@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site-config';
+import { SITES, BRAND } from '../../lib/sites';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+const canonical = `${SITES.main}/products/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Products', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Charcoal Products for B2B Buyers"
+  description="Coconut shell charcoal, hookah charcoal, BBQ charcoal and bamboo charcoal — category overview with standardized specifications."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Products', url: '/products/' }]}
+>
+  <div class="page-title container">
+    <h1>Charcoal Products</h1>
+    <p class="lede">
+      Category-level product overviews. Specific product entries — with verified size, ash, moisture,
+      fixed carbon and burn time — are published in our product database as supplier verification completes.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Natural Coconut Shell Charcoal</h3>
+          <p>Dense, low-ash charcoal made from coconut shell — the core product for hookah and BBQ.</p>
+          <a class="card-link" href="/products/coconut-shell-charcoal/">View →</a>
+        </div>
+        <div class="card">
+          <h3>Hookah / Shisha Charcoal</h3>
+          <p>Cube and flat charcoal sized for hookah sessions — 25mm, 26mm and 27mm.</p>
+          <a class="card-link" href="/products/hookah-charcoal/">View →</a>
+        </div>
+        <div class="card">
+          <h3>BBQ Charcoal</h3>
+          <p>Coconut and bamboo charcoal for grilling and restaurant use.</p>
+          <a class="card-link" href="/products/bbq-charcoal/">View →</a>
+        </div>
+        <div class="card">
+          <h3>Bamboo Charcoal</h3>
+          <p>Bamboo-source charcoal for grilling and specialty applications.</p>
+          <a class="card-link" href="/products/bamboo-charcoal/">View →</a>
+        </div>
+      </div>
+
+      <div class="callout-pending">
+        <span class="callout-title">Data pending</span>
+        <p>
+          Individual product entries (size, ash content, moisture, fixed carbon, burn time, MOQ) are
+          added only after supplier verification. See the product database for current status.
+        </p>
+        <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

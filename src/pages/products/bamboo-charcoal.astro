@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site-config';
+import { SITES } from '../../lib/sites';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+const canonical = `${SITES.main}/products/bamboo-charcoal/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Products', url: `${SITES.main}/products/` },
+    { name: 'Bamboo Charcoal', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Bamboo Charcoal"
+  description="Bamboo-source charcoal for grilling and specialty applications. Category overview — characteristics and buyer considerations."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Products', url: '/products/' },
+    { name: 'Bamboo Charcoal', url: '/products/bamboo-charcoal/' },
+  ]}
+>
+  <div class="page-title container">
+    <h1>Bamboo Charcoal</h1>
+    <p class="lede">
+      Charcoal produced from bamboo. Lighter and faster-igniting than coconut shell charcoal, bamboo
+      charcoal is suited to grilling and applications where quick ignition matters more than long burn.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout-pending">
+        <span class="callout-title">Data pending — supplier verification in progress</span>
+        <p>
+          Verified bamboo charcoal product entries are added to the product database after supplier
+          verification. We do not publish unverified specifications.
+        </p>
+        <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Sourcing bamboo charcoal?</h2>
+        <p>Tell us quantity and destination port.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site-config';
+import { SITES } from '../../lib/sites';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+const canonical = `${SITES.main}/products/bbq-charcoal/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Products', url: `${SITES.main}/products/` },
+    { name: 'BBQ Charcoal', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="BBQ Charcoal"
+  description="Coconut and bamboo charcoal for grilling and restaurant use. Category overview — raw material, burn behaviour and buyer considerations."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Products', url: '/products/' },
+    { name: 'BBQ Charcoal', url: '/products/bbq-charcoal/' },
+  ]}
+>
+  <div class="page-title container">
+    <h1>BBQ Charcoal</h1>
+    <p class="lede">
+      Coconut and bamboo charcoal for grilling, restaurants and outdoor cooking. BBQ charcoal is
+      selected for consistent heat, long burn and low sparking rather than the odor-neutrality that
+      matters most for hookah.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h2>Raw Material Options</h2>
+      <div class="prose">
+        <ul>
+          <li><strong>Coconut shell</strong> — dense, long-burning, lower ash.</li>
+          <li><strong>Bamboo</strong> — lighter, fast-igniting, suited to shorter cooks.</li>
+        </ul>
+      </div>
+
+      <div class="callout-pending">
+        <span class="callout-title">Data pending — supplier verification in progress</span>
+        <p>
+          Verified BBQ charcoal product entries are added to the product database after supplier
+          verification. We do not publish unverified specifications.
+        </p>
+        <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Sourcing BBQ charcoal?</h2>
+        <p>Tell us raw material, quantity and destination port.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+        <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/compliance/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Compliance', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Compliance & Regulatory"
+  description="Charcoal compliance and regulatory notes for EU, UK, USA — EUDR, emissions, packaging, labeling, food-contact claims and customs. Not legal advice."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Compliance', url: '/compliance/' }]}
+>
+  <div class="page-title container">
+    <h1>Compliance &amp; Regulatory</h1>
+    <p class="lede">
+      Regulatory notes for importing charcoal into the EU, UK and USA. This page is informational —
+      it is not legal advice, and it does not make absolute sales claims about compliance.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container prose">
+      <div class="callout">
+        <span class="callout-title">Not legal advice</span>
+        <p>
+          Compliance depends on the specific regulation, HS classification, import purpose and current
+          official interpretation. Verify all requirements with your customs broker or a qualified
+          advisor before importing.
+        </p>
+      </div>
+
+      <h2>Areas to Review</h2>
+      <ul>
+        <li><strong>EU Deforestation Regulation (EUDR)</strong> — whether a charcoal consignment falls in scope depends on the raw material's classification and the specific commodity codes. Do not assume a blanket exemption.</li>
+        <li><strong>REACH / chemical safety</strong> — applicable to substances and articles placed on the EU market.</li>
+        <li><strong>Emissions &amp; combustion</strong> — combustion products and indoor-air considerations may be subject to national rules.</li>
+        <li><strong>Packaging &amp; labeling</strong> — packaging waste, labeling and language requirements vary by destination market.</li>
+        <li><strong>Food-contact / grilling claims</strong> — charcoal is generally not a food-contact material, but any grilling or food-related claim must be accurate and compliant.</li>
+        <li><strong>Customs &amp; HS classification</strong> — correct tariff classification determines duties and any documentary requirements.</li>
+      </ul>
+
+      <h2>Source &amp; Recency</h2>
+      <p class="updated">
+        These notes reflect general regulatory areas as of 2026-10-07 and are marked for periodic review.
+        Specific requirements are confirmed per order and destination market with the buyer's broker.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

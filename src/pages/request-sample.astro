@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/request-sample/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Request Samples', url: canonical },
+  ]),
+];
+
+const FORMSPREE_ID = import.meta.env.FORMSPREE_ID;
+const ACTION = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : '#';
+const SUBJECT = 'Charcoal Hub — Request Samples';
+const MAILTO = `mailto:sales@guotan.com?subject=${encodeURIComponent(SUBJECT)}`;
+---
+
+<BaseLayout
+  site={site}
+  title="Request Samples"
+  description="Request charcoal samples to verify product quality before committing to bulk."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Request Samples', url: '/request-sample/' }]}
+>
+  <div class="page-title container">
+    <h1>Request Samples</h1>
+    <p class="lede">
+      Verify a product before committing to bulk. Request samples with your product, size and quantity —
+      sample verification is always the first step.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <form class="form-card" action={ACTION} method="POST" data-mailto={MAILTO}>
+        <div class="form-grid">
+          <div class="full">
+            <label for="product">Product <span class="req">*</span></label>
+            <input id="product" name="product" type="text" required placeholder="e.g. coconut shell hookah charcoal" />
+          </div>
+          <div>
+            <label for="size">Size</label>
+            <input id="size" name="size" type="text" placeholder="e.g. 25mm / 26mm / 27mm" />
+          </div>
+          <div>
+            <label for="quantity">Quantity</label>
+            <input id="quantity" name="quantity" type="text" placeholder="e.g. 1kg sample" />
+          </div>
+          <div>
+            <label for="country">Country <span class="req">*</span></label>
+            <input id="country" name="country" type="text" required />
+          </div>
+          <div>
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" />
+          </div>
+          <div class="full">
+            <label for="application">Application</label>
+            <input id="application" name="application" type="text" placeholder="e.g. hookah lounge / retail / BBQ" />
+          </div>
+          <div class="full">
+            <label for="comments">Comments</label>
+            <textarea id="comments" name="comments" placeholder="Any requirements…"></textarea>
+          </div>
+        </div>
+        <p style="margin-top:1.25rem;">
+          <button class="btn btn-primary" type="submit">Request Samples →</button>
+        </p>
+        <p class="form-note">
+          {FORMSPREE_ID
+            ? 'Submitting sends your sample request securely. We respond by email.'
+            : 'This form is not yet connected to a backend. Please email your request to sales@guotan.com, or the form will open your email client.'}
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    const form = document.querySelector('form[data-mailto]');
+    if (form && form.getAttribute('action') === '#') {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const lines = [];
+        for (const [k, v] of fd.entries()) if (v) lines.push(`${k}: ${v}`);
+        const body = encodeURIComponent(lines.join('\n'));
+        window.location.href = `${form.getAttribute('data-mailto')}&body=${body}`;
+      });
+    }
+  </script>
+</BaseLayout>

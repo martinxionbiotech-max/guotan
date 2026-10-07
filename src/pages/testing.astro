@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/testing/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Testing', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Charcoal Testing & Quality"
+  description="How we approach charcoal testing — batch testing, third-party vs supplier-reported data, and the metrics we evaluate."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Testing', url: '/testing/' }]}
+>
+  <div class="page-title container">
+    <h1>Testing &amp; Quality</h1>
+    <p class="lede">
+      Transparent testing is the foundation of a trustworthy charcoal supply. Every data point we
+      report is labeled by its source — third-party laboratory, supplier-provided, or not yet verified.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h2>What We Measure</h2>
+      <div class="grid grid-3">
+        <div class="card"><h3>Ash content</h3><p>Residue after combustion — a key hookah quality signal.</p></div>
+        <div class="card"><h3>Moisture</h3><p>Affects ignition and burn consistency.</p></div>
+        <div class="card"><h3>Fixed carbon</h3><p>Drives energy density and burn quality.</p></div>
+        <div class="card"><h3>Volatile matter</h3><p>Affects ignition and smoke.</p></div>
+        <div class="card"><h3>Burning time</h3><p>Session duration under controlled conditions.</p></div>
+        <div class="card"><h3>Size tolerance</h3><p>Dimensional consistency across a batch.</p></div>
+        <div class="card"><h3>Emissions</h3><p>Combustion by-products where applicable.</p></div>
+      </div>
+
+      <h2>Data Source Transparency</h2>
+      <div class="prose">
+        <ul>
+          <li><strong>Third-party laboratory testing</strong> — clearly labeled as such.</li>
+          <li><strong>Supplier-provided test data</strong> — clearly labeled as supplier reported, never presented as independent fact.</li>
+          <li><strong>Not yet available</strong> — we do not claim testing capabilities we do not yet have.</li>
+        </ul>
+      </div>
+
+      <p><a class="btn btn-secondary" href={`${SITES.testing}/`} target="_blank" rel="noopener">Testing Methodology →</a></p>
+
+      <div class="cta-banner">
+        <h2>Request product information</h2>
+        <p>Ask about specifications and testing for any product.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request Product Information →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

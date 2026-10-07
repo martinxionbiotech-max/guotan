@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site-config';
+import { SITES } from '../../lib/sites';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+const canonical = `${SITES.main}/products/coconut-shell-charcoal/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Products', url: `${SITES.main}/products/` },
+    { name: 'Coconut Shell Charcoal', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Coconut Shell Charcoal"
+  description="Natural coconut shell charcoal for hookah and BBQ — a dense, low-ash fuel sourced from coconut shell. Category overview with standardized specifications."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Products', url: '/products/' },
+    { name: 'Coconut Shell Charcoal', url: '/products/coconut-shell-charcoal/' },
+  ]}
+>
+  <div class="page-title container">
+    <h1>Coconut Shell Charcoal</h1>
+    <p class="lede">
+      Natural charcoal made from coconut shells — the core raw material for hookah and BBQ charcoal.
+      Valued for density, low ash and long burn time relative to wood-based charcoal.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h2>What It Is</h2>
+      <div class="prose">
+        <p>
+          Coconut shell charcoal is produced by carbonizing coconut shells — the hard, dense husk of
+          the coconut fruit — in a low-oxygen environment. The resulting charcoal is compressed into
+          cubes or other shapes for use in hookah, shisha and grilling.
+        </p>
+        <p>
+          The raw-material choice matters for buyers: coconut shell is denser than most wood charcoal,
+          which generally translates to longer burn time and less ash by mass. These properties are
+          what make it the standard choice for hookah charcoal.
+        </p>
+      </div>
+
+      <h2>Specifications We Evaluate</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Specification</th><th>What It Tells the Buyer</th></tr></thead>
+          <tbody>
+            <tr><td>Size (cube)</td><td>Cube dimensions — commonly 25mm, 26mm or 27mm — and dimensional tolerance.</td></tr>
+            <tr><td>Ash content</td><td>Residue left after combustion; lower ash means less cleanup and a cleaner session.</td></tr>
+            <tr><td>Moisture</td><td>Affects how easily the charcoal lights and how consistently it burns.</td></tr>
+            <tr><td>Fixed carbon</td><td>Indicates energy density and contributes to burn time.</td></tr>
+            <tr><td>Volatile matter</td><td>Affects ignition behaviour and smoke during lighting.</td></tr>
+            <tr><td>Burning time</td><td>How long a piece sustains usable heat under controlled conditions.</td></tr>
+            <tr><td>Ignition time</td><td>How quickly the charcoal reaches full glow.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-pending">
+        <span class="callout-title">Data pending — supplier verification in progress</span>
+        <p>
+          Specific product entries for coconut shell charcoal — with verified numeric specifications,
+          MOQ and manufacturer — are published in the product database once supplier verification
+          completes. We do not publish unverified figures.
+        </p>
+        <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Need coconut shell charcoal?</h2>
+        <p>Request a sample or a quote with your size, quantity and destination port.</p>
+        <a class="btn btn-primary" href="/request-sample/">Request Samples →</a>
+        <a class="btn btn-secondary" href="/request-quote/" style="margin-left:0.5rem;">Request a Quote →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

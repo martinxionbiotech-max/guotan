@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/manufacturing/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Manufacturing', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Charcoal Manufacturing & Sourcing"
+  description="How we approach charcoal manufacturing and sourcing — multi-supplier qualification, standardized specifications and batch quality control."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Manufacturing', url: '/manufacturing/' }]}
+>
+  <div class="page-title container">
+    <h1>Manufacturing &amp; Sourcing</h1>
+    <p class="lede">
+      A China-based sourcing and supplier network — focused on transparency, standardization and
+      sourcing efficiency rather than "China = cheap".
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h2>How We Source</h2>
+      <div class="grid grid-2">
+        <div class="card"><h3>Multi-supplier qualification</h3><p>We qualify multiple manufacturers so buyers can compare specifications.</p></div>
+        <div class="card"><h3>Standardized specifications</h3><p>One spec model across all products — ash, moisture, fixed carbon, size, burn time.</p></div>
+        <div class="card"><h3>Batch quality control</h3><p>Testing per batch with results labeled by source.</p></div>
+        <div class="card"><h3>Export readiness</h3><p>Documentation and container loading for international shipping.</p></div>
+      </div>
+
+      <div class="callout-pending">
+        <span class="callout-title">Data pending — supplier verification in progress</span>
+        <p>
+          Manufacturer profiles, production capacities and certifications are published only after
+          supplier verification. See the manufacturer sub-site for the qualification model.
+        </p>
+        <p><a href={`${SITES.manufacturer}/`} target="_blank" rel="noopener">Manufacturer Intelligence →</a></p>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Need manufacturing capacity?</h2>
+        <p>Tell us your product and volume.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

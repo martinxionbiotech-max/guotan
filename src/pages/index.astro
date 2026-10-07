@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES, BRAND } from '../lib/sites';
+import { organizationJsonLd, webSiteJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/`;
+
+const jsonLd = [
+  organizationJsonLd({
+    id: SITES.main,
+    name: BRAND,
+    description: site.description,
+    logo: `${SITES.main}/logo.svg`,
+  }),
+  webSiteJsonLd({ id: SITES.main, name: BRAND, description: site.description }),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Coconut Shell Charcoal Supplier for Global B2B Buyers"
+  description={site.description}
+  canonical={canonical}
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">B2B Charcoal Sourcing &amp; Product Intelligence</p>
+      <h1>Coconut Shell Charcoal Supplier for Global B2B Buyers</h1>
+      <p class="lede">
+        Natural hookah charcoal, BBQ charcoal and private-label solutions sourced from qualified
+        manufacturers in China — with standardized specifications, batch testing and transparent
+        verification.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote</a>
+        <a class="btn btn-secondary" href="/products/">View Products</a>
+        <a class="btn btn-ghost" href="/request-sample/">Request Samples</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>What We Supply</h2>
+        <p>Category-level supply capabilities, built on a standardized specification model.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card"><h3>Natural Coconut Shell Charcoal</h3><p>Core product — dense, low-ash coconut shell charcoal for hookah and BBQ use.</p><a class="card-link" href="/products/coconut-shell-charcoal/">Coconut Shell Charcoal →</a></div>
+        <div class="card"><h3>Hookah / Shisha Charcoal</h3><p>Cube and flat charcoal sized for hookah and shisha sessions (25mm / 26mm / 27mm).</p><a class="card-link" href="/products/hookah-charcoal/">Hookah Charcoal →</a></div>
+        <div class="card"><h3>BBQ Charcoal</h3><p>Coconut and bamboo charcoal for grilling and restaurant use.</p><a class="card-link" href="/products/bbq-charcoal/">BBQ Charcoal →</a></div>
+        <div class="card"><h3>Bamboo Charcoal</h3><p>Bamboo-source charcoal for grilling and specialty applications.</p><a class="card-link" href="/products/bamboo-charcoal/">Bamboo Charcoal →</a></div>
+        <div class="card"><h3>Private Label Charcoal</h3><p>Build your own brand — choose product, size, packaging and OEM finishing.</p><a class="card-link" href="/private-label/">Private Label →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Product Specifications</h2>
+        <p>Every product is evaluated against a standard specification set before quoting.</p>
+      </div>
+      <div class="grid grid-4">
+        <div class="card"><h3>Size</h3><p>Cube dimensions and dimensional tolerance (25/26/27mm).</p></div>
+        <div class="card"><h3>Ash</h3><p>Residue after combustion — a key hookah quality signal.</p></div>
+        <div class="card"><h3>Moisture</h3><p>Affects ignition and burn consistency.</p></div>
+        <div class="card"><h3>Fixed Carbon</h3><p>Drives energy density and burn quality.</p></div>
+        <div class="card"><h3>Burning Time</h3><p>Session duration under controlled conditions.</p></div>
+        <div class="card"><h3>Ignition</h3><p>Time to light and consistency of ignition.</p></div>
+        <div class="card"><h3>Shape</h3><p>Cube, flat, or custom die shapes.</p></div>
+        <div class="card"><h3>Packaging</h3><p>Bulk, retail box, or private-label formats.</p></div>
+      </div>
+      <p style="margin-top:1.25rem;"><a class="btn btn-secondary" href={`${SITES.data}/specifications/`} target="_blank" rel="noopener">Explore Charcoal Specifications →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Why Buyers Work With Us</h2>
+        <p>Not "high quality" and "best price" — concrete sourcing capabilities.</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="card"><h3>Multi-supplier sourcing</h3><p>We qualify multiple manufacturers so you can compare specifications, not settle for one option.</p></div>
+        <div class="card"><h3>Standardized specifications</h3><p>Every product is normalized to one spec model — ash, moisture, fixed carbon, size, burn time.</p></div>
+        <div class="card"><h3>Batch testing</h3><p>Testing on a per-batch basis, with results labeled by source (third-party vs supplier-reported).</p></div>
+        <div class="card"><h3>OEM / private label</h3><p>Custom size, packaging and branding through a structured private-label process.</p></div>
+        <div class="card"><h3>Flexible packaging</h3><p>Bulk, retail box and private-label packaging matched to your market and logistics.</p></div>
+        <div class="card"><h3>Export support</h3><p>Documentation, container loading and destination-port planning for international buyers.</p></div>
+        <div class="card"><h3>Sample verification</h3><p>Verify a product with samples before committing to bulk — always the first step.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Testing</h2>
+        <p>We report testing transparently and label every data point by its source.</p>
+      </div>
+      <p>
+        Where results come from a third-party laboratory, we say so. Where they come from
+        supplier-provided data, we label them as <em>supplier reported</em> — never as independent fact.
+        We do not claim testing capabilities we do not yet have.
+      </p>
+      <p style="margin-top:1rem;"><a class="btn btn-secondary" href="/testing/">How We Approach Testing →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Private Label — Build Your Own Charcoal Brand</h2>
+        <p>An eight-step process from product selection to shipment.</p>
+      </div>
+      <ol class="prose">
+        <li><strong>Choose Product</strong> — coconut shell hookah, BBQ or bamboo charcoal.</li>
+        <li><strong>Choose Size</strong> — 25mm / 26mm / 27mm cube or flat.</li>
+        <li><strong>Choose Packaging</strong> — bulk, retail box or custom.</li>
+        <li><strong>Submit Logo</strong> — your artwork and brand requirements.</li>
+        <li><strong>Sample</strong> — approve a pre-production sample.</li>
+        <li><strong>Production</strong> — manufacture to the agreed specification.</li>
+        <li><strong>Inspection</strong> — quality control before shipment.</li>
+        <li><strong>Shipment</strong> — export and delivery to your destination port.</li>
+      </ol>
+      <p style="margin-top:1.25rem;"><a class="btn btn-primary" href="/private-label/">Start a Private Label Project →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Product Database</h2>
+        <p>Structured product intelligence — compare raw material, size, ash, moisture, burn time, packaging and MOQ.</p>
+      </div>
+      <p><a class="btn btn-secondary" href={`${SITES.data}/products/`} target="_blank" rel="noopener">Compare Charcoal Products →</a></p>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Tell us what you need.</h2>
+      <p>Product, size, quantity, packaging and destination port — we'll respond with specifications and a quote.</p>
+      <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd, organizationJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/about/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'About', url: canonical },
+  ]),
+  organizationJsonLd({
+    id: SITES.main,
+    name: 'Charcoal Hub',
+    description: site.description,
+  }),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="About"
+  description="About Charcoal Hub — a B2B charcoal sourcing and product intelligence platform for global buyers."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'About', url: '/about/' }]}
+>
+  <div class="page-title container">
+    <h1>About Charcoal Hub</h1>
+    <p class="lede">
+      A B2B charcoal sourcing and product intelligence platform — not a single factory, not a blog,
+      not a marketplace of unverified listings.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container prose">
+      <h2>What We Do</h2>
+      <p>
+        We connect global B2B buyers with qualified charcoal manufacturers in China through a
+        standardized specification model, batch testing and transparent verification. Our focus is
+        transparency, standardization and sourcing efficiency.
+      </p>
+
+      <h2>Our Principles</h2>
+      <ul>
+        <li><strong>Data first, evidence first.</strong> We publish only what we can source and verify.</li>
+        <li><strong>No fabricated data.</strong> Product, manufacturer and test data are labeled by source and verification status.</li>
+        <li><strong>Buyer intent over traffic.</strong> Every page answers a real buyer question or serves a commercial function.</li>
+      </ul>
+
+      <h2>The Platform</h2>
+      <p>
+        This main site handles commercial conversion. Structured product and specification data live on
+        the <a href={`${SITES.data}/`} target="_blank" rel="noopener">data sub-site</a>; manufacturer
+        intelligence on the <a href={`${SITES.manufacturer}/`} target="_blank" rel="noopener">manufacturer sub-site</a>;
+        testing methodology on the <a href={`${SITES.testing}/`} target="_blank" rel="noopener">testing sub-site</a>;
+        and buyer education on the <a href={`${SITES.knowledge}/`} target="_blank" rel="noopener">knowledge hub</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

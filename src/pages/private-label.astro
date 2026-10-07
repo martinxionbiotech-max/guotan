@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/private-label/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Private Label', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Private Label Charcoal — Build Your Own Brand"
+  description="Private label and OEM charcoal: choose product, size, packaging and branding. An eight-step process from product selection to shipment."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Private Label', url: '/private-label/' }]}
+>
+  <div class="page-title container">
+    <h1>Private Label Charcoal</h1>
+    <p class="lede">
+      Build your own charcoal brand. Choose the product, size and packaging, submit your logo, and we
+      manage sampling, production, inspection and shipment.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h2>The Process</h2>
+      <ol class="prose">
+        <li><strong>Choose Product</strong> — coconut shell hookah, BBQ or bamboo charcoal.</li>
+        <li><strong>Choose Size</strong> — 25mm / 26mm / 27mm cube or flat.</li>
+        <li><strong>Choose Packaging</strong> — bulk, retail box or custom.</li>
+        <li><strong>Submit Logo</strong> — your artwork and brand requirements.</li>
+        <li><strong>Sample</strong> — approve a pre-production sample before production.</li>
+        <li><strong>Production</strong> — manufacture to the agreed specification.</li>
+        <li><strong>Inspection</strong> — quality control before shipment.</li>
+        <li><strong>Shipment</strong> — export and delivery to your destination port.</li>
+      </ol>
+
+      <h2>What You Can Customize</h2>
+      <div class="grid grid-3">
+        <div class="card"><h3>Product &amp; Size</h3><p>Coconut shell, BBQ or bamboo charcoal in standard or custom cube sizes.</p></div>
+        <div class="card"><h3>Packaging</h3><p>Bulk bags, retail boxes, or branded private-label packaging.</p></div>
+        <div class="card"><h3>Branding</h3><p>Your logo, colors and labeling on box and outer carton.</p></div>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Start a private label project</h2>
+        <p>Tell us your product, size, target market and packaging preference.</p>
+        <a class="btn btn-primary" href="/request-quote/">Start a Private Label Project →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

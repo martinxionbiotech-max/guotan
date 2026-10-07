@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/packaging/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Packaging', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Charcoal Packaging Options"
+  description="Charcoal packaging options for export — bulk bags, retail boxes and private-label packaging, matched to logistics and destination market."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Packaging', url: '/packaging/' }]}
+>
+  <div class="page-title container">
+    <h1>Packaging</h1>
+    <p class="lede">
+      Packaging affects logistics cost, shelf life and brand presentation. We match packaging format
+      to your market and shipping plan.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Bulk</h3>
+          <p>Large bags for distributors and repackers — lowest packaging cost per unit.</p>
+        </div>
+        <div class="card">
+          <h3>Retail Box</h3>
+          <p>Consumer-ready boxes for retail shelves and e-commerce.</p>
+        </div>
+        <div class="card">
+          <h3>Private Label</h3>
+          <p>Your brand on the box and outer carton, built to your artwork.</p>
+        </div>
+      </div>
+
+      <div class="callout-pending">
+        <span class="callout-title">Data pending — packaging specification in progress</span>
+        <p>
+          Specific packaging formats, weights and carton dimensions are confirmed per order and added
+          to the product database as verified.
+        </p>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Packaging requirements?</h2>
+        <p>Tell us your format and target market.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site-config';
+import { SITES } from '../../lib/sites';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+const canonical = `${SITES.main}/products/hookah-charcoal/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Products', url: `${SITES.main}/products/` },
+    { name: 'Hookah Charcoal', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Hookah / Shisha Charcoal"
+  description="Cube and flat hookah charcoal in 25mm, 26mm and 27mm sizes. Category overview — sizes, ash, burn time and ignition considerations for hookah buyers."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Products', url: '/products/' },
+    { name: 'Hookah Charcoal', url: '/products/hookah-charcoal/' },
+  ]}
+>
+  <div class="page-title container">
+    <h1>Hookah / Shisha Charcoal</h1>
+    <p class="lede">
+      Cube and flat charcoal sized for hookah and shisha. The most common cube sizes are 25mm, 26mm
+      and 27mm — the size choice affects heat output, burn time and how the charcoal fits the bowl.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h2>Sizes</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Size</th><th>Typical Use</th><th>Buyer Consideration</th></tr></thead>
+          <tbody>
+            <tr><td>25mm cube</td><td>Standard hookah sessions</td><td>Moderate heat and burn time; a common default.</td></tr>
+            <tr><td>26mm cube</td><td>Standard hookah sessions</td><td>Slightly higher heat and longer burn than 25mm.</td></tr>
+            <tr><td>27mm cube</td><td>Longer sessions / larger bowls</td><td>Higher heat output; fewer pieces needed.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Size naming reflects nominal cube edge length. Actual dimensions and dimensional tolerance are
+        confirmed per product and reported in the product database — never assumed.
+      </p>
+
+      <h2>What to Evaluate</h2>
+      <div class="prose">
+        <ul>
+          <li><strong>Ash content</strong> — lower ash means less residue and cleaner smoking.</li>
+          <li><strong>Burning time</strong> — how long a cube sustains usable heat.</li>
+          <li><strong>Odor</strong> — neutral odor is preferred for hookah; charcoal should not add taste.</li>
+          <li><strong>Ignition</strong> — time to full glow and consistency across a batch.</li>
+          <li><strong>Spark level</strong> — low sparking is preferred for safety and clean sessions.</li>
+        </ul>
+      </div>
+
+      <div class="callout-pending">
+        <span class="callout-title">Data pending — supplier verification in progress</span>
+        <p>
+          Verified product entries for hookah charcoal are added to the product database after supplier
+          verification. We do not publish unverified specifications.
+        </p>
+        <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Sourcing hookah charcoal?</h2>
+        <p>Tell us your size, quantity and destination port.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+        <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

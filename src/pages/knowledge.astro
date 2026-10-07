@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/knowledge/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Knowledge', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Buyer Knowledge Hub"
+  description="Buyer education for charcoal sourcing — how to choose, compare and source coconut shell charcoal."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Knowledge', url: '/knowledge/' }]}
+>
+  <div class="page-title container">
+    <h1>Buyer Knowledge Hub</h1>
+    <p class="lede">
+      Practical guidance for charcoal buyers — how to choose, compare and source coconut shell
+      charcoal. The full knowledge hub lives on its own sub-site.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        <div class="card"><h3>Buying</h3><p>How to choose hookah charcoal, compare coconut shell charcoal, and understand ash content and burn time.</p></div>
+        <div class="card"><h3>Sourcing</h3><p>How to source charcoal from China, MOQ, and container loading.</p></div>
+        <div class="card"><h3>Quality</h3><p>Ash, moisture, fixed carbon, burn time, size tolerance, odor and ignition.</p></div>
+      </div>
+      <p style="margin-top:1.25rem;">
+        <a class="btn btn-secondary" href={`${SITES.knowledge}/`} target="_blank" rel="noopener">Open the Knowledge Hub →</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

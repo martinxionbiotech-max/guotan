@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/oem/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'OEM', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="OEM Charcoal Manufacturing"
+  description="OEM charcoal manufacturing — custom product, size and packaging built to your specification with sampling and inspection."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'OEM', url: '/oem/' }]}
+>
+  <div class="page-title container">
+    <h1>OEM Charcoal Manufacturing</h1>
+    <p class="lede">
+      Manufacture charcoal to your specification — custom raw material, size, shape and packaging —
+      with a structured sampling and inspection workflow before bulk production.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h2>How OEM Works</h2>
+      <div class="prose">
+        <p>
+          OEM (original equipment manufacturing) means the product is manufactured to your
+          specification and, where requested, under your brand. The workflow follows the same
+          sample-first discipline as private label:
+        </p>
+        <ol>
+          <li>Define the specification — raw material, size, shape, performance targets.</li>
+          <li>Approve a pre-production sample.</li>
+          <li>Manufacture to the agreed specification.</li>
+          <li>Inspect before shipment.</li>
+        </ol>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Have a custom specification?</h2>
+        <p>Tell us what you need — we'll respond with feasibility and a quote.</p>
+        <a class="btn btn-primary" href="/request-quote/">Start an OEM Project →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

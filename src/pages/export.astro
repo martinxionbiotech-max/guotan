@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/export/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Export', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Charcoal Export & Logistics"
+  description="Charcoal export support — documentation, container loading and destination-port planning for international buyers."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Export', url: '/export/' }]}
+>
+  <div class="page-title container">
+    <h1>Export &amp; Logistics</h1>
+    <p class="lede">
+      Export support for international charcoal buyers — documentation, container loading and
+      destination-port planning.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h2>What We Support</h2>
+      <div class="grid grid-3">
+        <div class="card"><h3>Documentation</h3><p>Commercial invoice, packing list and export documents.</p></div>
+        <div class="card"><h3>Container Loading</h3><p>Optimized loading to maximize weight and protect the product.</p></div>
+        <div class="card"><h3>Destination Planning</h3><p>Port and delivery planning for your market.</p></div>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Planning an import?</h2>
+        <p>Tell us your destination port and volume.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
