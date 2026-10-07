@@ -81,6 +81,85 @@ const jsonLd = [
         <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
       </div>
 
+      <h2>Specification Context</h2>
+      <div class="prose">
+        <p>
+          One product record in the database carries declared values for coconut shell
+          charcoal — the 25&nbsp;mm natural coconut shell hookah cube. The figures below are
+          reproduced for context and are <strong>supplier-declared, not independently verified
+          by Charcoal Hub</strong>.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Parameter</th><th>Declared value</th><th>Method cited</th></tr></thead>
+          <tbody>
+            <tr><td>Fixed carbon</td><td>≥ 80%</td><td>ASTM D3172</td></tr>
+            <tr><td>Volatile matter</td><td>≤ 12%</td><td>ASTM D3175</td></tr>
+            <tr><td>Ash content</td><td>≤ 3.5% (typical 3.0%)</td><td>ASTM D3174</td></tr>
+            <tr><td>Moisture</td><td>≤ 5%</td><td>ASTM D3173</td></tr>
+            <tr><td>Sulphur</td><td>≤ 0.1%</td><td>ASTM D4239</td></tr>
+            <tr><td>Burning time</td><td>~60 min (claims up to 120 min)</td><td>Condition-dependent — no universal standard</td></tr>
+            <tr><td>Ignition time</td><td>8–12 min</td><td>Supplier-declared</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Source: public supplier listing (bbqoncharcoal.com 25&nbsp;mm product page), captured
+        2026-10-07. Supplier-declared — not independently verified by Charcoal Hub.
+      </p>
+
+      <h2>Buyer Checklist</h2>
+      <div class="prose">
+        <ul>
+          <li><strong>Method and basis.</strong> Ask which method produced each figure (ASTM / ISO / GB) and whether it is reported dry or as-received.</li>
+          <li><strong>Batch linkage.</strong> Confirm which batch, sample and date each number describes — a figure without a batch is not enforceable.</li>
+          <li><strong>Raw report.</strong> Request the laboratory report itself, not a summary PDF or a marketing datasheet.</li>
+          <li><strong>Moisture at origin.</strong> Check moisture at origin and again on arrival — charcoal is hygroscopic and shifts in transit.</li>
+          <li><strong>Size and tolerance.</strong> Confirm the nominal size class and its tolerance, and verify with calipers on a sample.</li>
+          <li><strong>Feedstock purity.</strong> If odour or smoke matters, confirm single-source coconut shell versus a blend.</li>
+          <li><strong>Acceptance clause.</strong> Agree the sampling procedure and the remedy for an out-of-spec arrival before ordering.</li>
+        </ul>
+      </div>
+
+      <h2>Verification Status</h2>
+      <div class="prose">
+        <p>
+          No coconut shell charcoal product has yet been independently verified by Charcoal Hub.
+          Published figures are supplier-declared and labelled as such; no figure is presented as
+          an established fact. Test reports, when attributable and verified, will be published on
+          the <a href={`${SITES.testing}/reports/`} target="_blank" rel="noopener">testing sub-site</a>.
+        </p>
+      </div>
+
+      <h2>Related</h2>
+      <div class="grid grid-3">
+        <a class="card" href={`${SITES.data}/products/25mm-natural-coconut-shell-hookah-charcoal/`} target="_blank" rel="noopener">
+          <h3>25 mm product record <span class="badge badge-muted">data</span></h3>
+          <p>Supplier-declared specification values with their source and status.</p>
+        </a>
+        <a class="card" href={`${SITES.data}/specifications/ash-content/`} target="_blank" rel="noopener">
+          <h3>Specification methodology <span class="badge badge-muted">data</span></h3>
+          <p>What ash, moisture and fixed carbon measure and how they are determined.</p>
+        </a>
+        <a class="card" href={`${SITES.testing}/tests/ash-content/`} target="_blank" rel="noopener">
+          <h3>Test methodology <span class="badge badge-muted">testing</span></h3>
+          <p>How each parameter is measured under public standards, with limitations.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/how-to-compare-coconut-shell-charcoal/`} target="_blank" rel="noopener">
+          <h3>How to compare <span class="badge badge-muted">knowledge</span></h3>
+          <p>A buyer guide to reading and comparing supplier spec sheets.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/what-ash-content-means/`} target="_blank" rel="noopener">
+          <h3>What ash content means <span class="badge badge-muted">knowledge</span></h3>
+          <p>Why low ash matters and how the metric is tested.</p>
+        </a>
+        <a class="card" href="/request-sample/">
+          <h3>Request samples</h3>
+          <p>Verify a batch yourself before committing to volume.</p>
+        </a>
+      </div>
+
       <div class="cta-banner">
         <h2>Need coconut shell charcoal?</h2>
         <p>Request a sample or a quote with your size, quantity and destination port.</p>

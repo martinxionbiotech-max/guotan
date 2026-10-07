@@ -77,6 +77,86 @@ const jsonLd = [
         <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
       </div>
 
+      <h2>Specification Context</h2>
+      <div class="prose">
+        <p>
+          One product record in the database carries declared values for hookah charcoal — the
+          25&nbsp;mm natural coconut shell cube. The figures below are reproduced for context and
+          are <strong>supplier-declared, not independently verified by Charcoal Hub</strong>.
+          The 26&nbsp;mm and 27&nbsp;mm records currently carry size-class data only (pieces per
+          kilogram); no batch specification values are published for those sizes.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Parameter</th><th>Declared value</th><th>Method cited</th></tr></thead>
+          <tbody>
+            <tr><td>Fixed carbon</td><td>≥ 80%</td><td>ASTM D3172</td></tr>
+            <tr><td>Volatile matter</td><td>≤ 12%</td><td>ASTM D3175</td></tr>
+            <tr><td>Ash content</td><td>≤ 3.5% (typical 3.0%)</td><td>ASTM D3174</td></tr>
+            <tr><td>Moisture</td><td>≤ 5%</td><td>ASTM D3173</td></tr>
+            <tr><td>Sulphur</td><td>≤ 0.1%</td><td>ASTM D4239</td></tr>
+            <tr><td>Burning time</td><td>~60 min (claims up to 120 min)</td><td>Condition-dependent — no universal standard</td></tr>
+            <tr><td>Ignition time</td><td>8–12 min</td><td>Supplier-declared</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Source: public supplier listing (bbqoncharcoal.com 25&nbsp;mm product page), captured
+        2026-10-07. Supplier-declared — not independently verified by Charcoal Hub.
+      </p>
+
+      <h2>Buyer Checklist</h2>
+      <div class="prose">
+        <ul>
+          <li><strong>Method and basis.</strong> Confirm which method produced each figure and whether it is dry or as-received.</li>
+          <li><strong>Batch linkage.</strong> Ask which batch, sample and date each number describes.</li>
+          <li><strong>Raw report.</strong> Request the laboratory report, not a summary PDF.</li>
+          <li><strong>Moisture at origin.</strong> Check moisture at origin and on arrival — hookah charcoal is hygroscopic.</li>
+          <li><strong>Size and tolerance.</strong> Confirm the nominal cube size and tolerance; verify with calipers on a sample.</li>
+          <li><strong>Odour neutrality.</strong> Assess odour on a blind sample in your own bowl — this is a session test, not a datasheet line.</li>
+          <li><strong>Acceptance clause.</strong> Agree sampling and the remedy for an out-of-spec arrival in the purchase order.</li>
+        </ul>
+      </div>
+
+      <h2>Verification Status</h2>
+      <div class="prose">
+        <p>
+          No hookah charcoal product has yet been independently verified by Charcoal Hub. Published
+          figures are supplier-declared and labelled as such. Verified test reports will be published
+          on the <a href={`${SITES.testing}/reports/`} target="_blank" rel="noopener">testing sub-site</a>
+          as they become attributable.
+        </p>
+      </div>
+
+      <h2>Related</h2>
+      <div class="grid grid-3">
+        <a class="card" href={`${SITES.data}/products/25mm-natural-coconut-shell-hookah-charcoal/`} target="_blank" rel="noopener">
+          <h3>25 mm product record <span class="badge badge-muted">data</span></h3>
+          <p>Supplier-declared specification values with source and status.</p>
+        </a>
+        <a class="card" href={`${SITES.data}/specifications/burning-time/`} target="_blank" rel="noopener">
+          <h3>Burning time methodology <span class="badge badge-muted">data</span></h3>
+          <p>Why burn time has no universal standard and how to compare claims.</p>
+        </a>
+        <a class="card" href={`${SITES.testing}/tests/burning-time/`} target="_blank" rel="noopener">
+          <h3>Test methodology <span class="badge badge-muted">testing</span></h3>
+          <p>How burn time is assessed under defined, configuration-specific protocols.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/how-to-choose-hookah-charcoal/`} target="_blank" rel="noopener">
+          <h3>How to choose <span class="badge badge-muted">knowledge</span></h3>
+          <p>A buyer decision framework for hookah charcoal.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/25mm-vs-26mm-charcoal/`} target="_blank" rel="noopener">
+          <h3>25 mm vs 26 mm <span class="badge badge-muted">knowledge</span></h3>
+          <p>What the size difference actually changes in a session.</p>
+        </a>
+        <a class="card" href="/request-sample/">
+          <h3>Request samples</h3>
+          <p>Test a batch in your own hardware before ordering.</p>
+        </a>
+      </div>
+
       <div class="cta-banner">
         <h2>Sourcing hookah charcoal?</h2>
         <p>Tell us your size, quantity and destination port.</p>
