@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/terms/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Terms of Use', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Terms of Use"
+  description="Terms of use for the Charcoal Hub site network: informational purpose, data verification status, no warranty and limitation of liability."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Terms of Use', url: '/terms/' }]}
+>
+  <div class="page-title container">
+    <h1>Terms of Use</h1>
+    <p class="lede">
+      These terms govern your use of the Charcoal Hub website and its four
+      sub-sites (data, manufacturer, testing and knowledge).
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container prose">
+      <p>Last updated: 2026-10-07</p>
+
+      <h2>1. Informational purpose</h2>
+      <p>
+        The site network publishes sourcing information for global B2B charcoal
+        buyers: product records, supplier profiles, test methodology and buyer
+        guides. All content is informational. Nothing on this site constitutes
+        an offer, a warranty of product quality, or a contractual commitment.
+        Actual terms — specifications, prices, MOQs, lead times — are agreed
+        only in writing with a supplier.
+      </p>
+
+      <h2>2. Data verification status</h2>
+      <p>
+        Product, manufacturer and testing data carry a verification status
+        (Verified / Supplier Reported / Third-Party Verified / Unverified) and
+        a data source. Status "Supplier Reported" means the figures come from
+        the supplier's own public statements and have not been independently
+        confirmed by us. Status "Unverified" means only basic identity
+        information could be confirmed. Treat any figure according to its
+        stated status; do not rely on a supplier-reported value as fact.
+      </p>
+
+      <h2>3. Not legal or professional advice</h2>
+      <p>
+        Compliance and regulatory content (import frameworks, EUDR notes,
+        certification guides) is provided for general orientation. It is not
+        legal advice. Verify all requirements with your customs broker or a
+        qualified advisor before importing.
+      </p>
+
+      <h2>4. No warranty</h2>
+      <p>
+        The site is provided "as is". We work to keep information accurate and
+        clearly sourced, but we make no warranty that content is complete,
+        error-free or current at any given moment. Verification dates are shown
+        where applicable; figures can change without notice.
+      </p>
+
+      <h2>5. Limitation of liability</h2>
+      <p>
+        To the maximum extent permitted by law, Charcoal Hub and its operators
+        are not liable for losses arising from reliance on site content,
+        including sourcing decisions based on supplier-reported data.
+      </p>
+
+      <h2>6. Intellectual property</h2>
+      <p>
+        Site text, design and structure are the property of Charcoal Hub.
+        Buyer guides may be cited with attribution; wholesale reproduction for
+        commercial purposes is not permitted.
+      </p>
+
+      <h2>7. Contact</h2>
+      <p>
+        Questions about these terms: <a href="mailto:sales@guotan.com">sales@guotan.com</a>.
+      </p>
+
+      <p class="meta-line">
+        See also: <a href="/privacy/">Privacy Policy</a> · <a href="/compliance/">Compliance</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

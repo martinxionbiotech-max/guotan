@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/privacy/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Privacy Policy', url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Privacy Policy"
+  description="Charcoal Hub privacy policy: what this site does and does not collect, how quote and sample requests are handled, and your data rights."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Privacy Policy', url: '/privacy/' }]}
+>
+  <div class="page-title container">
+    <h1>Privacy Policy</h1>
+    <p class="lede">
+      This policy describes the actual behaviour of this website — no analytics
+      scripts, no advertising trackers, and no data collection beyond what you
+      voluntarily submit in a form.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container prose">
+      <p>Last updated: 2026-10-07</p>
+
+      <h2>What this site does not do</h2>
+      <p>
+        This website runs no analytics scripts, no advertising pixels and no
+        third-party trackers. It does not set tracking cookies, does not build
+        advertising profiles and does not sell or share personal data with
+        advertising partners. We do not use Google Analytics, Meta Pixel or any
+        equivalent service on any page of this site or its sub-sites
+        (data, manufacturer, testing and knowledge).
+      </p>
+
+      <h2>What we receive when you contact us</h2>
+      <p>
+        When you submit a quote or sample request, you provide the information
+        you type into the form — typically name, company, email, country and
+        your product requirements. Two submission paths exist:
+      </p>
+      <ul>
+        <li>
+          <strong>Form service:</strong> when a form endpoint is configured, the
+          form contents are forwarded through a third-party form processor
+          (Formspree) to our sales mailbox. The processor's own privacy policy
+          applies to that transmission.
+        </li>
+        <li>
+          <strong>Direct email:</strong> when no endpoint is configured, the
+          form opens your email client and you send the message directly to
+          <a href="mailto:sales@guotan.com">sales@guotan.com</a> — in that case
+          the message never touches this website's infrastructure at all.
+        </li>
+      </ul>
+      <p>
+        We use the submitted information only to respond to your inquiry,
+        prepare a quote or arrange samples. We do not add your address to
+        marketing lists and do not transfer it to other parties except as
+        required to fulfil your request (for example, a shipping forwarder for
+        a sample shipment you asked for).
+      </p>
+
+      <h2>Server logs</h2>
+      <p>
+        This site is served by a static hosting platform (Cloudflare Pages).
+        The platform may record standard technical logs — IP address, page
+        requested, user agent — for security and abuse prevention, under the
+        platform's own privacy policy. We do not import or analyse those logs
+        ourselves.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        You may ask us to confirm what inquiry data we hold about you, correct
+        it, or delete it, by writing to
+        <a href="mailto:sales@guotan.com">sales@guotan.com</a>. We respond to
+        such requests within 30 days.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        If the site's behaviour changes (for example, if analytics are ever
+        added), this policy will be updated first and the change will be
+        disclosed on this page with a new revision date.
+      </p>
+
+      <p class="meta-line">
+        See also: <a href="/terms/">Terms of Use</a> · <a href="/compliance/">Compliance</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
