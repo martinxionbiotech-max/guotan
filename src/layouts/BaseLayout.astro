@@ -65,6 +65,23 @@ const fullTitle = site.siteKey === 'main' ? title : `${title} | ${site.name}`;
             </a>
           ))}
           {
+            site.siteKey === 'main' && site.network && site.network.length > 0 && (
+              <div class="nav-drop">
+                <button class="nav-drop-toggle" aria-haspopup="true" aria-expanded="false">
+                  Network <span class="nav-drop-caret" aria-hidden="true">▾</span>
+                </button>
+                <div class="nav-drop-menu" role="menu">
+                  {site.network.map((n) => (
+                    <a href={n.href} target="_blank" rel="noopener" role="menuitem">
+                      <span class="drop-label">{n.label}</span>
+                      <span class="drop-desc">{n.desc}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+          {
             site.siteKey !== 'main' && (
               <a class="nav-cta" href={`${SITES.main}/contact/`} target="_blank" rel="noopener">Request a Quote</a>
             )

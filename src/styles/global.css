@@ -112,6 +112,34 @@ code, .mono, .spec-value { font-family: var(--font-mono); font-size: 0.92em; }
 }
 .nav-cta:hover { background: var(--accent-dark) !important; }
 
+.nav-drop { position: relative; }
+.nav-drop-toggle {
+  all: unset; cursor: pointer; color: var(--muted); font-weight: 550; font-size: 0.92rem;
+  padding: 0.35rem 0; display: inline-flex; align-items: center; gap: 0.3rem;
+}
+.nav-drop-toggle:hover, .nav-drop:focus-within .nav-drop-toggle { color: var(--ink); }
+.nav-drop-caret { font-size: 0.7rem; transition: transform 0.15s ease; }
+.nav-drop:focus-within .nav-drop-caret, .nav-drop:hover .nav-drop-caret { transform: rotate(180deg); }
+.nav-drop-menu {
+  position: absolute; top: calc(100% + 8px); right: 0; min-width: 280px;
+  background: var(--surface, #fff); border: 1px solid var(--line-strong);
+  border-radius: var(--radius); box-shadow: var(--shadow-panel);
+  padding: 0.4rem; display: none; flex-direction: column; gap: 2px; z-index: 60;
+}
+.nav-drop:hover .nav-drop-menu, .nav-drop:focus-within .nav-drop-menu { display: flex; }
+.nav-drop-menu a {
+  display: flex; flex-direction: column; gap: 0.1rem; padding: 0.55rem 0.7rem;
+  border-radius: calc(var(--radius) - 4px); background-image: none;
+}
+.nav-drop-menu a:hover { background: var(--surface-2); }
+.nav-drop-menu .drop-label { color: var(--ink); font-weight: 650; font-size: 0.9rem; }
+.nav-drop-menu .drop-desc { color: var(--muted); font-size: 0.78rem; font-weight: 450; }
+@media (max-width: 860px) {
+  .nav-drop-menu { position: static; display: none; box-shadow: none; border: none; padding: 0.25rem 0 0.25rem 0.75rem; }
+  .nav-drop:hover .nav-drop-menu, .nav-drop:focus-within .nav-drop-menu { display: flex; }
+}
+
+
 .site-footer {
   margin-top: 4rem; background: var(--navy); color: #c3cdd9;
   border-top: 1px solid #1c2c3f;

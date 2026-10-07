@@ -16,6 +16,13 @@ export const site: SiteConfig = {
     { label: 'About', href: '/about/' },
     { label: 'Request a Quote', href: '/contact/' },
   ],
+  /* Cross-site network: rendered as a dropdown in the nav and a column in the footer. */
+  network: [
+    { label: 'Product Database', href: 'https://data.guotan.com/', desc: 'Product records & specification data', external: true },
+    { label: 'Manufacturer Profiles', href: 'https://manufacturer.guotan.com/', desc: 'Supplier qualification & verification', external: true },
+    { label: 'Test Methodologies', href: 'https://testing.guotan.com/', desc: 'How charcoal quality is measured', external: true },
+    { label: 'Knowledge Hub', href: 'https://knowledge.guotan.com/', desc: 'Buyer guides & sourcing education', external: true },
+  ],
   footerCols: [
     {
       title: 'Products',
@@ -44,6 +51,15 @@ export const site: SiteConfig = {
         { label: 'Packaging', href: '/packaging/' },
         { label: 'Compliance', href: '/compliance/' },
         { label: 'Specifications', href: '/products/' },
+      ],
+    },
+    {
+      title: 'Hub Network',
+      links: [
+        { label: 'Product Database', href: 'https://data.guotan.com/', external: true },
+        { label: 'Manufacturer Profiles', href: 'https://manufacturer.guotan.com/', external: true },
+        { label: 'Test Methodologies', href: 'https://testing.guotan.com/', external: true },
+        { label: 'Knowledge Hub', href: 'https://knowledge.guotan.com/', external: true },
       ],
     },
     {
