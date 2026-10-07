@@ -2,128 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd } from '../lib/seo';
 
-const canonical = `${SITES.main}/request-quote/`;
-const jsonLd = [
-  breadcrumbJsonLd([
-    { name: 'Home', url: `${SITES.main}/` },
-    { name: 'Request a Quote', url: canonical },
-  ]),
-];
-
-// Formspree-ready: set FORMSPREE_ID to activate; mailto fallback otherwise.
-const FORMSPREE_ID = import.meta.env.FORMSPREE_ID;
-const ACTION = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : '#';
-const SUBJECT = 'Charcoal Hub — Request a Quote';
-const MAILTO = `mailto:sales@guotan.com?subject=${encodeURIComponent(SUBJECT)}`;
-
-const buyerTypes = [
-  'Importer', 'Distributor', 'Wholesaler', 'Hookah Lounge',
-  'BBQ Distributor', 'Retail Brand', 'Private Label Brand', 'Other',
-];
+const canonical = `${SITES.main}/contact/`;
 ---
 
 <BaseLayout
   site={site}
   title="Request a Quote"
-  description="Request a charcoal quote — product, size, quantity, packaging, private label and destination port."
+  description="Request a quote — all quote requests are handled through the contact page."
   canonical={canonical}
-  jsonLd={jsonLd}
-  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Request a Quote', url: '/request-quote/' }]}
 >
+  <head><meta http-equiv="refresh" content="0; url=/contact/" /></head>
   <div class="page-title container">
     <h1>Request a Quote</h1>
     <p class="lede">
-      Tell us what you need. We'll respond with specifications and a quote — the more detail you
-      provide, the more precise the response.
+      Quote requests are handled through the contact page.
+      <a href="/contact/">Continue to Contact →</a>
     </p>
   </div>
-
-  <section class="section">
-    <div class="container">
-      <form class="form-card" action={ACTION} method="POST" data-mailto={MAILTO}>
-        <div class="form-grid">
-          <div>
-            <label for="name">Name <span class="req">*</span></label>
-            <input id="name" name="name" type="text" required />
-          </div>
-          <div>
-            <label for="company">Company</label>
-            <input id="company" name="company" type="text" />
-          </div>
-          <div>
-            <label for="email">Email <span class="req">*</span></label>
-            <input id="email" name="email" type="email" required />
-          </div>
-          <div>
-            <label for="country">Country <span class="req">*</span></label>
-            <input id="country" name="country" type="text" required />
-          </div>
-          <div class="full">
-            <label for="buyer_type">Buyer Type <span class="req">*</span></label>
-            <select id="buyer_type" name="buyer_type" required>
-              <option value="" disabled selected>Select buyer type…</option>
-              {buyerTypes.map((t) => <option value={t}>{t}</option>)}
-            </select>
-          </div>
-          <div>
-            <label for="product">Product</label>
-            <input id="product" name="product" type="text" placeholder="e.g. 26mm coconut shell hookah charcoal" />
-          </div>
-          <div>
-            <label for="size">Size</label>
-            <input id="size" name="size" type="text" placeholder="e.g. 25mm / 26mm / 27mm" />
-          </div>
-          <div>
-            <label for="quantity">Quantity</label>
-            <input id="quantity" name="quantity" type="text" placeholder="e.g. 1 × 40ft container" />
-          </div>
-          <div>
-            <label for="packaging">Packaging</label>
-            <input id="packaging" name="packaging" type="text" placeholder="e.g. bulk / retail box / private label" />
-          </div>
-          <div>
-            <label for="private_label">Private Label</label>
-            <select id="private_label" name="private_label">
-              <option value="" selected>Not required</option>
-              <option value="yes">Yes — private label</option>
-              <option value="no">No</option>
-              <option value="maybe">Discuss</option>
-            </select>
-          </div>
-          <div>
-            <label for="destination_port">Destination Port</label>
-            <input id="destination_port" name="destination_port" type="text" placeholder="e.g. Rotterdam, NL" />
-          </div>
-          <div class="full">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Any additional requirements…"></textarea>
-          </div>
-        </div>
-        <p style="margin-top:1.25rem;">
-          <button class="btn btn-primary" type="submit">Send Request →</button>
-        </p>
-        <p class="form-note">
-          {FORMSPREE_ID
-            ? 'Submitting sends your request securely. We respond by email.'
-            : 'This form is not yet connected to a backend. Please email your request to sales@guotan.com, or the form will open your email client.'}
-        </p>
-      </form>
-    </div>
-  </section>
-
-  <script>
-    const form = document.querySelector('form[data-mailto]');
-    if (form && form.getAttribute('action') === '#') {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const fd = new FormData(form);
-        const lines = [];
-        for (const [k, v] of fd.entries()) if (v) lines.push(`${k}: ${v}`);
-        const body = encodeURIComponent(lines.join('\n'));
-        window.location.href = `${form.getAttribute('data-mailto')}&body=${body}`;
-      });
-    }
-  </script>
 </BaseLayout>

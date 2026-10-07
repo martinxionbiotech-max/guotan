@@ -14,7 +14,7 @@ export const site: SiteConfig = {
     { label: 'Manufacturing', href: '/manufacturing/' },
     { label: 'Knowledge', href: '/knowledge/' },
     { label: 'About', href: '/about/' },
-    { label: 'Request a Quote', href: '/request-quote/' },
+    { label: 'Request a Quote', href: '/contact/' },
   ],
   footerCols: [
     {
@@ -52,7 +52,7 @@ export const site: SiteConfig = {
         { label: 'About', href: '/about/' },
         { label: 'Contact', href: '/contact/' },
         { label: 'Knowledge', href: '/knowledge/' },
-        { label: 'Request a Quote', href: '/request-quote/' },
+        { label: 'Request a Quote', href: '/contact/' },
       ],
     },
   ],

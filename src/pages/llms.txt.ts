@@ -22,7 +22,7 @@ export const GET: APIRoute = async () => {
   L.push(`- [Manufacturing](${base}/manufacturing/): Multi-supplier sourcing and qualification.`);
   L.push(`- [Export](${base}/export/): Export and logistics support.`);
   L.push(`- [Compliance](${base}/compliance/): Regulatory notes (EU, UK, USA) — not legal advice.`);
-  L.push(`- [Request a Quote](${base}/request-quote/): Structured RFQ form.`);
+  L.push(`- [Request a Quote](${base}/contact/): Quote requests are handled through the contact page.`);
   L.push(`- [Request Samples](${base}/request-sample/): Sample request form.`);
   L.push(`- [About](${base}/about/): Platform principles.`);
   L.push('');
