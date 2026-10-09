@@ -5,7 +5,7 @@ export const site: SiteConfig = {
   name: 'Charcoal Hub',
   shortName: 'Charcoal Hub',
   description:
-    'Coconut shell charcoal supplier for global B2B buyers — natural hookah charcoal, BBQ charcoal and private-label solutions sourced from qualified manufacturers in China.',
+    'Coconut shell charcoal supplier for global B2B buyers — natural hookah charcoal, BBQ charcoal and private-label solutions sourced from manufacturers in China, each with a published verification status.',
   nav: [
     { label: 'Products', href: '/products/' },
     { label: 'Private Label', href: '/private-label/' },
