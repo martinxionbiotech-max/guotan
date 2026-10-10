@@ -6,11 +6,11 @@
 
 | 仓库 | 域名（占位）| 职责 | 状态 |
 |---|---|---|---|
-| guotan | guotan.com | 商业转化 + Lead Gen | ✅ 19 页骨架 |
-| data.guotan | data.guotan.com | 产品/规格数据库 | ✅ 6 规格页 + schema |
-| manufacturer.guotan | manufacturer.guotan.com | 供应商情报 | ✅ schema + 索引 |
-| testing.guotan | testing.guotan.com | 检测方法学 | ✅ 7 测试页 |
-| Knowledge.guotan | knowledge.guotan.com | 买方教育 | ✅ 8 cornerstone |
+| guotan | chinacharcoalhub.com | 商业转化 + Lead Gen | ✅ 19 页骨架 |
+| data.guotan | data.chinacharcoalhub.com | 产品/规格数据库 | ✅ 6 规格页 + schema |
+| manufacturer.guotan | manufacturer.chinacharcoalhub.com | 供应商情报 | ✅ schema + 索引 |
+| testing.guotan | testing.chinacharcoalhub.com | 检测方法学 | ✅ 7 测试页 |
+| Knowledge.guotan | knowledge.chinacharcoalhub.com | 买方教育 | ✅ 8 cornerstone |
 
 ## 技术栈
 
@@ -47,4 +47,4 @@ Product → Raw Material → Application → Specification → Manufacturer → 
 
 - 每仓库独立 CF Pages 项目，绑定对应子域
 - 构建命令 `npm run build`，输出 `dist/`
-- SITE_URL 部署时按真实域名注入（本地默认 guotan.com 占位）
+- SITE_URL 部署时按真实域名注入（本地默认 chinacharcoalhub.com 占位）

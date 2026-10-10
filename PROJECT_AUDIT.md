@@ -51,7 +51,7 @@
 
 1. 5 个仓库 = 5 个 Cloudflare Pages 项目，需要 5 套独立部署（或主域 + 4 子域）。子域 DNS 待确认。
 2. RFQ/Sample 无后端：第一阶段用 Formspree-ready + mailto 回退，需在 CONVERSION_ARCHITECTURE.md 明确。
-3. 域名未定（见 DOMAIN_STRATEGY.md），但仓库命名 guotan 暗示可能用 guotan.com 系子域。
+3. 域名未定（见 DOMAIN_STRATEGY.md），但仓库命名 guotan 暗示可能用 chinacharcoalhub.com 系子域。
 
 ## 7. 推荐实施顺序
 

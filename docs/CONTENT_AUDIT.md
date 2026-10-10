@@ -7,11 +7,11 @@
 
 | 站 | pages.dev 线上 | 基线 commit | 审计前状态 |
 |---|---|---|---|
-| guotan.pages.dev | 200 | 8e0d32b | 干净工作树 |
-| data-guotan.pages.dev | 200 | fb240cf | 干净工作树 |
-| knowledge-guotan.pages.dev | 200 | d94d0d1 | 干净工作树 |
-| manufacturer-guotan.pages.dev | 200 | 4675be0 | 干净工作树 |
-| testing-guotan.pages.dev | 200 | cf542d4 | 干净工作树 |
+| chinacharcoalhub.com | 200 | 8e0d32b | 干净工作树 |
+| data-chinacharcoalhub.com | 200 | fb240cf | 干净工作树 |
+| knowledge-chinacharcoalhub.com | 200 | d94d0d1 | 干净工作树 |
+| manufacturer-chinacharcoalhub.com | 200 | 4675be0 | 干净工作树 |
+| testing-chinacharcoalhub.com | 200 | cf542d4 | 干净工作树 |
 
 ## 2. 已确认矛盾清单（阶段 1 输入）
 
@@ -64,13 +64,13 @@
 | 5 × pages.dev 线上 | 全部 200 |
 | robots.txt | 5 站全部正常（AI 爬虫友好策略） |
 | sitemap-index.xml | 5 站全部 200 |
-| canonical | 全部指向 guotan.com 系正式域名（**该域名不可用，见下**） |
-| guotan.com DNS | dnspod NS（julia/ash.dnspod.net），A 记录 203.12.200.78（apex/www/通配子域同 IP） |
-| https://guotan.com | **000 — TLS "unrecognized name"（该 IP 无此 SNI 证书）** |
-| http://guotan.com | 200，返回中文维护页（非本站内容） |
-| https://data.guotan.com 等子域 | 同样 TLS 000 |
+| canonical | 全部指向 chinacharcoalhub.com 系正式域名（**该域名不可用，见下**） |
+| chinacharcoalhub.com DNS | dnspod NS（julia/ash.dnspod.net），A 记录 203.12.200.78（apex/www/通配子域同 IP） |
+| https://chinacharcoalhub.com | **000 — TLS "unrecognized name"（该 IP 无此 SNI 证书）** |
+| http://chinacharcoalhub.com | 200，返回中文维护页（非本站内容） |
+| https://data.chinacharcoalhub.com 等子域 | 同样 TLS 000 |
 
-**结论**：正式域名 guotan.com 系当前不可用于生产（DNS 指向的服务器不服务该域名）。五站 canonical 与 sitemap 均指向正式域名，搜索引擎抓取 pages.dev 时会遇到 canonical 指向不可达域名的矛盾。**按红线：不改 DNS、不改 canonical 为 pages.dev**，此问题列为阻塞项，需业主在 Cloudflare Pages 配置自定义域并确保 DNS/TLS 就绪后解决。详见 REMAINING_ISSUES.md。
+**结论**：正式域名 chinacharcoalhub.com 系当前不可用于生产（DNS 指向的服务器不服务该域名）。五站 canonical 与 sitemap 均指向正式域名，搜索引擎抓取 pages.dev 时会遇到 canonical 指向不可达域名的矛盾。**按红线：不改 DNS、不改 canonical 为 pages.dev**，此问题列为阻塞项，需业主在 Cloudflare Pages 配置自定义域并确保 DNS/TLS 就绪后解决。详见 REMAINING_ISSUES.md。
 
 ## 6. 红线执行记录
 

@@ -18,10 +18,10 @@ export const site: SiteConfig = {
   ],
   /* Cross-site network: rendered as a dropdown in the nav and a column in the footer. */
   network: [
-    { label: 'Product Database', href: 'https://data.guotan.com/', desc: 'Product records & specification data', external: true },
-    { label: 'Manufacturer Profiles', href: 'https://manufacturer.guotan.com/', desc: 'Supplier qualification & verification', external: true },
-    { label: 'Test Methodologies', href: 'https://testing.guotan.com/', desc: 'How charcoal quality is measured', external: true },
-    { label: 'Knowledge Hub', href: 'https://knowledge.guotan.com/', desc: 'Buyer guides & sourcing education', external: true },
+    { label: 'Product Database', href: 'https://data.chinacharcoalhub.com/', desc: 'Product records & specification data', external: true },
+    { label: 'Manufacturer Profiles', href: 'https://manufacturer.chinacharcoalhub.com/', desc: 'Supplier qualification & verification', external: true },
+    { label: 'Test Methodologies', href: 'https://testing.chinacharcoalhub.com/', desc: 'How charcoal quality is measured', external: true },
+    { label: 'Knowledge Hub', href: 'https://knowledge.chinacharcoalhub.com/', desc: 'Buyer guides & sourcing education', external: true },
   ],
   footerCols: [
     {
@@ -56,10 +56,10 @@ export const site: SiteConfig = {
     {
       title: 'Hub Network',
       links: [
-        { label: 'Product Database', href: 'https://data.guotan.com/', external: true },
-        { label: 'Manufacturer Profiles', href: 'https://manufacturer.guotan.com/', external: true },
-        { label: 'Test Methodologies', href: 'https://testing.guotan.com/', external: true },
-        { label: 'Knowledge Hub', href: 'https://knowledge.guotan.com/', external: true },
+        { label: 'Product Database', href: 'https://data.chinacharcoalhub.com/', external: true },
+        { label: 'Manufacturer Profiles', href: 'https://manufacturer.chinacharcoalhub.com/', external: true },
+        { label: 'Test Methodologies', href: 'https://testing.chinacharcoalhub.com/', external: true },
+        { label: 'Knowledge Hub', href: 'https://knowledge.chinacharcoalhub.com/', external: true },
       ],
     },
     {

@@ -53,7 +53,7 @@
 
 ## 阶段 4：技术 SEO
 
-- 阻塞报告：guotan/docs/REMAINING_ISSUES.md P0（guotan.com TLS 000 / DNS 指向非 CF 服务器；canonical 与 sitemap 已预指向正式域名，按红线未改动）
+- 阻塞报告：guotan/docs/REMAINING_ISSUES.md P0（chinacharcoalhub.com TLS 000 / DNS 指向非 CF 服务器；canonical 与 sitemap 已预指向正式域名，按红线未改动）
 
 ## 阶段 5：交付物（全部落盘 guotan/docs/）
 

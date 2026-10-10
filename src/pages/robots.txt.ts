@@ -1,5 +1,5 @@
 export const GET = () => {
-  const base = (process.env.SITE_URL || 'https://guotan.com').replace(/\/$/, '');
+  const base = (process.env.SITE_URL || 'https://chinacharcoalhub.com').replace(/\/$/, '');
   return new Response(
     `User-agent: *
 Allow: /

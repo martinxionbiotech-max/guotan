@@ -7,7 +7,7 @@
 | Phase | 内容 | 状态 |
 |---|---|---|
 | 1 | 项目审计 | ✅ PROJECT_AUDIT.md（commit 79e02c5）|
-| 2 | 域名策略 | ✅ DOMAIN_STRATEGY.md；**guotan.com 占位待业主确认** |
+| 2 | 域名策略 | ✅ DOMAIN_STRATEGY.md；**chinacharcoalhub.com 占位待业主确认** |
 | 3 | 主站骨架 | ✅ 19 页 + RFQ/Sample 表单（commit f9119a3）|
 | 4 | 产品数据模型 | ✅ schema 定义 + 6 规格方法学页（54442df）|
 | 5 | 厂家数据模型 | ✅ schema + 索引，0 条目（0bcfbe5）|
@@ -35,7 +35,7 @@ PROJECT_AUDIT ✅ DOMAIN_STRATEGY ✅ ARCHITECTURE ✅ CONTENT_ARCHITECTURE ✅ 
 
 ## 遗留 TODO（需人工）
 
-1. **域名确认**：guotan.com 是否业主持有？→ 决定最终域名
+1. **域名确认**：chinacharcoalhub.com 是否业主持有？→ 决定最终域名
 2. **CF Pages 项目创建**：5 个仓库各建项目绑定子域
 3. **Formspree 配置**：表单端点 + 收件邮箱
 4. **业务邮箱**：contact/sales 邮箱确认

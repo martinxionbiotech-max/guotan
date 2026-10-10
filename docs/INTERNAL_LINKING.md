@@ -30,7 +30,7 @@ Product
 
 ## 实现
 
-- `sites.ts` 五站 URL 常量（已含 guotan.com 占位），跨站链接全部走常量
+- `sites.ts` 五站 URL 常量（已含 chinacharcoalhub.com 占位），跨站链接全部走常量
 - 主站产品页 CTA 按意图：Product → Request Sample；Bulk → Request Quote；OEM → Private Label；Testing → Product Info（§25）
 - 待真实数据灌入后激活自动实体互链
 

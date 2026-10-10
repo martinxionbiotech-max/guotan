@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const site = (process.env.SITE_URL || 'https://guotan.com').replace(/\/$/, '');
+const site = (process.env.SITE_URL || 'https://chinacharcoalhub.com').replace(/\/$/, '');
 
 export default defineConfig({
   site,
