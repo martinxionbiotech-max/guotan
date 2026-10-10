@@ -11,12 +11,13 @@ const jsonLd = [
     { name: 'Contact', url: canonical },
   ]),
 ];
+const WHATSAPP = 'https://wa.me/8615153588090';
 ---
 
 <BaseLayout
   site={site}
   title="Contact"
-  description="Contact Charcoal Hub for sourcing, samples, OEM and private label charcoal."
+  description="Contact Charcoal Hub sales for quotes, samples, OEM and private label charcoal."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Contact', url: '/contact/' }]}
@@ -30,13 +31,29 @@ const jsonLd = [
     <div class="container">
       <div class="grid grid-2">
         <div class="card">
-          <h3>Email</h3>
-          <p><a href="mailto:sales@guotan.com">sales@guotan.com</a></p>
+          <h3>Sales Director</h3>
+          <p><strong>Joanna D.</strong></p>
+          <p>
+            Phone / WhatsApp:<br />
+            <a href="tel:+8615153588090">+86 15153588090</a>
+          </p>
+          <p>
+            Email:<br />
+            <a href="mailto:joanna@dinweys.com">joanna@dinweys.com</a>
+          </p>
+          <p style="margin-top:1.25rem;">
+            <a
+              class="btn btn-primary"
+              href={WHATSAPP}
+              target="_blank"
+              rel="noopener"
+            >Chat on WhatsApp Now</a
+            >
+          </p>
         </div>
         <div class="card">
           <h3>Fastest path</h3>
           <p>Use the structured forms so we can route your request precisely.</p>
-          <p><a class="card-link" href="/contact/">Request a Quote →</a></p>
           <p><a class="card-link" href="/request-sample/">Request Samples →</a></p>
         </div>
       </div>
