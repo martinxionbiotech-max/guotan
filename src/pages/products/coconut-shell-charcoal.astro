@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site-config';
 import { SITES } from '../../lib/sites';
-import { breadcrumbJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, productJsonLd } from '../../lib/seo';
 
 const canonical = `${SITES.main}/products/coconut-shell-charcoal/`;
 const jsonLd = [
@@ -11,6 +11,14 @@ const jsonLd = [
     { name: 'Products', url: `${SITES.main}/products/` },
     { name: 'Coconut Shell Charcoal', url: canonical },
   ]),
+,
+  productJsonLd({
+    id: canonical,
+    name: 'Coconut Shell Charcoal',
+    description: 'Natural coconut shell charcoal for hookah and BBQ — dense, low-ash fuel from carbonized coconut shell.',
+    category: 'Charcoal fuel',
+    properties: [{ name: 'Raw material', value: 'Coconut shell' }, { name: 'Size', value: '25 / 26 / 27 mm cubes' }, { name: 'Ash', value: '≤ 3.5% (supplier-declared)' }, { name: 'Burning time', value: '~60 min per 25 mm cube (condition-dependent)' }],
+  }),
 ];
 ---
 

@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site-config';
 import { SITES } from '../../lib/sites';
-import { breadcrumbJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, productJsonLd } from '../../lib/seo';
 
 const canonical = `${SITES.main}/products/bbq-charcoal/`;
 const jsonLd = [
@@ -11,6 +11,14 @@ const jsonLd = [
     { name: 'Products', url: `${SITES.main}/products/` },
     { name: 'BBQ Charcoal', url: canonical },
   ]),
+,
+  productJsonLd({
+    id: canonical,
+    name: 'Bbq Charcoal',
+    description: 'BBQ charcoal category — natural lump and briquette fuels for grilling.',
+    category: 'Charcoal fuel',
+    properties: [{ name: 'Application', value: 'BBQ / grilling' }],
+  }),
 ];
 ---
 

@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site-config';
 import { SITES } from '../../lib/sites';
-import { breadcrumbJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, productJsonLd } from '../../lib/seo';
 
 const canonical = `${SITES.main}/products/bamboo-charcoal/`;
 const jsonLd = [
@@ -11,6 +11,14 @@ const jsonLd = [
     { name: 'Products', url: `${SITES.main}/products/` },
     { name: 'Bamboo Charcoal', url: canonical },
   ]),
+,
+  productJsonLd({
+    id: canonical,
+    name: 'Bamboo Charcoal',
+    description: 'Bamboo charcoal for hookah — FireMax cube and bar formats with supplier-declared specifications.',
+    category: 'Charcoal fuel',
+    properties: [{ name: 'Raw material', value: 'Bamboo' }, { name: 'Formats', value: 'Cubes 25 mm / 40 mm; silver bars' }, { name: 'Burning time', value: '90 min – 3 h (supplier-declared)' }, { name: 'Ignition', value: '9–10 min cubes; 35–45 s bars' }],
+  }),
 ];
 ---
 
@@ -42,10 +50,11 @@ const jsonLd = [
   <section class="section">
     <div class="container">
       <div class="callout-pending">
-        <span class="callout-title">Data pending — supplier verification in progress</span>
+        <span class="callout-title">Supplier-declared data — not independently verified</span>
         <p>
-          Verified bamboo charcoal product entries are added to the product database after supplier
-          verification. We do not publish unverified specifications.
+          Three bamboo charcoal product records are published with supplier-declared status from
+          the FireMax datasheet. They are visible with their declared figures, labelled source and
+          verification status — not presented as Charcoal Hub test data.
         </p>
         <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
       </div>
@@ -53,10 +62,33 @@ const jsonLd = [
       <h2>Specification Context</h2>
       <div class="prose">
         <p>
-          Data pending — no verified specification published yet. The product database does not
-          currently carry a bamboo charcoal product record, so no declared figures can be cited
-          here. Charcoal Hub does not publish unverified numbers.
+          Bamboo charcoal product records exist in the product database as supplier-declared
+          entries — figures come from the FireMax datasheet and are <em>not</em> independently
+          tested by Charcoal Hub:
         </p>
+        <ul>
+          <li><strong>FireMax SL470</strong> — 4 × 4 × 3 cm bamboo cube, burn 2–3 h, ash 3.5–5% (supplier-declared)</li>
+          <li><strong>FireMax C25</strong> — 25 mm bamboo cube, burn 90–120 min, calorific 7,500 J (supplier-declared)</li>
+          <li><strong>FireMax SI87</strong> — 9 × 2.5 × 1.2 cm silver bar, ignition 35–45 s (supplier-declared)</li>
+        </ul>
+        <p>
+          Full field-level data with source and status:
+          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a>
+        </p>
+      </div>
+      <div class="grid grid-3" aria-label="FireMax product scene images">
+        <figure class="card-media">
+          <img src="/images/firemax-sl470.webp" alt="Bamboo charcoal cube blocks beside a hookah — conceptual illustration" width="1600" height="900" loading="lazy" />
+          <figcaption>SL470 — 4 cm bamboo cube</figcaption>
+        </figure>
+        <figure class="card-media">
+          <img src="/images/firemax-c25.webp" alt="25 mm bamboo charcoal cubes with calipers — conceptual illustration" width="1600" height="900" loading="lazy" />
+          <figcaption>C25 — 25 mm bamboo cube</figcaption>
+        </figure>
+        <figure class="card-media">
+          <img src="/images/firemax-si87.webp" alt="Silver-coated charcoal bars, one glowing — conceptual illustration" width="1600" height="900" loading="lazy" />
+          <figcaption>SI87 — silver bar</figcaption>
+        </figure>
       </div>
 
       <h2>Buyer Checklist</h2>

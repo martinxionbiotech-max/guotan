@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site-config';
 import { SITES } from '../../lib/sites';
-import { breadcrumbJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, productJsonLd } from '../../lib/seo';
 
 const canonical = `${SITES.main}/products/hookah-charcoal/`;
 const jsonLd = [
@@ -11,6 +11,14 @@ const jsonLd = [
     { name: 'Products', url: `${SITES.main}/products/` },
     { name: 'Hookah Charcoal', url: canonical },
   ]),
+,
+  productJsonLd({
+    id: canonical,
+    name: 'Hookah Charcoal',
+    description: 'Hookah charcoal — natural coconut shell cubes and the FireMax bamboo/fruitwood range, supplier-declared.',
+    category: 'Charcoal fuel',
+    properties: [{ name: 'Raw material', value: 'Coconut shell / bamboo / fruitwood' }, { name: 'Size', value: '25–27 mm cubes; bars; 33 mm tablets' }, { name: 'Ignition', value: '8–12 min natural; 15–50 s instant-light' }, { name: 'Burning time', value: '45 min – 3 h depending on format' }],
+  }),
 ];
 ---
 
@@ -105,6 +113,26 @@ const jsonLd = [
         Source: public supplier listing (bbqoncharcoal.com 25&nbsp;mm product page), captured
         2026-10-07. Supplier-declared — not independently verified by Charcoal Hub.
       </p>
+
+      <h2>FireMax Product Range</h2>
+      <div class="prose">
+        <p>
+          The FireMax datasheet (provided 2026-10-10) adds four hookah product records to the
+          database — all <strong>supplier-declared</strong>, none independently tested:
+        </p>
+        <ul>
+          <li><strong>FireMax SL470</strong> — 4 × 4 × 3 cm bamboo cube, 2–3 h burn, ignition 9–10 min</li>
+          <li><strong>FireMax C25</strong> — 25 mm bamboo cube, 90–120 min burn, 7,500 J</li>
+          <li><strong>FireMax SI87</strong> — 90 × 25 × 12 mm silver bar, ignition 35–45 s</li>
+          <li><strong>FireMax RB33</strong> — 33 mm instant-light tablet, ignition 15–50 s, 45–70 min burn</li>
+        </ul>
+        <p>
+          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">View records in the Product Database →</a>
+        </p>
+      </div>
+      <div class="page-title-media" style="max-width:640px;margin-top:1.5rem;">
+        <img src="/images/firemax-rb33.webp" alt="Instant-light charcoal tablets on a stone tray, one lit — conceptual illustration" width="1600" height="900" loading="lazy" />
+      </div>
 
       <h2>Buyer Checklist</h2>
       <div class="prose">
