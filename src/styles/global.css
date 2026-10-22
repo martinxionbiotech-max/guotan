@@ -398,6 +398,20 @@ textarea { min-height: 120px; resize: vertical; }
 .page-title-split h1 { font-size: 2.45rem; }
 .page-title-split .lede { color: var(--muted); max-width: 58ch; font-size: 1.08rem; }
 
+/* Indicative B2B price line — must stay visible wherever productJsonLd emits an offer */
+.page-title .price-note,
+.page-title-split .price-note {
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin: 0.9rem 0 1.3rem;
+  padding: 9px 13px;
+  border-left: 3px solid var(--accent, #7a5c3e);
+  background: var(--card, #fff);
+  max-width: 62ch;
+}
+.page-title .price-note strong,
+.page-title-split .price-note strong { font-weight: 700; }
+
 /* ---------- CTA banner ---------- */
 .cta-banner {
   position: relative; overflow: hidden;
