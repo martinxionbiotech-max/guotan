@@ -1,0 +1,28 @@
+# Charcoal Hub
+
+> B2B charcoal sourcing and product intelligence platform. Natural coconut shell charcoal for hookah, BBQ and private-label solutions. All product, manufacturer and testing data are labeled by source and verification status; no fabricated claims.
+
+## Core pages
+- [Home](https://chinacharcoalhub.com/): Coconut shell charcoal supplier for global B2B buyers.
+- [Products](https://chinacharcoalhub.com/products/): Category overviews for coconut shell, hookah, BBQ and bamboo charcoal.
+- [Coconut Shell Charcoal](https://chinacharcoalhub.com/products/coconut-shell-charcoal/): The core raw material.
+- [Hookah Charcoal](https://chinacharcoalhub.com/products/hookah-charcoal/): 25mm / 26mm / 27mm cube charcoal.
+- [Private Label](https://chinacharcoalhub.com/private-label/): Eight-step private label process.
+- [OEM](https://chinacharcoalhub.com/oem/): Custom specification manufacturing.
+- [Testing](https://chinacharcoalhub.com/testing/): Testing approach and data-source transparency.
+- [Packaging](https://chinacharcoalhub.com/packaging/): Bulk, retail and private-label packaging.
+- [Manufacturing](https://chinacharcoalhub.com/manufacturing/): Multi-supplier sourcing and qualification.
+- [Export](https://chinacharcoalhub.com/export/): Export and logistics support.
+- [Compliance](https://chinacharcoalhub.com/compliance/): Regulatory notes (EU, UK, USA) — not legal advice.
+- [Request a Quote](https://chinacharcoalhub.com/contact/): Quote requests are handled through the contact page.
+- [Request Samples](https://chinacharcoalhub.com/request-sample/): Sample request form.
+- [About](https://chinacharcoalhub.com/about/): Platform principles.
+
+## Sub-sites
+- [Product Database](https://data.chinacharcoalhub.com/): Structured product and specification data.
+- [Manufacturer Intelligence](https://manufacturer.chinacharcoalhub.com/): Supplier qualification and verification.
+- [Testing Intelligence](https://testing.chinacharcoalhub.com/): Test methodology and report database.
+- [Knowledge Hub](https://knowledge.chinacharcoalhub.com/): Buyer education and sourcing guides.
+
+## Notes
+- Brand: Charcoal Hub. Product entries are added only after supplier verification.
