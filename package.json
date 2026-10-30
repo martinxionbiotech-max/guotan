@@ -6,7 +6,7 @@
   "description": "CHARCOAL HUB — B2B charcoal sourcing and product intelligence platform (guotan).",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/generate-markdown.mjs",
     "preview": "astro preview",
     "check:links": "node scripts/check-links.mjs",
     "check:data": "node scripts/check-data.mjs"
@@ -14,5 +14,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.7.0"
+  },
+  "devDependencies": {
+    "node-html-markdown": "^2.0.0"
   }
 }
