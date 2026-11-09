@@ -398,9 +398,9 @@ textarea { min-height: 120px; resize: vertical; }
 .page-title-split h1 { font-size: 2.45rem; }
 .page-title-split .lede { color: var(--muted); max-width: 58ch; font-size: 1.08rem; }
 
-/* Indicative B2B price line — must stay visible wherever productJsonLd emits an offer */
-.page-title .price-note,
-.page-title-split .price-note {
+/* RFQ pricing note — no fixed price is emitted in Product schema */
+.page-title .quote-note,
+.page-title-split .quote-note {
   font-size: 0.95rem;
   color: var(--ink);
   margin: 0.9rem 0 1.3rem;
@@ -409,8 +409,8 @@ textarea { min-height: 120px; resize: vertical; }
   background: var(--card, #fff);
   max-width: 62ch;
 }
-.page-title .price-note strong,
-.page-title-split .price-note strong { font-weight: 700; }
+.page-title .quote-note strong,
+.page-title-split .quote-note strong { font-weight: 700; }
 
 /* ---------- CTA banner ---------- */
 .cta-banner {

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/export/`;
 const jsonLd = [
@@ -10,6 +10,18 @@ const jsonLd = [
     { name: 'Home', url: `${SITES.main}/` },
     { name: 'Export', url: canonical },
   ]),
+  organizationJsonLd({
+    id: SITES.main,
+    name: 'Charcoal Hub',
+    description: site.description,
+  }),
+  serviceJsonLd({
+    id: canonical,
+    name: 'Charcoal Export & Logistics',
+    serviceType: 'Charcoal export and logistics support',
+    description: 'Charcoal export support — export documentation, container loading planning and destination-port coordination for international buyers.',
+    providerId: SITES.main,
+  }),
 ];
 ---
 
@@ -109,7 +121,7 @@ const jsonLd = [
       <div class="cta-banner">
         <h2>Planning an import?</h2>
         <p>Tell us your destination port and volume — we'll confirm the load plan and document set.</p>
-        <a class="btn btn-primary" href="/contact/">Request a Quote →</a>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
       </div>
     </div>
   </section>

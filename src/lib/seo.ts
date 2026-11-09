@@ -128,32 +128,43 @@ export function datasetJsonLd(o: {
   return out;
 }
 
+/* ----------------------------- Service ---------------------------- */
+/* For the commercial service pages (private label, OEM, etc.).       */
+export function serviceJsonLd(o: {
+  id: string;
+  name: string;
+  serviceType: string;
+  description: string;
+  providerId: string;
+  areaServed?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${o.id}#service`,
+    name: o.name,
+    serviceType: o.serviceType,
+    description: o.description,
+    url: o.id,
+    provider: { '@id': o.providerId },
+    areaServed: { '@type': 'Place', name: o.areaServed ?? 'Worldwide' },
+  };
+}
+
 /* ----------------------------- Product ---------------------------- */
 /* Only emitted when a product has real verified fields.              */
+/* No price or availability is emitted: B2B charcoal is quoted per     */
+/* specification and volume, so the Offer points at the RFQ page.      */
 export function productJsonLd(o: {
   id: string;
   name: string;
   description: string;
+  quoteUrl: string;
   brand?: string;
   category?: string;
   properties?: { name: string; value: string }[];
-  offers?: {
-    lowPrice: string;
-    highPrice: string;
-    priceCurrency?: string;
-    availability?: string;
-    sellerId?: string;
-  };
+  sellerId?: string;
 }) {
-  /* Site-wide indicative B2B range. Google requires a Product to carry
-     offers / review / aggregateRating, and requires the schema price to be
-     visible on the page — pages using this helper render a matching
-     "Indicative price" line. Override per product when real pricing differs. */
-  const offers = o.offers ?? {
-    lowPrice: '80',
-    highPrice: '200',
-    priceCurrency: 'USD',
-  };
   const out: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -171,17 +182,16 @@ export function productJsonLd(o: {
       value: p.value,
     }));
   }
-  const aggregate: Record<string, unknown> = {
-    '@type': 'AggregateOffer',
+  /* Offer without price/availability: schema.org permits an Offer whose
+     terms are confirmed on quotation. Never emit InStock without a real
+     sellable offer. */
+  const offer: Record<string, unknown> = {
+    '@type': 'Offer',
     '@id': `${o.id}#offer`,
-    url: o.id,
-    priceCurrency: offers.priceCurrency ?? 'USD',
-    lowPrice: offers.lowPrice,
-    highPrice: offers.highPrice,
-    availability: offers.availability ?? 'https://schema.org/InStock',
+    url: o.quoteUrl,
   };
-  if (offers.sellerId) aggregate.seller = { '@id': offers.sellerId };
-  out.offers = aggregate;
+  if (o.sellerId) offer.seller = { '@id': o.sellerId };
+  out.offers = offer;
   return out;
 }
 

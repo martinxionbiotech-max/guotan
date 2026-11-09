@@ -5,7 +5,7 @@ export const site: SiteConfig = {
   name: 'Charcoal Hub',
   shortName: 'Charcoal Hub',
   description:
-    'Coconut shell charcoal supplier for global B2B buyers — natural hookah charcoal, BBQ charcoal and private-label solutions sourced from manufacturers in China, each with a published verification status.',
+    'Coconut shell charcoal supplier for global B2B buyers — hookah, BBQ and private-label charcoal from Chinese manufacturers, with published verification status.',
   nav: [
     { label: 'Products', href: '/products/' },
     { label: 'Private Label', href: '/private-label/' },
@@ -14,7 +14,7 @@ export const site: SiteConfig = {
     { label: 'Manufacturing', href: '/manufacturing/' },
     { label: 'Knowledge', href: '/knowledge/' },
     { label: 'About', href: '/about/' },
-    { label: 'Request a Quote', href: '/contact/' },
+    { label: 'Request a Quote', href: '/request-quote/' },
   ],
   /* Cross-site network: rendered as a dropdown in the nav and a column in the footer. */
   network: [
@@ -68,7 +68,7 @@ export const site: SiteConfig = {
         { label: 'About', href: '/about/' },
         { label: 'Contact', href: '/contact/' },
         { label: 'Knowledge', href: '/knowledge/' },
-        { label: 'Request a Quote', href: '/contact/' },
+        { label: 'Request a Quote', href: '/request-quote/' },
         { label: 'Compliance', href: '/compliance/' },
         { label: 'Privacy Policy', href: '/privacy/' },
         { label: 'Terms of Use', href: '/terms/' },

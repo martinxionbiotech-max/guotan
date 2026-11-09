@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/private-label/`;
 const jsonLd = [
@@ -10,6 +10,18 @@ const jsonLd = [
     { name: 'Home', url: `${SITES.main}/` },
     { name: 'Private Label', url: canonical },
   ]),
+  organizationJsonLd({
+    id: SITES.main,
+    name: 'Charcoal Hub',
+    description: site.description,
+  }),
+  serviceJsonLd({
+    id: canonical,
+    name: 'Private Label Charcoal',
+    serviceType: 'Private label charcoal manufacturing',
+    description: 'Private label charcoal service — product, size, packaging and branding selection, with sampling, production, inspection and shipment managed to the agreed specification.',
+    providerId: SITES.main,
+  }),
 ];
 ---
 
@@ -97,7 +109,7 @@ const jsonLd = [
       <div class="cta-banner">
         <h2>Start a private label project</h2>
         <p>Tell us your product, size, target market and packaging preference.</p>
-        <a class="btn btn-primary" href="/contact/">Start a Private Label Project →</a>
+        <a class="btn btn-primary" href="/request-quote/">Start a Private Label Project →</a>
       </div>
     </div>
   </section>

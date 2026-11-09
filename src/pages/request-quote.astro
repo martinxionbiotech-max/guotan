@@ -2,22 +2,143 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd } from '../lib/seo';
 
-const canonical = `${SITES.main}/contact/`;
+const canonical = `${SITES.main}/request-quote/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Request a Quote', url: canonical },
+  ]),
+];
+
+const FORMSPREE_ID = import.meta.env.FORMSPREE_ID;
+const ACTION = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : '#';
+const SUBJECT = 'Charcoal Hub — Request a Quote';
+const MAILTO = `mailto:joanna@dinweys.com?subject=${encodeURIComponent(SUBJECT)}`;
 ---
 
 <BaseLayout
   site={site}
-  title="Request a Quote"
-  description="Request a quote — all quote requests are handled through the contact page."
+  title="Request a Charcoal Quote"
+  description="Request a charcoal quote — tell us product, size, volume, packaging and destination port. We reply with specifications and pricing."
   canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Request a Quote', url: '/request-quote/' }]}
 >
-  <head><meta http-equiv="refresh" content="0; url=/contact/" /></head>
   <div class="page-title container">
     <h1>Request a Quote</h1>
     <p class="lede">
-      Quote requests are handled through the contact page.
-      <a href="/contact/">Continue to Contact →</a>
+      Tell us the product, size, volume, packaging and destination port. We reply with the
+      specification we can actually supply and a quotation for that specification — no fixed
+      catalogue price, because charcoal is priced per grade, packaging and order volume.
     </p>
   </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        <div>
+          <h2>What to include</h2>
+          <ul class="prose">
+            <li><strong>Product</strong> — coconut shell, hookah, BBQ or bamboo charcoal.</li>
+            <li><strong>Size</strong> — 25 mm / 26 mm / 27 mm cube, flat, or a custom dimension.</li>
+            <li><strong>Volume</strong> — sample, pallet, LCL or full container.</li>
+            <li><strong>Packaging</strong> — bulk bag, retail box or private label.</li>
+            <li><strong>Destination port</strong> — so we can quote the right freight basis.</li>
+            <li><strong>Specification targets</strong> — ash, moisture, fixed carbon and burn time, if you have them.</li>
+          </ul>
+          <p>
+            Not sure about a specification? Send what you know. If a figure is missing we will mark
+            it <em>data pending</em> rather than guess, and confirm it with the supplier before you
+            commit.
+          </p>
+          <p>
+            For a physical sample first, use <a href="/request-sample/">Request Samples</a>.
+            For general contact details, see <a href="/contact/">Contact</a>.
+          </p>
+        </div>
+
+        <div>
+          <form class="form-card" action={ACTION} method="POST" data-mailto={MAILTO}>
+            <div class="form-grid">
+              <div class="full">
+                <label for="product">Product <span class="req">*</span></label>
+                <input id="product" name="product" type="text" required placeholder="e.g. coconut shell hookah charcoal" />
+              </div>
+              <div>
+                <label for="size">Size</label>
+                <input id="size" name="size" type="text" placeholder="e.g. 25mm / 26mm / 27mm" />
+              </div>
+              <div>
+                <label for="volume">Volume / quantity</label>
+                <input id="volume" name="volume" type="text" placeholder="e.g. 1 x 20 ft container" />
+              </div>
+              <div>
+                <label for="packaging">Packaging</label>
+                <input id="packaging" name="packaging" type="text" placeholder="e.g. 1 kg retail box" />
+              </div>
+              <div>
+                <label for="port">Destination port</label>
+                <input id="port" name="port" type="text" placeholder="e.g. Hamburg" />
+              </div>
+              <div>
+                <label for="company">Company</label>
+                <input id="company" name="company" type="text" />
+              </div>
+              <div>
+                <label for="country">Country <span class="req">*</span></label>
+                <input id="country" name="country" type="text" required />
+              </div>
+              <div class="full">
+                <label for="email">Email <span class="req">*</span></label>
+                <input id="email" name="email" type="email" required />
+              </div>
+              <div class="full">
+                <label for="comments">Specification targets / comments</label>
+                <textarea id="comments" name="comments" placeholder="Ash, moisture, fixed carbon, burn time, branding, target price basis…"></textarea>
+              </div>
+            </div>
+            <p style="margin-top:1.25rem;">
+              <button class="btn btn-primary" type="submit">Send Quote Request →</button>
+            </p>
+            <p class="form-note">
+              {FORMSPREE_ID
+                ? 'Submitting sends your request securely. We reply by email.'
+                : 'This form is not yet connected to a backend. Please email your request to joanna@dinweys.com, or the form will open your email client.'}
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <h2>What happens next</h2>
+      <ol class="prose">
+        <li>We check the request against available product records and supplier capability.</li>
+        <li>We confirm which specification fields are verified, supplier-reported or still pending.</li>
+        <li>We send a quotation for the confirmed specification, packaging and volume.</li>
+        <li>If the specification is still open, we arrange a sample before bulk production.</li>
+      </ol>
+
+      <div class="cta-banner">
+        <h2>Prefer to talk first?</h2>
+        <p>Contact the sales desk directly — phone, WhatsApp or email.</p>
+        <a class="btn btn-primary" href="/contact/">Contact Details →</a>
+        <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.querySelector('form[data-mailto]');
+    if (form && form.getAttribute('action') === '#') {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const lines = [];
+        for (const [k, v] of fd.entries()) if (v) lines.push(`${k}: ${v}`);
+        const body = encodeURIComponent(lines.join('\n'));
+        window.location.href = `${form.getAttribute('data-mailto')}&body=${body}`;
+      });
+    }
+  </script>
 </BaseLayout>

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/contact/`;
 const jsonLd = [
@@ -10,6 +10,11 @@ const jsonLd = [
     { name: 'Home', url: `${SITES.main}/` },
     { name: 'Contact', url: canonical },
   ]),
+  organizationJsonLd({
+    id: SITES.main,
+    name: 'Charcoal Hub',
+    description: site.description,
+  }),
 ];
 const WHATSAPP = 'https://wa.me/8615153588090';
 ---
@@ -17,7 +22,7 @@ const WHATSAPP = 'https://wa.me/8615153588090';
 <BaseLayout
   site={site}
   title="Contact"
-  description="Contact Charcoal Hub sales for quotes, samples, OEM and private label charcoal."
+  description="Contact Charcoal Hub sales for quotes, samples, OEM and private label charcoal — operating entity, mailbox domain and response path."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Contact', url: '/contact/' }]}
@@ -31,8 +36,8 @@ const WHATSAPP = 'https://wa.me/8615153588090';
     <div class="container">
       <div class="grid grid-2">
         <div class="card">
-          <h3>Sales Director</h3>
-          <p><strong>Joanna D.</strong></p>
+          <h3>Sales</h3>
+          <p><strong>Joanna D.</strong> — Sales Director</p>
           <p>
             Phone / WhatsApp:<br />
             <a href="tel:+8615153588090">+86 15153588090</a>
@@ -40,6 +45,11 @@ const WHATSAPP = 'https://wa.me/8615153588090';
           <p>
             Email:<br />
             <a href="mailto:joanna@dinweys.com">joanna@dinweys.com</a>
+          </p>
+          <p class="meta-line">
+            Mailbox note: this address is the Charcoal Hub sales desk. It is hosted on
+            <strong>dinweys.com</strong>, the shared mail domain used by our industrial-supply
+            operations; the domain does not indicate a separate seller, agent or reseller.
           </p>
           <p style="margin-top:1.25rem;">
             <a
@@ -51,12 +61,51 @@ const WHATSAPP = 'https://wa.me/8615153588090';
             >
           </p>
         </div>
+
         <div class="card">
-          <h3>Fastest path</h3>
-          <p>Use the structured forms so we can route your request precisely.</p>
-          <p><a class="card-link" href="/request-sample/">Request Samples →</a></p>
+          <h3>Operating entity</h3>
+          <p>
+            <strong>Yancheng Xuanbao Environmental Technology Co., Ltd.</strong><br />
+            Yancheng, Jiangsu, China
+          </p>
+          <p>
+            Charcoal Hub is operated by this company. Quotations, order confirmations and shipping
+            documents for orders placed through this site are issued in the name of this entity.
+          </p>
+          <p>
+            We are a sourcing and product-intelligence platform, not a single factory. Manufacturers
+            whose products we source are independent suppliers; each profile on the
+            <a href={`${SITES.manufacturer}/`} target="_blank" rel="noopener">manufacturer sub-site</a>
+            carries its own verification status.
+          </p>
+          <p style="margin-top:1.25rem;">
+            <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+          </p>
         </div>
       </div>
+
+      <h2>Fastest path</h2>
+      <p>
+        Use the structured forms so we can route your request precisely: a
+        <a href="/request-quote/">quote request</a> for specification and pricing, or a
+        <a href="/request-sample/">sample request</a> to verify a product before bulk.
+      </p>
+
+      <h2>Entity details</h2>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr><th>Legal name</th><td>Yancheng Xuanbao Environmental Technology Co., Ltd.</td></tr>
+            <tr><th>Location</th><td>Yancheng, Jiangsu, China</td></tr>
+            <tr><th>Platform role</th><td>Sourcing and product-intelligence platform (not the manufacturing factory)</td></tr>
+            <tr><th>Sales contact</th><td>Joanna D., Sales Director — +86 15153588090 — joanna@dinweys.com</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="updated">
+        Registration number and full street address are provided on request for contracting;
+        they are not published here until confirmed for public display.
+      </p>
     </div>
   </section>
 </BaseLayout>

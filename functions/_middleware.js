@@ -59,11 +59,21 @@ export async function onRequest(context) {
   const { request, env } = context;
   if (request.method !== 'GET' && request.method !== 'HEAD') return context.next();
 
+  const url = new URL(request.url);
+
+  /* Canonical host: www -> apex, 301. Requires the www hostname to be
+     attached to this Pages project (custom domain); _redirects cannot
+     match on hostname. APEX_HOST overrides the default apex. */
+  const apexHost = env.APEX_HOST || 'chinacharcoalhub.com';
+  if (url.hostname === `www.${apexHost}`) {
+    url.hostname = apexHost;
+    return Response.redirect(url.toString(), 301);
+  }
+
   if (!wantsMarkdown(request.headers.get('Accept') || '')) return context.next();
 
   try {
     const manifest = await getManifest(env);
-    const url = new URL(request.url);
     const key = normalizePath(url.pathname);
     const mdPath = manifest[key];
     if (!mdPath) return context.next();

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/packaging/`;
 const jsonLd = [
@@ -10,6 +10,18 @@ const jsonLd = [
     { name: 'Home', url: `${SITES.main}/` },
     { name: 'Packaging', url: canonical },
   ]),
+  organizationJsonLd({
+    id: SITES.main,
+    name: 'Charcoal Hub',
+    description: site.description,
+  }),
+  serviceJsonLd({
+    id: canonical,
+    name: 'Charcoal Packaging',
+    serviceType: 'Charcoal packaging and private-label packaging',
+    description: 'Charcoal packaging formats for export and retail — bulk bags, retail boxes and private-label packaging matched to the destination market and logistics plan.',
+    providerId: SITES.main,
+  }),
 ];
 ---
 
@@ -117,7 +129,7 @@ const jsonLd = [
       <div class="cta-banner">
         <h2>Packaging requirements?</h2>
         <p>Tell us your format and target market.</p>
-        <a class="btn btn-primary" href="/contact/">Request a Quote →</a>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
       </div>
     </div>
   </section>

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/manufacturing/`;
 const jsonLd = [
@@ -10,6 +10,18 @@ const jsonLd = [
     { name: 'Home', url: `${SITES.main}/` },
     { name: 'Manufacturing', url: canonical },
   ]),
+  organizationJsonLd({
+    id: SITES.main,
+    name: 'Charcoal Hub',
+    description: site.description,
+  }),
+  serviceJsonLd({
+    id: canonical,
+    name: 'Charcoal Manufacturing & Sourcing',
+    serviceType: 'Charcoal sourcing and manufacturing management',
+    description: 'Charcoal manufacturing and sourcing management — multi-supplier qualification, a standardized specification model and batch quality control.',
+    providerId: SITES.main,
+  }),
 ];
 ---
 
@@ -88,7 +100,7 @@ const jsonLd = [
       <div class="cta-banner">
         <h2>Need manufacturing capacity?</h2>
         <p>Tell us your product and volume.</p>
-        <a class="btn btn-primary" href="/contact/">Request a Quote →</a>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
       </div>
     </div>
   </section>
