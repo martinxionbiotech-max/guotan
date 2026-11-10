@@ -2,9 +2,29 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site-config';
 import { SITES } from '../../lib/sites';
-import { breadcrumbJsonLd, productJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, faqPageJsonLd, productJsonLd } from '../../lib/seo';
 
 const canonical = `${SITES.main}/products/hookah-charcoal/`;
+
+const faqs = [
+  {
+    q: 'Which cube size should a hookah lounge buy?',
+    a: 'Match the cube to the bowl and the session length you serve. 25 mm is the common default, 26 mm adds a little burn per piece, and 27 mm suits larger bowls or longer sessions. Buy samples of two sizes and compare them in your own setup before committing a container.',
+  },
+  {
+    q: 'Is instant-light charcoal acceptable for commercial use?',
+    a: 'It is legal and widely used where speed matters, but it lights with a chemical layer that some venues and guests prefer to avoid. Many lounges run natural coconut cubes for seated sessions and keep quick-light tablets for backup or outdoor use. The choice is operational, not a quality verdict.',
+  },
+  {
+    q: 'Why do burn-time claims differ so much between suppliers?',
+    a: 'There is no universal test. Burn time depends on cube mass, airflow, burner or wind conditions, bowl setup and how the coal is arranged. A supplier measuring in still air with a closed lid reports a longer figure than one measuring in a windy bay. Ask for the protocol before comparing numbers.',
+  },
+  {
+    q: 'Do you sell fixed-price hookah charcoal?',
+    a: 'No. Price depends on cube size, ash grade, packaging, order volume and destination port. Send the specification through the quote form and the offer is built around it — there is no catalogue price to quote from.',
+  },
+];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: `${SITES.main}/` },
@@ -14,18 +34,26 @@ const jsonLd = [
   productJsonLd({
     id: canonical,
     name: 'Hookah Charcoal',
-    description: 'Hookah charcoal — natural coconut shell cubes and the FireMax bamboo/fruitwood range, supplier-declared.',
+    description:
+      'Hookah charcoal in natural coconut cube, bamboo cube, bar and instant-light tablet formats — declared values with evidence status.',
     quoteUrl: `${SITES.main}/request-quote/`,
     category: 'Charcoal fuel',
-    properties: [{ name: 'Raw material', value: 'Coconut shell / bamboo / fruitwood' }, { name: 'Size', value: '25–27 mm cubes; bars; 33 mm tablets' }, { name: 'Ignition', value: '8–12 min natural; 15–50 s instant-light' }, { name: 'Burning time', value: '45 min – 3 h depending on format' }],
+    properties: [
+      { name: 'Raw material', value: 'Coconut shell / bamboo / fruitwood' },
+      { name: 'Formats', value: 'Cubes 22–27 mm, large block, bar, 33 mm tablet' },
+      { name: 'Ignition', value: '8–12 min natural; 15–50 s instant-light (supplier-declared)' },
+      { name: 'Burning time', value: '45 min – 3 h depending on format (supplier-declared)' },
+      { name: 'Verification status', value: 'Supplier-declared; not independently tested by Charcoal Hub' },
+    ],
   }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
 ];
 ---
 
 <BaseLayout
   site={site}
-  title="Hookah / Shisha Charcoal"
-  description="Cube and flat hookah charcoal in 25mm, 26mm and 27mm sizes. Category overview — sizes, ash, burn time and ignition considerations for hookah buyers."
+  title="Hookah Charcoal: Cube Sizes, Ash & Burn Time"
+  description="Hookah charcoal guide: natural cubes, bars and instant-light tablets, 25–27 mm sizes, ash, burn time, ignition and packaging, evidence status on each figure."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[
@@ -38,8 +66,9 @@ const jsonLd = [
     <div>
       <h1>Hookah / Shisha Charcoal</h1>
       <p class="lede">
-        Cube and flat charcoal sized for hookah and shisha. The most common cube sizes are 25mm, 26mm
-        and 27mm — the size choice affects heat output, burn time and how the charcoal fits the bowl.
+        Cube, bar and tablet charcoal for hookah and shisha. Format and cube size decide heat output,
+        burn per piece and how the coal sits on the bowl — this page compares the options and what
+        each published figure is based on.
       </p>
       <p class="quote-note">
         Pricing: quoted per specification, packaging and order volume — no fixed catalogue price.
@@ -53,63 +82,149 @@ const jsonLd = [
 
   <section class="section">
     <div class="container">
-      <h2>Sizes</h2>
+      <div class="callout">
+        <span class="callout-title">How to read the figures on this page</span>
+        <p>
+          <span class="badge badge-warn">Supplier-declared</span> means the value comes from a
+          supplier's public listing or datasheet and has <strong>not</strong> been independently
+          tested by Charcoal Hub. <span class="badge badge-muted">Industry reference</span> means a
+          class-level range from public sources. <span class="badge badge-accent">Data pending</span>
+          means we have no figure to publish. Burn time in particular is configuration-dependent —
+          treat every number as a claim with a protocol attached.
+        </p>
+      </div>
+
+      <h2>At a Glance</h2>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Size</th><th>Typical Use</th><th>Buyer Consideration</th></tr></thead>
+          <thead><tr><th>Item</th><th>What we can state</th></tr></thead>
           <tbody>
-            <tr><td>25mm cube</td><td>Standard hookah sessions</td><td>Moderate heat and burn time; a common default.</td></tr>
-            <tr><td>26mm cube</td><td>Standard hookah sessions</td><td>Slightly higher heat and longer burn than 25mm.</td></tr>
-            <tr><td>27mm cube</td><td>Longer sessions / larger bowls</td><td>Higher heat output; fewer pieces needed.</td></tr>
+            <tr><td>Formats</td><td>Natural cubes (22–27 mm), large block, coated bar, instant-light tablet</td></tr>
+            <tr><td>Raw materials</td><td>Coconut shell (natural cubes); bamboo and fruitwood (FireMax range)</td></tr>
+            <tr><td>Declared burn time</td><td>~60 min for a 25 mm cube; 2–3 h for large blocks — supplier-declared</td></tr>
+            <tr><td>Declared ignition</td><td>8–12 min on a coil burner; 15–50 s for instant-light</td></tr>
+            <tr><td>Evidence status</td><td>Supplier-declared — no independent test report on file</td></tr>
+            <tr><td>Price</td><td>No catalogue price — quoted per specification, packaging and volume</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Choosing a Format</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Format</th><th>How it behaves</th><th>Typical use</th></tr></thead>
+          <tbody>
+            <tr><td>Natural coconut cube, 25–27 mm</td><td>Coil burner, 8–12 min to full glow; steady heat, low ash.</td><td>Seated lounge sessions, premium retail.</td></tr>
+            <tr><td>Large block, 40 × 40 × 30 mm</td><td>More mass per piece; long burn, fewer pieces per bowl.</td><td>Long sessions, large bowls.</td></tr>
+            <tr><td>Coated bar, 90 × 25 × 12 mm</td><td>Fast ignition via coating, long burn, even heat.</td><td>Lounges wanting speed without loose tablets.</td></tr>
+            <tr><td>Instant-light tablet, 33 mm</td><td>Lights from a flame in under a minute; chemical ignition layer.</td><td>Outdoor use, backup, fast turnover.</td></tr>
           </tbody>
         </table>
       </div>
       <p class="meta-line">
-        Size naming reflects nominal cube edge length. Actual dimensions and dimensional tolerance are
-        confirmed per product and reported in the product database — never assumed.
+        Behaviour described here is the general characteristic of each format, not a measurement of
+        any product.
       </p>
 
-      <h2>What to Evaluate</h2>
-      <div class="prose">
-        <ul>
-          <li><strong>Ash content</strong> — lower ash means less residue and cleaner smoking.</li>
-          <li><strong>Burning time</strong> — how long a cube sustains usable heat.</li>
-          <li><strong>Odor</strong> — neutral odor is preferred for hookah; charcoal should not add taste.</li>
-          <li><strong>Ignition</strong> — time to full glow and consistency across a batch.</li>
-          <li><strong>Spark level</strong> — low sparking is preferred for safety and clean sessions.</li>
-        </ul>
+      <h2>Cube Sizes and What Changes</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Nominal cube</th><th>Approx. pieces per kg</th><th>What changes in a session</th></tr></thead>
+          <tbody>
+            <tr><td>22 mm</td><td>~96</td><td>Finer heat steps; more pieces to manage; shorter burn per piece.</td></tr>
+            <tr><td>25 mm</td><td>~72</td><td>The common default — moderate heat, predictable burn.</td></tr>
+            <tr><td>26 mm</td><td>~64</td><td>More mass and burn per cube at a similar footprint.</td></tr>
+            <tr><td>27 mm</td><td>~56</td><td>Higher heat per piece; sits better on larger bowls.</td></tr>
+          </tbody>
+        </table>
       </div>
+      <p class="meta-line">
+        Counts are approximate, from a public size-class table captured 2026-10-07. Actual dimensions
+        and tolerance are confirmed per product in the
+        <a href={`${SITES.data}/sizes/`} target="_blank" rel="noopener">size records</a> — never
+        assumed from the nominal name.
+      </p>
 
-      <div class="callout-pending">
-        <span class="callout-title">Data pending — supplier verification in progress</span>
+      <h2>Heat, Burn and Session Length</h2>
+      <div class="prose">
         <p>
-          Verified product entries for hookah charcoal are added to the product database after supplier
-          verification. We do not publish unverified specifications.
+          Burn time is the most quoted and least comparable figure in this category. A cube has no
+          burn time in the abstract — only one under a particular airflow, bowl, lid position,
+          ambient temperature and coal arrangement. Move the same cube from a windless lounge to a
+          terrace and the number changes, which is why a supplier claim of “120 minutes” and a user
+          report of “60 minutes” can both be honest.
         </p>
-        <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
+        <p>
+          What a buyer can compare is <em>mass per piece</em> and <em>declared ash</em>. A larger cube
+          carries more fuel and tends to hold heat longer, at the cost of a hotter initial phase.
+          Lower ash means less residue in the bowl. Neither guarantees a better session — the pack,
+          the bowl and the draw matter as much as the coal.
+        </p>
+        <p>
+          For a lounge, the metric is cost per session, not cost per kilogram: how many cubes a bowl
+          needs, how often staff replace them, and how much unburnt charcoal is discarded. A cheaper
+          cube that needs replacing twice is not cheaper.
+        </p>
       </div>
 
-      <h2>Specification Context</h2>
+      <h2>Ignition: Natural vs Quick-Light</h2>
       <div class="prose">
         <p>
-          One product record in the database carries declared values for hookah charcoal — the
-          25&nbsp;mm natural coconut shell cube. The figures below are reproduced for context and
-          are <strong>supplier-declared, not independently verified by Charcoal Hub</strong>.
-          The 26&nbsp;mm and 27&nbsp;mm records currently carry size-class data only (pieces per
-          kilogram); no batch specification values are published for those sizes.
+          Natural cubes are lit on an electric coil burner or with a gas torch and reach full glow in
+          roughly 8–12 minutes. The wait is the trade-off for a fuel with no ignition chemicals in the
+          coal itself.
+        </p>
+        <p>
+          Instant-light tablets and coated bars carry an ignition layer that catches from a flame in
+          15–50 seconds. That layer is why they light fast and why some venues keep them separate from
+          natural coal: the first minutes of combustion include the coating. Light them in a
+          ventilated area, away from the bowl, and let the coating burn off before the coal goes on
+          the bowl.
+        </p>
+        <p>
+          Budget for ignition hardware too. A lounge running natural cubes needs enough coil
+          burners for peak covers, and burner condition affects ignition time as much as the charcoal.
+        </p>
+      </div>
+
+      <h2>Ash, Odour and Spark</h2>
+      <div class="prose">
+        <p>
+          Ash is the residue left after combustion. In hookah use it affects how the coal sits as it
+          burns down and how much cleaning each session needs. A declared maximum is more useful than
+          a declared typical value, because the typical figure is not what an out-of-spec batch
+          delivers.
+        </p>
+        <p>
+          Odour is harder to specify. Coconut shell is chosen partly because it is relatively
+          neutral, but neutrality is a session property — it depends on the shell, binder,
+          carbonization and storage. Test odour on a blind sample in your own bowl; “odourless” on a
+          datasheet is a claim, not a measurement.
+        </p>
+        <p>
+          Sparking is a safety and comfort issue rather than a quality grade. Denser, well-dried cubes
+          generally spark less, but tongs, distance and placement all change the risk.
+        </p>
+      </div>
+
+      <h2>Declared Values on Record</h2>
+      <div class="prose">
+        <p>
+          One public listing carries a full set of values for the 25&nbsp;mm natural coconut shell
+          hookah cube. The 26&nbsp;mm and 27&nbsp;mm records carry size-class data only.
         </p>
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Parameter</th><th>Declared value</th><th>Method cited</th></tr></thead>
+          <thead><tr><th>Parameter</th><th>Declared value</th><th>Method cited</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td>Fixed carbon</td><td>≥ 80%</td><td>ASTM D3172</td></tr>
-            <tr><td>Volatile matter</td><td>≤ 12%</td><td>ASTM D3175</td></tr>
-            <tr><td>Ash content</td><td>≤ 3.5% (typical 3.0%)</td><td>ASTM D3174</td></tr>
-            <tr><td>Moisture</td><td>≤ 5%</td><td>ASTM D3173</td></tr>
-            <tr><td>Sulphur</td><td>≤ 0.1%</td><td>ASTM D4239</td></tr>
-            <tr><td>Burning time</td><td>~60 min (claims up to 120 min)</td><td>Condition-dependent — no universal standard</td></tr>
-            <tr><td>Ignition time</td><td>8–12 min</td><td>Supplier-declared</td></tr>
+            <tr><td>Fixed carbon</td><td>≥ 80%</td><td>ASTM D3172</td><td>Supplier-declared</td></tr>
+            <tr><td>Volatile matter</td><td>≤ 12%</td><td>ASTM D3175</td><td>Supplier-declared</td></tr>
+            <tr><td>Ash content</td><td>≤ 3.5% (typical 3.0%)</td><td>ASTM D3174</td><td>Supplier-declared</td></tr>
+            <tr><td>Moisture</td><td>≤ 5%</td><td>ASTM D3173</td><td>Supplier-declared</td></tr>
+            <tr><td>Sulphur</td><td>≤ 0.1%</td><td>ASTM D4239</td><td>Supplier-declared</td></tr>
+            <tr><td>Burning time</td><td>~60 min per 25 mm cube (claims up to 120 min)</td><td>None — condition-dependent</td><td>Supplier-declared</td></tr>
+            <tr><td>Ignition time</td><td>8–12 min</td><td>None stated</td><td>Supplier-declared</td></tr>
           </tbody>
         </table>
       </div>
@@ -118,37 +233,93 @@ const jsonLd = [
         2026-10-07. Supplier-declared — not independently verified by Charcoal Hub.
       </p>
 
-      <h2>FireMax Product Range</h2>
+      <h2>The FireMax Range on Record</h2>
       <div class="prose">
         <p>
-          The FireMax datasheet (provided 2026-10-10) adds four hookah product records to the
-          database — all <strong>supplier-declared</strong>, none independently tested:
-        </p>
-        <ul>
-          <li><strong>FireMax SL470</strong> — 4 × 4 × 3 cm bamboo cube, 2–3 h burn, ignition 9–10 min</li>
-          <li><strong>FireMax C25</strong> — 25 mm bamboo cube, 90–120 min burn, 7,500 J</li>
-          <li><strong>FireMax SI87</strong> — 90 × 25 × 12 mm silver bar, ignition 35–45 s</li>
-          <li><strong>FireMax RB33</strong> — 33 mm instant-light tablet, ignition 15–50 s, 45–70 min burn</li>
-        </ul>
-        <p>
-          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">View records in the Product Database →</a>
+          Four further products are recorded from a FireMax datasheet provided 2026-10-10. All are
+          <strong>supplier-declared</strong> and none has been independently tested. Declared values sit
+          side by side to show format differences — not a ranking.
         </p>
       </div>
-      <div class="page-title-media" style="max-width:640px;margin-top:1.5rem;">
-        <img src="/images/firemax-rb33.webp" alt="Instant-light charcoal tablets on a stone tray, one lit — conceptual illustration" width="1600" height="900" loading="lazy" />
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Product</th><th>Format</th><th>Burn</th><th>Ignition</th><th>Ash</th><th>Packaging</th></tr></thead>
+          <tbody>
+            <tr><td>FireMax SL470</td><td>Bamboo block, 40 × 40 × 30 mm</td><td>2–3 h</td><td>9–10 min</td><td>3.5–5%</td><td>12 kg bag + carton</td></tr>
+            <tr><td>FireMax C25</td><td>Bamboo cube, 25 mm</td><td>90–120 min</td><td>9–10 min</td><td>Grade S: 3.5–5%</td><td>10 kg carton</td></tr>
+            <tr><td>FireMax SI87</td><td>Coated bar, 90 × 25 × 12 mm</td><td>90–110 min</td><td>35–45 s</td><td>3.5–4.5%</td><td>60 pcs/box, 24 boxes/carton</td></tr>
+            <tr><td>FireMax RB33</td><td>Instant-light tablet, 33 mm</td><td>45–70 min</td><td>15–50 s</td><td>Printed as 0.045 — unconfirmed</td><td>10 pcs/roll, colour-specific cartons</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Source: FireMax product datasheet, provided by the Charcoal Hub operator 2026-10-10. Ash for
+        the RB33 is printed as <code>0.045</code> — almost certainly a formatting error for 4.5%,
+        recorded verbatim and flagged rather than silently corrected. Full records:
+        <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">product database</a>.
+      </p>
+
+      <h2>Packaging and Order Shape</h2>
+      <div class="prose">
+        <p>
+          The 25&nbsp;mm natural record lists 1 kg moisture-resistant colour boxes (72 cubes), retail
+          packs of 1 / 1.2 / 2 / 10 kg and master cartons of 10 or 20 kg. The FireMax lines differ —
+          10 kg cartons for C25, 60-piece boxes for SI87, 10-piece rolls for RB33. That matters
+          commercially: a mixed pallet means several carton specifications, barcodes and artworks.
+        </p>
+        <p>
+          Loading is declared at roughly 14.4 tonnes for a 20′ GP and 23.4 tonnes for a 40′ HQ on the
+          natural cube record. Treat those as nominal — packing density, carton size and palletisation
+          change the real figure. Confirm the load plan before booking freight.
+        </p>
+        <p>
+          <a href="/packaging/">Packaging services →</a> ·
+          <a href={`${SITES.knowledge}/knowledge/charcoal-packaging-options/`} target="_blank" rel="noopener">Guide: packaging options</a> ·
+          <a href={`${SITES.knowledge}/knowledge/charcoal-container-loading/`} target="_blank" rel="noopener">Guide: container loading</a>
+        </p>
+      </div>
+
+      <h2>Where Hookah Charcoal Goes Wrong</h2>
+      <div class="prose">
+        <ul>
+          <li><strong>Burn-time inflation.</strong> A claim measured in still air with a closed lid will not survive a busy terrace. Ask for the protocol.</li>
+          <li><strong>Ash above the ceiling.</strong> A “typical 3%” batch can arrive at 5%; without a maximum in the PO there is no remedy.</li>
+          <li><strong>Odour from binder or storage.</strong> The most common complaint that never appears on a datasheet.</li>
+          <li><strong>Cracking and fines.</strong> Under-dried cubes crack; over-dry cubes break in the carton — both leave dust in the box.</li>
+          <li><strong>Coating inconsistency.</strong> Patchy coating means uneven ignition across a roll.</li>
+          <li><strong>Mixed batches.</strong> Several runs in one shipment make every comparison unreliable. Ask for one batch per SKU.</li>
+        </ul>
       </div>
 
       <h2>Buyer Checklist</h2>
       <div class="prose">
         <ul>
-          <li><strong>Method and basis.</strong> Confirm which method produced each figure and whether it is dry or as-received.</li>
-          <li><strong>Batch linkage.</strong> Ask which batch, sample and date each number describes.</li>
+          <li><strong>Format first.</strong> Decide natural vs quick-light before comparing price — different products, different costs.</li>
+          <li><strong>Size and tolerance.</strong> Confirm the nominal cube and permitted tolerance; verify with calipers.</li>
+          <li><strong>Method and basis.</strong> Ask which method produced each figure and whether it is dry or as-received.</li>
+          <li><strong>Batch linkage.</strong> Ask which batch and date each number describes.</li>
           <li><strong>Raw report.</strong> Request the laboratory report, not a summary PDF.</li>
-          <li><strong>Moisture at origin.</strong> Check moisture at origin and on arrival — hookah charcoal is hygroscopic.</li>
-          <li><strong>Size and tolerance.</strong> Confirm the nominal cube size and tolerance; verify with calipers on a sample.</li>
-          <li><strong>Odour neutrality.</strong> Assess odour on a blind sample in your own bowl — this is a session test, not a datasheet line.</li>
-          <li><strong>Acceptance clause.</strong> Agree sampling and the remedy for an out-of-spec arrival in the purchase order.</li>
+          <li><strong>Session test.</strong> Assess odour, spark and heat on a blind sample in your own bowl.</li>
+          <li><strong>Moisture at both ends.</strong> Test at origin and on arrival; the difference shows what the packaging does.</li>
+          <li><strong>Acceptance clause.</strong> Agree sampling and the remedy for an out-of-spec arrival.</li>
         </ul>
+      </div>
+
+      <h2>Sampling and Verification Path</h2>
+      <div class="prose">
+        <ol>
+          <li><strong>Request a sample</strong> in the exact format and size you intend to sell. <a href="/request-sample/">Sample request form →</a></li>
+          <li><strong>Run a session test</strong> with your own burner and bowl; record ignition, burn and ash behaviour per cube.</li>
+          <li><strong>Ask for the batch report</strong> before the bulk order, then re-check on arrival.</li>
+        </ol>
+        <p>
+          Method references:
+          <a href={`${SITES.testing}/tests/burning-time/`} target="_blank" rel="noopener">burn time</a>,
+          <a href={`${SITES.testing}/tests/ignition-time/`} target="_blank" rel="noopener">ignition time</a>,
+          <a href={`${SITES.testing}/tests/ash-content/`} target="_blank" rel="noopener">ash content</a>,
+          <a href={`${SITES.testing}/tests/odor/`} target="_blank" rel="noopener">odour</a>.
+          None of those pages contain results.
+        </p>
       </div>
 
       <h2>Verification Status</h2>
@@ -161,19 +332,29 @@ const jsonLd = [
         </p>
       </div>
 
+      <h2>Frequently Asked</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
+      </div>
+
       <h2>Related</h2>
       <div class="grid grid-3">
         <a class="card" href={`${SITES.data}/products/25mm-natural-coconut-shell-hookah-charcoal/`} target="_blank" rel="noopener">
           <h3>25 mm product record <span class="badge badge-muted">data</span></h3>
-          <p>Supplier-declared specification values with source and status.</p>
+          <p>Supplier-declared values with source and status.</p>
         </a>
         <a class="card" href={`${SITES.data}/specifications/burning-time/`} target="_blank" rel="noopener">
           <h3>Burning time methodology <span class="badge badge-muted">data</span></h3>
           <p>Why burn time has no universal standard and how to compare claims.</p>
         </a>
         <a class="card" href={`${SITES.testing}/tests/burning-time/`} target="_blank" rel="noopener">
-          <h3>Test methodology <span class="badge badge-muted">testing</span></h3>
-          <p>How burn time is assessed under defined, configuration-specific protocols.</p>
+          <h3>Burn-time test method <span class="badge badge-muted">testing</span></h3>
+          <p>How burn time is assessed under a defined protocol.</p>
         </a>
         <a class="card" href={`${SITES.knowledge}/knowledge/how-to-choose-hookah-charcoal/`} target="_blank" rel="noopener">
           <h3>How to choose <span class="badge badge-muted">knowledge</span></h3>
@@ -183,6 +364,18 @@ const jsonLd = [
           <h3>25 mm vs 26 mm <span class="badge badge-muted">knowledge</span></h3>
           <p>What the size difference actually changes in a session.</p>
         </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/quick-light-vs-natural-coconut-charcoal/`} target="_blank" rel="noopener">
+          <h3>Quick-light vs natural <span class="badge badge-muted">knowledge</span></h3>
+          <p>The operational trade-off behind the two ignition classes.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/charcoal-odor-and-ignition/`} target="_blank" rel="noopener">
+          <h3>Odour and ignition <span class="badge badge-muted">knowledge</span></h3>
+          <p>Why odour is a session property, not a spec-sheet line.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/charcoal-density-and-heat-management/`} target="_blank" rel="noopener">
+          <h3>Density and heat management <span class="badge badge-muted">knowledge</span></h3>
+          <p>How mass per piece changes the heat curve.</p>
+        </a>
         <a class="card" href="/request-sample/">
           <h3>Request samples</h3>
           <p>Test a batch in your own hardware before ordering.</p>
@@ -191,7 +384,7 @@ const jsonLd = [
 
       <div class="cta-banner">
         <h2>Sourcing hookah charcoal?</h2>
-        <p>Tell us your size, quantity and destination port.</p>
+        <p>Send the format, cube size, monthly volume, packaging and destination port. The quote is built around that specification.</p>
         <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
         <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
       </div>
