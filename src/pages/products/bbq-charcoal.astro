@@ -2,9 +2,29 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site-config';
 import { SITES } from '../../lib/sites';
-import { breadcrumbJsonLd, productJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, faqPageJsonLd, productJsonLd } from '../../lib/seo';
 
 const canonical = `${SITES.main}/products/bbq-charcoal/`;
+
+const faqs = [
+  {
+    q: 'Do you publish specifications for BBQ charcoal?',
+    a: 'Not yet. The product database carries no BBQ charcoal product record, so there is no batch-linked specification to publish. Filling the page with borrowed numbers from a different product would be worse than leaving it empty. The fields below show what a supplier would have to declare before a record can be created.',
+  },
+  {
+    q: 'Is coconut shell or bamboo better for grilling?',
+    a: 'They behave differently rather than ranking. Coconut shell charcoal is denser, so a piece of the same volume holds more mass and tends to burn longer with less ash by mass. Bamboo charcoal is generally lighter and faster to ignite. It depends on cook length, refuelling frequency and whether sparking matters in your setup — decide on a sample, not the category name.',
+  },
+  {
+    q: 'Why does the page not quote a price per tonne?',
+    a: 'BBQ charcoal is quoted per raw material, size grade, packaging, order volume and destination port, and the batch composition changes the offer. A single catalogue figure would not survive contact with a real enquiry. Send the specification you need and the offer is built around it.',
+  },
+  {
+    q: 'Can I get a sample before ordering a container?',
+    a: 'Yes — use the sample request form. Quantity, courier and any sample cost are confirmed per destination. Burn the sample the way your customers will: same grill, same lighting method, same cook length.',
+  },
+];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: `${SITES.main}/` },
@@ -13,19 +33,26 @@ const jsonLd = [
   ]),
   productJsonLd({
     id: canonical,
-    name: 'Bbq Charcoal',
-    description: 'BBQ charcoal category — natural lump and briquette fuels for grilling.',
+    name: 'BBQ Charcoal',
+    description:
+      'BBQ charcoal category overview for B2B buyers — raw material families, format choices, and the specification fields a supplier must declare before a record is published.',
     quoteUrl: `${SITES.main}/request-quote/`,
     category: 'Charcoal fuel',
-    properties: [{ name: 'Application', value: 'BBQ / grilling' }],
+    properties: [
+      { name: 'Application', value: 'BBQ / grilling' },
+      { name: 'Raw material options', value: 'Coconut shell, bamboo, wood-derived lump' },
+      { name: 'Format options', value: 'Lump, pressed briquette, extruded cube' },
+      { name: 'Verification status', value: 'Data pending — no BBQ product record published' },
+    ],
   }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
 ];
 ---
 
 <BaseLayout
   site={site}
-  title="BBQ Charcoal"
-  description="Coconut and bamboo charcoal for grilling and restaurant use. Category overview — raw material, burn behaviour and buyer considerations."
+  title="BBQ Charcoal: Lump, Briquette and Buyer Checklist"
+  description="BBQ charcoal buying guide: lump vs briquette, what to specify, how to test a sample, and why no verified BBQ product record is published yet."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[
@@ -38,9 +65,9 @@ const jsonLd = [
     <div>
       <h1>BBQ Charcoal</h1>
       <p class="lede">
-        Coconut and bamboo charcoal for grilling, restaurants and outdoor cooking. BBQ charcoal is
-        selected for consistent heat, long burn and low sparking rather than the odor-neutrality that
-        matters most for hookah.
+        Grilling fuel is bought on behaviour, not on a category name: how fast it lights, how long it
+        holds heat, how much ash it leaves and whether it throws sparks. This page covers the format
+        families, the fields to specify, and what is still missing from our own records.
       </p>
       <p class="quote-note">
         Pricing: quoted per specification, packaging and order volume — no fixed catalogue price.
@@ -54,72 +81,250 @@ const jsonLd = [
 
   <section class="section">
     <div class="container">
-      <h2>Raw Material Options</h2>
-      <div class="prose">
-        <ul>
-          <li><strong>Coconut shell</strong> — dense, long-burning, lower ash.</li>
-          <li><strong>Bamboo</strong> — lighter, fast-igniting, suited to shorter cooks.</li>
-        </ul>
+      <div class="callout">
+        <span class="callout-title">How to read this page</span>
+        <p>
+          <span class="badge badge-warn">Supplier-declared</span> means a value comes from a
+          supplier's datasheet and has not been independently tested by Charcoal Hub.
+          <span class="badge badge-muted">Industry reference</span> means a class-level statement
+          about how the material generally behaves — orientation, not a purchasing commitment.
+          <span class="badge badge-accent">Data pending</span> means we have no figure to publish.
+          There are no laboratory results on this page.
+        </p>
       </div>
 
       <div class="callout-pending">
-        <span class="callout-title">Data pending — supplier verification in progress</span>
+        <span class="callout-title">Data pending — no BBQ product record published</span>
         <p>
-          Verified BBQ charcoal product entries are added to the product database after supplier
-          verification. We do not publish unverified specifications.
+          The product database has no BBQ charcoal record, so this page cannot cite batch-linked
+          size, ash, moisture, fixed carbon or burn figures. Rather than copy chemistry from a
+          hookah cube or a bamboo bar and present it as BBQ data, the numbers stay absent until a
+          supplier declares them for a specific product.
         </p>
-        <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
+        <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product database →</a></p>
       </div>
 
-      <h2>Specification Context</h2>
+      <h2>At a Glance</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Raw material options</td><td>Coconut shell, bamboo, wood-derived lump</td></tr>
+            <tr><td>Format options</td><td>Lump, pressed briquette, extruded cube</td></tr>
+            <tr><td>Primary application</td><td>Grilling, restaurant and outdoor cooking</td></tr>
+            <tr><td>Declared chemistry</td><td><span class="badge badge-accent">Data pending</span> — no BBQ record</td></tr>
+            <tr><td>Size grades</td><td><span class="badge badge-accent">Data pending</span> — no BBQ record</td></tr>
+            <tr><td>Burn and ignition values</td><td><span class="badge badge-accent">Data pending</span> — no BBQ record</td></tr>
+            <tr><td>MOQ</td><td><span class="badge badge-accent">Data pending</span> — depends on line and packaging run</td></tr>
+            <tr><td>Price</td><td>No catalogue price — quoted per specification and volume</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>What "BBQ Charcoal" Actually Covers</h2>
       <div class="prose">
         <p>
-          Data pending — no verified specification published yet. The product database does not
-          currently carry a BBQ charcoal product record, so no declared figures can be cited here.
-          Charcoal Hub does not publish unverified numbers.
+          The term describes an application, not one material. At least three different product
+          families are sold under it, and they are not interchangeable:
+        </p>
+        <ul>
+          <li><strong>Lump charcoal</strong> — carbonized biomass left in irregular pieces. It lights relatively quickly and produces a hot bed, but piece size varies from bag to bag and it commonly sparks more than pressed fuel.</li>
+          <li><strong>Pressed briquettes</strong> — char fines mixed with a binder and formed into a uniform shape. Consistent size and packing density, slower and steadier burn, less dust in the bag.</li>
+          <li><strong>Extruded or moulded cubes</strong> — the format used for hookah charcoal, also sold into grilling where uniform pieces and long burn are valued. Coconut shell is the usual feedstock.</li>
+        </ul>
+        <p>
+          Each family can be made from different feedstocks — coconut shell, bamboo, hardwood,
+          fruitwood, or blends — and the feedstock changes density, ash and odour behaviour. A
+          supplier who quotes "BBQ charcoal" without naming the feedstock and format has not yet
+          quoted a product.
+        </p>
+      </div>
+
+      <h2>Lump Versus Briquette: What Changes in Use</h2>
+      <div class="prose">
+        <p>
+          The difference buyers notice first is repeatability. Lump charcoal gives an uneven bed:
+          larger pieces burn slower, smaller pieces flash hot and die. That suits open-grill cooking
+          where the cook adjusts vents and moves food. Briquettes give a predictable bed and a more
+          stable temperature curve, which suits long, covered cooks and volume food service.
+        </p>
+        <p>
+          The second difference is ash and dust. Pressed fuel generally leaves a more consolidated
+          ash and less fines in the bag; lump tends to shed dust as pieces rub together in transit.
+          Neither is a defect by itself — both become a problem when the packaging does not match the
+          product.
+        </p>
+        <p>
+          The third is lighting. Lump usually needs a chimney or a bed of embers; some briquettes are
+          sold as instant-light and carry an accelerant. If the fuel will be used in food service,
+          ask what the accelerant is and whether it is declared — do not assume it is absent.
+        </p>
+      </div>
+
+      <h2>Specification Worksheet for a BBQ Enquiry</h2>
+      <div class="prose">
+        <p>
+          A supplier cannot quote precisely against "BBQ charcoal, 20 tonnes". The fields below are
+          the minimum that make an offer comparable. Our own values are marked pending because no
+          BBQ record exists yet.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Field</th><th>Why it matters</th><th>Our record</th></tr></thead>
+          <tbody>
+            <tr><td>Raw material and blend</td><td>Density, ash and odour all follow the feedstock; blends are common and should be declared.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+            <tr><td>Format</td><td>Lump, briquette or cube sets the burn profile and the packing method.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+            <tr><td>Nominal size and tolerance</td><td>Fit to the grill, and how much variation is acceptable between pieces.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+            <tr><td>Fixed carbon</td><td>Fuel fraction; drives heat available per kilogram.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+            <tr><td>Ash content</td><td>Residue to clear; high ash shortens the usable bed.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+            <tr><td>Moisture</td><td>Ignition reliability and weight stability in transit.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+            <tr><td>Volatile matter</td><td>Smoke during lighting and early burn.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+            <tr><td>Burn duration</td><td>Refuelling interval; only comparable when the test setup is stated.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+            <tr><td>Ignition time</td><td>Time to a usable bed with the stated lighting method.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+            <tr><td>Binder or accelerant</td><td>Affects lighting, odour and what you can claim on the pack.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+            <tr><td>Packaging</td><td>Bag or carton format, inner liner, print and pallet configuration.</td><td><span class="badge badge-accent">Data pending</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Where BBQ Quality Goes Wrong</h2>
+      <div class="prose">
+        <ul>
+          <li><strong>Fines and breakage.</strong> Charcoal abrades in transit. A carton taken from the top of a pallet can look fine while the bottom layer is dust — inspect from the middle.</li>
+          <li><strong>Moisture pickup.</strong> Charcoal is hygroscopic. Fuel that left the factory dry can arrive slow to light if the liner or the container seal failed.</li>
+          <li><strong>Mixed batches.</strong> A shipment assembled from several production runs varies carton to carton. Ask for one batch per container where consistency matters.</li>
+          <li><strong>Undeclared binder or accelerant.</strong> These change lighting and odour. Get the declaration in writing before printing a retail claim.</li>
+          <li><strong>Spark behaviour.</strong> Some feedstocks throw sparks that matter for open grills and outdoor safety. It is a sample test, not a datasheet field.</li>
+          <li><strong>Size drift.</strong> Nominal size is not a tolerance. Without a stated tolerance in the purchase order, a drifting die produces an unenforceable specification.</li>
+        </ul>
+      </div>
+
+      <h2>What the Page Cannot Tell You Yet</h2>
+      <div class="prose">
+        <p>
+          Three things are missing on purpose. First, no chemistry table: there is no BBQ record, so
+          every figure would be borrowed from another product. Second, no MOQ: minimum order depends
+          on the line, the packaging run and the artwork setup, and we have no supplier declaration
+          for a BBQ product. Third, no supplier profile: no BBQ manufacturer has been verified.
+        </p>
+        <p>
+          What exists is the method. The
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">testing sub-site</a>
+          documents how ash, moisture, fixed carbon, calorific value, density and burn time are
+          measured and where those methods stop being comparable. That is the part a buyer can use
+          today: ask every supplier for the same basis, and the numbers become comparable before we
+          publish our own.
+        </p>
+        <p>
+          The application record itself is public:
+          <a href={`${SITES.data}/applications/`} target="_blank" rel="noopener">BBQ / grilling application →</a>.
+        </p>
+      </div>
+
+      <h2>Packaging and Container Planning</h2>
+      <div class="prose">
+        <p>
+          Charcoal is classified as dangerous goods for sea freight, so the packaging is part of the
+          compliance story, not only the marketing story. A retail bag needs an inner liner that
+          resists moisture; a master carton needs enough compression strength for the pallet stack;
+          and the container needs a load plan that keeps cartons from shifting.
+        </p>
+        <p>
+          Confirm the load plan before booking freight, and confirm who is responsible for the
+          dangerous-goods declaration. The
+          <a href={`${SITES.knowledge}/knowledge/charcoal-shipping-safety-un1361/`} target="_blank" rel="noopener">UN 1361 shipping guide</a>
+          covers the basics, and
+          <a href={`${SITES.knowledge}/knowledge/charcoal-packaging-options/`} target="_blank" rel="noopener">packaging options</a>
+          covers the formats. For printed retail programmes, see
+          <a href="/private-label/">private label</a>.
         </p>
       </div>
 
       <h2>Buyer Checklist</h2>
       <div class="prose">
         <ul>
-          <li><strong>Method and basis.</strong> Ask which method produced each figure and whether it is dry or as-received.</li>
+          <li><strong>Name the product.</strong> Feedstock, format, size class and packaging — before discussing price.</li>
+          <li><strong>Method and basis.</strong> Ask which method produced each figure (ASTM / ISO / GB) and whether it is dry or as-received.</li>
           <li><strong>Batch linkage.</strong> Confirm which batch, sample and date each number describes.</li>
-          <li><strong>Raw report.</strong> Request the laboratory report, not a summary PDF.</li>
-          <li><strong>Moisture at origin.</strong> Check moisture at origin and on arrival — charcoal is hygroscopic in transit.</li>
-          <li><strong>Size and tolerance.</strong> Confirm the nominal size class and tolerance; verify with calipers on a sample.</li>
-          <li><strong>Spark level.</strong> For grilling, low sparking is preferred for safety; confirm it on a sample burn.</li>
+          <li><strong>Raw report.</strong> Request the laboratory report, not a summary PDF or a marketing datasheet.</li>
+          <li><strong>Moisture at both ends.</strong> Test at origin and on arrival; the difference tells you what the packaging is doing.</li>
+          <li><strong>Sample burn.</strong> Light it the way your customers will and record ignition, peak heat and how long the bed lasts.</li>
+          <li><strong>Inspect the middle carton.</strong> Breakage and fines hide at the bottom of the pallet.</li>
           <li><strong>Acceptance clause.</strong> Agree sampling and the remedy for an out-of-spec arrival before ordering.</li>
         </ul>
+      </div>
+
+      <h2>Sampling and Verification Path</h2>
+      <div class="prose">
+        <p>A datasheet narrows the shortlist; a sample decides it. The sequence is short:</p>
+        <ol>
+          <li><strong>Request a sample</strong> in the format and size grade you intend to buy. <a href="/request-sample/">Sample request form →</a></li>
+          <li><strong>Burn it in your own setup</strong> — same grill, same lighting method, same cook length — and record what you observe.</li>
+          <li><strong>Ask for a batch test report</strong> before the bulk order, then repeat the check on the arrived container.</li>
+        </ol>
+        <p>
+          Method references are on the
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">testing sub-site</a>;
+          structured records, when they exist, are in the
+          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">product database</a>.
+        </p>
       </div>
 
       <h2>Verification Status</h2>
       <div class="prose">
         <p>
-          No BBQ charcoal product has yet been independently verified by Charcoal Hub, and no
-          supplier record has been published. Verified test reports will appear on the
+          No BBQ charcoal product has been independently verified by Charcoal Hub, and no supplier
+          record has been published for this application. Verified test reports will appear on the
           <a href={`${SITES.testing}/reports/`} target="_blank" rel="noopener">testing sub-site</a>
-          as they become attributable.
+          as they become attributable. Nothing on this page should be read as a certificate, a
+          laboratory result or a supplier endorsement.
         </p>
+      </div>
+
+      <h2>Frequently Asked</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
       </div>
 
       <h2>Related</h2>
       <div class="grid grid-3">
-        <a class="card" href={`${SITES.data}/products/`} target="_blank" rel="noopener">
-          <h3>Product database <span class="badge badge-muted">data</span></h3>
-          <p>All product records with their verification status and source.</p>
+        <a class="card" href={`${SITES.data}/applications/`} target="_blank" rel="noopener">
+          <h3>BBQ application record <span class="badge badge-muted">data</span></h3>
+          <p>How the application is classified and which raw materials relate to it.</p>
         </a>
         <a class="card" href={`${SITES.data}/specifications/ash-content/`} target="_blank" rel="noopener">
-          <h3>Specification methodology <span class="badge badge-muted">data</span></h3>
-          <p>What ash, moisture and fixed carbon measure and how they are determined.</p>
+          <h3>Ash content methodology <span class="badge badge-muted">data</span></h3>
+          <p>What ash measures and where the number stops being comparable.</p>
         </a>
-        <a class="card" href={`${SITES.testing}/tests/ash-content/`} target="_blank" rel="noopener">
-          <h3>Test methodology <span class="badge badge-muted">testing</span></h3>
-          <p>How each parameter is measured under public standards, with limitations.</p>
+        <a class="card" href={`${SITES.testing}/tests/burning-time/`} target="_blank" rel="noopener">
+          <h3>Burn time test method <span class="badge badge-muted">testing</span></h3>
+          <p>Why burn time is a system property, not a fixed product constant.</p>
         </a>
-        <a class="card" href={`${SITES.knowledge}/knowledge/how-to-compare-coconut-shell-charcoal/`} target="_blank" rel="noopener">
-          <h3>How to compare <span class="badge badge-muted">knowledge</span></h3>
-          <p>A buyer guide to reading and comparing supplier spec sheets.</p>
+        <a class="card" href={`${SITES.knowledge}/knowledge/charcoal-density-and-heat-management/`} target="_blank" rel="noopener">
+          <h3>Density and heat <span class="badge badge-muted">knowledge</span></h3>
+          <p>How density and airflow shape the heat a grill actually delivers.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/how-long-coconut-charcoal-burns/`} target="_blank" rel="noopener">
+          <h3>How long charcoal burns <span class="badge badge-muted">knowledge</span></h3>
+          <p>What determines burn duration and why quoted hours vary.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/pre-shipment-inspection-charcoal/`} target="_blank" rel="noopener">
+          <h3>Pre-shipment inspection <span class="badge badge-muted">knowledge</span></h3>
+          <p>What to check before a container leaves the loading port.</p>
+        </a>
+        <a class="card" href="/products/coconut-shell-charcoal/">
+          <h3>Coconut shell charcoal</h3>
+          <p>The dense feedstock used for hookah cubes and premium grilling fuel.</p>
+        </a>
+        <a class="card" href="/products/bamboo-charcoal/">
+          <h3>Bamboo charcoal</h3>
+          <p>Lighter feedstock with documented hookah cube and bar formats.</p>
         </a>
         <a class="card" href="/request-sample/">
           <h3>Request samples</h3>
@@ -129,7 +334,7 @@ const jsonLd = [
 
       <div class="cta-banner">
         <h2>Sourcing BBQ charcoal?</h2>
-        <p>Tell us raw material, quantity and destination port.</p>
+        <p>Send the format, size grade, monthly volume, packaging and destination port. The quote is built around that specification.</p>
         <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
         <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
       </div>

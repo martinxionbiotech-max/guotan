@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site-config';
-import { SITES, BRAND } from '../../lib/sites';
+import { SITES } from '../../lib/sites';
 import { breadcrumbJsonLd } from '../../lib/seo';
 
 const canonical = `${SITES.main}/products/`;
@@ -16,7 +16,7 @@ const jsonLd = [
 <BaseLayout
   site={site}
   title="Charcoal Products for B2B Buyers"
-  description="Coconut shell charcoal, hookah charcoal, BBQ charcoal and bamboo charcoal — category overview with standardized specifications."
+  description="Four charcoal categories for B2B buyers: coconut shell, hookah, BBQ and bamboo. Compare formats, evidence status and what to specify before an RFQ."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Products', url: '/products/' }]}
@@ -24,49 +24,201 @@ const jsonLd = [
   <div class="page-title container">
     <h1>Charcoal Products</h1>
     <p class="lede">
-      Category-level product overviews. Specific product entries — with verified size, ash, moisture,
-      fixed carbon and burn time — are published in our product database as supplier verification completes.
+      Four categories, documented at different levels. Some carry supplier-declared chemistry;
+      others have no product record at all. This page says which is which, so a category name is
+      never mistaken for a verified specification.
+    </p>
+    <p class="quote-note">
+      Pricing: quoted per specification, packaging and order volume — no fixed catalogue price.
+      <a href="/request-quote/">Request a quote →</a>
     </p>
   </div>
 
   <section class="section">
     <div class="container">
+      <div class="callout">
+        <span class="callout-title">Evidence status, category by category</span>
+        <p>
+          <span class="badge badge-warn">Supplier-declared</span> means figures come from a supplier
+          datasheet and have not been independently tested by Charcoal Hub.
+          <span class="badge badge-accent">Data pending</span> means no product record exists, so
+          there is nothing to publish. Nothing on this site carries an independent laboratory report
+          yet — the
+          <a href={`${SITES.testing}/reports/`} target="_blank" rel="noopener">reports index</a>
+          shows what is actually on file.
+        </p>
+      </div>
+
+      <h2>Category Comparison</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Documented records</th>
+              <th>Formats covered</th>
+              <th>Evidence status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/products/coconut-shell-charcoal/">Coconut shell charcoal</a></td>
+              <td>3 size records (25 / 26 / 27 mm)</td>
+              <td>Nominal cubes</td>
+              <td><span class="badge badge-warn">Supplier-declared</span> — full chemistry on the 25 mm record only</td>
+            </tr>
+            <tr>
+              <td><a href="/products/hookah-charcoal/">Hookah / shisha charcoal</a></td>
+              <td>3 size records, shared with coconut</td>
+              <td>22 / 25 / 26 / 27 mm cubes</td>
+              <td><span class="badge badge-warn">Supplier-declared</span> — no independent test</td>
+            </tr>
+            <tr>
+              <td><a href="/products/bamboo-charcoal/">Bamboo charcoal</a></td>
+              <td>3 product records (SL470, C25, SI87)</td>
+              <td>Large cube, 25 mm cube, silver bar</td>
+              <td><span class="badge badge-warn">Supplier-declared</span> — fixed carbon and volatiles missing</td>
+            </tr>
+            <tr>
+              <td><a href="/products/bbq-charcoal/">BBQ charcoal</a></td>
+              <td>0</td>
+              <td>Lump, briquette, extruded cube (class-level)</td>
+              <td><span class="badge badge-accent">Data pending</span> — no product record published</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Record counts reflect the product database as published. A record is not a verification: all
+        current records are supplier-declared.
+      </p>
+
+      <h2>Choose by What You Already Know</h2>
+      <div class="prose">
+        <p>
+          Buyers arrive with different constraints. If your requirement is a hookah cube in a
+          standard bowl, the decision is mostly about size class and evidence, not about raw material
+          mythology. If you are buying grilling fuel by the container, the format decision — lump
+          versus briquette versus extruded cube — matters more than the feedstock name.
+        </p>
+        <ul>
+          <li><strong>Hookah, standard bowl, long session.</strong> Start with the 25–27 mm coconut cubes; they are the only records with declared chemistry attached.</li>
+          <li><strong>Hookah, fast lighting or large bowl.</strong> The bamboo records cover a 40 mm cube and a quick-light bar, both supplier-declared and both missing fixed carbon.</li>
+          <li><strong>Grilling, restaurant volume.</strong> The BBQ category has no record yet; use the specification worksheet on that page to build a comparable enquiry.</li>
+          <li><strong>Private label or OEM.</strong> Packaging and artwork decide the MOQ more than the charcoal does — see <a href="/private-label/">private label</a> and <a href="/oem/">OEM</a>.</li>
+        </ul>
+      </div>
+
+      <h2>The Four Categories</h2>
       <div class="grid grid-2">
         <div class="card">
-          <h3>Natural Coconut Shell Charcoal</h3>
-          <p>Dense, low-ash charcoal made from coconut shell — the core product for hookah and BBQ.</p>
-          <a class="card-link" href="/products/coconut-shell-charcoal/">View →</a>
+          <h3>Coconut Shell Charcoal</h3>
+          <p>
+            Dense, low-ash charcoal from carbonized and pressed coconut shell. Three size records,
+            with a full declared chemistry table on the 25 mm cube.
+          </p>
+          <p><span class="badge badge-warn">Supplier-declared</span></p>
+          <a class="card-link" href="/products/coconut-shell-charcoal/">View category →</a>
         </div>
         <div class="card">
           <h3>Hookah / Shisha Charcoal</h3>
-          <p>Cube and flat charcoal sized for hookah sessions — 25mm, 26mm and 27mm.</p>
-          <a class="card-link" href="/products/hookah-charcoal/">View →</a>
+          <p>
+            Cube and flat formats sized for water-pipe sessions, 22–27 mm. The page covers bowl fit,
+            session length and what to verify on a sample.
+          </p>
+          <p><span class="badge badge-warn">Supplier-declared</span></p>
+          <a class="card-link" href="/products/hookah-charcoal/">View category →</a>
         </div>
         <div class="card">
           <h3>BBQ Charcoal</h3>
-          <p>Coconut and bamboo charcoal for grilling and restaurant use.</p>
-          <a class="card-link" href="/products/bbq-charcoal/">View →</a>
+          <p>
+            Lump, briquette and extruded formats for grilling and food service. Format and feedstock
+            guide, plus the full list of fields a supplier must declare.
+          </p>
+          <p><span class="badge badge-accent">Data pending</span> — no product record</p>
+          <a class="card-link" href="/products/bbq-charcoal/">View category →</a>
         </div>
         <div class="card">
           <h3>Bamboo Charcoal</h3>
-          <p>Bamboo-source charcoal for grilling and specialty applications.</p>
-          <a class="card-link" href="/products/bamboo-charcoal/">View →</a>
+          <p>
+            Lighter feedstock in three supplier-declared hookah formats. The page also documents
+            what the datasheet leaves unresolved — including the calorific unit.
+          </p>
+          <p><span class="badge badge-warn">Supplier-declared</span></p>
+          <a class="card-link" href="/products/bamboo-charcoal/">View category →</a>
         </div>
       </div>
 
-      <div class="callout-pending">
-        <span class="callout-title">Data pending</span>
+      <h2>What We Do Not Publish</h2>
+      <div class="prose">
         <p>
-          Individual product entries (size, ash content, moisture, fixed carbon, burn time, MOQ) are
-          added only after supplier verification. See the product database for current status.
+          Three things are deliberately absent from these pages, and their absence is the point:
         </p>
-        <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
+        <ul>
+          <li><strong>A price list.</strong> Charcoal is quoted per specification, packaging, volume and destination. A catalogue figure would be wrong for almost every buyer who read it.</li>
+          <li><strong>Stock status.</strong> No product here is sold from inventory with a published availability. Enquiries are quoted, not added to a cart.</li>
+          <li><strong>Certificates and test results.</strong> No record on this site is backed by an independent laboratory report. Where a supplier declares a figure, it is labelled as declared.</li>
+        </ul>
+        <p>
+          What you can rely on is the labelling. A number either has a source and a status, or it is
+          marked pending — there is no third category.
+        </p>
       </div>
 
-      <p style="margin-top:1.5rem;">
-        Need a specification and price for one of these categories?
-        <a href="/request-quote/">Request a quote →</a>
-      </p>
+      <h2>Before You Ask for a Quote</h2>
+      <div class="prose">
+        <p>
+          An enquiry that names the specification gets a usable offer. The minimum set is: raw
+          material, format and size class, application, monthly or per-shipment volume, packaging
+          (bulk bag, retail box, printed private label), destination port and any acceptance
+          criteria you intend to enforce.
+        </p>
+        <p>
+          If you do not have those numbers yet, start with a sample instead. Testing two formats
+          side by side in your own setup will settle questions that a datasheet cannot.
+        </p>
+        <p>
+          <a href="/request-quote/">Request a quote →</a> ·
+          <a href="/request-sample/">Request samples →</a> ·
+          <a href="/compliance/">Compliance and documentation →</a>
+        </p>
+      </div>
+
+      <div class="callout-pending">
+        <span class="callout-title">Where the records live</span>
+        <p>
+          Field-level product records, specification definitions and evidence status are maintained
+          on the data sub-site, not duplicated here. Use it to check what a record actually contains
+          before relying on a summary.
+        </p>
+        <p>
+          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product database →</a> ·
+          <a href={`${SITES.data}/specifications/`} target="_blank" rel="noopener">Specification definitions →</a> ·
+          <a href={`${SITES.data}/applications/`} target="_blank" rel="noopener">Applications →</a>
+        </p>
+      </div>
+
+      <div class="grid grid-3" aria-label="Related resources">
+        <a class="card" href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">
+          <h3>Test methods <span class="badge badge-muted">testing</span></h3>
+          <p>How each parameter is measured, with limitations stated.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/`} target="_blank" rel="noopener">
+          <h3>Buyer guides <span class="badge badge-muted">knowledge</span></h3>
+          <p>Sourcing, specification and shipping explainers.</p>
+        </a>
+        <a class="card" href="/manufacturing/">
+          <h3>Manufacturing</h3>
+          <p>How the production process shapes the specification.</p>
+        </a>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Need a specification built?</h2>
+        <p>Send the application, volume and destination. The quote follows the specification, not the other way round.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+        <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

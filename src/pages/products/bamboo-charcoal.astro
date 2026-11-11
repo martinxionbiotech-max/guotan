@@ -2,9 +2,29 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site-config';
 import { SITES } from '../../lib/sites';
-import { breadcrumbJsonLd, productJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, faqPageJsonLd, productJsonLd } from '../../lib/seo';
 
 const canonical = `${SITES.main}/products/bamboo-charcoal/`;
+
+const faqs = [
+  {
+    q: 'Is bamboo charcoal the same as bamboo "charcoal" for air purification?',
+    a: 'No. The records on this page describe fuel-grade bamboo charcoal pressed into hookah cubes and bars. Bamboo charcoal sold for air purification, humidity control or water treatment is a different product grade with different processing and different claims. Do not treat one as a substitute for the other.',
+  },
+  {
+    q: 'Why does the datasheet give calorific value in joules?',
+    a: 'The FireMax datasheet states "J" without a multiplier, which is not a usable calorific unit — the same figure would mean different things as J/g, kJ/kg or cal/g. Charcoal Hub reproduces the number as stated and does not convert it. Treat the calorific field as unresolved until the supplier confirms the unit and basis in writing.',
+  },
+  {
+    q: 'Are these bamboo products verified?',
+    a: 'No. All three records carry supplier-declared status: the figures come from a FireMax datasheet provided by the site operator, and none has been independently tested by Charcoal Hub. No certificate, laboratory report or factory audit sits behind them.',
+  },
+  {
+    q: 'Can I order a printed retail box?',
+    a: 'Private label is possible in principle, but no MOQ or artwork process has been declared for these three products — the field is recorded as pending. Ask for the packaging run, plate cost and proofing sequence before committing to artwork.',
+  },
+];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: `${SITES.main}/` },
@@ -14,18 +34,26 @@ const jsonLd = [
   productJsonLd({
     id: canonical,
     name: 'Bamboo Charcoal',
-    description: 'Bamboo charcoal for hookah — FireMax cube and bar formats with supplier-declared specifications.',
+    description:
+      'Bamboo charcoal for hookah — three supplier-declared FireMax formats, the limits of the datasheet, and how to verify a batch before ordering.',
     quoteUrl: `${SITES.main}/request-quote/`,
     category: 'Charcoal fuel',
-    properties: [{ name: 'Raw material', value: 'Bamboo' }, { name: 'Formats', value: 'Cubes 25 mm / 40 mm; silver bars' }, { name: 'Burning time', value: '90 min – 3 h (supplier-declared)' }, { name: 'Ignition', value: '9–10 min cubes; 35–45 s bars' }],
+    properties: [
+      { name: 'Raw material', value: 'Bamboo' },
+      { name: 'Documented formats', value: '40 × 40 × 30 mm cube; 25 mm cube; 90 × 25 × 12 mm silver bar' },
+      { name: 'Declared burn time', value: '90 min – 3 h across the three records (supplier-declared)' },
+      { name: 'Declared ash', value: '3.5–5% across the three records (supplier-declared)' },
+      { name: 'Verification status', value: 'Supplier-declared; not independently tested by Charcoal Hub' },
+    ],
   }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
 ];
 ---
 
 <BaseLayout
   site={site}
-  title="Bamboo Charcoal"
-  description="Bamboo-source charcoal for grilling and specialty applications. Category overview — characteristics and buyer considerations."
+  title="Bamboo Charcoal: Hookah Cubes, Bars and Limits"
+  description="Bamboo charcoal for hookah: three supplier-declared FireMax formats, what the datasheet does and does not state, and how to verify a batch before ordering."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[
@@ -38,8 +66,9 @@ const jsonLd = [
     <div>
       <h1>Bamboo Charcoal</h1>
       <p class="lede">
-        Charcoal produced from bamboo. Lighter and faster-igniting than coconut shell charcoal, bamboo
-        charcoal is suited to grilling and applications where quick ignition matters more than long burn.
+        Bamboo carbonized and pressed into hookah cubes and bars. Lighter than coconut shell and
+        faster to ignite, with three supplier-declared formats on record — and a datasheet that
+        leaves several fields unresolved.
       </p>
       <p class="quote-note">
         Pricing: quoted per specification, packaging and order volume — no fixed catalogue price.
@@ -53,88 +82,244 @@ const jsonLd = [
 
   <section class="section">
     <div class="container">
-      <div class="callout-pending">
-        <span class="callout-title">Supplier-declared data — not independently verified</span>
+      <div class="callout">
+        <span class="callout-title">How to read the figures on this page</span>
         <p>
-          Three bamboo charcoal product records are published with supplier-declared status from
-          the FireMax datasheet. They are visible with their declared figures, labelled source and
-          verification status — not presented as Charcoal Hub test data.
+          <span class="badge badge-warn">Supplier-declared</span> means the value comes from a
+          supplier datasheet and has <strong>not</strong> been independently tested by Charcoal Hub.
+          <span class="badge badge-muted">Industry reference</span> means a class-level statement
+          about how bamboo charcoal generally behaves.
+          <span class="badge badge-accent">Data pending</span> means the field is empty in our
+          records and we will not fill it by inference. No laboratory results here.
         </p>
-        <p><a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a></p>
       </div>
 
-      <h2>Specification Context</h2>
+      <h2>At a Glance</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>What we can state</th></tr></thead>
+          <tbody>
+            <tr><td>Raw material</td><td>Bamboo, carbonized and formed into cubes or bars</td></tr>
+            <tr><td>Documented formats</td><td>40 × 40 × 30 mm cube; 25 × 25 × 25 mm cube; 90 × 25 × 12 mm silver bar</td></tr>
+            <tr><td>Documented application</td><td>Hookah / shisha; the bar record also lists incense</td></tr>
+            <tr><td>Declared ash</td><td>3.5–5% across the three records (supplier-declared)</td></tr>
+            <tr><td>Declared burn time</td><td>90 min – 3 h depending on format (supplier-declared)</td></tr>
+            <tr><td>Fixed carbon / volatiles</td><td><span class="badge badge-accent">Data pending</span> — null in all three records</td></tr>
+            <tr><td>MOQ</td><td><span class="badge badge-accent">Data pending</span> — not declared</td></tr>
+            <tr><td>Private label</td><td><span class="badge badge-accent">Data pending</span> — not declared</td></tr>
+            <tr><td>Manufacturer</td><td>Not verified; datasheet brand is FireMax</td></tr>
+            <tr><td>Price</td><td>No catalogue price — quoted per specification, packaging and volume</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>What Bamboo Charcoal Is</h2>
       <div class="prose">
         <p>
-          Bamboo charcoal product records exist in the product database as supplier-declared
-          entries — figures come from the FireMax datasheet and are <em>not</em> independently
-          tested by Charcoal Hub:
+          Bamboo charcoal is made by carbonizing bamboo — typically culms and process offcuts — in a
+          low-oxygen kiln or retort, then milling the char and pressing it into a finished shape.
+          The carbonization step drives off water and volatiles and leaves a carbon-rich solid; the
+          pressing step decides the final density, and therefore how the piece burns.
         </p>
-        <ul>
-          <li><strong>FireMax SL470</strong> — 4 × 4 × 3 cm bamboo cube, burn 2–3 h, ash 3.5–5% (supplier-declared)</li>
-          <li><strong>FireMax C25</strong> — 25 mm bamboo cube, burn 90–120 min, calorific 7,500 J (supplier-declared)</li>
-          <li><strong>FireMax SI87</strong> — 9 × 2.5 × 1.2 cm silver bar, ignition 35–45 s (supplier-declared)</li>
-        </ul>
         <p>
-          Full field-level data with source and status:
-          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">Product Database →</a>
+          Bamboo grows faster than most hardwood feedstocks, which is why it appears in
+          sustainability-oriented marketing. That is a feedstock-supply argument, not a performance
+          argument: the finished cube still has to be judged on density, ash, moisture and burn
+          behaviour like any other charcoal.
+        </p>
+        <p>
+          <span class="badge badge-muted">Industry reference</span> Bamboo charcoal is generally
+          less dense than coconut shell charcoal. For the same nominal cube size that means less mass
+          per piece, a faster ignition and a shorter burn — which is exactly what the declared
+          figures below show, with 90–120 minutes for the 25 mm cube against a 60-minute
+          user-reported baseline for the coconut equivalent.
+        </p>
+      </div>
+
+      <h2>The Three Formats on Record</h2>
+      <div class="prose">
+        <p>
+          Three FireMax bamboo products are published in the product database. All three carry
+          supplier-declared status; none has been independently tested. They are reproduced here with
+          the source named, because a figure without provenance cannot carry a purchase decision.
         </p>
       </div>
       <div class="grid grid-3" aria-label="FireMax product scene images">
         <figure class="card-media">
           <img src="/images/firemax-sl470.webp" alt="Bamboo charcoal cube blocks beside a hookah — conceptual illustration" width="1600" height="900" loading="lazy" />
-          <figcaption>SL470 — 4 cm bamboo cube</figcaption>
+          <figcaption>SL470 — 40 × 40 × 30 mm cube</figcaption>
         </figure>
         <figure class="card-media">
           <img src="/images/firemax-c25.webp" alt="25 mm bamboo charcoal cubes with calipers — conceptual illustration" width="1600" height="900" loading="lazy" />
-          <figcaption>C25 — 25 mm bamboo cube</figcaption>
+          <figcaption>C25 — 25 × 25 × 25 mm cube</figcaption>
         </figure>
         <figure class="card-media">
           <img src="/images/firemax-si87.webp" alt="Silver-coated charcoal bars, one glowing — conceptual illustration" width="1600" height="900" loading="lazy" />
-          <figcaption>SI87 — silver bar</figcaption>
+          <figcaption>SI87 — 90 × 25 × 12 mm silver bar</figcaption>
         </figure>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Product</th><th>Format</th><th>Burn</th><th>Ignition</th><th>Ash</th><th>Packaging</th></tr></thead>
+          <tbody>
+            <tr><td><strong>SL470</strong></td><td>40 × 40 × 30 mm cube</td><td>2–3 h</td><td>9–10 min</td><td>3.5–5%</td><td>12 kg G.W., PE inner bag + brown carton</td></tr>
+            <tr><td><strong>C25</strong></td><td>25 × 25 × 25 mm cube</td><td>90–120 min</td><td>9–10 min</td><td>Grade S: 3.5–5%</td><td>10 kg per carton</td></tr>
+            <tr><td><strong>SI87</strong></td><td>90 × 25 × 12 mm silver bar</td><td>90–110 min</td><td>35–45 s</td><td>3.5–4.5%</td><td>60 pcs/box, 24 boxes per carton</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        All values supplier-declared from the FireMax datasheet, last recorded 2026-10-10. Moisture
+        is declared &lt; 5% for all three. Full field-level records:
+        <a href={`${SITES.data}/products/p-firemax-sl470-bamboo-cube/`} target="_blank" rel="noopener">SL470</a> ·
+        <a href={`${SITES.data}/products/p-firemax-c25-bamboo-cube/`} target="_blank" rel="noopener">C25</a> ·
+        <a href={`${SITES.data}/products/p-firemax-si87-silver-bar/`} target="_blank" rel="noopener">SI87</a>.
+      </p>
+
+      <h2>What the Datasheet Does Not Say</h2>
+      <div class="prose">
+        <p>
+          The gaps matter as much as the numbers. In all three records, fixed carbon and volatile
+          matter are null — the two fields that would let a buyer compare bamboo against coconut on
+          fuel fraction rather than on burn claims. The datasheet also leaves these unresolved:
+        </p>
+        <ul>
+          <li><strong>Calorific unit.</strong> Values are stated in "J" — 6,500–7,450 for SL470, 7,500 for C25, 7,200–7,400 for SI87 — with no multiplier. As written the unit is ambiguous; we do not convert it.</li>
+          <li><strong>Test method.</strong> No ASTM, ISO or GB method is cited for any figure. Numbers without a method are not comparable across suppliers.</li>
+          <li><strong>Batch and date.</strong> The datasheet describes a product line, not a production batch.</li>
+          <li><strong>Binder and coating.</strong> Binder is not stated for the cubes; the composition of the silver coating on SI87 is not stated either.</li>
+          <li><strong>Density and hardness basis.</strong> "Hardness 95%" appears in the datasheet with no test definition.</li>
+        </ul>
+      </div>
+
+      <h2>Which Format Suits Which Job</h2>
+      <div class="prose">
+        <p>
+          <strong>SL470</strong> is the large-format cube: 40 × 40 × 30 mm, about three times the
+          volume of a 25 mm cube (48,000 mm³ against 15,625 mm³). The larger mass supports the declared 2–3 hour burn and
+          suits long sessions or large bowls where refuelling is disruptive. It also takes longer to
+          reach full glow and needs a bowl that can seat it.
+        </p>
+        <p>
+          <strong>C25</strong> is the standard 25 mm cube — the most widely used hookah size, and
+          the format that fits the majority of bowls. It is the closest bamboo equivalent to the
+          25 mm coconut record, which makes it the natural head-to-head comparison when you sample.
+        </p>
+        <p>
+          <strong>SI87</strong> is a coated bar with a 35–45 second ignition window, which places it
+          in the quick-light class rather than the natural-cube class. That speed comes from the
+          coating; if you need an uncoated product, this is not it. It is also the only record that
+          lists incense alongside hookah as an application.
+        </p>
+        <p>
+          Bamboo charcoal is also used as grilling fuel and for incense in some markets, but no
+          BBQ-specific bamboo record exists in our database — that field stays
+          <span class="badge badge-accent">data pending</span>. For grilling formats, see
+          <a href="/products/bbq-charcoal/">BBQ charcoal</a>.
+        </p>
+      </div>
+
+      <h2>Where Bamboo Quality Goes Wrong</h2>
+      <div class="prose">
+        <ul>
+          <li><strong>Low density, short burn.</strong> Lighter feedstock means less heat per piece; a cube that looks identical to coconut can die noticeably sooner.</li>
+          <li><strong>Higher ash.</strong> The declared 3.5–5% band is wider and higher than the coconut record's ≤ 3.5%. More residue per session, and a wider spread between good and bad cartons.</li>
+          <li><strong>Coating inconsistency.</strong> Silver-coated bars depend on an even coat for the fast-light claim; patchy coating shows up as uneven ignition across a box.</li>
+          <li><strong>Breakage.</strong> Bars are thin in one dimension and snap; cubes chip at the edges. Inspect a middle carton, not the top layer.</li>
+          <li><strong>Moisture pickup.</strong> Bamboo char is hygroscopic like any charcoal; a failed liner shows up as slow lighting on arrival.</li>
+          <li><strong>Category confusion.</strong> Fuel-grade bamboo charcoal is not the same product as bamboo charcoal sold for filtration or deodorising. Specifications do not transfer.</li>
+        </ul>
       </div>
 
       <h2>Buyer Checklist</h2>
       <div class="prose">
         <ul>
-          <li><strong>Method and basis.</strong> Ask which method produced each figure and whether it is dry or as-received.</li>
-          <li><strong>Batch linkage.</strong> Confirm which batch, sample and date each number describes.</li>
-          <li><strong>Raw report.</strong> Request the laboratory report, not a summary PDF.</li>
-          <li><strong>Moisture at origin.</strong> Check moisture at origin and on arrival — charcoal is hygroscopic in transit.</li>
-          <li><strong>Size and tolerance.</strong> Confirm the nominal size class and tolerance; verify with calipers on a sample.</li>
-          <li><strong>Ignition speed.</strong> Bamboo charcoal is valued for fast ignition; confirm it on a sample burn in your setup.</li>
+          <li><strong>Confirm the format.</strong> Cube or bar, exact dimensions, and the tolerance around them.</li>
+          <li><strong>Ask for fixed carbon and volatiles.</strong> Both are missing from the current datasheet — that is the first gap to close.</li>
+          <li><strong>Resolve the calorific unit.</strong> Ask for the value with a multiplier and the basis (dry or as-received).</li>
+          <li><strong>Name the method.</strong> ASTM / ISO / GB for every chemistry figure, or the number is not comparable.</li>
+          <li><strong>Declare the coating and binder.</strong> Especially for the silver bar, where ignition speed depends on the coat.</li>
+          <li><strong>Test ignition and burn yourself.</strong> Bamboo's advantage is fast lighting; confirm it on your burner, not on the datasheet.</li>
+          <li><strong>Inspect the middle carton.</strong> Breakage and fines hide at the bottom of the pallet.</li>
           <li><strong>Acceptance clause.</strong> Agree sampling and the remedy for an out-of-spec arrival before ordering.</li>
         </ul>
+      </div>
+
+      <h2>Sampling and Verification Path</h2>
+      <div class="prose">
+        <p>
+          Compare C25 against a 25 mm coconut cube in the same session — same bowl, same burner,
+          same session length — and record ignition, peak heat and total usable burn. That single
+          side-by-side tells you more than any datasheet comparison.
+        </p>
+        <ol>
+          <li><strong>Request a sample</strong> in the format you intend to buy. <a href="/request-sample/">Sample request form →</a></li>
+          <li><strong>Burn it in your own setup</strong> and write down what happens, including ash volume and odour.</li>
+          <li><strong>Ask for a batch test report</strong> before the bulk order, then repeat the check on the arrived container.</li>
+        </ol>
+        <p>
+          Method references are on the
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">testing sub-site</a>;
+          structured records are in the
+          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">product database</a>.
+        </p>
       </div>
 
       <h2>Verification Status</h2>
       <div class="prose">
         <p>
-          No bamboo charcoal product has yet been independently verified by Charcoal Hub, and no
-          supplier record has been published. Verified test reports will appear on the
-          <a href={`${SITES.testing}/reports/`} target="_blank" rel="noopener">testing sub-site</a>
-          as they become attributable.
+          No bamboo charcoal product has been independently verified by Charcoal Hub. All three
+          records are supplier-declared from a FireMax datasheet provided by the site operator; no
+          certificate, laboratory report or factory audit is on file, and no manufacturer is named
+          as verified. Reports, when attributable, will be published on the
+          <a href={`${SITES.testing}/reports/`} target="_blank" rel="noopener">testing sub-site</a>.
         </p>
+      </div>
+
+      <h2>Frequently Asked</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
       </div>
 
       <h2>Related</h2>
       <div class="grid grid-3">
-        <a class="card" href={`${SITES.data}/products/`} target="_blank" rel="noopener">
-          <h3>Product database <span class="badge badge-muted">data</span></h3>
-          <p>All product records with their verification status and source.</p>
+        <a class="card" href={`${SITES.data}/products/p-firemax-c25-bamboo-cube/`} target="_blank" rel="noopener">
+          <h3>C25 product record <span class="badge badge-muted">data</span></h3>
+          <p>25 mm bamboo cube with supplier-declared values and status.</p>
         </a>
         <a class="card" href={`${SITES.data}/specifications/ignition-time/`} target="_blank" rel="noopener">
           <h3>Ignition time methodology <span class="badge badge-muted">data</span></h3>
           <p>Why ignition time is a system property and how to compare it.</p>
         </a>
         <a class="card" href={`${SITES.testing}/tests/ignition-time/`} target="_blank" rel="noopener">
-          <h3>Test methodology <span class="badge badge-muted">testing</span></h3>
-          <p>How ignition time is assessed under defined conditions, with limitations.</p>
+          <h3>Ignition test method <span class="badge badge-muted">testing</span></h3>
+          <p>How ignition time is assessed under defined conditions.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/quick-light-vs-natural-coconut-charcoal/`} target="_blank" rel="noopener">
+          <h3>Quick-light vs natural <span class="badge badge-muted">knowledge</span></h3>
+          <p>What coating does to ignition, and what it changes in the session.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/25mm-vs-26mm-charcoal/`} target="_blank" rel="noopener">
+          <h3>25 mm vs 26 mm <span class="badge badge-muted">knowledge</span></h3>
+          <p>How a millimetre changes mass, count and burn per cube.</p>
         </a>
         <a class="card" href={`${SITES.knowledge}/knowledge/charcoal-odor-and-ignition/`} target="_blank" rel="noopener">
-          <h3>Odour &amp; ignition <span class="badge badge-muted">knowledge</span></h3>
+          <h3>Odour and ignition <span class="badge badge-muted">knowledge</span></h3>
           <p>What drives odour and ignition behaviour in charcoal.</p>
+        </a>
+        <a class="card" href="/products/coconut-shell-charcoal/">
+          <h3>Coconut shell charcoal</h3>
+          <p>The denser alternative, with a full declared chemistry table.</p>
+        </a>
+        <a class="card" href="/oem/">
+          <h3>OEM sourcing</h3>
+          <p>How a private-label programme is specified and run.</p>
         </a>
         <a class="card" href="/request-sample/">
           <h3>Request samples</h3>
@@ -144,8 +329,9 @@ const jsonLd = [
 
       <div class="cta-banner">
         <h2>Sourcing bamboo charcoal?</h2>
-        <p>Tell us quantity and destination port.</p>
+        <p>Tell us the format, treatment, quantity and destination port. The quote is built around that specification.</p>
         <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+        <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
       </div>
     </div>
   </section>
