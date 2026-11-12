@@ -1,0 +1,538 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/coconut-shell-charcoal-guide/`;
+
+const faqs = [
+  {
+    q: 'Is coconut shell charcoal better than wood charcoal?',
+    a: 'It is denser than most wood charcoal, so a cube of the same size generally holds more mass and burns longer with less ash by mass. That is a category-level advantage, not a guarantee for every batch. Binder, carbonization and drying decide the finished cube, so compare declared values and a sample — not the feedstock name alone.',
+  },
+  {
+    q: 'What is the best grade of coconut shell charcoal for hookah?',
+    a: 'There is no formal grade standard for hookah charcoal. In practice, buyers bundle a size class (usually 25–27 mm), an ash ceiling, a fixed-carbon floor, an odour requirement and a packaging format. The “best” bundle is the one that fits your bowl, session length and market — not the one with the most superlatives on the datasheet.',
+  },
+  {
+    q: 'What ash content should I specify?',
+    a: 'Specify a maximum you can enforce, not a typical value. Public supplier ranges for coconut shell charcoal commonly sit around 2–5% ash, but those are illustrative, not a standard. If a supplier quotes “typical 3.0%”, ask for a guaranteed maximum and the method used to measure it.',
+  },
+  {
+    q: 'Why is there no price per tonne on this page?',
+    a: 'Charcoal is quoted per specification, packaging, order volume and destination port, and raw material varies by batch. A catalogue figure would be wrong for most buyers who read it. Send the specification and volume you need and the offer is built around that.',
+  },
+  {
+    q: 'Can Charcoal Hub verify a supplier test report for me?',
+    a: 'We can explain what a report does and does not prove, and we publish the evidence status of every figure we reproduce. We do not have an independent test report on file for coconut shell charcoal, so we cannot present a supplier’s numbers as our own verification. A report is only attributable when it names the batch, the method and the laboratory.',
+  },
+];
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Coconut Shell Charcoal Buyer’s Guide', url: canonical },
+  ]),
+  articleJsonLd({
+    id: canonical,
+    headline: 'Coconut Shell Charcoal: Specification, Grades and Buyer’s Guide',
+    description:
+      'How coconut shell charcoal is specified and traded: size classes, ash and fixed carbon, datasheet reading, sampling, MOQ and contract terms.',
+    datePublished: '2026-11-13',
+    dateModified: '2026-11-13',
+  }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Coconut Shell Charcoal: Specification and Buyer's Guide"
+  description="A buyer's guide to coconut shell charcoal: size grades, ash and fixed carbon, datasheet reading, MOQ, packaging and a verification sequence."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Coconut Shell Charcoal Buyer’s Guide', url: '/coconut-shell-charcoal-guide/' },
+  ]}
+>
+  <div class="page-title-split container">
+    <div>
+      <h1>Coconut Shell Charcoal: Specification, Grades and Buyer’s Guide</h1>
+      <p class="lede">
+        “Grade” is the most overloaded word in the charcoal trade. This guide separates the part a
+        supplier can prove from the part that is shorthand — then shows how to turn a specification
+        into an enquiry, a sample and an enforceable purchase order.
+      </p>
+      <p class="quote-note">
+        All figures below are labelled by evidence status. No independent laboratory report for
+        coconut shell charcoal is on file.
+        <a href="/request-quote/">Request a quote →</a>
+      </p>
+    </div>
+    <div class="page-title-media">
+      <img src="/images/product-coconut-shell.webp" alt="Coconut shell charcoal cubes beside raw coconut shell halves — conceptual illustration" width="1600" height="900" loading="lazy" />
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout">
+        <span class="callout-title">How to read the evidence labels</span>
+        <p>
+          <span class="badge badge-warn">Supplier-declared</span> means the value comes from a
+          supplier listing or datasheet and has not been independently tested by Charcoal Hub.
+          <span class="badge badge-muted">Industry reference</span> means a class-level range from
+          public sources — useful for orientation, never a factory commitment.
+          <span class="badge badge-accent">Data pending</span> means no figure is published for that
+          field. The <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">testing
+          sub-site</a> documents methods, not results.
+        </p>
+      </div>
+
+      <h2>What “Grade” Means in Coconut Shell Charcoal</h2>
+      <div class="prose">
+        <p>
+          There is no single international grade standard for hookah charcoal. The standards that do
+          exist cover either test methods or a different product category. ASTM D1762 describes how
+          to analyse charcoal; it does not set an acceptance limit. EN 1860-2 addresses barbecue
+          charcoal and briquettes, with ash ceilings that are far looser than a hookah buyer would
+          normally accept. Neither document defines “premium”, “A-grade” or “export grade”.
+        </p>
+        <p>
+          In the trade, a grade is usually a bundle of five things: a size class, an ash ceiling, a
+          fixed-carbon floor, a format (cube, flat, lump or briquette) and an application. Sometimes
+          packaging and odour are folded in. Two suppliers can both advertise “premium hookah
+          charcoal” and mean completely different bundles, which is why the word cannot be compared
+          across datasheets.
+        </p>
+        <p>
+          A useful grade claim therefore looks like this: “25 mm cube, ash ≤ 3.5%, fixed carbon ≥ 80%,
+          moisture ≤ 5%, natural (no accelerant), 1 kg retail box.” Every element is measurable or
+          inspectable. A claim that says only “high quality, low ash, long burning” has told you
+          nothing you can put in a contract.
+        </p>
+        <p>
+          This guide uses “grade” in that commercial sense — a specification bundle — and never as a
+          certification. For the underlying metrics, see
+          <a href={`${SITES.knowledge}/knowledge/what-ash-content-means/`} target="_blank" rel="noopener">what ash content means</a>
+          and
+          <a href={`${SITES.knowledge}/knowledge/fixed-carbon-explained/`} target="_blank" rel="noopener">fixed carbon explained</a>.
+        </p>
+      </div>
+
+      <h2>From Shell to Cube: The Process Behind the Spec</h2>
+      <div class="prose">
+        <p>
+          Coconut shell charcoal is made by heating shells in a low-oxygen environment, then
+          crushing, binding, pressing and drying the carbonized material. The conventional route runs
+          through six stages, and each one leaves a fingerprint on the specification.
+        </p>
+        <ol>
+          <li><strong>Carbonization.</strong> Shells are heated in a kiln, retort or drum with limited air. Public process references put the window at roughly 600–900&nbsp;°C <span class="badge badge-muted">Industry reference</span>. Too low leaves volatiles and smoke; too high wastes yield.</li>
+          <li><strong>Cooling and grading.</strong> Char is cooled and screened. Fines, unburnt shell and oversized pieces are separated before milling.</li>
+          <li><strong>Milling.</strong> Char is ground to a controlled particle size. A finer grind packs more tightly, but it also changes how the cube burns and how much binder is needed.</li>
+          <li><strong>Binder mixing.</strong> Many pressed cubes use cassava or tapioca starch. The binder share affects hardness, ash and sometimes odour. A binderless line exists, but it is not the default.</li>
+          <li><strong>Pressing.</strong> The mix is formed under pressure. Die wear is one reason actual dimensions drift away from the nominal size across a long run.</li>
+          <li><strong>Drying and sorting.</strong> Cubes are dried to target moisture, then screened for cracks, chips and size before packing.</li>
+        </ol>
+        <p>
+          A datasheet that reports only the finished numbers hides this chain. Asking which stage the
+          supplier controls — and whether the char is bought in or produced in-house — tells you more
+          about batch consistency than a single ash figure. The process is described in more detail in
+          <a href={`${SITES.knowledge}/knowledge/how-coconut-shell-charcoal-is-made/`} target="_blank" rel="noopener">how coconut shell charcoal is made</a>.
+        </p>
+      </div>
+
+      <h2>The Specification Set That Decides a Purchase</h2>
+      <div class="prose">
+        <p>
+          A charcoal specification is not a list of every number a laboratory can produce. It is the
+          short set of properties that change the buying decision, each with a limit, a method and a
+          basis. The table below is the working set used on this site.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th>What it tells you</th><th>What to put in the PO</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Moisture</td><td>Water content; affects ignition, weight and shelf life.</td><td>A maximum, plus the method and whether it is measured at origin or arrival.</td></tr>
+            <tr><td>Ash</td><td>Non-combustible residue; affects clean-up and airflow.</td><td>A guaranteed maximum, not a “typical” value.</td></tr>
+            <tr><td>Volatile matter</td><td>Compounds released on heating; linked to smoke and odour during lighting.</td><td>A maximum, with the method named.</td></tr>
+            <tr><td>Fixed carbon</td><td>The carbon fraction left after moisture, ash and volatiles are accounted for.</td><td>A minimum, calculated from the three measured values.</td></tr>
+            <tr><td>Calorific value</td><td>Energy released per unit mass.</td><td>A range and the basis (dry or as-received).</td></tr>
+            <tr><td>Size and tolerance</td><td>Fit to the bowl or grate, and consistency between pieces.</td><td>Nominal size plus a permitted tolerance in millimetres.</td></tr>
+            <tr><td>Density</td><td>Mass per unit volume; linked to burn duration and container loading.</td><td>A measured range, or pressing pressure plus a drop-test result.</td></tr>
+            <tr><td>Burning and ignition time</td><td>Session behaviour under a stated setup.</td><td>The test conditions, not just a number of minutes.</td></tr>
+            <tr><td>Sulphur and impurities</td><td>Feedstock purity and contamination risk.</td><td>A maximum, plus a visual inspection clause.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Method families: ASTM D1762 and ASTM D3172–D3175 for proximate analysis; GB/T 12496 for
+        Chinese charcoal test reports. A value is only comparable when the method and reporting basis
+        match. See the
+        <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">test methodology index</a>.
+      </p>
+
+      <h2>Size Classes: 22, 25, 26 and 27 mm</h2>
+      <div class="prose">
+        <p>
+          Hookah charcoal is sold in nominal cube sizes, and the size class is the first thing most
+          buyers fix. The count per kilogram is a useful sanity check, but it is approximate: actual
+          dimensions, density and moisture all move it.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nominal cube</th><th>Approx. pieces per kg</th><th>Practical implication</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>22 × 22 × 22 mm</td><td>~96</td><td>Smaller pieces, finer heat control, more pieces per session.</td></tr>
+            <tr><td>25 × 25 × 25 mm</td><td>~72</td><td>The common default; moderate heat and burn per cube.</td></tr>
+            <tr><td>26 × 26 × 26 mm</td><td>~64</td><td>Slightly longer burn per cube, slightly fewer pieces per kilo.</td></tr>
+            <tr><td>27 × 27 × 27 mm</td><td>~56</td><td>Largest standard cube; higher heat per piece, suited to larger bowls.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Counts are from a public size-class table (charcoal.pro, captured 2026-10-07) and are
+        approximate. <span class="badge badge-muted">Industry reference</span> — verify with calipers
+        and a scale on your sample.
+      </p>
+      <div class="prose">
+        <p>
+          “25 mm” is a nominal label, not a tolerance. A cube that measures 24.2 mm and one that
+          measures 25.6 mm can both be sold as 25 mm unless the supplier states a band. For bowl fit
+          and heat-management devices, the tolerance and the consistency between pieces matter more
+          than the headline number. See
+          <a href={`${SITES.knowledge}/knowledge/charcoal-size-tolerance/`} target="_blank" rel="noopener">charcoal size tolerance</a>
+          and
+          <a href={`${SITES.knowledge}/knowledge/25mm-vs-26mm-charcoal/`} target="_blank" rel="noopener">25 mm vs 26 mm charcoal</a>.
+        </p>
+        <p>
+          There is no quality hierarchy between sizes. A 22 mm cube is not “worse” than a 27 mm cube;
+          it suits a different bowl, session length and heat-management routine. Choose the size your
+          users already buy, then specify the tolerance.
+        </p>
+      </div>
+
+      <h2>Ash, Fixed Carbon and the Published Record</h2>
+      <div class="prose">
+        <p>
+          Ash and fixed carbon are the two numbers most often used to sell a grade. They are also the
+          two most often quoted without the information needed to compare them.
+        </p>
+        <p>
+          <strong>Ash</strong> is what remains after the combustible material is burned away. For
+          coconut shell charcoal, public supplier ranges commonly sit around 2–5%
+          <span class="badge badge-muted">Industry reference</span>, and lower ash generally means
+          less residue and less interference in a hookah bowl. But “lower” is not automatically
+          better for every application: ash affects airflow and heat transfer, and a briquette
+          designed for a long grill burn may carry a different mineral load. The number only becomes
+          enforceable when it is written as a maximum with a method.
+        </p>
+        <p>
+          <strong>Fixed carbon</strong> is not measured directly. It is calculated as 100% minus
+          moisture, ash and volatile matter. That means a fixed-carbon figure inherits the errors of
+          three measurements, and a supplier can raise it by changing the basis rather than the
+          product. Ask for the three input values and the method, not just the result. The
+          <a href={`${SITES.knowledge}/knowledge/fixed-carbon-explained/`} target="_blank" rel="noopener">fixed-carbon explainer</a>
+          walks through the arithmetic.
+        </p>
+        <p>
+          A grade claim that says “ash 3%, fixed carbon 80%” is a starting point. A usable claim says
+          “ash ≤ 3.5% by ASTM D3174, fixed carbon ≥ 80% calculated from ASTM D3173/D3175/D3174, on
+          the 25 mm line, batch referenced.” That is the difference between marketing and a purchase
+          specification. The
+          <a href={`${SITES.knowledge}/knowledge/how-to-compare-coconut-shell-charcoal/`} target="_blank" rel="noopener">comparison guide</a>
+          covers the full set of fields to request.
+        </p>
+        <p>
+          The published record shows how much of that bundle is actually on file. The product
+          database holds three coconut shell hookah records: 25 mm, 26 mm and 27 mm. Only the 25 mm
+          record carries a full chemistry set; the other two carry size-class data and nothing else,
+          and we do not copy the 25 mm values across.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Record</th><th>Declared chemistry</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href={`${SITES.data}/products/25mm-natural-coconut-shell-hookah-charcoal/`} target="_blank" rel="noopener">25 mm natural coconut hookah cube</a></td>
+              <td>Fixed carbon ≥ 80%; ash ≤ 3.5% (typical 3.0%); moisture ≤ 5%; volatiles ≤ 12%; sulphur ≤ 0.1%; calorific value 7,000–7,500 kcal/kg</td>
+              <td><span class="badge badge-warn">Supplier-declared</span></td>
+            </tr>
+            <tr>
+              <td><a href={`${SITES.data}/products/26mm-natural-coconut-shell-hookah-charcoal/`} target="_blank" rel="noopener">26 mm natural coconut hookah cube</a></td>
+              <td>None published — size class only (~64 cubes/kg)</td>
+              <td><span class="badge badge-accent">Data pending</span></td>
+            </tr>
+            <tr>
+              <td><a href={`${SITES.data}/products/27mm-natural-coconut-shell-hookah-charcoal/`} target="_blank" rel="noopener">27 mm natural coconut hookah cube</a></td>
+              <td>None published — size class only (~56 cubes/kg)</td>
+              <td><span class="badge badge-accent">Data pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Source: public supplier listing (bbqoncharcoal.com 25&nbsp;mm product page, captured
+        2026-10-07). Supplier-declared values have not been independently tested by Charcoal Hub.
+        The 22 mm class appears in public size tables but has no separate product record.
+      </p>
+      <div class="prose">
+        <p>
+          Read the table as a map of what is known, not as a product ranking. The 25 mm values are one
+          supplier’s declarations for one size class; they are useful as a reference point and
+          useless as a guarantee for another factory, another size or another batch. The
+          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">product database</a>
+          shows the same status for every record.
+        </p>
+      </div>
+
+      <h2>Grades by Application: Hookah, BBQ and Quick-Light</h2>
+      <div class="prose">
+        <p>
+          The same feedstock can be sold into markets with different priorities. That is why an
+          application-first specification beats a generic “premium” label.
+        </p>
+        <p>
+          <strong>Hookah.</strong> The priorities are cube geometry, ash ceiling, odour neutrality and
+          ignition behaviour. A 25–27 mm cube that fits the bowl and lights evenly is worth more than
+          a marginally higher fixed-carbon figure that comes with a soft, dusty cube. Size tolerance
+          and binder declaration matter here. Start with the
+          <a href="/products/coconut-shell-charcoal/">coconut shell charcoal category</a> or the
+          <a href="/products/hookah-charcoal/">hookah charcoal page</a>.
+        </p>
+        <p>
+          <strong>BBQ and food service.</strong> Grilling buyers care about burn duration, heat
+          output, ash behaviour and cost per hour, and they may buy lump, briquette or extruded cube.
+          EN 1860-2 is the relevant benchmark for the European barbecue market, with ash limits of 8%
+          for lump charcoal and 18% for briquettes. That is a very different specification from a
+          hookah cube. The
+          <a href="/products/bbq-charcoal/">BBQ charcoal page</a> sets out the format decision; no BBQ
+          product record is published yet.
+        </p>
+        <p>
+          <strong>Quick-light.</strong> Quick-light charcoal carries an accelerant coating that
+          changes ignition time, odour and sometimes the ash. It is a product class, not a grade, and
+          some markets impose labelling or composition requirements. If your customers expect
+          instant lighting, say so at enquiry stage — a natural cube cannot be made to behave like a
+          coated one by changing the packing.
+        </p>
+        <p>
+          <strong>Activated carbon.</strong> Coconut shell is also the feedstock for activated carbon,
+          but that is a different product with a different process, specification and market. It is
+          not a grade of hookah charcoal. The
+          <a href={`${SITES.knowledge}/knowledge/coconut-charcoal-vs-activated-carbon/`} target="_blank" rel="noopener">comparison</a>
+          explains the boundary.
+        </p>
+      </div>
+
+      <h2>Moisture, Density and Binder: The Invisible Specs</h2>
+      <div class="prose">
+        <p>
+          Three properties decide how a cube feels in use but rarely appear in a headline. They are
+          worth writing into the specification.
+        </p>
+        <p>
+          <strong>Moisture</strong> is the one that changes after the factory gate. Charcoal is
+          hygroscopic; a cube that left at ≤ 5% can arrive soft and slow to light after a humid
+          voyage or a damp warehouse. Test at origin and on arrival, and treat the difference as a
+          packaging signal. Moisture also adds weight you pay freight on, without adding fuel.
+        </p>
+        <p>
+          <strong>Density</strong> is the mass per unit volume. Public process references place
+          pressed shisha briquettes in a working range around 1.2–1.3 t/m³
+          <span class="badge badge-muted">Industry reference</span>. A denser cube generally burns
+          longer and survives handling better; a soft cube crumbles and finishes early. Ask for a
+          measured density or a pressing pressure plus a drop-test result, then confirm by hand on a
+          sample. See
+          <a href={`${SITES.knowledge}/knowledge/charcoal-density-and-heat-management/`} target="_blank" rel="noopener">density and heat management</a>.
+        </p>
+        <p>
+          <strong>Binder</strong> is usually cassava or tapioca starch. The ratio affects hardness,
+          ash and sometimes odour. If your market expects a binderless cube, ask before the sample is
+          made, not after the container is booked. Sulphur is a related purity signal: the 25 mm
+          record declares ≤ 0.1%, but that is one supplier’s figure, not a category constant.
+        </p>
+        <p>
+          None of these can be judged from a photograph. They are the reason a sample is not a
+          formality — it is the only stage where you can weigh, squeeze and burn the actual product
+          before committing to volume.
+        </p>
+      </div>
+
+      <h2>MOQ, Packaging and Container Economics</h2>
+      <div class="prose">
+        <p>
+          Coconut charcoal is a heavy, low-value-per-kilogram cargo, so packaging and container
+          loading often decide the landed cost more than a few dollars per tonne at the factory.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Item</th><th>Declared value</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>MOQ — stock packaging</td><td>1 tonne</td><td>Supplier-declared</td></tr>
+            <tr><td>MOQ — printed OEM boxes</td><td>One 20′ container</td><td>Supplier-declared</td></tr>
+            <tr><td>Retail packs</td><td>1 / 1.2 / 2 / 10 kg</td><td>Supplier-declared</td></tr>
+            <tr><td>Inner box</td><td>1 kg moisture-resistant colour box, 72 cubes</td><td>Supplier-declared</td></tr>
+            <tr><td>Master carton</td><td>10 kg or 20 kg, customer-specified</td><td>Supplier-declared</td></tr>
+            <tr><td>20′ GP load</td><td>Approx. 14.4 tonnes</td><td>Supplier-declared</td></tr>
+            <tr><td>40′ HQ load</td><td>Approx. 23.4 tonnes</td><td>Supplier-declared</td></tr>
+            <tr><td>OEM lead time</td><td>15–25 days after artwork approval</td><td>Supplier-declared</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        These are one supplier’s terms, not an industry standard. Container weights are nominal and
+        depend on packing density and carton configuration.
+      </p>
+      <div class="prose">
+        <p>
+          The MOQ table is where many first orders fail. A 1-tonne stock-pack order and a printed
+          private-label run are different production events, with different artwork, plate and
+          setup costs. If you need your own brand, plan for the container threshold; if you are
+          testing a market, start with stock packaging and a sample. The
+          <a href={`${SITES.knowledge}/knowledge/coconut-charcoal-moq/`} target="_blank" rel="noopener">MOQ guide</a>
+          and
+          <a href={`${SITES.knowledge}/knowledge/charcoal-packaging-options/`} target="_blank" rel="noopener">packaging guide</a>
+          go deeper.
+        </p>
+        <p>
+          Charcoal is also a dangerous-goods cargo. Coconut charcoal is classified under UN 1361 as a
+          Class 4.2 self-heating substance, and the booking must be declared correctly. A
+          mis-declared container is a supply-chain risk that no specification can fix. Check the
+          current IMDG requirements with your forwarder and carrier; the
+          <a href={`${SITES.knowledge}/knowledge/charcoal-shipping-safety-un1361/`} target="_blank" rel="noopener">UN 1361 guide</a>
+          is a starting point, not legal advice.
+        </p>
+        <p>
+          We do not publish a price list. Quotes are built from specification, packaging, volume and
+          destination, because those four variables move the number more than any catalogue discount.
+          <a href="/request-quote/">Send the requirement</a> and the offer is structured around it.
+        </p>
+      </div>
+
+      <h2>Sampling and Verification: A Buyer’s Sequence</h2>
+      <div class="prose">
+        <p>
+          A datasheet narrows the shortlist; a sample and a batch record decide the order. The
+          sequence below is deliberately short — each step exists to kill a specific risk.
+        </p>
+        <ol>
+          <li><strong>Define the application.</strong> Hookah, BBQ, quick-light or private label. The application sets the size class and the properties that matter.</li>
+          <li><strong>Write the specification.</strong> Every field gets a value, a unit, a method, a basis and a status (maximum, minimum or typical).</li>
+          <li><strong>Ask for three-batch history.</strong> One perfect report is a sample; three consecutive batches show whether the line is stable.</li>
+          <li><strong>Request the raw report.</strong> A summary PDF or a supplier datasheet is not a laboratory report. Check the batch ID, the method and the laboratory name.</li>
+          <li><strong>Test a sample in your own setup.</strong> Your burner, your bowl, your session length. Record ignition time, burn time, ash behaviour and odour. <a href="/request-sample/">Request a sample →</a></li>
+          <li><strong>Measure the physical claims.</strong> Calipers on a random handful, a scale for cube count, a drop test for integrity, a moisture reading at origin.</li>
+          <li><strong>Approve a pre-production sample for private label.</strong> A screen proof will not show print registration on moisture-resistant board.</li>
+          <li><strong>Inspect before shipment.</strong> Sample from the middle of the load, check carton integrity, DG labels and moisture. Repeat the key checks on arrival.</li>
+        </ol>
+        <p>
+          The verification path is documented on the
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">testing sub-site</a> and
+          the
+          <a href={`${SITES.data}/explain/how-to-compare/`} target="_blank" rel="noopener">data site’s comparison explainer</a>.
+          Neither contains results for a specific supplier, because we do not have an independent
+          report to publish.
+        </p>
+      </div>
+
+      <h2>Specification Traps and Contract Terms</h2>
+      <div class="prose">
+        <p>
+          Most disputes are not caused by bad charcoal. They are caused by a specification that was
+          never enforceable. These are the traps worth designing out before the first PO.
+        </p>
+        <ul>
+          <li><strong>“Typical” treated as a maximum.</strong> A typical 3.0% ash does not stop a 5% batch from being conforming. Write a ceiling.</li>
+          <li><strong>Chemistry copied across sizes.</strong> A 25 mm datasheet does not describe a 27 mm cube. Each size class needs its own record or an explicit statement that the values are shared.</li>
+          <li><strong>Method mismatch.</strong> ASTM D1762, ASTM D3172–D3175 and GB/T 12496 are not interchangeable. A number without a method is not comparable.</li>
+          <li><strong>Nominal size without tolerance.</strong> “25 mm” alone permits a wide range. Specify a band and a sampling method.</li>
+          <li><strong>Moisture measured only at origin.</strong> Add an arrival check and a remedy if the container gains moisture in transit.</li>
+          <li><strong>Batch mixing.</strong> Ask for one production batch per shipment, or for the batch split to be declared on the packing list.</li>
+          <li><strong>No acceptance clause.</strong> Agree the sampling plan, the test method and the remedy — replacement, credit or rework — before ordering.</li>
+          <li><strong>A “certificate” that is a datasheet.</strong> A supplier declaration is not a third-party certificate. Label it for what it is.</li>
+        </ul>
+        <p>
+          Put the agreed specification in an annex to the PO, with the method and basis beside each
+          value. That single document resolves more arguments than any amount of email history.
+        </p>
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="prose">
+        <p>
+          If you are still choosing a category, start with the
+          <a href="/products/">product comparison</a>. If you have a specification, the next useful
+          step is a sample and a quote. If you are building a brand, read the
+          <a href="/private-label/">private label process</a> before fixing the packaging.
+        </p>
+        <p>
+          For the underlying records, the
+          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">product database</a>
+          holds the declared values and their status; the
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">testing sub-site</a>
+          explains how each property is measured. Neither is a substitute for a batch report on the
+          material you are actually buying.
+        </p>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:1.5rem;">
+        <a class="card" href="/products/coconut-shell-charcoal/">
+          <h3>Coconut shell charcoal <span class="badge badge-muted">product</span></h3>
+          <p>Size classes, declared chemistry and the sampling path for the core product.</p>
+        </a>
+        <a class="card" href="/products/hookah-charcoal/">
+          <h3>Hookah charcoal <span class="badge badge-muted">product</span></h3>
+          <p>Bowl fit, session length and what to verify before a hookah order.</p>
+        </a>
+        <a class="card" href="/products/bbq-charcoal/">
+          <h3>BBQ charcoal <span class="badge badge-muted">product</span></h3>
+          <p>Lump, briquette and extruded formats for grilling and food service.</p>
+        </a>
+        <a class="card" href="/private-label/">
+          <h3>Private label <span class="badge badge-muted">service</span></h3>
+          <p>Artwork, MOQ and the pre-production sample sequence.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/how-to-compare-coconut-shell-charcoal/`} target="_blank" rel="noopener">
+          <h3>Compare suppliers <span class="badge badge-muted">knowledge</span></h3>
+          <p>A field-by-field method for reading two datasheets side by side.</p>
+        </a>
+        <a class="card" href="/request-quote/">
+          <h3>Request a quote</h3>
+          <p>Send size, volume, packaging and destination port for a specification-based offer.</p>
+        </a>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Build the specification first.</h2>
+        <p>Send the cube size, monthly volume, packaging and destination port. We will confirm what can be declared, what needs a sample, and what stays pending.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+        <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
