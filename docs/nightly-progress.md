@@ -1,9 +1,9 @@
 # Charcoal Hub — Nightly Progress
 
-Last updated: 2026-11-13
-Current: N5
-Next: N5
-Status: N4 complete
+Last updated: 2026-11-14
+Current: N6
+Next: N6
+Status: N5 complete
 
 ## Completed
 
@@ -13,6 +13,7 @@ Status: N4 complete
 | N2 | Product upgrade 1 — coconut shell + hookah | 2026-11-11 | `909568f` | 21 pages | Both pages rewritten from ~600 to ~1,800 rendered words (1,799 / 1,800 measured on `dist`). Added status legend, process/format detail, size + packaging tables, quality-risk sections, sampling path, and 4-question FAQ with FAQPage schema. Every numeric claim carries a supplier-declared or industry-reference label; 26/27 mm chemistry remains explicitly `data pending`. Product Offer stays RFQ-only (no price, no availability). Cross-links: 4–5 data records, 4–6 test methods, 7–8 knowledge articles per page, all verified against sub-site source trees. |
 | N3 | Product upgrade 2 — BBQ + bamboo, product hub | 2026-11-11 | `eff2969` | 21 pages | BBQ 475 → 1,824 main-content words; bamboo → 1,709; products hub 242 → 811 with a per-category evidence table. BBQ keeps all 11 spec fields as `data pending` because the database holds no BBQ record (verified against `data.guotan/src/content/products/`). Bamboo corrected: the page previously sold bamboo as grilling fuel, but all three FireMax records are hookah cubes and one incense bar — reframed, with the datasheet's unresolved calorific unit ("J" with no multiplier), null fixed carbon/volatiles, null MOQ and null private label all stated explicitly. Homepage cards updated so bamboo is no longer described as grilling fuel. |
 | N4 | Pillar 1 — coconut shell specification and buyer's guide | 2026-11-13 | `e5e41ef` | 22 pages | New `/coconut-shell-charcoal-guide/` at 3,384 visible `<main>` words, 12 H2, 1 H1, title 55 chars, description 140 chars. Covers what "grade" means (no formal hookah grade standard), the shell-to-cube process, the 9-field specification set, 22/25/26/27 mm size classes, ash/fixed carbon plus the published 25/26/27 mm records, application classes, moisture/density/binder, MOQ/packaging/container economics, an 8-step sampling sequence, contract traps, and 5 FAQs. Links 11 knowledge articles, 3 data product records, the data explainer and the testing methods index; inbound links added from the coconut product page, products hub and knowledge gateway. Article + BreadcrumbList + FAQPage schema, no price or availability. |
+| N5 | Pillar 2 — hookah charcoal manufacturing | 2026-11-14 | `1f882dd` | 23 pages | New `/hookah-charcoal-manufacturing/` at 3,496 visible `<main>` words, 12 content H2, 1 H1, title 54 chars, description 147 chars. Runs the line stage by stage (shell intake → carbonisation → milling → binder → pressing → drying → sorting), ties each stage to the parameter it fixes and its characteristic defect, and separates conformance from batch-to-batch consistency. Adds a three-density table (bulk / particle / piece mass), a stage-gate QC plan with the record that makes each check traceable, a defect-to-stage table, and a PO annex structure. All process ranges labelled industry reference; no factory, capacity or certification claim. Links 3 products, 2 services, 6 knowledge articles, 3 test methods, the 25 mm data record and the manufacturer verification model; inbound links from the hookah product page, manufacturing page and knowledge gateway. Article + BreadcrumbList + FAQPage schema, no price or availability. |
 
 ## Partial / Blocked
 
@@ -51,6 +52,17 @@ Status: N4 complete
 - JSON-LD: Article + BreadcrumbList + FAQPage. No Offer, price or availability is emitted on the guide.
 - Inbound links added: coconut product page Related card, products hub "Before You Ask for a Quote", knowledge gateway callout.
 - Evidence discipline: only the 25 mm record carries chemistry; 26 mm and 27 mm are explicitly `data pending`; the 22 mm class is noted as a size table entry with no separate record.
+
+## N5 verification detail
+
+- `npm run build` → 23 pages, markdown negotiation 22/1 skipped (404).
+- New `/hookah-charcoal-manufacturing/`: 3,496 visible `<main>` words (target 2,500–3,500), 12 content H2, 1 H1. The automated H2 count returns 13 because the closing CTA banner carries its own `<h2>`; content sections are 12.
+- Metadata: 22/22 non-404 pages pass title ≤60, description ≤160, exactly one H1. Guide title 54 chars, description 147 chars.
+- Internal links: `npm run check:links` → 23 pages, 911 links, no broken links.
+- `/request-quote/` appears 5× on the new page; inbound links added from the hookah product page (Related card), `/manufacturing/` (specification section) and `/knowledge/` (gateway callout).
+- Cross-site links verified against sub-site source trees: knowledge `how-coconut-shell-charcoal-is-made`, `charcoal-moisture-explained`, `charcoal-density-and-heat-management`, `pre-shipment-inspection-charcoal`, `private-label-charcoal`, `how-to-choose-hookah-charcoal`; testing `/tests/` and `/tests/density/`; data `/products/25mm-natural-coconut-shell-hookah-charcoal/`; manufacturer `/verification/`.
+- JSON-LD: Article + BreadcrumbList + FAQPage. No Offer, price or availability is emitted on the page.
+- Evidence discipline: carbonisation window (600–900 °C), shell-to-char yield (2–2.5 t per t), feedstock moisture (≤20%), finished moisture (6–8%) and pressed density (1.2–1.3 t/m³) are all labelled industry reference and attributed to public process sources, not to a named plant. No capacity, certification or client claim is made.
 
 ## Carry-forward notes
 
