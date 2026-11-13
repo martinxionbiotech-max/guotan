@@ -1,0 +1,556 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/hookah-charcoal-manufacturing/`;
+
+const faqs = [
+  {
+    q: 'How can I tell whether a supplier actually manufactures or just repacks?',
+    a: 'Ask three process questions: where the carbonised shell comes from, what pressing equipment is used, and how drying is controlled. Then ask for a QC sheet whose batch number matches the packing list. A factory can produce that record; a trader usually forwards a datasheet instead.',
+  },
+  {
+    q: 'What density should hookah charcoal have?',
+    a: 'Public process references place pressed shisha briquettes in a working range of roughly 1.2–1.3 t/m³, but the figure is only meaningful with its method. Bulk density decides container loading; particle density describes a single cube. Ask which one is quoted, then confirm by weighing a sample cube and measuring it with calipers.',
+  },
+  {
+    q: 'Why does cube size vary inside one carton?',
+    a: 'Nominal size is a die dimension, not a guarantee. Die wear, paste moisture, press pressure and drying shrinkage all move the finished dimension across a run, so a supplier who checks only at the start ships cubes at the edge of the band. Specify a tolerance and a sampling plan, not just a size.',
+  },
+  {
+    q: 'Is a darker cube a better cube?',
+    a: 'No. Colour responds to carbonisation temperature, binder share and drying, and it is not a specification. Two cubes of the same colour can differ in ash, density and burn behaviour. Judge weight, hardness, dimension, ash and a burn test — not shade.',
+  },
+  {
+    q: 'What causes sparks or a chemical smell when lighting?',
+    a: 'Sparks usually point to feedstock contamination — sand, shell fibre or foreign material that survived screening. A chemical or solvent note is more often an accelerant coating, an industrial binder, or incomplete carbonisation leaving volatiles. Both are process signals, and both are reasons to test a sample rather than accept a datasheet.',
+  },
+];
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Hookah Charcoal Manufacturing', url: canonical },
+  ]),
+  articleJsonLd({
+    id: canonical,
+    headline: 'Hookah Charcoal Manufacturing: Quality, Density and Consistency',
+    description:
+      'How pressed hookah charcoal is manufactured and controlled — carbonisation, binder, pressing, density, drying and the QC records that hold a batch together.',
+    datePublished: '2026-11-14',
+    dateModified: '2026-11-14',
+  }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Hookah Charcoal Manufacturing: Quality and Consistency"
+  description="How pressed hookah charcoal is made and controlled: carbonisation, binder, pressing, density, drying and the QC records that hold a batch together."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Hookah Charcoal Manufacturing', url: '/hookah-charcoal-manufacturing/' },
+  ]}
+>
+  <div class="page-title-split container">
+    <div>
+      <h1>Hookah Charcoal Manufacturing: Quality, Density and Consistency</h1>
+      <p class="lede">
+        A hookah cube is decided at the press and the dryer, not at the packing table. This guide
+        walks the production line stage by stage, shows which parameter each stage fixes, and turns
+        the vague claim of “factory quality” into checks a buyer can actually run.
+      </p>
+      <p class="quote-note">
+        Process ranges below are industry references, not one factory’s settings. No independent
+        audit report for a named plant is on file.
+        <a href="/request-quote/">Request a quote →</a>
+      </p>
+    </div>
+    <div class="page-title-media">
+      <img src="/images/page-manufacturing.webp" alt="Charcoal briquette production line with a press and conveyor — conceptual illustration" width="1600" height="900" loading="lazy" />
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout">
+        <span class="callout-title">How to read the evidence labels</span>
+        <p>
+          <span class="badge badge-warn">Supplier-declared</span> means a figure comes from a
+          supplier listing or datasheet and has not been independently tested by Charcoal Hub.
+          <span class="badge badge-muted">Industry reference</span> means a class-level range from
+          public process sources — orientation, not a commitment from any plant.
+          <span class="badge badge-accent">Data pending</span> means no figure is published for that
+          field. Method definitions live on the
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">testing sub-site</a>.
+        </p>
+      </div>
+
+      <h2>What Manufacturing Quality Means in Hookah Charcoal</h2>
+      <div class="prose">
+        <p>
+          Buyers often describe quality as a feeling: the cube lights evenly, holds its shape, does
+          not smell, and leaves a fine grey ash instead of a crust. Those are real outcomes, but
+          they are outputs of a process. A manufacturing claim is only useful when it can be traced
+          back to a stage that was controlled and a record that proves it.
+        </p>
+        <p>
+          In practice, “quality” in this product means two different things, and they are frequently
+          confused. The first is <strong>conformance</strong>: does this batch meet the declared ash,
+          moisture, size and density limits? The second is <strong>consistency</strong>: does the next
+          batch meet them too? A single perfect laboratory report answers the first question for one
+          lot. Only a run of batch records answers the second.
+        </p>
+        <p>
+          That distinction matters commercially. A buyer who qualifies on one sample and then orders
+          a container is trusting a process they have never seen. The sections below are arranged in
+          production order so that each claim can be attached to the stage that creates it — and so
+          that a plant visit or a video call has a structure.
+        </p>
+      </div>
+
+      <h2>The Line, Stage by Stage</h2>
+      <div class="prose">
+        <p>
+          The conventional line for pressed coconut shell hookah charcoal runs through seven stages.
+          Each one leaves a fingerprint on the finished cube, and each one has a characteristic
+          failure mode that shows up later as a complaint.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Stage</th><th>What it fixes</th><th>Characteristic failure</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Shell intake and screening</td><td>Ash precursor, contamination</td><td>Sand, fibre or mixed feedstock raises ash and causes sparks</td></tr>
+            <tr><td>Carbonisation</td><td>Volatile matter, fixed carbon, yield</td><td>Under-carbonised char smokes and smells; over-carbonised char wastes yield</td></tr>
+            <tr><td>Milling and screening</td><td>Particle size distribution, packing behaviour</td><td>A coarse or drifting grind gives soft cubes and uneven burn</td></tr>
+            <tr><td>Binder mixing</td><td>Green strength, ash, odour</td><td>Too much binder softens the cube and lifts ash; the wrong binder adds a note</td></tr>
+            <tr><td>Pressing and cutting</td><td>Density, nominal size, shape</td><td>Die wear drifts dimensions; low pressure gives a crumbly cube</td></tr>
+            <tr><td>Drying and conditioning</td><td>Moisture, crack formation, hardness</td><td>Fast drying cracks cubes; under-drying ships soft, smoky product</td></tr>
+            <tr><td>Sorting and packing</td><td>Fines removal, count, barrier</td><td>Fines left in the box read as breakage at arrival</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Stage sequence is the general process described in public industry sources; equipment and
+        set-points differ between plants. No named factory is described here.
+      </p>
+      <div class="prose">
+        <p>
+          The order is not arbitrary: a defect introduced at carbonisation cannot be fixed at
+          packing, and an under-pressed cube cannot be rescued by longer drying.
+        </p>
+      </div>
+
+      <h2>Carbonisation: Where Ash and Fixed Carbon Are Decided</h2>
+      <div class="prose">
+        <p>
+          Coconut shells are heated in a kiln, retort or drum with limited oxygen. Public process
+          references put the effective window at roughly 600–900&nbsp;°C
+          <span class="badge badge-muted">Industry reference</span>. Inside that window, volatile
+          matter is driven off as gas and what remains is a carbon skeleton — the material that
+          carries fixed carbon.
+        </p>
+        <p>
+          Two things are decided here that buyers care about most. The first is
+          <strong>volatile matter</strong>. Incomplete carbonisation leaves volatiles behind, and
+          those volatiles are the closest laboratory proxy for start-up smoke and odour. A cube made
+          from under-carbonised char can look perfect and still taste wrong. The second is
+          <strong>ash</strong>, but indirectly: ash is mineral matter from the shell, and because
+          carbonisation removes mass, the same minerals become a larger percentage of the finished
+          char. Clean, screened shells are therefore the cheapest ash control available.
+        </p>
+        <p>
+          Yield is the commercial counterweight. Public references place the shell-to-charcoal ratio
+          at roughly 2–2.5 tonnes of shells per tonne of char
+          <span class="badge badge-muted">Industry reference</span>. Push carbonisation harder and
+          yield falls; that cost reappears in the price or the binder share.
+        </p>
+        <p>
+          Feedstock moisture matters before the kiln, not after. Process references describe shells
+          being dried to roughly 20% or below before carbonisation
+          <span class="badge badge-muted">Industry reference</span>, because wet shells carbonise
+          slowly and unevenly. A plant that stores shells in the open will produce char that varies
+          with the weather — and no downstream stage fully corrects for that.
+        </p>
+        <p>
+          For buyers, the practical question is who owns this stage. Some suppliers carbonise
+          in-house; others buy carbonised shell powder and run only the forming line. Neither is
+          dishonest, but the second model means ash and volatile matter are inherited from a
+          third party, and batch traceability has an extra link. Ask directly, and ask for the char
+          supplier’s specification if the answer is “we buy powder”. The
+          <a href={`${SITES.knowledge}/knowledge/how-coconut-shell-charcoal-is-made/`} target="_blank" rel="noopener">process explainer</a>
+          covers the same chain from the feedstock side.
+        </p>
+      </div>
+
+      <h2>Milling, Binder and Moisture in the Mix</h2>
+      <div class="prose">
+        <p>
+          Carbonised shell is ground before it can be pressed. The grind is a real specification
+          variable even though it rarely appears on a datasheet. A finer, more uniform powder packs
+          more tightly and produces a harder green cube, but it also needs more water and can change
+          how the finished cube burns. A coarse or drifting grind gives a soft cube, a rough surface
+          and inconsistent density inside the piece.
+        </p>
+        <p>
+          The binder is usually food-grade tapioca or cassava starch: the glue that holds the cube
+          together and burns away with the fuel. Its share affects green strength, ash after
+          combustion and sometimes odour during lighting. More binder makes a tougher cube and a
+          higher ash residue, which is why “low ash” and “extra hard” claims belong together.
+        </p>
+        <p>
+          Water in the mix is process water, not product moisture. It makes the paste workable and is
+          removed in the dryer. Confusing the two is a common source of bad specifications: a buyer
+          asks for “5% moisture” and the supplier measures the wet mix instead of the finished cube.
+          Always state that the moisture limit applies to the dried, packed product.
+        </p>
+        <p>
+          If a supplier claims a binderless cube, ask how it holds together without one and what the
+          drop-test result is. Some products are pressed from char with enough natural tars to bind;
+          many “binderless” claims are simply a different starch that is not declared. Neither answer
+          is automatically disqualifying, but the answer should be specific.
+        </p>
+      </div>
+
+      <h2>Pressing: Density, Die Wear and Size Drift</h2>
+      <div class="prose">
+        <p>
+          The press turns paste into a cube. Pressure is the main lever on density, and density is
+          the property a buyer feels first: a dense cube has weight in the hand, survives handling
+          and burns longer for its size. Public process references place pressed shisha briquettes in
+          a working range around 1.2–1.3&nbsp;t/m³
+          <span class="badge badge-muted">Industry reference</span>. Treat that as an orientation
+          band, not a purchase limit — it is a class-level figure, not a factory guarantee.
+        </p>
+        <p>
+          Size is set by the die, and dies wear. Across a long production run the cavity enlarges
+          slightly, so cubes pressed at the end of a run can measure larger than cubes pressed at the
+          start. This is the mechanical reason a nominal “25&nbsp;mm” label is not a tolerance. It is
+          also why an in-process dimension check at the start, middle and end of a run tells you more
+          than a single measurement on a single sample.
+        </p>
+        <p>
+          Green strength — the strength of the cube before drying — is an intermediate the buyer
+          never sees, but it predicts the arrival condition. A cube that is fragile when wet tends to
+          crack in the dryer and shed fines in the carton. Press pressure, binder share and particle
+          size all feed into it.
+        </p>
+      </div>
+
+      <h2>Drying and Conditioning: The Arrival Risk</h2>
+      <div class="prose">
+        <p>
+          Drying is the least glamorous stage and the one most likely to decide whether the container
+          arrives in sellable condition. Public process references describe finished hookah cubes
+          drying to roughly 6–8% moisture
+          <span class="badge badge-muted">Industry reference</span>, with some buyers specifying a
+          tighter ceiling at the factory gate. The exact target matters less than the control: a
+          uniform, measured endpoint beats a nominal number achieved unevenly.
+        </p>
+        <p>
+          Two failure modes sit on either side of the target. <strong>Under-drying</strong> leaves
+          water in the cube: it lights slowly, smokes more, weighs more than it should and can
+          develop mould in a warm container. <strong>Over-drying</strong> — especially fast, high-heat
+          drying — creates a moisture gradient, and the shrinkage stress shows up as hairline cracks
+          after handling.
+        </p>
+        <p>
+          Drying method changes uniformity. Oven or tunnel drying gives a controlled, repeatable
+          curve; sun drying depends on weather and turns out a batch that varies day to day. For a
+          container order, the difference is not cosmetic: it is the difference between a moisture
+          figure you can put in a contract and one you hope holds.
+        </p>
+        <p>
+          Charcoal is hygroscopic, so a cube that leaves at 6% moves toward equilibrium with the
+          humidity around it in transit. Packaging therefore belongs in the moisture specification,
+          and an arrival check belongs in the purchase terms. The
+          <a href={`${SITES.knowledge}/knowledge/charcoal-moisture-explained/`} target="_blank" rel="noopener">moisture guide</a>
+          sets out the measurement and storage detail.
+        </p>
+      </div>
+
+      <h2>Density: Three Different Numbers</h2>
+      <div class="prose">
+        <p>
+          “Density” is used for at least three different measurements in this trade, and a datasheet
+          rarely says which one it means. The numbers are not interchangeable, and comparing them
+          across suppliers is a reliable way to reach a wrong conclusion.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Measure</th><th>What it describes</th><th>What it decides</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bulk density</td>
+              <td>Mass of a loosely filled or settled volume of cubes, typically kg/m³</td>
+              <td>Container loading and freight per tonne</td>
+            </tr>
+            <tr>
+              <td>Particle (apparent) density</td>
+              <td>Mass of one piece divided by its envelope volume</td>
+              <td>How much fuel sits in a cube of a given size</td>
+            </tr>
+            <tr>
+              <td>Piece mass</td>
+              <td>Weight of a single cube, in grams</td>
+              <td>The quickest field check, and the basis for pieces per kilogram</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Bulk density is measured under ISO 17828 procedures or a container-fill method; particle
+        density uses a different method entirely. See the
+        <a href={`${SITES.testing}/tests/density/`} target="_blank" rel="noopener">density method page</a>.
+      </p>
+      <div class="prose">
+        <p>
+          The consequences run in different directions. Higher bulk density fits more tonnes into a
+          container, which lowers freight per tonne — a logistics win that says nothing about how the
+          cube burns. Higher particle density means more carbon per piece, and generally a longer,
+          steadier burn. A heavier piece can be either, or simply absorbed water.
+        </p>
+        <p>
+          That last point catches buyers repeatedly. Water adds weight without adding fuel. A cube
+          that has taken up moisture feels dense and performs badly — slow to light, smoky, and short
+          on usable heat. Density figures should therefore always be read next to moisture, and a
+          measured density should state whether it is on a dry basis.
+        </p>
+        <p>
+          For a practical check, weigh ten random cubes and measure them with calipers. The spread in
+          piece mass at a fixed nominal size is a direct read on press consistency, and it takes two
+          minutes. The
+          <a href={`${SITES.knowledge}/knowledge/charcoal-density-and-heat-management/`} target="_blank" rel="noopener">density and heat management guide</a>
+          connects the number to session behaviour.
+        </p>
+      </div>
+
+      <h2>Consistency: Batch Variation and What It Looks Like</h2>
+      <div class="prose">
+        <p>
+          Consistency is a process property, and it fails in two directions. <strong>Within a
+          batch</strong>, the symptoms are visible: a spread of cube sizes in one carton, a mix of
+          shades, some pieces noticeably heavier, cracks or chipped corners. <strong>Between
+          batches</strong>, the symptoms are quieter and more expensive: ash drifts up half a point,
+          burn time shortens, a customer notices the session changed.
+        </p>
+        <p>
+          The sources of drift are ordinary: a new shell supplier changes the mineral load, a
+          different char lot changes volatile matter, a binder delivery changes green strength, humid
+          weather changes drying, a worn die changes size. None is a scandal; all are invisible
+          unless the plant records them.
+        </p>
+        <p>
+          This is why a single certificate is weak evidence and three consecutive batch records are
+          strong. Ask for the same fields across three batches — ash, moisture, volatile matter,
+          fixed carbon, size check, density or piece mass — and look at the spread rather than the
+          average. A supplier whose three batches sit in a narrow band is controlling the line. A
+          supplier whose values wander is running a process that happens to have produced a good
+          sample.
+        </p>
+        <p>
+          Two visual shortcuts are worth discarding. Colour is not a grade: it responds to
+          carbonisation temperature, binder share and drying, and two cubes of the same shade can
+          differ in ash and density. Surface gloss is not a guarantee either — a polished look can
+          come from a die, a coating or a tumbling step, and none of those is a specification. Judge
+          mass, dimension, hardness, ash and a burn test; leave appearance out of the qualification.
+        </p>
+      </div>
+
+      <h2>The QC Plan: Stage Gates and Records</h2>
+      <div class="prose">
+        <p>
+          A workable plan is short: a check at each stage where a parameter is fixed, recorded against
+          a batch number so it can be traced to the cartons it covers. The table is a buyer’s version
+          of that plan — what to require, not a claim about any supplier’s practice.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Gate</th><th>Check</th><th>Record that makes it useful</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Shell intake</td><td>Source, cleanliness, moisture before carbonisation</td><td>Supplier lot, date, moisture reading</td></tr>
+            <tr><td>Carbonised char</td><td>Volatile matter, ash, appearance, unburnt shell</td><td>Kiln run ID and result per run</td></tr>
+            <tr><td>Milled powder</td><td>Particle size, uniformity, foreign matter</td><td>Sieve result or grind setting log</td></tr>
+            <tr><td>Mix</td><td>Binder type and share, water addition</td><td>Recipe version and batch weight</td></tr>
+            <tr><td>Pressed green</td><td>Piece mass, dimensions, green strength</td><td>Start / middle / end-of-run measurements</td></tr>
+            <tr><td>Dried</td><td>Moisture, cracks, hardness</td><td>Dryer curve and final moisture per lot</td></tr>
+            <tr><td>Packed</td><td>Fines, count per box, seal integrity</td><td>Carton count and sample photos</td></tr>
+            <tr><td>Pre-shipment</td><td>Fresh sample, dimensions, moisture, DG labels</td><td>Inspection report with container number</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Gate list is a recommended buyer framework. Method references: ASTM D1762 / ASTM D3172–D3175
+        for proximate analysis, GB/T 12496 for Chinese charcoal reports, ISO 17831-1 and ASTM D440
+        for durability and drop behaviour.
+      </p>
+      <div class="prose">
+        <p>
+          The record is the part that gets skipped. A QC sheet with numbers but no batch ID cannot be
+          tied to the cartons in front of you, and a test result from “last month” describes a
+          different lot. Ask for the batch number on the packing list to match the QC sheet, and
+          reject the shipment if it does not.
+        </p>
+        <p>
+          Sampling discipline matters as much as the test. Samples taken from the top layer of a
+          pallet are not a sample of the load. A working plan takes pieces from several cartons
+          across the pallet, and for a container, from more than one position in the stow. The
+          <a href={`${SITES.knowledge}/knowledge/pre-shipment-inspection-charcoal/`} target="_blank" rel="noopener">pre-shipment inspection guide</a>
+          sets out the sequence, including the dangerous-goods labelling check.
+        </p>
+      </div>
+
+      <h2>Process Claims, Defects and What They Reveal</h2>
+      <div class="prose">
+        <p>
+          A defect is more useful than a compliment. Each symptom below points to a stage, and the
+          stage tells you which question to ask. The mapping narrows the conversation; it is not a
+          diagnosis.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Symptom</th><th>Likely stage</th><th>Question to ask</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cubes crumble or shed dust in the box</td><td>Pressing, binder, drying</td><td>What is the drop-test or durability result for this size, and what fines limit applies?</td></tr>
+            <tr><td>Hairline cracks after arrival</td><td>Drying</td><td>What is the dryer curve, and is moisture measured before or after conditioning?</td></tr>
+            <tr><td>Size spread inside one carton</td><td>Pressing, die wear</td><td>Are dimensions checked at the end of the run, and what tolerance band is guaranteed?</td></tr>
+            <tr><td>Sparks during lighting</td><td>Shell intake, screening</td><td>How is feedstock screened for sand and foreign matter?</td></tr>
+            <tr><td>Chemical or solvent note</td><td>Binder, coating, carbonisation</td><td>What exactly is in the binder, and is there any accelerant layer?</td></tr>
+            <tr><td>Smoky start, ash-heavy session</td><td>Carbonisation, moisture</td><td>Volatile matter and moisture for this batch, with method and basis?</td></tr>
+            <tr><td>Uneven glow across a cube</td><td>Mixing, pressing</td><td>Is density checked within a piece, or only as a batch average?</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          The same logic applies to marketing language. “Smokeless” is not a measurable property —
+          volatile matter and a session test are. “100% natural” says nothing about the binder unless
+          the binder is named. “Export grade” has no legal definition; “premium” is a price signal.
+          None of these is proof of a problem; they are simply not evidence. Evidence is a batch
+          record, a named method, a stated basis and a sample you burned yourself.
+        </p>
+      </div>
+
+      <h2>Specifying Quality in the Purchase Order</h2>
+      <div class="prose">
+        <p>
+          The manufacturing detail only becomes enforceable when it is written into the order. A
+          workable annex has five parts: the field, the limit, the method, the basis and the status
+          (maximum, minimum or typical). Anything missing is a conversation, not a term.
+        </p>
+        <p>
+          Start with the fields that decide the product: cube size and tolerance, piece mass or
+          density, moisture at packing, ash maximum, volatile matter maximum, fixed carbon minimum,
+          and a named binder. Add the sensory items you can evaluate — a blind session test for odour
+          and ignition — and record the result rather than describing it in adjectives.
+        </p>
+        <p>
+          Then define the batch. One production run per shipment, or a declared split, is far easier
+          to inspect than a blended load. Agree the sampling plan, the laboratory or method, the
+          acceptance limits and the remedy: replacement, credit or rework. A specification without a
+          remedy is a wish.
+        </p>
+        <p>
+          For a private-label order, make the pre-production sample a formal gate. A screen proof will
+          not show registration on moisture-resistant board; a first article from the actual line
+          will. The <a href="/private-label/">private label process</a> covers artwork, MOQ and
+          approval; the
+          <a href={`${SITES.knowledge}/knowledge/private-label-charcoal/`} target="_blank" rel="noopener">private-label guide</a>
+          covers the commercial side.
+        </p>
+        <p>
+          Finally, inspect before shipment. Sample from the middle of the load, verify carton
+          integrity and UN 1361 Class 4.2 marking, and photograph the lot with the container number
+          visible. A photo set is the cheapest dispute insurance in the trade, and it costs nothing
+          to require.
+        </p>
+        <p>
+          We publish no price list or fixed MOQ, because both depend on specification, packaging and
+          destination. Describe the cube, the volume and the market. Any figure without evidence — a
+          density reading, a batch history, a binder declaration — stays
+          <span class="badge badge-accent">Data pending</span>.
+        </p>
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="prose">
+        <p>
+          If you are still selecting a product, start with the
+          <a href="/products/hookah-charcoal/">hookah charcoal page</a> or the
+          <a href="/products/coconut-shell-charcoal/">coconut shell category</a>. If you have a
+          specification, the next useful step is a sample and a quote. If you are auditing a plant,
+          take the gate table above as the interview script.
+        </p>
+        <p>
+          The declared values behind this product family live in the
+          <a href={`${SITES.data}/products/25mm-natural-coconut-shell-hookah-charcoal/`} target="_blank" rel="noopener">25 mm product record</a>,
+          with the same status legend applied to every field. The
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">testing sub-site</a>
+          explains how each property is measured, and the
+          <a href={`${SITES.manufacturer}/verification/`} target="_blank" rel="noopener">manufacturer verification model</a>
+          explains what a profile does and does not prove.
+        </p>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:1.5rem;">
+        <a class="card" href="/products/hookah-charcoal/">
+          <h3>Hookah charcoal <span class="badge badge-muted">product</span></h3>
+          <p>Cube sizes, session behaviour and what to verify before ordering.</p>
+        </a>
+        <a class="card" href="/products/coconut-shell-charcoal/">
+          <h3>Coconut shell charcoal <span class="badge badge-muted">product</span></h3>
+          <p>The feedstock-to-cube category and its declared records.</p>
+        </a>
+        <a class="card" href="/private-label/">
+          <h3>Private label <span class="badge badge-muted">service</span></h3>
+          <p>Artwork, MOQ and the pre-production sample gate.</p>
+        </a>
+        <a class="card" href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">
+          <h3>Test methods <span class="badge badge-muted">testing</span></h3>
+          <p>How density, moisture, ash and durability are actually measured.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/how-to-choose-hookah-charcoal/`} target="_blank" rel="noopener">
+          <h3>How to choose <span class="badge badge-muted">knowledge</span></h3>
+          <p>A buyer decision framework for hookah charcoal.</p>
+        </a>
+        <a class="card" href="/request-quote/">
+          <h3>Request a quote</h3>
+          <p>Send size, volume, packaging and destination port for a specification-based offer.</p>
+        </a>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Audit the process, not the brochure.</h2>
+        <p>Send the cube size, monthly volume, packaging and destination port. We will confirm what can be declared, what needs a sample, and what stays pending.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+        <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
