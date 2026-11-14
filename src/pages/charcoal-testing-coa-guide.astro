@@ -1,0 +1,615 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/charcoal-testing-coa-guide/`;
+
+const faqs = [
+  {
+    q: 'Is a certificate of analysis the same as a test report?',
+    a: 'No. A COA is the seller’s declaration of values for a lot and is often produced in-house. A test report is a laboratory’s record of a specific measurement on a specific sample. The COA says what the seller claims; the report says what a laboratory measured.',
+  },
+  {
+    q: 'Should I ask for ASTM or ISO methods?',
+    a: 'Ask for the method that fits the product class and sits inside the laboratory’s accredited scope. ISO 18122, 18123, 18125 and 18134 were written for solid biofuels and map closely onto charcoal; ASTM D1762 was written for wood charcoal and is applied to coconut shell by analogy. The family matters less than using the same one on both sides of a comparison.',
+  },
+  {
+    q: 'The supplier sent an ISO 9001 certificate. Is that enough?',
+    a: 'No. ISO 9001 certifies a management system, not the properties of a lot, and says nothing about the ash, moisture or fixed carbon in your container. Treat it as a supporting document beside a batch report and a tested sample.',
+  },
+  {
+    q: 'Can I trust a report from a Chinese laboratory?',
+    a: 'Trust depends on traceability, not nationality. Check that the laboratory is accredited for that specific test, that the report carries a unique number and the sample identification, and verify the laboratory through the accreditation body — not the contact details on the report.',
+  },
+  {
+    q: 'What if the COA and my own test disagree?',
+    a: 'First check that both share a method family, a basis and a comparable sample. If they still differ beyond the stated uncertainty, the usual cause is sampling — retest the sealed duplicate you retained.',
+  },
+];
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Charcoal Testing and COA', url: canonical },
+  ]),
+  articleJsonLd({
+    id: canonical,
+    headline: 'Charcoal Testing and COA: What Buyers Can Verify',
+    description:
+      'How to read a charcoal certificate of analysis and test report — methods, reporting basis, sampling, laboratory accreditation and the checks a buyer can run without a lab.',
+    datePublished: '2026-11-14',
+    dateModified: '2026-11-14',
+  }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Charcoal Testing & COA: What Buyers Can Verify"
+  description="How to read a charcoal COA and lab report — methods, reporting basis, sampling, accreditation, red flags and the checks a buyer can run without a lab."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Charcoal Testing and COA', url: '/charcoal-testing-coa-guide/' },
+  ]}
+>
+  <div class="page-title-split container">
+    <div>
+      <h1>Charcoal Testing and COA: What Buyers Can Verify</h1>
+      <p class="lede">
+        A certificate of analysis is not a quality guarantee. It is a statement about one sample,
+        measured one way, on one date. This guide explains what each line reports, how the same
+        result changes with its basis, where the sampling chain breaks, and what you can check
+        yourself before a container ships.
+      </p>
+      <p class="quote-note">
+        We publish no laboratory results for named suppliers.
+        <a href="/request-quote/">Request a quote →</a>
+      </p>
+    </div>
+    <div class="page-title-media">
+      <img src="/images/page-testing.webp" alt="Charcoal testing bench with a balance, caliper, sieve and sample trays — conceptual illustration" width="1600" height="900" loading="lazy" />
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout">
+        <span class="callout-title">How to read the evidence labels</span>
+        <p>
+          <span class="badge badge-muted">Public standard</span> means a published method, cited by
+          designation. <span class="badge badge-muted">Industry reference</span> means a class-level
+          range, not a commitment. <span class="badge badge-accent">Data pending</span> means no
+          figure is published.
+        </p>
+      </div>
+
+      <h2>What a COA Is — and What It Is Not</h2>
+      <div class="prose">
+        <p>
+          “Certificate of analysis” has no fixed international format. In charcoal it usually means a
+          one- or two-page document issued by the seller, listing moisture, ash, volatile matter,
+          fixed carbon, sometimes calorific value and size, against a batch number. The letterhead is
+          the seller’s, not a laboratory’s.
+        </p>
+        <p>Three arrangements produce three different documents:</p>
+        <ul>
+          <li><strong>Seller’s COA</strong> — the seller declares values. Evidence grade: a supplier statement.</li>
+          <li><strong>Third-party report on a seller-supplied sample</strong> — real measurement, seller-chosen sample.</li>
+          <li><strong>Third-party report on a sample drawn from your lot</strong> — the only arrangement that ties the number to the goods.</li>
+        </ul>
+        <p>
+          The hinge is a sentence on almost every report: results relate only to the sample
+          received. A laboratory can be competent, accredited and precise and still have measured a
+          sample that never sat in your container. The report is accurate about the sample and
+          silent about the shipment.
+        </p>
+        <p>
+          A COA is a claim, a test report is a record, and an accreditation is a statement about
+          competence. None is a guarantee about the container. What a buyer can build is a chain in
+          which every link is checkable: lot identity, sampling record, method, basis, laboratory,
+          result and remedy.
+        </p>
+      </div>
+
+      <h2>The Documents Buyers Confuse</h2>
+      <div class="prose">
+        <p>
+          A request for “certificates” often returns several document types. Name the one you want.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Document</th><th>What it states</th><th>What it does not prove</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Certificate of analysis</td><td>Values the seller declares for a lot</td><td>Who measured them, or which sample</td></tr>
+            <tr><td>Test report</td><td>A result for one sample, method and date</td><td>That the sample came from your container</td></tr>
+            <tr><td>Certificate of conformity</td><td>That goods are declared to meet a spec</td><td>Any measured value</td></tr>
+            <tr><td>ISO 9001 certificate</td><td>That a management system was audited</td><td>Ash, moisture or carbon in one lot</td></tr>
+            <tr><td>SDS / MSDS</td><td>Hazards and transport classification</td><td>Quality, grade or composition</td></tr>
+            <tr><td>Certificate of origin</td><td>Where goods are deemed to originate</td><td>Manufacture, specification or testing</td></tr>
+            <tr><td>DG declaration (UN 1361)</td><td>Transport classification, Class 4.2</td><td>Product quality</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Ask for the <em>test report</em> to know what was measured, the <em>COA</em> for the
+          declared specification, and both when the two must agree. Destination-specific document
+          requirements sit in the <a href="/compliance/">compliance notes</a>.
+        </p>
+      </div>
+
+      <h2>The Proximate Set and the Arithmetic That Catches Bad Reports</h2>
+      <div class="prose">
+        <p>
+          Nearly every charcoal COA rests on four numbers, and they are not independent. Fixed carbon
+          is <strong>calculated by difference</strong>:
+        </p>
+      </div>
+      <div class="callout">
+        <span class="callout-title">The identity every report must satisfy</span>
+        <p>
+          Moisture + ash + volatile matter + fixed carbon = 100%, on the stated basis. Fixed carbon =
+          100 − moisture − ash − volatile matter. If a report presents fixed carbon as directly
+          measured, ask how.
+        </p>
+      </div>
+      <div class="prose">
+        <p>
+          This is the cheapest audit a buyer has. Add the four figures. A sum of 103 means mixed
+          bases or a wrong number; a sum of 95 means something is missing, often unconverted
+          moisture. Rounding explains tenths, not several points.
+        </p>
+        <p>
+          Weaker reports fail in a second way. Fixed carbon is a residual, so it inherits every
+          error in the other three: a laboratory that overstates volatile matter by a point
+          understates fixed carbon by a point and still sums to 100. Consistency is not accuracy.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Field</th><th>What it measures</th><th>Method family</th><th>What it cannot tell you</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Moisture</td><td>Water removed under a defined drying regime</td><td>ASTM D3173, ISO 18134</td><td>Ignition speed, or pickup in transit</td></tr>
+            <tr><td>Ash</td><td>Inorganic residue after controlled combustion</td><td>ASTM D3174, ISO 18122</td><td>Ash composition or melting behaviour</td></tr>
+            <tr><td>Volatile matter</td><td>Fraction released as gas on heating</td><td>ASTM D3175, ISO 18123</td><td>Odour chemistry on its own</td></tr>
+            <tr><td>Fixed carbon</td><td>Carbon residue, calculated by difference</td><td>ASTM D3172 practice</td><td>Burn time — it is a calculation</td></tr>
+            <tr><td>Calorific value</td><td>Heat released in a bomb calorimeter</td><td>ASTM D5865, ISO 18125</td><td>Usable heat in a bowl</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Method assignments follow the
+        <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">methodology pages</a>. A
+        report without method and basis cannot be compared with anything.
+      </p>
+
+      <h2>Method Families: ASTM, ISO, GB/T and EN</h2>
+      <div class="prose">
+        <p>
+          Four families appear on charcoal paperwork, and they were not written for the same product.
+        </p>
+        <ul>
+          <li>
+            <strong>ASTM D1762</strong> covers <em>wood</em> charcoal. Coconut shell is not wood, so
+            applying it is an analogy — common and workable, but the report should say so.
+          </li>
+          <li>
+            <strong>ASTM D3172–D3175</strong> is the coal and coke proximate family: D3173 moisture,
+            D3174 ash, D3175 volatile matter. Familiar apparatus, familiar arithmetic.
+          </li>
+          <li>
+            <strong>ISO 18122 / 18123 / 18125 / 18134</strong> were written for solid biofuels — ash,
+            volatile matter, calorific value, moisture — and map closely onto a briquette. ISO 17828
+            covers bulk density, ISO 17831-1 mechanical durability.
+          </li>
+          <li>
+            <strong>GB/T 12496</strong> is the Chinese family for wooden <em>activated carbon</em>.
+            It appears on coconut-shell paperwork because that industry is built around activated
+            carbon; a hookah briquette report citing 12496.3 used an activated-carbon method on a
+            fuel product.
+          </li>
+          <li>
+            <strong>EN 1860-2</strong> is the European product standard for barbecue charcoal and
+            briquettes — closer to a BBQ specification than a generic laboratory method.
+          </li>
+        </ul>
+        <p>
+          Furnace temperature, heating rate, hold time, sample mass and crucible differ between
+          methods, and each changes the number: two reports on the same material can differ by a
+          point or more in ash because one laboratory used a coal method and the other a biofuel
+          method. Results are comparable only within the same method, edition and basis. The
+          <a href={`${SITES.knowledge}/knowledge/how-to-read-a-chinese-charcoal-test-report/`} target="_blank" rel="noopener">guide to Chinese test reports</a>
+          sets out the GB/T part numbering.
+        </p>
+      </div>
+
+      <h2>The Reporting Basis Changes the Number</h2>
+      <div class="prose">
+        <p>
+          The same measurement, reported on a different basis, is a different number:
+          <strong>as-received</strong> includes the sample’s moisture; <strong>dry</strong> divides
+          everything by the dry mass; <strong>dry ash-free</strong> also removes ash, leaving the
+          combustible fraction.
+        </p>
+        <p>
+          Conversion is arithmetic, not a new test. Below is one worked example — illustrative, not a
+          supplier’s certificate.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Component</th><th>As-received</th><th>Dry basis</th><th>Dry ash-free</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Moisture</td><td>6.00%</td><td>0.00%</td><td>0.00%</td></tr>
+            <tr><td>Ash</td><td>3.00%</td><td>3.19%</td><td>0.00%</td></tr>
+            <tr><td>Volatile matter</td><td>11.00%</td><td>11.70%</td><td>12.09%</td></tr>
+            <tr><td>Fixed carbon</td><td>80.00%</td><td>85.11%</td><td>87.91%</td></tr>
+            <tr><td>Total</td><td>100.00%</td><td>100.00%</td><td>100.00%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Dry = as-received ÷ (1 − M/100); dry ash-free = dry ÷ (1 − A/100).
+      </p>
+      <div class="prose">
+        <p>
+          Read the fixed carbon row again: one material is 80%, 85% or 88% depending on the basis
+          chosen. Two suppliers quoting “80%” and “88%” may be selling the same cube. This is the
+          most common false comparison in charcoal sourcing, and it is rarely dishonest — each seller
+          reports the basis their laboratory uses.
+        </p>
+        <p>
+          Ash moves the other way, which is why sellers prefer as-received for ash and dry ash-free
+          for carbon. At 10% moisture an as-received 3.00% becomes 3.33% dry, so a humid season can
+          improve the ash figure without any change in the material.
+        </p>
+        <p>
+          Contract language follows: state the basis and the moisture at which it is defined. “Ash ≤
+          3.0%, dry basis, at 6% as-received moisture” is enforceable; “ash ≤ 3.0%” is an argument
+          waiting to happen. The
+          <a href={`${SITES.data}/explain/test-basis-matters/`} target="_blank" rel="noopener">basis explainer</a>
+          works a second example.
+        </p>
+      </div>
+
+      <h2>Sampling: Where Most Certificates Break</h2>
+      <div class="prose">
+        <p>
+          Laboratories are usually the strongest link. Sampling is usually the weakest. Five
+          handovers can each break traceability:
+        </p>
+        <ol>
+          <li><strong>Lot to increments.</strong> A scoop from the top of a pallet is not a sample of the pallet. Fines migrate down, larger pieces rise, moisture moves to the cooler surface.</li>
+          <li><strong>Increments to gross sample.</strong> Combine in a stated ratio and reduce with a riffle splitter rather than by scooping.</li>
+          <li><strong>Gross to laboratory sample.</strong> Reduction must preserve the particle-size distribution; over-grinding loses moisture before weighing.</li>
+          <li><strong>Transport and storage.</strong> Charcoal is hygroscopic. A paper bag in a warm vehicle tests the journey, not the lot.</li>
+          <li><strong>Laboratory sample to result.</strong> The report must carry the sample ID that appears on the sampling record and the packing list.</li>
+        </ol>
+        <p>
+          No universally applied charcoal sampling standard exists, so the plan is contractual:
+          increments, positions, minimum mass, container, holding time. “Representative sample”
+          states nothing. Weigh moisture samples sealed at receipt, so loss before weighing is
+          visible rather than absorbed into the figure.
+        </p>
+        <p>
+          A perfect report on a seller-chosen sample shows the seller can produce one good sample,
+          not that the next container will match it. A pre-shipment inspection closes that gap:
+          sample drawn from the load after packing, lot photographed with the container number
+          visible, as in the
+          <a href={`${SITES.knowledge}/knowledge/pre-shipment-inspection-charcoal/`} target="_blank" rel="noopener">inspection guide</a>.
+        </p>
+      </div>
+
+      <h2>Reading Each Metric — and the Claims Built on It</h2>
+      <div class="prose">
+        <p>
+          Beyond the proximate four, a datasheet carries physical and performance figures, each
+          answering a narrow question and routinely asked a wider one.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>What it decides</th><th>Where it stops being useful</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Bulk density</td><td>Tonnes per container, freight per tonne</td><td>Silent on burn; fill method changes the figure</td></tr>
+            <tr><td>Particle density</td><td>Fuel mass per piece at a size</td><td>Confused with bulk density on most datasheets</td></tr>
+            <tr><td>Piece mass</td><td>Pieces per kilogram, press consistency</td><td>Water adds mass — read beside moisture</td></tr>
+            <tr><td>Durability / breakage</td><td>Fines generated in transit</td><td>Drum and drop methods are not interchangeable</td></tr>
+            <tr><td>Size tolerance</td><td>Bowl fit, count per box</td><td>A nominal size is a die dimension, not a tolerance</td></tr>
+            <tr><td>Calorific value</td><td>Energy per kilogram on a stated basis</td><td>Gross and net differ; bases differ more</td></tr>
+            <tr><td>Burning time</td><td>Session length under a protocol</td><td>No universal standard — the protocol is the result</td></tr>
+            <tr><td>Odour / emissions</td><td>Perceived quality, compliance questions</td><td>Odour has no instrument; emissions depend on the appliance</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          <strong>Calorific value</strong> is quoted gross or net, and gross is always higher, so a
+          GCV figure against an NCV expectation overstates by a few percent without saying anything
+          false.
+        </p>
+        <p>
+          <strong>Moisture</strong> matters less for energy than most buyers assume: each point
+          removes roughly 0.024&nbsp;MJ/kg, under a tenth of a percent of a ~30&nbsp;MJ/kg fuel
+          <span class="badge badge-muted">Industry reference</span>. Its real cost is freight on
+          water, slower ignition, start-up smoke and mould risk in a warm container.
+        </p>
+        <p>
+          <strong>Burning time</strong> is the most quoted and least standardised figure in hookah
+          charcoal. No ISO or ASTM method defines “a session”; ISO 19867-1 was written for
+          cookstoves. A burn-time number needs its conditions — cube mass, bowl, ignition source,
+          airflow, ambient conditions and endpoint. Time to first ash, time to grey ash and time
+          until the bowl is unusable are different measurements, and “up to 120 minutes” is a
+          favourable ceiling.
+        </p>
+        <p>
+          Run the comparison yourself: same bowl, mass, igniter and room, three cubes per product,
+          blind if possible. Compare medians and ranges; if they overlap, the products are not
+          distinguishable at your sample size. The
+          <a href={`${SITES.testing}/tests/burning-time/`} target="_blank" rel="noopener">burn-time method</a>
+          and the
+          <a href={`${SITES.knowledge}/knowledge/charcoal-odor-and-ignition/`} target="_blank" rel="noopener">odour and ignition guide</a>
+          cover the variables.
+        </p>
+      </div>
+
+      <h2>Laboratory Identity and Accreditation</h2>
+      <div class="prose">
+        <p>
+          Two credentials matter, and they are different. <strong>ISO/IEC 17025</strong> is the
+          international standard for testing laboratory competence, accredited by a national body —
+          CNAS in China, UKAS in the UK, A2LA or IAS in the US. <strong>CMA</strong> (检验检测机构资质认定)
+          is the Chinese statutory credential for issuing test data for official purposes.
+        </p>
+        <p>
+          Accreditation is granted to a <em>scope</em>. A laboratory can be accredited for ash and
+          not for emissions, or for coal and not for solid biofuel. Ask not “are you accredited?” but
+          “is this test inside your accredited scope, and what is the scope number?”
+        </p>
+        <p>
+          Verify the laboratory through the accreditation body’s public directory, not the phone
+          number printed on the report. A forged letterhead is easy; a forged directory entry is not.
+          A complete report carries a unique number and page count, the laboratory’s legal name and
+          address with its accreditation mark, the sample ID and dates received and tested, the
+          method with edition and the basis, results with units and uncertainty where required, the
+          “sample as received” statement, and a signature or seal.
+        </p>
+        <p>
+          That disclaimer defines what the document proves. It is why the sampling record matters as
+          much as the laboratory.
+        </p>
+      </div>
+
+      <h2>Twelve Red Flags in a COA</h2>
+      <div class="prose">
+        <p>None is proof of fraud. Each is a reason to ask before paying for a container.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Flag</th><th>Why it matters</th><th>What to ask</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>No method or edition</td><td>The number is not reproducible</td><td>Which standard, which year?</td></tr>
+            <tr><td>No reporting basis</td><td>Ash and carbon can move several points</td><td>As-received, dry or dry ash-free?</td></tr>
+            <tr><td>Proximate does not sum to 100</td><td>Mixed basis or a wrong number</td><td>Send the full four-component table</td></tr>
+            <tr><td>“Typical” in a result column</td><td>A typical is not a lot result</td><td>What was measured in this batch?</td></tr>
+            <tr><td>No sample ID or date received</td><td>Result cannot be tied to goods</td><td>Sample ID and packing list reference</td></tr>
+            <tr><td>Report predates production</td><td>It describes a different lot</td><td>Report date against production date</td></tr>
+            <tr><td>No laboratory address</td><td>Identity cannot be verified</td><td>Full legal name and address</td></tr>
+            <tr><td>Same report number, several products</td><td>A template, not a test</td><td>One report per lot, unique numbers</td></tr>
+            <tr><td>Test outside the lab’s scope</td><td>Unaccredited result presented as accredited</td><td>Scope number and the test’s listing</td></tr>
+            <tr><td>Photocopy of a photocopy</td><td>Alteration cannot be detected</td><td>Original or laboratory-verified PDF</td></tr>
+            <tr><td>ISO 9001 instead of a report</td><td>A system certificate is not product data</td><td>The batch test report, separately</td></tr>
+            <tr><td>Only page one of several</td><td>Tables and signatures sit on later pages</td><td>Complete document, all pages</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>What You Can Verify Without a Laboratory</h2>
+      <div class="prose">
+        <p>
+          Most buyers cannot run a proximate analysis and need not. Field checks will not produce a
+          certificate, but they tell you whether one is plausible.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Check</th><th>How to run it</th><th>What it means</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dimension</td><td>Caliper ten cubes across three axes; record min, max, mean</td><td>Whether the tolerance is real and the die is drifting</td></tr>
+            <tr><td>Piece mass</td><td>Weigh the same ten cubes on a 0.1&nbsp;g scale</td><td>Press consistency; read beside moisture</td></tr>
+            <tr><td>Drop resistance</td><td>Drop five cubes 1&nbsp;m onto concrete, three times each</td><td>A house ranking, not an ASTM D440 result</td></tr>
+            <tr><td>Moisture, indicative</td><td>Weigh, dry at 105&nbsp;°C to stable mass, reweigh</td><td>The oven principle without the controls — indicative only</td></tr>
+            <tr><td>Burn protocol</td><td>Fixed bowl, mass and igniter; three runs, blind</td><td>A comparative result you own, not a spec figure</td></tr>
+            <tr><td>Residue</td><td>Burn a known mass in a steel pan, weigh the remainder</td><td>Ranks samples only; unburnt carbon and fly ash distort it</td></tr>
+            <tr><td>Odour</td><td>Blind panel of three, at lighting and after ten minutes</td><td>Catches solvent notes a datasheet will not mention</td></tr>
+            <tr><td>Packaging</td><td>Seal integrity, barrier, count, fines in the box</td><td>Predicts arrival better than any lab figure</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Field checks are screening tools, not acceptance criteria. They do not replace a method-based
+        result.
+      </p>
+      <div class="prose">
+        <p>
+          Run dimension and mass first — objective and fast; moisture next, because it explains
+          mass; burn and odour last, because they need time and a controlled room. Photograph and
+          date everything: a folder of measurements across three shipments beats any single
+          certificate.
+        </p>
+        <p>
+          The limit is plain: these checks catch gross problems — a wrong size class, crumbling
+          cubes, a solvent smell, soft cartons. They will not resolve a 0.5-point ash dispute; that
+          needs a laboratory and a retained sample.
+        </p>
+      </div>
+
+      <h2>Putting Testing Into the Purchase Order</h2>
+      <div class="prose">
+        <p>
+          Testing becomes leverage only when it is written into the order. A workable annex has eight
+          elements; any missing one turns a term into a conversation.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Element</th><th>What it must state</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Parameter</td><td>The property, unambiguously — ash content, not “quality”</td></tr>
+            <tr><td>Limit</td><td>Maximum, minimum or range, with the unit</td></tr>
+            <tr><td>Method</td><td>Designation and edition, e.g. ISO 18122:2022</td></tr>
+            <tr><td>Basis</td><td>As-received, dry or dry ash-free, and the defining moisture</td></tr>
+            <tr><td>Sampling</td><td>Who draws it, when, how many increments, where in the load</td></tr>
+            <tr><td>Laboratory</td><td>Named laboratory, or a list both parties accept</td></tr>
+            <tr><td>Timing</td><td>Test after production, report before loading</td></tr>
+            <tr><td>Remedy</td><td>Retest, adjustment, rework, replacement or rejection — and who pays</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Assembled, it reads: “Ash ≤ 3.5% by ISO 18122, dry basis at 6.0% as-received moisture;
+          sample drawn by the buyer’s agent from five positions after packing; tested at an ISO/IEC
+          17025-accredited laboratory; report before loading; above 4.0% the buyer may reject at the
+          seller’s cost.” That is enforceable. “Low ash, as per sample” is not.
+        </p>
+        <p>
+          Two supporting terms are worth the ink: retain a sealed duplicate held by a third party, so
+          a dispute can be retested rather than argued; and name the arbitration route in advance —
+          second laboratory, defined method, rule for which result stands. Quality disputes are
+          usually sampling disputes, and a duplicate settles them.
+        </p>
+        <p>
+          Do not accept “certificate at destination” as the only gate: a report issued after the
+          container sails gives you a claim, not a decision.
+        </p>
+      </div>
+
+      <h2>The COA Request Template</h2>
+      <div class="prose">
+        <p>Send this as a table. A supplier who can answer it has a process.</p>
+        <ol>
+          <li>Report number, issue date, laboratory legal name and address.</li>
+          <li>Accreditation body, number, and the scope entry covering each test.</li>
+          <li>Sample ID, the lot it represents, and the date drawn.</li>
+          <li>Who drew it, from how many positions, and from which part of the load.</li>
+          <li>Production date and the quantity the lot represents.</li>
+          <li>Each parameter with result, unit, and method including edition.</li>
+          <li>Reporting basis, and the moisture at which it is defined.</li>
+          <li>The full proximate set, so the four components can be checked against 100%.</li>
+          <li>Measurement uncertainty where the method requires it, and any “typical” or range flagged as such.</li>
+          <li>Whether the sample was client-submitted, quoted verbatim, and where the duplicate is held.</li>
+        </ol>
+        <p>
+          If a field cannot be supplied, “data pending” is a valid answer. A plausible-looking figure
+          nobody can trace is worse than a gap, because it removes the question from the table. Our
+          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">product records</a>
+          follow the same rule: fields carry a status, and unverified values are labelled rather than
+          filled.
+        </p>
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
+      </div>
+
+      <h2>Standards and References</h2>
+      <div class="prose">
+        <p>
+          Methods are cited by designation and edition. Obtain the current edition from the issuing
+          body and confirm the edition printed on any report.
+        </p>
+        <ul>
+          <li><strong>ASTM D1762</strong> — Chemical Analysis of Wood Charcoal. ASTM International.</li>
+          <li><strong>ASTM D3172 / D3173 / D3174 / D3175</strong> — proximate analysis practice, moisture, ash and volatile matter for coal and coke. ASTM International.</li>
+          <li><strong>ASTM D5865</strong> — Gross Calorific Value of Coal and Coke. ASTM International.</li>
+          <li><strong>ASTM D440</strong> — Drop Shatter Test for Coal. ASTM International.</li>
+          <li><strong>ISO 18122 / 18123 / 18125 / 18134</strong> — Solid biofuels: ash, volatile matter, calorific value and moisture. ISO.</li>
+          <li><strong>ISO 17828 / 17831-1</strong> — Solid biofuels: bulk density and mechanical durability. ISO.</li>
+          <li><strong>ISO 19867-1</strong> — Clean cookstoves: harmonised laboratory test protocols. ISO.</li>
+          <li><strong>ISO/IEC 17025</strong> — Competence of testing and calibration laboratories. ISO and IEC.</li>
+          <li><strong>GB/T 12496 (series)</strong> — Test methods of wooden activated carbon. Standardization Administration of China.</li>
+          <li><strong>EN 1860-2</strong> — Barbecue charcoal and barbecue charcoal briquettes. European Committee for Standardization.</li>
+          <li><strong>UN 1361</strong> — Carbon, animal or vegetable origin. UN Model Regulations; Class 4.2 in the IMDG Code.</li>
+        </ul>
+        <p>
+          Internal reference: the
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">test methodology index</a>
+          covers all twelve parameters.
+        </p>
+      </div>
+
+      <div class="prose">
+        <p>
+          If you are choosing a product, start with the
+          <a href="/products/coconut-shell-charcoal/">coconut shell charcoal page</a>. If you are
+          writing a specification, the
+          <a href="/coconut-shell-charcoal-guide/">coconut shell buyer’s guide</a> sets out the field
+          set and size classes, and the
+          <a href="/hookah-charcoal-manufacturing/">manufacturing guide</a> explains which production
+          stage fixes each property.
+        </p>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:1.5rem;">
+        <a class="card" href="/testing/">
+          <h3>Testing approach <span class="badge badge-muted">main</span></h3>
+          <p>How each data source is labelled.</p>
+        </a>
+        <a class="card" href={`${SITES.testing}/reports/`} target="_blank" rel="noopener">
+          <h3>Reports database <span class="badge badge-muted">testing</span></h3>
+          <p>What a published report must contain.</p>
+        </a>
+        <a class="card" href={`${SITES.data}/explain/how-specs-are-measured/`} target="_blank" rel="noopener">
+          <h3>How specs are measured <span class="badge badge-muted">data</span></h3>
+          <p>The measurement basis behind each product field.</p>
+        </a>
+        <a class="card" href={`${SITES.manufacturer}/verification/`} target="_blank" rel="noopener">
+          <h3>Supplier verification <span class="badge badge-muted">manufacturer</span></h3>
+          <p>What a profile proves — and does not.</p>
+        </a>
+        <a class="card" href="/private-label/">
+          <h3>Private label <span class="badge badge-muted">service</span></h3>
+          <p>Sample gates and artwork approval.</p>
+        </a>
+        <a class="card" href="/request-quote/">
+          <h3>Request a quote</h3>
+          <p>Size, volume, packaging, destination.</p>
+        </a>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Test the lot, not the brochure.</h2>
+        <p>Send the specification, volume and destination port; we will confirm what can be declared, what needs a batch report, and what stays pending.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+        <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
