@@ -1,0 +1,586 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/private-label-oem-charcoal-guide/`;
+
+const faqs = [
+  {
+    q: 'Is private label the same as OEM?',
+    a: 'Not quite. Private label puts your brand on a product the supplier already makes; OEM means it is manufactured to your specification, branded or not. Most projects are both: a standard cube in your printed box, with a specification and inspection plan.',
+  },
+  {
+    q: 'What is the minimum order for private label charcoal?',
+    a: 'There is no industry-wide figure. Two minimums stack — the smallest charcoal run the factory will schedule, and the smallest print run the converter will produce. Public listings commonly describe roughly one tonne for stock packaging and a full 20 ft container once boxes are printed. The binding number is in your quotation.',
+  },
+  {
+    q: 'Can I supply my own printed packaging?',
+    a: 'It is possible, and it moves responsibility. If you supply the boxes, you own the print risk, the board grade and the delivery date. Ask who inspects incoming packaging, who pays for a line stoppage, and what happens if the boxes arrive late or short.',
+  },
+  {
+    q: 'Who owns the artwork and the printing plates?',
+    a: 'The brand owner normally owns the artwork, but plate ownership is a commercial term. Write down whether the printer retains the plates, who pays for storage, how long they are kept, and what remaking them costs.',
+  },
+  {
+    q: 'The printed box colour does not match my brand. What should the contract say?',
+    a: 'A colour standard and a numeric tolerance. Name the reference — a Pantone spot colour or a signed press sheet — and agree a Delta E range, because board absorbs ink differently from coated paper. Also name who bears a reprint if the proof is missed.',
+  },
+  {
+    q: 'Can the box say “smokeless” or “eco-friendly”?',
+    a: 'Only if you can support it in the destination market. Charcoal produces smoke; “smokeless” is a claim a competitor can test, and “eco-friendly” is vague and increasingly scrutinised. Write only claims you can evidence.',
+  },
+];
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Private Label and OEM Charcoal', url: canonical },
+  ]),
+  articleJsonLd({
+    id: canonical,
+    headline: 'Private Label and OEM Charcoal: From Specification to Shipment',
+    description:
+      'How private label and OEM charcoal orders run — specification, artwork, sampling, MOQ, packaging, labelling, inspection and export documents.',
+    datePublished: '2026-11-15',
+    dateModified: '2026-11-15',
+  }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Private Label & OEM Charcoal: Specification to Shipment"
+  description="How private label and OEM charcoal orders run — specification, artwork, sampling, MOQ, packaging, labelling, inspection and export documents."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Private Label and OEM Charcoal', url: '/private-label-oem-charcoal-guide/' },
+  ]}
+>
+  <div class="page-title-split container">
+    <div>
+      <h1>Private Label and OEM Charcoal: From Specification to Shipment</h1>
+      <p class="lede">
+        A private label order is not a product you buy; it is a specification, a print run and a
+        document trail that have to agree. This guide covers what to write down, what the artwork
+        gate decides, why two minimums stack, where labels become legal, and which records settle a
+        dispute.
+      </p>
+      <p class="quote-note">
+        We quote per specification and volume, not from a catalogue.
+        <a href="/request-quote/">Start a private label quote →</a>
+      </p>
+    </div>
+    <div class="page-title-media">
+      <img src="/images/private-label.webp" alt="Charcoal briquette cubes beside kraft retail boxes with blank label panels on a workbench — conceptual illustration" width="1600" height="900" loading="lazy" />
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout">
+        <span class="callout-title">How to read the evidence labels</span>
+        <p>
+          <span class="badge badge-muted">Industry reference</span> means a range reported in public
+          trade sources, not a commitment from any factory. <span class="badge badge-muted">Supplier-declared</span>
+          means a figure a supplier publishes about its own product.
+          <span class="badge badge-accent">Data pending</span> means no figure is published, and none
+          is invented here.
+        </p>
+      </div>
+
+      <h2>What a Private Label Order Actually Buys</h2>
+      <div class="prose">
+        <p>
+          In most private label projects the charcoal is the same coconut shell cube the factory
+          already sells — same shell, carbonisation and press. What changes is everything around it:
+          the specification is written down, the packaging carries your brand, the order justifies a
+          print run, and responsibility for what the box says moves to you.
+        </p>
+        <p>You buy four things:</p>
+        <ul>
+          <li><strong>Specification control</strong> — a written target for size, moisture, ash and packing, with a method and basis attached.</li>
+          <li><strong>A print run</strong> — boxes and cartons to your artwork, with print's minimum and lead time.</li>
+          <li><strong>A document trail</strong> — sample approvals, inspection records and shipping documents.</li>
+          <li><strong>Brand liability</strong> — the label is your legal face in the destination market.</li>
+        </ul>
+        <p>
+          A buyer who reads private label as “a better grade of charcoal” negotiates the wrong
+          variable and is surprised by the print minimum. One who reads it as a packaging project
+          budgets for proofs and gets a repeatable product.
+        </p>
+        <p>Four arrangements get confused:</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Arrangement</th><th>Who specifies</th><th>Whose brand</th><th>What you buy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>White label</td><td>Supplier</td><td>Yours, on a stock SKU</td><td>A label on an existing product</td></tr>
+            <tr><td>Private label</td><td>Supplier, with your packaging</td><td>Yours</td><td>Brand plus a packaging spec</td></tr>
+            <tr><td>OEM</td><td>You, within process capability</td><td>Yours or none</td><td>A custom run to your specification</td></tr>
+            <tr><td>ODM</td><td>Supplier designs, you approve</td><td>Yours</td><td>A supplier-developed product you adopt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Most projects sit between the two: standard product, your size, moisture target, pack and
+          label. The <a href="/private-label/">private label page</a> covers the commercial workflow;
+          the <a href="/oem/">OEM page</a> covers custom specification.
+        </p>
+      </div>
+
+      <h2>What the Specification Can — and Cannot — Fix</h2>
+      <div class="prose">
+        <p>
+          A specification is a set of promises the process can keep, not an upgrade to the raw
+          material: a briquette pressed from low-density, high-ash char will not test like a premium
+          cube because the order says “premium”. Shell source, carbonisation yield and press density
+          were fixed before your order entered the schedule.
+        </p>
+        <p>What it can do is narrow the variation of a capable process and make the result checkable. Three limits are worth understanding first:</p>
+        <ul>
+          <li><strong>Tolerances have a floor.</strong> A die wears, so ±0.2&nbsp;mm on a 25&nbsp;mm cube is achievable on a fresh die and arguable after a long campaign. Ask what the factory holds across a run, not what the drawing says.</li>
+          <li><strong>Some properties are calculated.</strong> Fixed carbon is the remainder after moisture, ash and volatile matter; a target on it is a target on the other three plus arithmetic.</li>
+          <li><strong>Performance depends on the test.</strong> Burn time has no universal standard — bowl, cube mass, igniter and endpoint define the result.</li>
+        </ul>
+        <p>
+          The failure pattern is specifications written as adjectives. “Premium quality, low ash,
+          long burning, smokeless” cannot be inspected, so nothing can be rejected against it.
+        </p>
+      </div>
+
+      <h2>The Specification Sheet Is the Product</h2>
+      <div class="prose">
+        <p>
+          A workable specification fits on one page: nine product fields, a second page for
+          packaging. Write the value, method and basis for each — and mark anything unknown as
+          pending rather than filling it with a plausible number.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Field</th><th>What to write</th><th>What breaks when it is vague</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Base material</td><td>Coconut shell, bamboo or blended; briquette or lump</td><td>“Charcoal” lets a substitution pass</td></tr>
+            <tr><td>Form and nominal size</td><td>Cube or flat, nominal dimension in mm</td><td>A nominal size is a die dimension, not a tolerance</td></tr>
+            <tr><td>Size tolerance</td><td>Allowed deviation per axis on a stated sample</td><td>Bowl fit and count per box drift</td></tr>
+            <tr><td>Piece mass</td><td>Target with a range, at a stated moisture</td><td>Water adds mass; the target becomes unenforceable</td></tr>
+            <tr><td>Moisture</td><td>Maximum %, method, as-received</td><td>Freight on water, slow ignition, mould risk</td></tr>
+            <tr><td>Ash</td><td>Maximum %, dry basis, at a defined moisture</td><td>The same material reads points apart on different bases</td></tr>
+            <tr><td>Fixed carbon</td><td>Minimum %, stated as calculated by difference</td><td>Presented as measured, it hides errors in the other three</td></tr>
+            <tr><td>Volatile matter</td><td>Maximum %, method and edition</td><td>Ignition behaviour and smoke are decided here</td></tr>
+            <tr><td>Burn protocol</td><td>Bowl, cube mass, igniter, airflow, endpoint</td><td>“Long burning” becomes an opinion</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Method families and reporting bases: <a href="/charcoal-testing-coa-guide/">testing and COA guide</a>.
+        Field set: <a href={`${SITES.data}/specifications/`} target="_blank" rel="noopener">specification records</a>.
+      </p>
+      <div class="prose">
+        <p>
+          Give every field a status — confirmed, supplier-declared or pending — so a gap is a
+          question for the next call, not a number to guess. Keep the unit and basis in the same cell
+          as the value: “ash ≤ 3.0%, dry basis, at 6.0% as-received moisture” survives a dispute;
+          “ash ≤ 3.0%” becomes one.
+        </p>
+      </div>
+
+      <h2>Artwork: The Gate Most Projects Underestimate</h2>
+      <div class="prose">
+        <p>
+          Artwork turns a brand project into a manufacturing project. The file that looks right on
+          screen is not what a converter can print: it needs a die line, bleed, a safe area for text
+          and a barcode that scans at printed size. Ask for the dieline before the designer starts —
+          building on a guessed template causes most second proof rounds, and every round resets the
+          clock.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Element</th><th>What to confirm</th><th>Why prepress checks it</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dieline and bleed</td><td>Converter's current template; bleed on trimmed edges</td><td>Artwork on last year's die shifts on the fold</td></tr>
+            <tr><td>Safe area</td><td>Text and logos clear of trim and glue flaps</td><td>Copy clipped by a fold is a reprint</td></tr>
+            <tr><td>Barcode</td><td>Your GS1 prefix, correct symbology, scanner minimum size</td><td>A factory barcode on your brand is a retail rejection</td></tr>
+            <tr><td>Batch code window</td><td>Blank area the inkjet can print into</td><td>Lot codes must be legible for traceability</td></tr>
+            <tr><td>Net weight and count</td><td>Metric unit, and count if sold by piece</td><td>Short-fill claims start with the printed figure</td></tr>
+            <tr><td>Importer block</td><td>Legal name and address of the responsible operator</td><td>Missing details block Customs or listing</td></tr>
+            <tr><td>Language panels</td><td>Every language the market requires, correct panel</td><td>Sticker workarounds carry their own cost</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Then agree the proof. A PDF proves layout only; a contract proof proves colour on a
+          calibrated device; a press proof shows how ink behaves on the board. For a brand colour,
+          name a Pantone reference and a numeric tolerance rather than “match the logo”.
+        </p>
+        <p>
+          Ownership is a separate clause: the brand owner usually owns the artwork, while plates and
+          print files may sit with the printer. Write down who holds them, for how long, and what a
+          reorder costs if they are gone.
+        </p>
+      </div>
+
+      <h2>Sampling: Three Samples, Three Jobs</h2>
+      <div class="prose">
+        <p>
+          “The sample” is shorthand for three different objects, and projects get into trouble when
+          one is used to settle a question another was meant to answer.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Sample</th><th>Question it answers</th><th>Who keeps it</th><th>What it commits</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Development</td><td>Is this the right product, size and grade?</td><td>Buyer</td><td>Nothing — a shortlist tool</td></tr>
+            <tr><td>Golden / approval</td><td>Is this exactly what we will accept?</td><td>Both, signed, dated, sealed</td><td>The production target</td></tr>
+            <tr><td>Production</td><td>Did the run match the golden sample?</td><td>Buyer, plus a retained duplicate</td><td>The acceptance decision</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          The golden sample is the one that matters legally. Draw it from a real run, not a bench
+          sample finished more carefully than a tonne of cubes. Sign, date and seal it, keep
+          one with each party, and photograph it beside a ruler and a scale so the record survives the
+          sample.
+        </p>
+        <p>
+          Compare the production sample on objective fields first — dimension, mass, count, print —
+          and on moisture and burn only with the protocol you wrote. A comparison that starts with
+          “these look different” ends in a negotiation; one that starts with caliper readings ends in
+          a number.
+        </p>
+        <p>
+          Sampling is also where you decide whether the product deserves print. A neutral box and a
+          sticker cost less than a print run and let you test with your own customers first; the
+          <a href={`${SITES.knowledge}/knowledge/private-label-charcoal/`} target="_blank" rel="noopener">private label article</a>
+          sets out that sequencing.
+        </p>
+      </div>
+
+      <h2>MOQ: Two Minimums Stacked</h2>
+      <div class="prose">
+        <p>Private label MOQ is not one number. At least three minimums can apply, and the highest governs:</p>
+        <ul>
+          <li><strong>The charcoal run</strong> — the smallest batch the factory will schedule and dry without disrupting its line.</li>
+          <li><strong>The print run</strong> — the smallest number of boxes or labels the converter will produce before setup dominates.</li>
+          <li><strong>The board minimum</strong> — corrugators often quote a minimum area or tonnage that exceeds the box count you need.</li>
+        </ul>
+        <p>
+          Public supplier listings commonly describe roughly one tonne for stock packaging and a full
+          20 ft container once boxes are printed
+          <span class="badge badge-muted">Industry reference</span>. Treat those as patterns: the
+          binding figure is in your quotation and moves with box size, board grade, print colours and
+          the factory's schedule.
+        </p>
+        <p>
+          Container arithmetic explains part of the jump. Retail boxes cube out before they weigh out,
+          so a printed pack loads fewer tonnes than bulk bags. Indicative figures for coconut shell
+          hookah charcoal are about 14.4 tonnes in a 20 ft container and 23.4 tonnes in a 40 ft
+          high-cube <span class="badge badge-muted">Industry reference</span>; the
+          <a href={`${SITES.knowledge}/knowledge/charcoal-container-loading/`} target="_blank" rel="noopener">container loading guide</a>
+          covers the variables.
+        </p>
+        <p>
+          If the print minimum is out of reach, start cheaper: a stock box with a printed label, a
+          neutral box with a sticker, or a mixed container combining your SKU with stock product.
+          Each defers the print commitment until the product is proven. The
+          <a href={`${SITES.knowledge}/knowledge/coconut-charcoal-moq/`} target="_blank" rel="noopener">MOQ explainer</a>
+          covers the economics.
+        </p>
+      </div>
+
+      <h2>Packaging: Moisture, Compression and Palletisation</h2>
+      <div class="prose">
+        <p>
+          Charcoal is hygroscopic. It takes moisture from humid air, adding dead weight, slowing
+          ignition and leaving a retail box soft before the shelf. The packaging spec is a technical
+          document, not a graphics attachment.
+        </p>
+        <p>
+          Three decisions do most of the work. The <strong>inner barrier</strong> — a poly-lined bag
+          or moisture-resistant box — decides pickup between packing and sale. The <strong>board
+          grade</strong> decides whether the box survives stacking; edge crush and burst strength are
+          the two numbers converters quote, and they are not interchangeable. The <strong>pallet
+          pattern</strong> decides stability and how much container volume is board and air.
+        </p>
+        <p>
+          For export, solid wood pallets normally need ISPM 15 treatment and the IPPC mark; processed
+          board is treated differently. Ask what the pallet will be, not just the box — an unmarked
+          pallet can stop a load for a reason that has nothing to do with charcoal.
+        </p>
+        <p>
+          Shelf life follows from the same system. Public supplier listings commonly state 24 months
+          for sealed, dry storage <span class="badge badge-muted">Supplier-declared</span> — a
+          property of the packaging-and-storage combination, not the charcoal alone. See the
+          <a href={`${SITES.knowledge}/knowledge/charcoal-storage-and-shelf-life/`} target="_blank" rel="noopener">storage guide</a>
+          and the <a href="/packaging/">packaging page</a>.
+        </p>
+      </div>
+
+      <h2>The Label Is a Legal Document</h2>
+      <div class="prose">
+        <p>
+          Under your brand, the label stops being marketing and becomes the product's legal
+          description. The details vary by market; the categories do not.
+        </p>
+        <ul>
+          <li><strong>Responsible operator.</strong> In the EU, the General Product Safety Regulation (EU) 2023/988, applicable since 13 December 2024, expects a responsible operator established in the Union, with contact details on the pack. If you import, that is usually you.</li>
+          <li><strong>Country of origin.</strong> The United States requires imported goods to be marked with their country of origin; other markets have their own rules.</li>
+          <li><strong>Net weight and count.</strong> Metric units, with the count if sold by piece; short-fill rules attach to the printed figure.</li>
+          <li><strong>Batch or lot code.</strong> The link between a complaint and a run. Without it, traceability is not operable.</li>
+          <li><strong>Claims.</strong> “Natural”, “smokeless”, “eco-friendly”, “restaurant grade” and “long burning” each carry a different evidentiary burden.</li>
+        </ul>
+        <p>
+          Two threads need their own check. Wood charcoal sits in HS chapter 44 and appears on the EU
+          deforestation regulation's product list; a coconut-shell product is not wood, so whether it
+          is in scope is a question for your importer and counsel, not something to settle from a
+          blog. Environmental claims are policed in both markets — the FTC Green Guides in the United
+          States, consumer-protection rules in Europe — so a vague green claim is a liability printed
+          by the thousand.
+        </p>
+        <p>
+          None of this is legal advice. It is the list to take to the adviser who signs off your
+          artwork. The <a href="/compliance/">compliance notes</a> and the
+          <a href={`${SITES.knowledge}/knowledge/charcoal-import-certifications/`} target="_blank" rel="noopener">import certification guide</a>
+          cover the documents.
+        </p>
+      </div>
+
+      <h2>The Critical Path, and Where It Slips</h2>
+      <div class="prose">
+        <p>
+          A private label order has a longer critical path than a stock order because print sits in
+          front of production. The durations below are reported industry practice, not a schedule
+          for any factory <span class="badge badge-muted">Industry reference</span>.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Stage</th><th>Finished when</th><th>Typical</th><th>What restarts the clock</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Specification sign-off</td><td>Product, size, moisture, ash, packing agreed</td><td>1–3 weeks</td><td>A changed tolerance or new size</td></tr>
+            <tr><td>Artwork and dieline</td><td>Print-ready file on the converter's template</td><td>1–2 weeks</td><td>A new dieline or copy change</td></tr>
+            <tr><td>Proof approval</td><td>Signed proof and colour standard</td><td>3–10 days</td><td>Any revision after sign-off</td></tr>
+            <tr><td>Print and conversion</td><td>Printed board, cut and glued boxes</td><td>10–20 days</td><td>A board stock-out or plate remake</td></tr>
+            <tr><td>Charcoal production</td><td>Carbonised, pressed, dried cubes</td><td>10–20 days</td><td>A failed moisture or density check</td></tr>
+            <tr><td>Packing</td><td>Boxes filled, coded, cartoned</td><td>3–7 days</td><td>Late packaging or a labour gap</td></tr>
+            <tr><td>Inspection</td><td>Pre-shipment check and photos</td><td>1–3 days</td><td>A failed check and rework decision</td></tr>
+            <tr><td>Booking and loading</td><td>Space, DG acceptance, loading</td><td>1–3 weeks</td><td>Carrier rejection or missed cut-off</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Read it as a chain of approvals. Every stage waits on a signature, and the one that most
+          often arrives late is the proof. Treat the artwork approval date as day zero, and do not
+          let anyone quote a shipment date from the purchase order date.
+        </p>
+        <p>
+          Seasonality sits on top. Chinese New Year closes factories for a period that varies by
+          plant, and the weeks before it are the busiest of the year for production and vessel space.
+          Buffer is the print and booking tail nobody controls.
+        </p>
+      </div>
+
+      <h2>Inspection and the Retained Duplicate</h2>
+      <div class="prose">
+        <p>Three gates cover a run, and they get more expensive in this order:</p>
+        <ol>
+          <li><strong>Pre-production.</strong> Golden sample, approved proof and packaging in the factory's hands before the run. Most mismatches are set here.</li>
+          <li><strong>During production.</strong> Check the first cartons off the line, and check print against the proof while the press is set up.</li>
+          <li><strong>Pre-shipment.</strong> Sample the packed lot, not a display stack, and record it before the container closes.</li>
+        </ol>
+        <p>
+          Write the sampling scheme into the order. ISO 2859-1 is the usual family; lot size,
+          inspection level, AQL and the critical defect definition are your choices. For charcoal the
+          critical list is short: wrong size class, contamination, wet product, wrong artwork, missing
+          batch code, damaged packaging.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Pre-shipment check</th><th>Method</th><th>Record that makes it useful</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dimension</td><td>Caliper across three axes on a stated sample</td><td>Min, max and mean per axis</td></tr>
+            <tr><td>Piece mass</td><td>Scale to 0.1&nbsp;g on the same sample</td><td>Mass beside the moisture reading</td></tr>
+            <tr><td>Moisture</td><td>Method-based reading, or sealed sample for the lab</td><td>Sample ID and the date sealed</td></tr>
+            <tr><td>Breakage and fines</td><td>Open cartons from the middle of the load</td><td>Photo of the opened carton and sieve</td></tr>
+            <tr><td>Print and label</td><td>Compare against the signed proof, panel by panel</td><td>Legible photo beside the proof</td></tr>
+            <tr><td>Barcode</td><td>Scan at printed size, not on screen</td><td>Scan result and symbology</td></tr>
+            <tr><td>DG marks</td><td>UN 1361 marking and declaration against the booking</td><td>Photo of the marked carton or container</td></tr>
+            <tr><td>Pallet and loading</td><td>ISPM 15 mark, wrap, stowage</td><td>Container number visible in the loading photo</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Retain a sealed duplicate from the packed lot — one with the buyer, one with the factory,
+          or one with a third party. It costs a carton and settles the most common dispute in charcoal
+          importing: not fraud, but disagreement about which sample was tested. The
+          <a href={`${SITES.knowledge}/knowledge/pre-shipment-inspection-charcoal/`} target="_blank" rel="noopener">inspection checklist</a>
+          covers the sequence; the <a href="/charcoal-testing-coa-guide/">testing guide</a> explains
+          the sampling chain.
+        </p>
+      </div>
+
+      <h2>Documents, Dangerous Goods and the Shipment File</h2>
+      <div class="prose">
+        <p>
+          Charcoal is classified for transport as UN 1361, Class 4.2 — liable to spontaneous
+          combustion — and the classification follows the cargo, not the brand. A private label
+          shipment carries the same dangerous-goods obligations as a stock one, plus the documents
+          that name you as brand owner.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Document</th><th>Issuer</th><th>What it does</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Commercial invoice</td><td>Seller</td><td>Names goods, value, terms and parties for Customs</td></tr>
+            <tr><td>Packing list</td><td>Seller</td><td>Ties cartons and pallets to invoice lines</td></tr>
+            <tr><td>Bill of lading</td><td>Carrier</td><td>Transport contract and title document</td></tr>
+            <tr><td>Certificate of origin</td><td>Chamber or authority</td><td>Supports origin and preferential treatment</td></tr>
+            <tr><td>DG declaration</td><td>Shipper</td><td>Declares UN 1361, Class 4.2, packing and quantity</td></tr>
+            <tr><td>ISPM 15 mark</td><td>Registered pallet supplier</td><td>Shows solid wood packaging was treated</td></tr>
+            <tr><td>COA / test report</td><td>Seller or laboratory</td><td>Declares or measures the lot against the spec</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Incoterms 2020 decide who books, who clears and where risk passes, and the term needs a
+          named place. “FOB” alone is incomplete; “FOB Shanghai” is a position. Agree the term before
+          the quotation, not after.
+        </p>
+        <p>
+          Two points save containers. Confirm DG acceptance with the carrier at booking, not at the
+          gate — not every service accepts Class 4.2, and the answer can change with the transhipment
+          port. Then match the documents before releasing the balance: invoice, packing list, bill of
+          lading and DG declaration should agree on quantity, marks and parties.
+        </p>
+        <p>
+          The <a href="/export/">export page</a> covers the logistics we support and the
+          <a href={`${SITES.knowledge}/knowledge/charcoal-shipping-safety-un1361/`} target="_blank" rel="noopener">UN 1361 shipping guide</a>
+          covers the classification.
+        </p>
+      </div>
+
+      <h2>The Purchase Order Annex, Line by Line</h2>
+      <div class="prose">
+        <p>
+          The specification, artwork and inspection plan only bind when they are in the order. A
+          one-page annex does that; anything not in it is a preference.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Annex line</th><th>What it must state</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Product identity</td><td>Base material, form, nominal size and SKU or brand name</td></tr>
+            <tr><td>Specification table</td><td>Each parameter with limit, unit, method and basis</td></tr>
+            <tr><td>Packaging</td><td>Inner unit and fill, board grade, master carton, pallet</td></tr>
+            <tr><td>Artwork reference</td><td>Approved proof version, date and colour standard</td></tr>
+            <tr><td>Sample reference</td><td>Golden sample ID, signed and dated by both parties</td></tr>
+            <tr><td>Inspection</td><td>Gates, sampling scheme, AQL, critical defect list</td></tr>
+            <tr><td>Retained duplicate</td><td>How many, sealed by whom, held where, for how long</td></tr>
+            <tr><td>Documents</td><td>Shipment file including DG declaration and any certificate</td></tr>
+            <tr><td>Delivery term</td><td>Incoterms 2020 rule with named place, and loading window</td></tr>
+            <tr><td>Remedy</td><td>Retest, rework, replacement or rejection — and who pays at each threshold</td></tr>
+            <tr><td>Brand ownership</td><td>Artwork, plates and print files: owner, location, retention</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Assembled, one line reads: “Moisture ≤ 7.0% by ISO 18134, as-received; sample drawn from
+          five cartons after packing; report before loading; above 9.0% the buyer may reject at the
+          seller's cost.” An inspector can apply that. “Good quality, dry product” is a conversation
+          that starts after the container sails.
+        </p>
+
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="prose">
+        <p>
+          If you are still choosing the product, the
+          <a href="/products/hookah-charcoal/">hookah charcoal page</a> and the
+          <a href="/products/bamboo-charcoal/">bamboo charcoal page</a> show what each format can and
+          cannot declare. If the specification is written, the
+          <a href="/hookah-charcoal-manufacturing/">manufacturing guide</a> explains which stage fixes
+          each property, and the
+          <a href={`${SITES.manufacturer}/verification/`} target="_blank" rel="noopener">supplier verification model</a>
+          explains what a profile proves.
+        </p>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:1.5rem;">
+        <a class="card" href="/private-label/">
+          <h3>Private label service <span class="badge badge-muted">main</span></h3>
+          <p>The commercial workflow, start to shipment.</p>
+        </a>
+        <a class="card" href="/oem/">
+          <h3>OEM manufacturing <span class="badge badge-muted">main</span></h3>
+          <p>Custom specification, sampling and inspection.</p>
+        </a>
+        <a class="card" href="/packaging/">
+          <h3>Packaging formats <span class="badge badge-muted">main</span></h3>
+          <p>Retail, bulk and private-label configurations.</p>
+        </a>
+        <a class="card" href={`${SITES.data}/packaging/`} target="_blank" rel="noopener">
+          <h3>Packaging records <span class="badge badge-muted">data</span></h3>
+          <p>Supplier-declared formats and MOQ notes.</p>
+        </a>
+        <a class="card" href={`${SITES.knowledge}/knowledge/charcoal-packaging-options/`} target="_blank" rel="noopener">
+          <h3>Packaging options <span class="badge badge-muted">knowledge</span></h3>
+          <p>How format affects moisture, cost and loading.</p>
+        </a>
+        <a class="card" href="/request-quote/">
+          <h3>Request a quote</h3>
+          <p>Product, size, packaging, volume, destination.</p>
+        </a>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Build the brand on a specification, not a picture.</h2>
+        <p>Send the product, size, pack format and destination market; we will confirm what can be declared, what needs a sample, and what stays pending.</p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+        <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
