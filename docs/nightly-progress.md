@@ -1,9 +1,9 @@
 # Charcoal Hub — Nightly Progress
 
 Last updated: 2026-11-15
-Current: N7
-Next: N7
-Status: N6 complete
+Current: N8
+Next: N8
+Status: N7 complete
 
 ## Completed
 
@@ -15,6 +15,7 @@ Status: N6 complete
 | N4 | Pillar 1 — coconut shell specification and buyer's guide | 2026-11-13 | `e5e41ef` | 22 pages | New `/coconut-shell-charcoal-guide/` at 3,384 visible `<main>` words, 12 H2, 1 H1, title 55 chars, description 140 chars. Covers what "grade" means (no formal hookah grade standard), the shell-to-cube process, the 9-field specification set, 22/25/26/27 mm size classes, ash/fixed carbon plus the published 25/26/27 mm records, application classes, moisture/density/binder, MOQ/packaging/container economics, an 8-step sampling sequence, contract traps, and 5 FAQs. Links 11 knowledge articles, 3 data product records, the data explainer and the testing methods index; inbound links added from the coconut product page, products hub and knowledge gateway. Article + BreadcrumbList + FAQPage schema, no price or availability. |
 | N5 | Pillar 2 — hookah charcoal manufacturing | 2026-11-14 | `1f882dd` | 23 pages | New `/hookah-charcoal-manufacturing/` at 3,496 visible `<main>` words, 12 content H2, 1 H1, title 54 chars, description 147 chars. Runs the line stage by stage (shell intake → carbonisation → milling → binder → pressing → drying → sorting), ties each stage to the parameter it fixes and its characteristic defect, and separates conformance from batch-to-batch consistency. Adds a three-density table (bulk / particle / piece mass), a stage-gate QC plan with the record that makes each check traceable, a defect-to-stage table, and a PO annex structure. All process ranges labelled industry reference; no factory, capacity or certification claim. Links 3 products, 2 services, 6 knowledge articles, 3 test methods, the 25 mm data record and the manufacturer verification model; inbound links from the hookah product page, manufacturing page and knowledge gateway. Article + BreadcrumbList + FAQPage schema, no price or availability. |
 | N6 | Pillar 3 — charcoal testing and COA | 2026-11-15 | `dd9cc4d` | 24 pages | New `/charcoal-testing-coa-guide/` at 3,498 visible `<main>` words, 12 content H2, 1 H1, title 46 chars, description 150 chars. Covers what a COA actually certifies (seller declaration vs laboratory record), the document types buyers confuse, the proximate identity and the sum check that exposes mixed bases, the ASTM / ISO / GB/T / EN method families and why they are not interchangeable, dry vs as-received vs dry ash-free with a worked conversion (one material reads 80 / 85.1 / 87.9% fixed carbon), the five sampling handovers, the limits of each metric (including the moisture-to-energy arithmetic), accreditation scope and report anatomy, 12 red flags, eight field checks a buyer can run without a lab, an eight-element PO annex with example wording, and a 10-item COA request template. 15 standards cited by designation. Inbound links from `/testing/`, `/knowledge/`, the coconut product page and `/request-sample/`. Article + BreadcrumbList + FAQPage; no Offer, price or availability. |
+| N7 | Pillar 4 — private label and OEM | 2026-11-15 | `d461064` | 25 pages | New `/private-label-oem-charcoal-guide/` at 3,500 visible `<main>` words, 12 content H2, 1 H1, title 55 visible chars, description 141. Covers what a private label order buys (and how white label, private label, OEM and ODM differ), what a specification can and cannot fix, the nine-field spec sheet, the artwork/dieline gate and proof types, the three samples (development, golden, production), the three stacked minimums and container arithmetic, packaging moisture/compression/palletisation, label compliance (EU GPSR, country of origin, claims, EUDR caveat), the critical path, three inspection gates plus the retained duplicate, documents and UN 1361/Class 4.2, and a 12-line PO annex. Inbound links added from `/private-label/`, `/oem/`, `/packaging/` and `/knowledge/`. Article + BreadcrumbList + FAQPage; no Offer, price or availability. |
 
 ## Partial / Blocked
 
@@ -78,6 +79,19 @@ Status: N6 complete
 - Sources: 15 standards cited by designation and issuer (ASTM D1762, D3172–D3175, D5865, D440; ISO 18122/18123/18125/18134, 17828, 17831-1, 19867-1; ISO/IEC 17025; GB/T 12496 series; EN 1860-2; UN 1361). No URLs were invented: web search was unavailable in this run, so the list names issuers and tells the reader to obtain the current edition from them.
 - Word budget: first draft measured 5,092 on the same counter; trimmed to 3,498 by removing duplicated restatement, not by dropping sections. All 12 sections and both tables survived.
 - Evidence discipline: the worked basis table is labelled illustrative arithmetic, not a supplier certificate. No laboratory result, accreditation number, supplier name or price appears anywhere on the page. The moisture-to-energy figure (≈0.024 MJ/kg per point) is labelled industry reference and derived from the standard net-calorific-value correction, not measured.
+
+## N7 verification detail
+
+- `npm run build` → 25 pages, markdown negotiation 24/1 skipped (404).
+- New `/private-label-oem-charcoal-guide/`: 3,500 visible `<main>` words (target 2,500–3,500), 12 content H2, 1 H1. The automated H2 count returns 14 because the FAQ and closing CTA each carry an H2.
+- Metadata: 24/24 non-404 pages pass title ≤60, description ≤160, exactly one H1. Guide title 55 visible characters, description 141.
+- Internal links: `npm run check:links` → 25 pages, 1,016 links, no broken links.
+- `/request-quote/` appears 3× on the new page; `/request-sample/` once.
+- Inbound links added: `/private-label/` callout, `/oem/` callout, `/packaging/` meta line, `/knowledge/` gateway callout.
+- Cross-site links verified against sub-site source trees: knowledge `private-label-charcoal`, `charcoal-packaging-options`, `coconut-charcoal-moq`, `pre-shipment-inspection-charcoal`, `charcoal-container-loading`, `charcoal-import-certifications`, `charcoal-shipping-safety-un1361`, `charcoal-storage-and-shelf-life`; data `/specifications/` and `/packaging/`; manufacturer `/verification/`.
+- JSON-LD: Article + BreadcrumbList + FAQPage. No Offer, price or availability.
+- Evidence discipline: MOQ patterns (~1 t stock / 20 ft printed), container loads (14.4 t / 23.4 t) and critical-path durations are labelled industry reference; the 24-month shelf life is labelled supplier-declared. No factory, capacity, certification, price or client claim appears. GPSR (EU) 2023/988 and UN 1361 Class 4.2 are cited as regulatory context; EUDR scope for coconut shell is explicitly left to the importer and counsel rather than asserted.
+- Word budget: the first draft measured 4,583 on the same counter; trimmed to 3,500 by cutting restatement and duplicate clauses, not sections. All 12 sections and seven tables survived.
 
 ## Carry-forward notes
 
