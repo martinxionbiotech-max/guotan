@@ -1,9 +1,9 @@
 # Charcoal Hub — Nightly Progress
 
-Last updated: 2026-11-15
-Current: N8
-Next: N8
-Status: N7 complete
+Last updated: 2026-11-17
+Current: N9
+Next: N9
+Status: N8 complete
 
 ## Completed
 
@@ -16,6 +16,7 @@ Status: N7 complete
 | N5 | Pillar 2 — hookah charcoal manufacturing | 2026-11-14 | `1f882dd` | 23 pages | New `/hookah-charcoal-manufacturing/` at 3,496 visible `<main>` words, 12 content H2, 1 H1, title 54 chars, description 147 chars. Runs the line stage by stage (shell intake → carbonisation → milling → binder → pressing → drying → sorting), ties each stage to the parameter it fixes and its characteristic defect, and separates conformance from batch-to-batch consistency. Adds a three-density table (bulk / particle / piece mass), a stage-gate QC plan with the record that makes each check traceable, a defect-to-stage table, and a PO annex structure. All process ranges labelled industry reference; no factory, capacity or certification claim. Links 3 products, 2 services, 6 knowledge articles, 3 test methods, the 25 mm data record and the manufacturer verification model; inbound links from the hookah product page, manufacturing page and knowledge gateway. Article + BreadcrumbList + FAQPage schema, no price or availability. |
 | N6 | Pillar 3 — charcoal testing and COA | 2026-11-15 | `dd9cc4d` | 24 pages | New `/charcoal-testing-coa-guide/` at 3,498 visible `<main>` words, 12 content H2, 1 H1, title 46 chars, description 150 chars. Covers what a COA actually certifies (seller declaration vs laboratory record), the document types buyers confuse, the proximate identity and the sum check that exposes mixed bases, the ASTM / ISO / GB/T / EN method families and why they are not interchangeable, dry vs as-received vs dry ash-free with a worked conversion (one material reads 80 / 85.1 / 87.9% fixed carbon), the five sampling handovers, the limits of each metric (including the moisture-to-energy arithmetic), accreditation scope and report anatomy, 12 red flags, eight field checks a buyer can run without a lab, an eight-element PO annex with example wording, and a 10-item COA request template. 15 standards cited by designation. Inbound links from `/testing/`, `/knowledge/`, the coconut product page and `/request-sample/`. Article + BreadcrumbList + FAQPage; no Offer, price or availability. |
 | N7 | Pillar 4 — private label and OEM | 2026-11-15 | `d461064` | 25 pages | New `/private-label-oem-charcoal-guide/` at 3,500 visible `<main>` words, 12 content H2, 1 H1, title 55 visible chars, description 141. Covers what a private label order buys (and how white label, private label, OEM and ODM differ), what a specification can and cannot fix, the nine-field spec sheet, the artwork/dieline gate and proof types, the three samples (development, golden, production), the three stacked minimums and container arithmetic, packaging moisture/compression/palletisation, label compliance (EU GPSR, country of origin, claims, EUDR caveat), the critical path, three inspection gates plus the retained duplicate, documents and UN 1361/Class 4.2, and a 12-line PO annex. Inbound links added from `/private-label/`, `/oem/`, `/packaging/` and `/knowledge/`. Article + BreadcrumbList + FAQPage; no Offer, price or availability. |
+| N8 | Data site — 7 product records, 8 specifications, 3 sizes | 2026-11-17 | `9ee50b8` (data.guotan) | 31 pages | Every null field on all 7 product records now carries a written reason: `pending_fields` (who owes the value and why) or `not_applicable` (the field cannot exist for that form). Added `calorific_value` — four FireMax records had been filing calorific value under `temperature`, and the value is now withheld as pending because the datasheet unit is bare "J" with no multiplier. Added written `meta_description` per record. Filled `length`/`width`/`height` for the cube and block records from the declared size string; corrected SL470's "2.5× volume" to 3.07× (48,000 mm³ vs 15,625 mm³); RB33 ash `0.045` is now null with the verbatim figure quoted in the body; the 25 mm record's Quick Facts no longer contradicts its frontmatter burn time; duplicate markdown H1 removed from all 7 records. Sizes gained `pieces_per_kg` (72/64/56), provenance and a pending tolerance; `/sizes/` now renders the three classes instead of a hard-coded empty row. `npm run check:data` was failing 28 checks and now passes; the gate enforces pending coverage, treats literal `null` as empty, and separates record/taxonomy/knowledge provenance. 30/30 indexable pages pass title ≤60, description ≤160, single H1. |
 
 ## Partial / Blocked
 
@@ -93,11 +94,27 @@ Status: N7 complete
 - Evidence discipline: MOQ patterns (~1 t stock / 20 ft printed), container loads (14.4 t / 23.4 t) and critical-path durations are labelled industry reference; the 24-month shelf life is labelled supplier-declared. No factory, capacity, certification, price or client claim appears. GPSR (EU) 2023/988 and UN 1361 Class 4.2 are cited as regulatory context; EUDR scope for coconut shell is explicitly left to the importer and counsel rather than asserted.
 - Word budget: the first draft measured 4,583 on the same counter; trimmed to 3,500 by cutting restatement and duplicate clauses, not sections. All 12 sections and seven tables survived.
 
+## N8 verification detail
+
+- `npm run build` → 31 pages (30 indexable + 404). Clean build after clearing `.astro`; an earlier incremental build emitted a stale duplicate-id warning from the content-layer cache.
+- `npm run check:data` → passes. Before this run it failed with 28 issues: missing provenance on applications/packaging/sizes, and `manufacturer_id: null` misread as a broken reference because the script treated the literal string `null` as an id.
+- `npm run check:links` → 31 pages, 1,221 internal links, no broken links.
+- Metadata: 30/30 indexable pages pass title ≤60, description ≤160, exactly one H1. Longest title 59, longest description 158.
+- Product records: 7/7 carry `meta_description`, `data_source`, `last_verified`, `verification_status` and a complete field-status list. Pending counts: 25 mm 7, 26 mm 18, 27 mm 18, C25 10, RB33 11, SI87 10, SL470 10. No field is both empty and unexplained, and no field is marked empty while holding a value — both are gate failures.
+- Sizes: 3/3 carry `pieces_per_kg` (72/64/56), `data_source`, `last_verified`, `verification_status` and a pending tolerance reason. `/sizes/` renders all three rows; previously the table hard-coded a "No size classes yet (3 entries)" row and never read the collection.
+- Specifications: 8/8 pass the schema and render 7 H2 sections each; 499–680 words per page. No supplier data is asserted on any of them.
+- JSON-LD: Product + BreadcrumbList on product pages; no `offers`, no `price`, no `availability` anywhere in the data site. `productJsonLd` never emitted offers, and the records carry no price fields.
+- Type grouping on `/types/` is derived from the published records (4 groups, counts 3/2/1/1) rather than asserting empty type pages.
+- `llms.txt`: the route now derives counts from the collections (7 products, 3 sizes, 2 applications, 2 packaging, 8 specifications). A concurrent commit added `public/llms.txt` with the same stale "ZERO entries" text; because both resolve to `/llms.txt`, the static copy was removed rather than left as a second, false source.
+- Quote links across the sub-site (`nav`, footer, product/compare/spec templates, `llms.txt`) now point at `/request-quote/` instead of `/contact/`, matching the N1 RFQ page.
+
 ## Carry-forward notes
 
-- `data.guotan` SL470 record claims the 40 × 40 × 30 mm cube is "roughly 2.5× the volume of a standard 25 mm cube". The arithmetic gives 48,000 mm³ vs 15,625 mm³ ≈ 3.07×. Main-site copy states three times and does not repeat the 2.5× figure. Fix the data record during N8.
-- Bamboo datasheet calorific values are recorded in "J" with no multiplier (6,500–7,450 / 7,500 / 7,200–7,400). Left unconverted and flagged as unresolved; ask the supplier for the unit and basis before any comparison.
-- N6 sources are cited by designation only, with no outbound links, because web search was unavailable during the run. If a future pass has network access, add one official link per standard (ASTM, ISO, CEN, SAC) and keep the designation-plus-edition rule intact.
+- Bamboo datasheet calorific values are recorded in the body as "J" with no multiplier (6,500–7,450 / 7,500 / 7,200–7,400). N8 removed them from the structured `temperature` field and left `calorific_value` pending; ask the supplier for the unit and basis before any comparison, then fill the field.
+- The 26 mm and 27 mm records remain size-class records only: piece count and nominal dimension from a public table, no batch chemistry, packaging, MOQ or origin. They need a supplier datasheet before they can support a buying decision. Same for the 25 mm record's odour, spark, capacity, testing and certification fields.
+- `data.guotan` has no manufacturer collection, so every `manufacturer_id` stays pending. Linking FireMax or the coconut supplier to `manufacturer.guotan` profiles needs a stable cross-site id or a verified supplier entity first — do not guess the mapping.
+- Size classes have no detail routes (`/sizes/<slug>/` does not exist), so the tolerance reasons are visible only in the record file. If size pages are added later, render `pending_fields` there too.
+- N6 sources are cited by designation only, with no outbound links, because web search was unavailable during that run. If a future pass has network access, add one official link per standard (ASTM, ISO, CEN, SAC) and keep the designation-plus-edition rule intact.
 
 ## Rules
 
