@@ -101,8 +101,9 @@ listed as pending operator action.
 5. **Rich-result validation.** JSON-LD is checked for structure, parse errors and forbidden offer
    fields locally. It was not submitted to an external rich-results validator, and no Search
    Console data was used.
-6. **Live deployment.** This pass verifies the local builds. Pages changed here still need the
-   normal deploy before the live site reflects them.
+6. **Live deployment.** The main-site changes were confirmed live after this pass:
+   `/editorial-standards/` and `/about/` both returned HTTP 200 from `chinacharcoalhub.com`.
+   Sub-site link fixes still follow the normal deploy for those projects.
 
 ## 7. Reproduce
 
