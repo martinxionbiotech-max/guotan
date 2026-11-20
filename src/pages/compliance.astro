@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, webPageJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/compliance/`;
 const jsonLd = [
@@ -10,6 +10,21 @@ const jsonLd = [
     { name: 'Home', url: `${SITES.main}/` },
     { name: 'Compliance', url: canonical },
   ]),
+  organizationJsonLd({
+    id: SITES.main,
+    name: 'Charcoal Hub',
+    description: site.description,
+  }),
+  webPageJsonLd({
+    id: canonical,
+    type: 'WebPage',
+    name: 'Compliance & Regulatory Notes',
+    description:
+      'Charcoal import notes for the EU, UK and USA — EUDR, emissions, packaging, labeling and customs. Informational, not legal advice.',
+    dateModified: '2026-11-20',
+    mainEntityId: SITES.main,
+    siteId: SITES.main,
+  }),
 ];
 ---
 
@@ -106,10 +121,34 @@ const jsonLd = [
 
       <h2>Source &amp; Recency</h2>
       <p class="updated">
-        These notes reflect general regulatory areas as of 2026-10-07 and are marked for periodic review.
-        Specific requirements are confirmed per order and destination market with the buyer's broker.
-        This page is informational and does not constitute legal advice.
+        These notes reflect general regulatory areas as of 2026-10-07 and were last edited 2026-11-20.
+        They are marked for periodic review. Specific requirements are confirmed per order and
+        destination market with the buyer's broker. This page is informational and does not
+        constitute legal advice.
       </p>
+
+      <h2>How These Notes Are Maintained</h2>
+      <p>
+        The notes summarise publicly documented requirements; they are not a legal opinion and have
+        not been reviewed by counsel for any particular importer. Where a rule is uncertain — EUDR
+        scope for coconut shell is the clearest example — the page says so instead of choosing an
+        interpretation that would read better in a sales conversation.
+      </p>
+      <p>
+        If a statement here is out of date or wrong, send the page URL and the current official text
+        to <a href="mailto:joanna@dinweys.com?subject=Correction%20request">joanna@dinweys.com</a>
+        with the subject line <em>Correction request</em>. The same evidence and correction rules
+        that govern product pages apply here; they are set out in the
+        <a href="/editorial-standards/">editorial and data standards</a>.
+      </p>
+      <div class="callout-pending">
+        <span class="callout-title">What this page does not do</span>
+        <ul>
+          <li>It does not classify a specific shipment or confirm an HS code.</li>
+          <li>It does not certify that a product, packaging or label complies in a given market.</li>
+          <li>It does not replace a customs broker, importer of record or legal adviser.</li>
+        </ul>
+      </div>
     </div>
   </section>
 </BaseLayout>

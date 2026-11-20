@@ -1,0 +1,270 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site-config';
+import { SITES } from '../lib/sites';
+import { breadcrumbJsonLd, organizationJsonLd, webPageJsonLd } from '../lib/seo';
+
+const canonical = `${SITES.main}/editorial-standards/`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Home', url: `${SITES.main}/` },
+    { name: 'Editorial & Data Standards', url: canonical },
+  ]),
+  organizationJsonLd({
+    id: SITES.main,
+    name: 'Charcoal Hub',
+    description: site.description,
+  }),
+  webPageJsonLd({
+    id: canonical,
+    type: 'WebPage',
+    name: 'Editorial & Data Standards',
+    description:
+      'How Charcoal Hub labels evidence, what the site will not publish, and how to challenge a record.',
+    dateModified: '2026-11-20',
+    mainEntityId: SITES.main,
+    siteId: SITES.main,
+  }),
+];
+---
+
+<BaseLayout
+  site={site}
+  title="Editorial & Data Standards"
+  description="How Charcoal Hub labels evidence, what the site will not publish, and how to challenge a record — the rules behind every page."
+  canonical={canonical}
+  jsonLd={jsonLd}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Editorial & Data Standards', url: '/editorial-standards/' },
+  ]}
+>
+  <div class="page-title container">
+    <h1>Editorial &amp; Data Standards</h1>
+    <p class="lede">
+      The rules behind every page on this network: what a label means, what we refuse to publish,
+      and what to do when a page is wrong.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container prose">
+      <div class="callout">
+        <span class="callout-title">A standard, not a certificate</span>
+        <p>
+          This page describes how Charcoal Hub writes and labels content. It is not an
+          accreditation, a quality certificate or a guarantee about any supplier. Buyers should
+          still verify the counterparty, the specification and the documents for their own order.
+        </p>
+      </div>
+
+      <h2>Why this page exists</h2>
+      <p>
+        A B2B sourcing site is only useful if a buyer can tell the difference between a measured
+        value, a supplier's claim and a guess. Most sites blur those three. We label them instead,
+        even when the honest answer is less impressive: a field marked <em>data pending</em> is
+        more useful to a buyer than a plausible number with no source.
+      </p>
+      <p>
+        The same rule applies to the commercial pages. We do not publish a catalogue price for a
+        product quoted per grade and volume, and we do not claim stock we cannot ship. This page
+        records that policy so it can be checked, and so a future edit cannot quietly abandon it.
+      </p>
+
+      <h2>Who publishes what</h2>
+      <p>
+        The network separates commercial pages from records and methods. Each site has one job, and
+        a claim should be read in the place that owns it.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Site</th><th>Publishes</th><th>Does not publish</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>chinacharcoalhub.com</strong></td>
+              <td>Commercial pages, product and service descriptions, buying guides, RFQ and sample routes.</td>
+              <td>Batch records, supplier rankings or prices presented as catalogue prices.</td>
+            </tr>
+            <tr>
+              <td><strong>data.chinacharcoalhub.com</strong></td>
+              <td>Structured product, specification and size records with field-level status.</td>
+              <td>Sales copy, offers, or values that no source supports.</td>
+            </tr>
+            <tr>
+              <td><strong>manufacturer.chinacharcoalhub.com</strong></td>
+              <td>Supplier profiles with a verification status and document references.</td>
+              <td>Rankings, recommendations or a "verified" badge without a reviewed document.</td>
+            </tr>
+            <tr>
+              <td><strong>testing.chinacharcoalhub.com</strong></td>
+              <td>Test methods, definitions and the report register.</td>
+              <td>Test results that no laboratory report supports.</td>
+            </tr>
+            <tr>
+              <td><strong>knowledge.chinacharcoalhub.com</strong></td>
+              <td>Buyer education in four reading clusters, with sources.</td>
+              <td>Supplier-specific claims or commercial offers.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Supplier verification labels</h2>
+      <p>
+        Supplier profiles carry one of four statuses. The label describes how far the identity and
+        documents behind the profile have been checked — not how good the charcoal is.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Status</th><th>What was checked</th><th>What it does not mean</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Unverified</strong></td>
+              <td>Name and public listing only. Nothing has been checked against an independent source.</td>
+              <td>A candidate to qualify — not a supplier you can rely on.</td>
+            </tr>
+            <tr>
+              <td><strong>Supplier Reported</strong></td>
+              <td>The operational figures are the supplier's own statements.</td>
+              <td>Not independently confirmed. Capacity, MOQ, certifications and markets need checks before contracting.</td>
+            </tr>
+            <tr>
+              <td><strong>Verified</strong></td>
+              <td>Identity and company documents have been reviewed against a source.</td>
+              <td>Not a product-quality certificate and not a factory-capability audit.</td>
+            </tr>
+            <tr>
+              <td><strong>Third-Party Verified</strong></td>
+              <td>An independent document supports the named parameters.</td>
+              <td>Covers only the parameters in that document — not the whole factory, and not batch-to-batch consistency.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta-line">
+        Full definitions, including the six-level evidence model, are maintained on the
+        <a href={`${SITES.manufacturer}/verification/`} target="_blank" rel="noopener">verification page</a>.
+      </p>
+
+      <h2>Field-level labels</h2>
+      <p>
+        Records use three further labels. They exist so that an empty field is never filled with a
+        template value, and a general industry figure is never mistaken for a supplier's number.
+      </p>
+      <ul>
+        <li>
+          <strong>Data pending</strong> — the field belongs in the record, but no value has been
+          supplied or confirmed. The record also states who owes the value and why it is missing.
+          Pending is a status, not a placeholder to be guessed away.
+        </li>
+        <li>
+          <strong>Not applicable</strong> — the field cannot exist for that product form. For
+          example, a dimension that only applies to pressed cubes has no meaning for a loose
+          granular product.
+        </li>
+        <li>
+          <strong>Industry reference</strong> — a published range, method or conversion from general
+          industry sources. It is attributed as such and is never presented as a measurement of a
+          specific batch.
+        </li>
+      </ul>
+      <p>
+        Where a page quotes a supplier's figure, the wording says so. Where it quotes a standard or
+        a public method, the standard is named. Where neither exists, the field stays pending.
+      </p>
+
+      <h2>What we will not publish</h2>
+      <ul>
+        <li>Invented contacts, personas, job titles or email addresses.</li>
+        <li>Company names presented as suppliers without a profile that says what has been checked.</li>
+        <li>Certificates or registration numbers we have not seen or traced.</li>
+        <li>Test results without a laboratory, report number, date, method and basis.</li>
+        <li>Prices presented as catalogue prices, or stock status without a real sellable offer.</li>
+        <li>MOQs presented as universal rather than as the basis of a particular quotation.</li>
+        <li>Client logos, testimonials or case studies without permission and a traceable source.</li>
+        <li>Statistics, market sizes or growth figures we cannot attribute.</li>
+        <li>Health, medical or safety claims for a fuel product.</li>
+      </ul>
+      <p>
+        If a page needs one of these to be persuasive, the page is wrong — not the rule.
+      </p>
+
+      <h2>Prices, availability and the quote route</h2>
+      <p>
+        Charcoal is priced per grade, size, packaging, volume and delivery basis. A single number on
+        a page would be wrong for almost every buyer who read it. Commercial pages therefore end at
+        the <a href="/request-quote/">quote request</a>, and structured data carries an offer URL
+        without a price or an availability claim.
+      </p>
+      <p>
+        The same logic applies to samples: a
+        <a href="/request-sample/">sample request</a> is a separate route because a sample is a
+        physical check, not a discount on a future order. Neither route creates a contract; the
+        quotation and the order documents do.
+      </p>
+
+      <h2>Corrections and challenges</h2>
+      <p>
+        If a page is wrong, we want the specific claim, the page URL and the source that contradicts
+        it. Send it to <a href="mailto:joanna@dinweys.com?subject=Correction%20request">joanna@dinweys.com</a>
+        with the subject line <em>Correction request</em>. The mailbox is the Charcoal Hub sales desk;
+        the domain is explained on the <a href="/contact/">contact page</a>.
+      </p>
+      <p>What happens to a challenged claim:</p>
+      <ol>
+        <li>We check the claim against the record, the supplier document or the named public source.</li>
+        <li>If the claim is unsupported, it is corrected or removed — not defended with softer wording.</li>
+        <li>If the claim depends on a supplier's statement, the label is corrected to show that.</li>
+        <li>If the value is genuinely unknown, the field becomes <em>data pending</em>.</li>
+      </ol>
+      <p>
+        We would rather publish a thinner page than keep a sentence we cannot support. Corrections
+        that change a specification or a status are recorded in the affected record's
+        <em>last verified</em> date.
+      </p>
+
+      <h2>Authorship, review and dates</h2>
+      <p>
+        Pages are written and maintained by the Charcoal Hub editorial desk and published by the
+        operating entity named on the <a href="/about/">about page</a>. Commercial claims are checked
+        against the supplier documents held for the relevant record before they are published as
+        facts; otherwise they carry a supplier-reported or pending label.
+      </p>
+      <p>
+        We do not publish invented author biographies, reviewer credentials or "medically reviewed"
+        badges. A date on a page means the page or record was last checked on that date; it is not a
+        claim that a laboratory re-tested anything. Records that have never been verified say so
+        rather than showing a blank date.
+      </p>
+
+      <h2>Limits of this site</h2>
+      <ul>
+        <li>We are not a testing laboratory. Method pages explain how a measurement is made; they do not produce results.</li>
+        <li>We are not a certification body. A status describes document review, not an accreditation.</li>
+        <li>We are not a marketplace with escrow. Confirm the contracting entity and the payment route before transferring money.</li>
+        <li>Regulatory pages are informational. They are not legal advice and do not replace a customs broker or counsel.</li>
+        <li>A specification on this site is a starting point for a quotation, not a warranty for a batch you have not inspected.</li>
+      </ul>
+
+      <h2>How to check a page in two minutes</h2>
+      <ol>
+        <li>Find the label: is the number verified, supplier-reported, an industry reference or pending?</li>
+        <li>Follow the record link: does the structured record say the same thing as the prose?</li>
+        <li>Check the date: when was the record last verified, and by what document?</li>
+        <li>Look for the commercial limit: is there a price or stock claim that should be an RFQ?</li>
+        <li>If something is missing, ask for it through the <a href="/request-quote/">quote route</a> — a missing field is a question, not a hidden answer.</li>
+      </ol>
+
+      <h2>Change log</h2>
+      <p class="updated">
+        2026-11-20 — page published with the Phase 0 trust-and-QA pass. Standards reflect the current
+        five-site structure and the evidence labels in use on the data, manufacturer and testing
+        sub-sites.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

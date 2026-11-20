@@ -84,6 +84,34 @@ export function webSiteJsonLd(o: { id: string; name: string; description: string
   };
 }
 
+/* ----------------------------- WebPage ---------------------------- */
+/* Page-level node for static trust pages. `mainEntity` points at the
+   Organization node already emitted on the page, never at a new one. */
+export function webPageJsonLd(o: {
+  id: string;
+  type?: 'WebPage' | 'AboutPage' | 'ContactPage';
+  name: string;
+  description: string;
+  dateModified?: string;
+  mainEntityId?: string;
+  siteId?: string;
+}) {
+  const out: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': o.type ?? 'WebPage',
+    '@id': o.id,
+    url: o.id,
+    name: o.name,
+    description: o.description,
+    inLanguage: 'en',
+  };
+  if (o.siteId) out.isPartOf = { '@id': o.siteId };
+  if (o.mainEntityId) out.mainEntity = { '@id': o.mainEntityId };
+  const dm = isoDate(o.dateModified);
+  if (dm) out.dateModified = dm;
+  return out;
+}
+
 /* ----------------------------- Article ---------------------------- */
 export function articleJsonLd(o: {
   id: string;

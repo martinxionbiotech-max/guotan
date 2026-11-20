@@ -22,9 +22,14 @@ export const GET: APIRoute = async () => {
   L.push(`- [Manufacturing](${base}/manufacturing/): Multi-supplier sourcing and qualification.`);
   L.push(`- [Export](${base}/export/): Export and logistics support.`);
   L.push(`- [Compliance](${base}/compliance/): Regulatory notes (EU, UK, USA) — not legal advice.`);
-  L.push(`- [Request a Quote](${base}/contact/): Quote requests are handled through the contact page.`);
+  L.push(`- [Request a Quote](${base}/request-quote/): Structured quote request — product, size, volume, packaging, destination port.`);
   L.push(`- [Request Samples](${base}/request-sample/): Sample request form.`);
-  L.push(`- [About](${base}/about/): Platform principles.`);
+  L.push(`- [About](${base}/about/): Operating entity, platform role and principles.`);
+  L.push(`- [Editorial & Data Standards](${base}/editorial-standards/): Evidence labels, what the site will not publish, and the corrections route.`);
+  L.push(`- [Coconut Shell Charcoal Guide](${base}/coconut-shell-charcoal-guide/): Specification and buyer's guide.`);
+  L.push(`- [Hookah Charcoal Manufacturing](${base}/hookah-charcoal-manufacturing/): Process, density and consistency.`);
+  L.push(`- [Charcoal Testing & COA Guide](${base}/charcoal-testing-coa-guide/): What buyers can verify.`);
+  L.push(`- [Private Label & OEM Guide](${base}/private-label-oem-charcoal-guide/): Specification to shipment.`);
   L.push('');
   L.push('## Sub-sites');
   L.push(`- [Product Database](${SITES.data}/): Structured product and specification data.`);
@@ -33,6 +38,7 @@ export const GET: APIRoute = async () => {
   L.push(`- [Knowledge Hub](${SITES.knowledge}/): Buyer education and sourcing guides.`);
   L.push('');
   L.push('## Notes');
-  L.push(`- Brand: ${BRAND}. Product entries are added only after supplier verification.`);
+  L.push(`- Brand: ${BRAND}. Every product, manufacturer and testing record states its verification status; missing values are labelled data pending rather than filled.`);
+  L.push(`- Prices and stock are not published: charcoal is quoted per specification, packaging and volume through the request-quote route.`);
   return new Response(L.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

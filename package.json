@@ -3,13 +3,14 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "CHARCOAL HUB — B2B charcoal sourcing and product intelligence platform (guotan).",
+  "description": "CHARCOAL HUB \u2014 B2B charcoal sourcing and product intelligence platform (guotan).",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/generate-markdown.mjs",
     "preview": "astro preview",
     "check:links": "node scripts/check-links.mjs",
-    "check:data": "node scripts/check-data.mjs"
+    "check:data": "node scripts/check-data.mjs",
+    "audit:network": "node scripts/audit-network.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",

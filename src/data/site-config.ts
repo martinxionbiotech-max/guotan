@@ -67,6 +67,7 @@ export const site: SiteConfig = {
       links: [
         { label: 'About', href: '/about/' },
         { label: 'Contact', href: '/contact/' },
+        { label: 'Editorial & Data Standards', href: '/editorial-standards/' },
         { label: 'Knowledge', href: '/knowledge/' },
         { label: 'Request a Quote', href: '/request-quote/' },
         { label: 'Compliance', href: '/compliance/' },

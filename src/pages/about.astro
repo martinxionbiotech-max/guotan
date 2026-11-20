@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd, organizationJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, webPageJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/about/`;
 const jsonLd = [
@@ -15,13 +15,23 @@ const jsonLd = [
     name: 'Charcoal Hub',
     description: site.description,
   }),
+  webPageJsonLd({
+    id: canonical,
+    type: 'AboutPage',
+    name: 'About Charcoal Hub',
+    description:
+      'Who operates Charcoal Hub, how supplier and product evidence is labelled, and what the platform does not claim.',
+    dateModified: '2026-11-20',
+    mainEntityId: SITES.main,
+    siteId: SITES.main,
+  }),
 ];
 ---
 
 <BaseLayout
   site={site}
-  title="About"
-  description="About Charcoal Hub — a B2B charcoal sourcing and product intelligence platform for global buyers."
+  title="About Charcoal Hub"
+  description="Who operates Charcoal Hub, how supplier and product evidence is labelled, and what the platform does not claim."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'About', url: '/about/' }]}
@@ -41,10 +51,16 @@ const jsonLd = [
     <div class="container prose">
       <h2>What We Do</h2>
       <p>
-        We connect global B2B buyers with charcoal manufacturers in China through a
-        standardized specification model, batch testing and transparent verification — every
-        supplier profile carries a published verification status. Our focus is transparency,
-        standardization and sourcing efficiency.
+        We connect global B2B buyers with charcoal manufacturers in China through a standardized
+        specification model, batch testing and transparent verification — every supplier profile
+        carries a published verification status. Our focus is transparency, standardization and
+        sourcing efficiency.
+      </p>
+      <p>
+        In practice that means a buyer can start with a product page, check the structured record
+        behind it, read how a claimed parameter is measured, and then ask for a quotation for a
+        defined specification. The commercial page is the entry point; the record and the method are
+        the evidence.
       </p>
 
       <h2>Operating Entity</h2>
@@ -67,11 +83,41 @@ const jsonLd = [
         <a href={`${SITES.manufacturer}/`} target="_blank" rel="noopener">manufacturer sub-site</a>.
       </p>
 
+      <h2>How We Handle Evidence</h2>
+      <p>
+        Every claim on this network is meant to be readable at three levels: the commercial page, the
+        structured record and the source. Numbers that come from a supplier are labelled as
+        supplier-reported. Numbers that come from a published standard or industry reference are
+        labelled as such. Numbers that nobody has supplied stay <em>data pending</em> — they are not
+        filled with a plausible default.
+      </p>
+      <p>
+        Supplier profiles follow the same rule. A profile marked <em>Unverified</em> is a lead record,
+        not a recommendation. <em>Verified</em> means identity and company documents were reviewed
+        against a source — it is not a product-quality certificate. <em>Third-Party Verified</em>
+        covers only the parameters named in the independent document. No profile is promoted because
+        a supplier asked for it.
+      </p>
+      <p>
+        The full rulebook — status definitions, field labels, what we refuse to publish and how to
+        challenge a claim — is on the
+        <a href="/editorial-standards/">Editorial &amp; Data Standards</a> page.
+      </p>
+
+      <h2>What We Are Not</h2>
+      <ul>
+        <li><strong>Not the factory.</strong> Production is carried out by independent suppliers; the profile states what has been checked about each one.</li>
+        <li><strong>Not a laboratory.</strong> We explain test methods and publish a report register; we do not manufacture test results.</li>
+        <li><strong>Not a certification body.</strong> A verification status describes document review, not accreditation.</li>
+        <li><strong>Not a marketplace with escrow.</strong> Buyers contract with the named entity and should confirm the payment route before transferring funds.</li>
+      </ul>
+
       <h2>Our Principles</h2>
       <ul>
         <li><strong>Data first, evidence first.</strong> We publish only what we can source and verify.</li>
         <li><strong>No fabricated data.</strong> Product, manufacturer and test data are labeled by source and verification status.</li>
         <li><strong>Buyer intent over traffic.</strong> Every page answers a real buyer question or serves a commercial function.</li>
+        <li><strong>Corrections over defence.</strong> A claim that cannot be supported is corrected or removed, not reworded.</li>
       </ul>
 
       <h2>The Platform</h2>
@@ -81,6 +127,24 @@ const jsonLd = [
         intelligence on the <a href={`${SITES.manufacturer}/`} target="_blank" rel="noopener">manufacturer sub-site</a>;
         testing methodology on the <a href={`${SITES.testing}/`} target="_blank" rel="noopener">testing sub-site</a>;
         and buyer education on the <a href={`${SITES.knowledge}/`} target="_blank" rel="noopener">knowledge hub</a>.
+      </p>
+      <p>
+        The split is deliberate. A product page should not pretend to be a database, a database should
+        not read like sales copy, and a test-method page should not imply that a report exists. Keeping
+        those jobs separate makes each one easier to check.
+      </p>
+
+      <h2>Contact and Corrections</h2>
+      <p>
+        For a quotation, use the <a href="/request-quote/">quote request</a> route with the product,
+        size, volume, packaging and destination port. For a physical check first, use
+        <a href="/request-sample/">request samples</a>. For a factual correction, email
+        <a href="mailto:joanna@dinweys.com?subject=Correction%20request">joanna@dinweys.com</a> with
+        the page URL and the source that contradicts the claim.
+      </p>
+      <p class="updated">
+        Page last reviewed 2026-11-20. Entity and contact details are repeated on the
+        <a href="/contact/">contact page</a>.
       </p>
     </div>
   </section>

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd, organizationJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, webPageJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/contact/`;
 const jsonLd = [
@@ -15,6 +15,16 @@ const jsonLd = [
     name: 'Charcoal Hub',
     description: site.description,
   }),
+  webPageJsonLd({
+    id: canonical,
+    type: 'ContactPage',
+    name: 'Contact Charcoal Hub',
+    description:
+      'Contact the Charcoal Hub sales desk — what to include in an enquiry, which route to use, and who issues quotations and order documents.',
+    dateModified: '2026-11-20',
+    mainEntityId: SITES.main,
+    siteId: SITES.main,
+  }),
 ];
 const WHATSAPP = 'https://wa.me/8615153588090';
 ---
@@ -22,7 +32,7 @@ const WHATSAPP = 'https://wa.me/8615153588090';
 <BaseLayout
   site={site}
   title="Contact"
-  description="Contact Charcoal Hub sales for quotes, samples, OEM and private label charcoal — operating entity, mailbox domain and response path."
+  description="Contact the Charcoal Hub sales desk — what to include in an enquiry, which route to use, and who issues quotations and order documents."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Contact', url: '/contact/' }]}
@@ -84,11 +94,77 @@ const WHATSAPP = 'https://wa.me/8615153588090';
         </div>
       </div>
 
-      <h2>Fastest path</h2>
+      <h2>Which route to use</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Your question</th><th>Route</th><th>What happens</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Price, specification, packaging, delivery basis</td>
+              <td><a href="/request-quote/">Request a Quote</a></td>
+              <td>We check the request against product records and supplier capability, then quote the confirmed specification.</td>
+            </tr>
+            <tr>
+              <td>A physical sample before committing to bulk</td>
+              <td><a href="/request-sample/">Request Samples</a></td>
+              <td>The sample route is separate from the quotation because it is a physical check, not a discount.</td>
+            </tr>
+            <tr>
+              <td>A factual error on a page or record</td>
+              <td><a href="/editorial-standards/">Correction request</a></td>
+              <td>Send the page URL and the source. Unsupported claims are corrected or removed.</td>
+            </tr>
+            <tr>
+              <td>Import rules for a destination market</td>
+              <td><a href="/compliance/">Compliance notes</a></td>
+              <td>Informational only. Confirm the requirement with your customs broker or counsel.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>What to include in a first message</h2>
       <p>
-        Use the structured forms so we can route your request precisely: a
-        <a href="/request-quote/">quote request</a> for specification and pricing, or a
-        <a href="/request-sample/">sample request</a> to verify a product before bulk.
+        A complete first message gets a complete answer. Nothing here is mandatory, but each item
+        removes a round trip:
+      </p>
+      <ul class="prose">
+        <li><strong>Product form</strong> — coconut shell, hookah, BBQ or bamboo charcoal.</li>
+        <li><strong>Size</strong> — cube dimension, flat/bar format or a custom dimension.</li>
+        <li><strong>Volume</strong> — sample, pallet, LCL or full container, with an expected repeat volume if known.</li>
+        <li><strong>Packaging</strong> — bulk bag, retail box, or private label with artwork status.</li>
+        <li><strong>Destination port</strong> — so the quotation can state the delivery basis.</li>
+        <li><strong>Specification targets</strong> — ash, moisture, fixed carbon, burn time and any test method you require.</li>
+        <li><strong>Documents you need</strong> — COA, packing list, MSDS or a declaration required by your market.</li>
+      </ul>
+      <p>
+        If a figure is missing, say so. We will mark it <em>data pending</em> and confirm it with the
+        supplier rather than fill it with a template value. The
+        <a href="/editorial-standards/">editorial and data standards</a> explain what each label means.
+      </p>
+
+      <h2>Contracting and payment</h2>
+      <p>
+        The sales desk can discuss a requirement, but a quotation only becomes binding in the order
+        documents issued in the name of the operating entity above. Registration number and full
+        street address are provided on request for contracting; they are not published here until
+        confirmed for public display.
+      </p>
+      <p>
+        Payment instructions are issued with the order documents. If bank details arrive in a
+        separate message, or differ from the details on the order documents, verify them through the
+        sales desk before paying — changed bank details are a common fraud pattern in
+        cross-border trade.
+      </p>
+
+      <h2>Languages</h2>
+      <p>
+        The sales desk works in English and Chinese. Product records, specification pages and
+        knowledge articles are published in English; the underlying supplier documents may be in
+        Chinese, and a translated extract is provided only when it can be checked against the
+        original.
       </p>
 
       <h2>Entity details</h2>
@@ -103,8 +179,9 @@ const WHATSAPP = 'https://wa.me/8615153588090';
         </table>
       </div>
       <p class="updated">
-        Registration number and full street address are provided on request for contracting;
-        they are not published here until confirmed for public display.
+        Page last reviewed 2026-11-20. Entity, mailbox-domain and correction policies are also stated
+        on the <a href="/about/">about page</a> and in the
+        <a href="/editorial-standards/">editorial and data standards</a>.
       </p>
     </div>
   </section>
