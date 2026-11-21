@@ -1,9 +1,9 @@
 # Charcoal Hub — Nightly Progress
 
-Last updated: 2026-11-20
-Current: N12
-Next: — (12-night queue complete)
-Status: N12 complete
+Last updated: 2026-11-22
+Current: N13
+Next: N14 — `/private-label/` depth (372 words)
+Status: N13 complete; 12-night queue closed, extended queue open
 
 ## Completed
 
@@ -21,6 +21,7 @@ Status: N12 complete
 | N10 | Testing site — methods-only positioning | 2026-11-18 | `1181e68` + `927fd1d` (testing.guotan) | 18 pages | Took the methods-only branch of the acceptance criteria: no sample reports were invented. New `/methods-vs-reports/` page states the site's scope — a methods reference with an empty reports register, not a test report database — and explains the difference between a sanitised report (real report, commercial identifiers removed) and a synthetic sample (no measurement behind it, indistinguishable from data once forwarded). Includes a method-vs-report comparison table, the four status labels with what each does **not** mean, eight report fields with the check a buyer runs on each, a six-step certificate reading sequence, five pre-document checks, submission terms, and six FAQs. `/reports/` now leads with "0 published reports", links the scope page and requires laboratory + report number + date + standard before any entry. Upstream had added a static `public/llms.txt` that shadowed the generated `/llms.txt`; deleted it so the generated file (which now names the scope page and the 0-report status) is the single source. Quote links on nav, footer, homepage and method pages moved from `/contact/` to `/request-quote/` to match N1. |
 | N11 | Knowledge site — 4 clusters + hubs | 2026-11-19 | `292da58` + `4507500` (Knowledge.guotan) | 33 pages | All 24 articles assigned to one of four reading clusters via a required `cluster` frontmatter enum — choosing-charcoal (7), specifications-and-quality (7), sourcing-and-suppliers (5), shipping-and-compliance (5). New `/knowledge/clusters/` overview and four hub pages, 513–613 visible words each, with CollectionPage + BreadcrumbList JSON-LD, a three-article "start here" sequence, supporting guides, links to the other three hubs and to the data/testing records. Article pages now carry the cluster in the breadcrumb and `Article.articleSection`, a cluster badge under the H1, and a "More in this cluster" block of three sibling links. Index and nav regrouped by cluster; `intent` kept as a per-article badge. Metadata pass: 22 pages were over the limits before this run (homepage description 208 chars; 19 article descriptions 168–230; full titles 61–62 because the site suffix was 24 chars) — all 33 pages now pass title ≤60, description ≤160, one H1. `llms.txt` now lists the four clusters and each article's cluster; upstream's static `public/llms.txt` was removed again because it shadowed the generated route. RFQ links on nav, footer, homepage and article CTA moved from `/contact/` to `/request-quote/`. |
 | N12 | Trust + QA — trust pages, schema, metadata, sitemap, final audit | 2026-11-20 | `ebed684` + `1eaca0f` (data) + `3eb6f0e` (manufacturer) + `721ea44` (Knowledge) | 123 pages / 118 indexable | New `/editorial-standards/` (1,307 words) states the evidence labels, per-site publishing boundaries, refusal list, price/stock policy, corrections procedure and site limits. About 304 → 663 words with `AboutPage`; Contact 162 → 581 with `ContactPage`, route table, first-message checklist and a bank-detail fraud warning; Compliance 706 → 760 with `WebPage`, a maintenance/correction route and an explicit "what this page does not do" box. New `scripts/audit-network.mjs` + `npm run audit:network` gate all five built sites on title/description/H1/canonical/duplicate metadata/sitemap equality/JSON-LD offer fields/cross-site link resolution. Fixed six real defects the per-page checks had missed: two dead cross-site `/specifications/burn-time/` links on a knowledge article, 18 stale `/contact/` CTAs in knowledge article bodies, 11 in the data site, the manufacturer layout's hard-coded `/contact/` nav CTA on 15 pages, the knowledge 404 CTA, and a stale `llms.txt` claim that every product entry is verified. All five sites now pass: 123 built pages, 118 indexable, 118 sitemap URLs, 3,787 internal links, 0 failures. |
+| N13 | Packaging service page (queue extension) | 2026-11-22 | `a7610ff` | 26 pages | `/packaging/` 393 → 1,939 visible words, 12 H2, 1 H1, title 26, description 135. Six-format table separates the two supplier-declared data records (1 kg box, 10 kg pack) from four industry-reference formats. Adds box anatomy by layer, the moisture/barrier decision with its measurement basis and sampling point, ECT vs Mullen, pallet footprints and ISPM 15, the retail-vs-bulk loading trade-off, ISTA 1A / ASTM D5276 protocols, an eleven-line packaging specification, cost drivers, and five FAQs. Service + BreadcrumbList + FAQPage JSON-LD; no Offer, price or availability. |
 
 ## Partial / Blocked
 
@@ -164,11 +165,41 @@ Status: N12 complete
 - RFQ inbound: every main-site page has at least 2 links to `/request-quote/`; homepage 4, four product pages 4 each, five service pages 3 each, guides 5 each, standards page 4.
 - www 301 verified live: `curl -I https://www.chinacharcoalhub.com/` returns `HTTP/2 301` with `location: https://chinacharcoalhub.com/`. This closes the N1 carry-forward; no DNS change was made in this run.
 
+## N13 verification detail
+
+- `npm run build` (guotan) → 26 pages (25 indexable + 404); markdown negotiation 25 generated / 1 skipped (404).
+- `/packaging/`: 1,939 visible `<main>` words, 12 H2, 1 H1. Title 26 chars, description 135 chars.
+- `npm run check:links` → 26 pages, 1,091 internal links, 0 broken. `npm run audit:network` → all five sites pass (main 26 pages / 25 indexable / 25 sitemap / max title 55 / max desc 158).
+- Internal links: `/request-quote/` appears 3× on the page; `/private-label-oem-charcoal-guide/`, `/export/` and `/private-label/` each appear once.
+- Cross-site links verified against built sibling trees: data `/packaging/` (index only — the two packaging records have no detail routes, so no invented URLs), testing `/tests/moisture/` and `/tests/breakage/`, knowledge `/knowledge/charcoal-container-loading/`.
+- JSON-LD: BreadcrumbList + Organization + Service + FAQPage. No Offer, price or availability; the FAQ schema matches the five visible Q&As.
+- Evidence discipline: the 1 kg box (72 × 25 mm cubes) and 10 kg pack are labelled supplier-declared and come from the data site records. The 1.2 kg / 2 kg packs, 10–20 kg master carton and 500–1,000 kg jumbo bag are labelled industry reference. Container figures (14.4 t / 23.4 t) are the same public-supplier planning reference already used on `/export/`. Board grades, liner specifications and carton dimensions remain `data pending` with the reason stated.
+- No prices, MOQs or lead times were added to this page. The print/charcoal minimum structure stays on `/private-label/` and the pillar, where it is already labelled industry reference.
+
+## Extended queue (opened 2026-11-22)
+
+The 12-night queue is closed. The plan's remaining measurable gap is the commercial-page depth KPI (`<600 words → 0`) and the 25 vs 30–35 indexable-page target. This extension takes one page per night and does not add thin pages to move the count.
+
+| Night | Work unit | Current → target | Acceptance |
+|---|---|---|---|
+| N13 | `/packaging/` specification page | 393 → 1,939 | done |
+| N14 | `/private-label/` service page | 372 → 1,200+ | service scope, artwork gate, minimums, what to send; links pillar, packaging, RFQ |
+| N15 | `/oem/` service page | 429 → 1,200+ | OEM vs private label, spec control, tooling/print ownership, inspection |
+| N16 | `/manufacturing/` service page | 348 → 1,200+ | stage overview, QC gates, what is supplier-declared; link manufacturing pillar |
+| N17 | `/export/` service page | 446 → 1,200+ | Incoterms/risk, document set, UN 1361, loading plan, destination checks |
+| N18 | `/testing/` gateway | 369 → 900+ | methods vs reports, what can be requested, how to read a COA; link testing site |
+| N19 | `/request-quote/` + `/request-sample/` | 275 / 85 → 600+ each | what to send, response path, sample terms; no invented lead times |
+| N20 | Main-site page-count review | 25 → 30–35 | only pages with a real query and evidence plan; no filler |
+
+Each night still follows the rules: one unit, build, link check, audit gate, commit, push, update this file. If a unit cannot meet the acceptance without inventing a fact, record it as `partial` and stop.
+
 ## Carry-forward notes
 
 - The 12-night queue is complete. Main-site indexable pages stand at 25 against the plan's 30–35 target; the 20 → 25 growth is four pillar pages plus the standards page. Further growth needs new commercial or reference pages, not filler; do not add thin pages to close the count.
 - `npm run audit:network` is now the release gate for the network. Run it after any cross-site link, slug or metadata change — `check:links` is per site and cannot see a link that is valid locally but dead in the sibling build.
 - Trust pages must keep their entity facts in sync: legal name, founding date, phone, mailbox and mailbox-domain explanation appear on About, Contact, the Organization schema on every page, and the footer. Change them in one pass across all five repos or the network will contradict itself.
+
+- `/packaging/` is a specification page, not a price list. Only the 1 kg box and 10 kg pack carry data records, both supplier-declared; board grades, liner specifications and carton dimensions stay pending until a supplier document exists. When a dieline or board certificate arrives, add the record to `data.guotan/src/content/packaging/` first, then cite it from the page — do not type a specification into the marketing copy.
 
 - No supplier profile is `Verified` or `Third-Party Verified`. The next upgrade requires an actual document review (business licence, factory document) or a traceable third-party report for a named supplier — a storefront or a supplier's own website cannot support either status.
 - The PT Coco and Yaparacoal NIB numbers are supplier-stated only. The Indonesian registry (AHU/OSS) was not queried; verify the numbers there before moving either profile off `Supplier Reported`.
