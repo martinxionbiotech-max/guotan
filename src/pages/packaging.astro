@@ -2,9 +2,33 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd, faqPageJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/packaging/`;
+
+const faqs = [
+  {
+    q: 'What is the minimum order for custom printed charcoal packaging?',
+    a: 'Two minimums stack: the smallest charcoal run the factory will schedule and the smallest print run the converter will produce. Public supplier listings commonly describe roughly one tonne for stock packaging and a full 20 ft container once boxes are printed. The binding figures are the ones in your written quotation.',
+  },
+  {
+    q: 'Can I supply my own printed packaging?',
+    a: 'It is possible, and it moves responsibility. If you supply the boxes you own the board grade, the print risk and the delivery date. Agree who inspects incoming packaging, who carries a line stoppage, and what happens if the cartons arrive late or short before you choose that route.',
+  },
+  {
+    q: 'Is a moisture-resistant box enough for a humid destination?',
+    a: 'Not on its own. A coating or moisture-resistant board slows pickup through the face, but the liner and how it is closed decide most of the barrier. Specify the liner, whether it is sealed, and the moisture limit with its basis, then test at an agreed point in the route rather than only at packing.',
+  },
+  {
+    q: 'Do charcoal shipments need ISPM 15 pallets?',
+    a: 'Solid wood packaging normally needs ISPM 15 treatment and the IPPC mark for export; processed board is treated differently. The requirement depends on the destination and the pallet material, so confirm it with your forwarder and broker before the pallets are ordered — an unmarked pallet can stop a load independently of the charcoal.',
+  },
+  {
+    q: 'Can packaging reduce freight cost?',
+    a: 'It can reduce the freight carried by each tonne, by using container volume more efficiently. Bulk and bulk-stuffed loads fit more charcoal than retail-boxed, palletised loads. The trade-off is shelf presence and handling: retail packaging buys presentation and pays for it in tonnes per container.',
+  },
+];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: `${SITES.main}/` },
@@ -22,22 +46,26 @@ const jsonLd = [
     description: 'Charcoal packaging formats for export and retail — bulk bags, retail boxes and private-label packaging matched to the destination market and logistics plan.',
     providerId: SITES.main,
   }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
 ];
 ---
 
 <BaseLayout
   site={site}
   title="Charcoal Packaging Options"
-  description="Charcoal packaging options for export — bulk bags, retail boxes and private-label packaging, matched to logistics and destination market."
+  description="Charcoal packaging formats, board grades, moisture barriers and palletisation — and the eleven-line spec that makes a pack enforceable."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Packaging', url: '/packaging/' }]}
 >
   <div class="page-title container">
-    <h1>Packaging</h1>
+    <h1>Charcoal Packaging</h1>
     <p class="lede">
-      Packaging affects logistics cost, shelf life and brand presentation. We match packaging format
-      to your market and shipping plan.
+      Packaging is a specification, not a graphics file. The format sets how much moisture the
+      charcoal picks up between packing and sale, how much of a container is product rather than
+      board and air, and how early your brand has to commit to a print run. This page covers the
+      formats, the construction decisions behind them, and the lines that turn a preference into an
+      enforceable packaging specification.
     </p>
     <div class="page-title-media">
       <img src="/images/page-packaging.webp" alt="Kraft retail boxes and bulk sacks stacked on pallets in a charcoal packaging workspace — conceptual illustration" width="1600" height="900" loading="lazy" />
@@ -46,94 +74,239 @@ const jsonLd = [
 
   <section class="section">
     <div class="container">
-      <div class="grid grid-3">
-        <div class="card">
-          <h3>Bulk</h3>
-          <p>Large bags for distributors and repackers — lowest packaging cost per unit.</p>
-        </div>
-        <div class="card">
-          <h3>Retail Box</h3>
-          <p>Consumer-ready boxes for retail shelves and e-commerce.</p>
-        </div>
-        <div class="card">
-          <h3>Private Label</h3>
-          <p>Your brand on the box and outer carton, built to your artwork.</p>
-        </div>
-      </div>
-
-      <h2>Standard Retail Formats</h2>
+      <h2>What the Packaging Decision Controls</h2>
       <div class="prose">
         <p>
-          Hookah-grade coconut shell charcoal is commonly packed in a graduated set of retail
-          weights. The figures below reflect public supplier listings and are provided as a
-          planning reference, not a guarantee for any order.
+          Four costs move with the pack. <strong>Moisture pickup</strong> adds water weight to a
+          product sold by the tonne and degrades ignition. <strong>Volume efficiency</strong> decides
+          how many tonnes fit a container, and therefore how much freight each tonne carries.
+          <strong>The print minimum</strong> decides the smallest order that can carry your brand.
+          <strong>Damage rate</strong> decides how much of the shipment arrives saleable.
+        </p>
+        <p>
+          Those four pull against each other. The most protective retail box is neither the cheapest
+          per unit nor the most volume-efficient; the densest bulk load has no shelf presence at all.
+          The right answer depends on where the product is sold — a lounge buying 10 kg packs and a
+          supermarket chain buying 1 kg boxes need different packs around the same charcoal.
+        </p>
+      </div>
+
+      <h2>Packaging Formats</h2>
+      <div class="prose">
+        <p>
+          Charcoal moves in a small number of practical formats. The table separates what the product
+          database actually records from what is common industry practice: only the 1 kg box and the
+          10 kg pack carry a supplier-declared record today.
         </p>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Format</th><th>Typical content</th><th>Role</th></tr>
+            <tr><th>Format</th><th>Typical content</th><th>Evidence</th></tr>
           </thead>
           <tbody>
-            <tr><td>1 kg box</td><td class="spec-value">~72 × 25 mm cubes</td><td>Standard retail unit</td></tr>
-            <tr><td>1.2 kg pack</td><td class="spec-value">Scaled retail pack</td><td>Alternate retail size</td></tr>
-            <tr><td>2 kg pack</td><td class="spec-value">Larger retail pack</td><td>Home / bulk retail</td></tr>
-            <tr><td>10 kg pack</td><td class="spec-value">Bulk retail</td><td>Distributors, lounges</td></tr>
-            <tr><td>Master carton</td><td class="spec-value">10–20 kg</td><td>Outer carton for shipping</td></tr>
+            <tr><td>1 kg colour box</td><td class="spec-value">~72 × 25 mm cubes, moisture-resistant box</td><td>Supplier-declared — data record</td></tr>
+            <tr><td>1.2 kg retail pack</td><td class="spec-value">Scaled retail unit</td><td>Industry reference</td></tr>
+            <tr><td>2 kg retail pack</td><td class="spec-value">Larger retail unit; home and bulk retail</td><td>Industry reference</td></tr>
+            <tr><td>10 kg bulk pack</td><td class="spec-value">10 kg per pack; also a 10 or 20 kg master carton</td><td>Supplier-declared — data record</td></tr>
+            <tr><td>Master carton</td><td class="spec-value">10–20 kg outer, customer-specified</td><td>Industry reference</td></tr>
+            <tr><td>Bulk / jumbo bag</td><td class="spec-value">500–1,000 kg, subject to the filling limit</td><td>Industry reference</td></tr>
           </tbody>
         </table>
       </div>
+      <p class="updated">
+        Two records sit in the product database — the 1 kg retail box and the 10 kg bulk pack — both
+        supplier-declared and traceable to a public listing; see the
+        <a href={`${SITES.data}/packaging/`} target="_blank" rel="noopener">packaging records</a>.
+        Carton dimensions, board grades and barrier specifications are not recorded yet.
+      </p>
 
-      <h2>Moisture Protection</h2>
+      <h2>Box Anatomy: What Each Layer Does</h2>
       <div class="prose">
         <p>
-          Charcoal is hygroscopic — it absorbs moisture from humid air, which adds dead weight and
-          degrades ignition. Retail boxes are typically <strong>moisture-resistant</strong>, and the
-          inner 1 kg colour box protects the cubes through transit and shelf time. This is why the
-          packaging format is a specification decision, not just a logistics one: a bulk bag in a
-          humid destination can arrive heavier and harder to light than the same product in sealed
-          retail boxes.
+          A retail charcoal pack is four packages inside one another, and each has a separate job:
+        </p>
+        <ul>
+          <li><strong>Primary pack</strong> — the colour box or printed bag: print surface, piece count and the first moisture barrier.</li>
+          <li><strong>Inner liner</strong> — a poly or barrier bag inside the box: decides whether moisture can move through the board. A “moisture-resistant box” with no stated liner is an unfinished specification.</li>
+          <li><strong>Master carton</strong> — the corrugated outer: compression strength for stacking, and protection for the primary packs in handling.</li>
+          <li><strong>Pallet and wrap</strong> — turns cartons into one unit load and keeps the stack square under transit vibration.</li>
+        </ul>
+        <p>
+          Failures usually start at the boundary between two layers: a sealed liner inside a box that
+          is not closed squarely, or a carton whose board grade was chosen for the box rather than for
+          the stack it would carry.
         </p>
       </div>
 
-      <h2>Shelf Life</h2>
+      <h2>Moisture Protection Is a Barrier Decision</h2>
       <div class="prose">
         <p>
-          Public supplier listings commonly state a <strong>24-month shelf life</strong> for sealed,
-          dry-storage charcoal. That figure is tied to the storage condition — "sealed, dry storage"
-          — and should not be read as a promise that open or humid storage preserves the product.
-          Shelf life is a property of the packaging-and-storage system as much as of the charcoal.
+          Charcoal is hygroscopic. It takes water from humid air, and that water is weight you pay
+          freight on and cannot burn. The pickup happens between packing and sale — in a warehouse,
+          in a container, on a shelf — so the barrier has to work for the whole route, not only at
+          the factory gate.
+        </p>
+        <p>
+          Three things belong in the specification. First, <strong>where the barrier sits</strong>:
+          liner, board coating, or both. Second, <strong>whether the liner is sealed</strong>, because
+          a folded bag is not a barrier. Third, <strong>the moisture figure and the basis</strong> it
+          is measured on. Moisture is reported as-received or on a dry basis, and the two are not
+          interchangeable; a limit without a basis cannot be enforced.
+        </p>
+        <p>
+          The reference methods are gravimetric — a weighed sample dried to constant mass under
+          ASTM D1762 or the ISO 18134 series, with the result expressed on a stated basis. Handheld
+          meters are useful for a quick check but are calibrated against an oven reference, so they
+          do not settle a dispute. If moisture is commercially significant, agree when the sample is
+          taken — at packing, at loading, or on arrival — because a value from an earlier stage may
+          not describe the load as delivered. See the
+          <a href={`${SITES.testing}/tests/moisture/`} target="_blank" rel="noopener">moisture method</a>
+          and the <a href={`${SITES.data}/specifications/moisture/`} target="_blank" rel="noopener">moisture specification record</a>.
+        </p>
+      </div>
+
+      <h2>Board Grade and Stacking Strength</h2>
+      <div class="prose">
+        <p>
+          Converters quote two different strengths. <strong>Edge crush test (ECT)</strong> measures
+          the board's resistance to a top load applied to the fluted edge;
+          <strong>burst strength (Mullen)</strong> measures resistance to puncture through the face.
+          They are not interchangeable, and a specification that names neither leaves the grade to
+          the supplier.
+        </p>
+        <p>
+          The requirement comes from the load the carton will carry, the height and duration of the
+          stack, and the humidity of the route. Board loses compression strength as humidity rises,
+          which is why a carton that passes a dry warehouse check can fail in a humid container.
+          State the stack height and the expected storage condition, then let the converter propose a
+          grade that meets both — “strong box” is a preference, not a requirement.
+        </p>
+      </div>
+
+      <h2>Palletisation and ISPM 15</h2>
+      <div class="prose">
+        <p>
+          Two footprints dominate: 1,200 × 1,000 mm and the smaller 1,200 × 800 mm European pallet.
+          The choice changes how the load fills a container, and cartons should not overhang the
+          pallet — overhang puts stack load on the carton edge and is a common cause of crushed
+          corners.
+        </p>
+        <p>
+          For export, solid wood pallets normally require ISPM 15 treatment and the IPPC mark;
+          processed board is treated differently. An unmarked solid-wood pallet can hold a load for a
+          reason that has nothing to do with the charcoal, so ask what the pallet will be, not only
+          what the box will be. Stretch wrap, corner boards and a top sheet protect the unit load;
+          they do not replace a correct board grade.
         </p>
       </div>
 
       <h2>Packaging and Container Loading</h2>
       <div class="prose">
         <p>
-          Packaging choice feeds directly into how many tonnes fit a container. Retail boxes waste
-          volume relative to bulk bags, so a full retail-packaged 20 ft container loads lighter than
-          a bulk-stuffed one. See the <a href="/export/">export page</a> for indicative container
-          weights, and the
+          Packaging sets how much charcoal fits a container, and freight is charged on the space and
+          weight you use. As a planning reference drawn from public supplier data for coconut shell
+          hookah charcoal, a 20 ft container loads approximately <strong>14.4 tonnes</strong> and a
+          40 ft high-cube approximately <strong>23.4 tonnes</strong> — but retail-packaged and
+          palletised loads load lighter than bulk-stuffed loads, because boxes and pallets consume
+          volume.
+        </p>
+        <p>
+          That is the trade-off in one line: bulk packing lowers freight per tonne and removes shelf
+          presence; retail packing buys presentation and pays for it in container utilisation. The
+          split is a market decision before it is a logistics one. See the
+          <a href="/export/">export page</a> for the loading reference and the
           <a href={`${SITES.knowledge}/knowledge/charcoal-container-loading/`} target="_blank" rel="noopener">container-loading guide</a>
-          for the full trade-off.
+          for the arithmetic.
         </p>
       </div>
 
-      <p class="meta-line">
-        Packaging is one line of a private label order; the print, label and inspection side is in
-        <a href="/private-label-oem-charcoal-guide/">the private label and OEM guide</a>.
-      </p>
+      <h2>Damage in Transit: What to Specify and Inspect</h2>
+      <div class="prose">
+        <p>
+          Three failure modes account for most packaging losses: compression from stacking, drop
+          from handling, and moisture from climate. Each can be tested, and the test belongs in the
+          specification rather than in a post-arrival argument.
+        </p>
+        <p>
+          Drop testing is commonly run to ISTA 1A or ASTM D5276, compression testing to a stated
+          load and duration. A test result describes the pack that was tested, not the whole
+          production run, so the protocol should state the sample size and the acceptance rule.
+          Before loading, inspect carton condition, piece count, seals, print and pallet marks, and
+          photograph the unit loads — a loading photo with the container number visible is the
+          cheapest evidence in the file. The
+          <a href={`${SITES.testing}/tests/breakage/`} target="_blank" rel="noopener">breakage method</a>
+          explains how physical damage is assessed.
+        </p>
+      </div>
+
+      <h2>The Packaging Specification: Eleven Lines</h2>
+      <div class="prose">
+        <p>
+          A packaging specification that can be quoted, inspected and enforced has eleven lines.
+          Anything missing becomes the supplier's choice:
+        </p>
+        <ol>
+          <li><strong>Format and nominal net weight</strong> — box, pack or bulk bag, and what the label declares.</li>
+          <li><strong>Piece count and piece size</strong> — cubes per unit, with the size class and tolerance.</li>
+          <li><strong>Primary pack dimensions and board grade</strong> — ECT or burst value, not a colour name.</li>
+          <li><strong>Barrier</strong> — liner material, thickness where stated, and whether it is sealed.</li>
+          <li><strong>Print</strong> — colours, artwork version and who approves the proof.</li>
+          <li><strong>Coding</strong> — barcode or GTIN, batch or lot code, production date.</li>
+          <li><strong>Labelling</strong> — language, importer details, country of origin, net weight.</li>
+          <li><strong>Master carton</strong> — units per carton, dimensions and carton marking.</li>
+          <li><strong>Pallet</strong> — type, footprint, tier pattern and ISPM 15 status.</li>
+          <li><strong>Test protocol</strong> — moisture limit with basis and sampling point, drop or compression method.</li>
+          <li><strong>Acceptance rule</strong> — inspection level, who inspects, and what happens to a failed lot.</li>
+        </ol>
+        <p>
+          Two lines — the moisture basis and the acceptance rule — decide whether a dispute is
+          resolvable. A specification without them records a preference, not a requirement. The
+          print, artwork and label side of a branded order is covered in the
+          <a href="/private-label-oem-charcoal-guide/">private label and OEM guide</a>.
+        </p>
+      </div>
+
+      <h2>Cost Drivers, Without a Price List</h2>
+      <div class="prose">
+        <p>
+          Packaging cost is not one number. It is board grade and print setup, amortised over the
+          print run; the volume the pack consumes in a container; hand-packing labour; the damage
+          rate that survives transit; and the compliance labelling the destination requires. A
+          heavier board raises unit cost and lowers damage; a larger box raises shelf presence and
+          lowers tonnes per container. We do not publish a price list, because board, energy and
+          print costs move and the same format quoted at two volumes is two different prices. The
+          quotation for your specification is the number that applies.
+        </p>
+      </div>
 
       <div class="callout-pending">
         <span class="callout-title">Data pending — packaging specification in progress</span>
         <p>
-          Specific packaging formats, weights and carton dimensions are confirmed per order and added
-          to the product database as verified.
+          The product database holds two packaging records — the 1 kg retail box and the 10 kg bulk
+          pack — both supplier-declared. Carton dimensions, board grades, liner specifications and
+          pallet patterns for the other formats are confirmed per order and recorded only when a
+          supplier document supports them. Nothing on this page is a measured packaging result for a
+          specific supplier.
         </p>
+      </div>
+
+      <h2>Packaging Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
       </div>
 
       <div class="cta-banner">
         <h2>Packaging requirements?</h2>
-        <p>Tell us your format and target market.</p>
+        <p>
+          Send the format, target market and volume — we will confirm what can be quoted and what is
+          still pending.
+        </p>
         <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
       </div>
     </div>
