@@ -2,9 +2,33 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd, faqPageJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/private-label/`;
+
+const faqs = [
+  {
+    q: 'What is the minimum order for private label charcoal?',
+    a: 'Three minimums apply at once: the smallest charcoal run the factory will schedule, the smallest print run the converter will produce, and the carrier’s dangerous-goods booking terms. Public supplier listings commonly describe roughly one tonne for stock packaging and a full 20 ft container once boxes are printed. The effective minimum is the largest of the three, and only your written quotation binds it.',
+  },
+  {
+    q: 'Can I start with a small branded order?',
+    a: 'Usually not with printed boxes. The print step carries its own run length, which is often larger than the charcoal minimum. The practical route is to launch in neutral or supplier packaging, prove the product in your market, and commit to a printed run on the second order — or to use labels and stickers on a stock box for a first, limited batch, accepting the higher unit cost and the reduced shelf finish.',
+  },
+  {
+    q: 'Who owns the printing plates and the artwork?',
+    a: 'Ask before you approve the proof. Plates are commonly charged to the buyer once and held by the converter, which means a later switch of packaging supplier may require new plates. Artwork ownership is separate from plate ownership: agree in writing that the design files remain yours, and get the dieline and the approved file back in an editable format.',
+  },
+  {
+    q: 'Does private label change the charcoal itself?',
+    a: 'No. A private label order changes the packaging, the branding and the commercial terms, not the chemistry of the product inside. If a specification field is recorded as pending in the product database, printing your logo on the box does not fill it. Specify the product from the records first, then specify the pack around it.',
+  },
+  {
+    q: 'What documents should arrive with a private label shipment?',
+    a: 'At minimum: a commercial invoice, a packing list that matches the cartons and pallet marks, and a certificate of analysis whose values are traceable to a laboratory report or clearly labelled as the seller’s declaration. Charcoal also moves under UN 1361, Class 4.2, so the dangerous-goods declaration and safety data sheet belong in the same file. Destination rules may add a certificate of origin or label requirements.',
+  },
+];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: `${SITES.main}/` },
@@ -22,13 +46,14 @@ const jsonLd = [
     description: 'Private label charcoal service — product, size, packaging and branding selection, with sampling, production, inspection and shipment managed to the agreed specification.',
     providerId: SITES.main,
   }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
 ];
 ---
 
 <BaseLayout
   site={site}
   title="Private Label Charcoal — Build Your Own Brand"
-  description="Private label and OEM charcoal: choose product, size, packaging and branding. An eight-step process from product selection to shipment."
+  description="Private label charcoal: what the service covers, the artwork gate, how the three minimums stack, sampling, and the documents to send with an enquiry."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Private Label', url: '/private-label/' }]}
@@ -36,8 +61,11 @@ const jsonLd = [
   <div class="page-title container">
     <h1>Private Label Charcoal</h1>
     <p class="lede">
-      Build your own charcoal brand. Choose the product, size and packaging, submit your logo, and we
-      manage sampling, production, inspection and shipment.
+      Private label puts your brand on a charcoal product that already exists in the catalogue. The
+      charcoal is chosen from the same size and grade records as any other order; what changes is
+      the packaging, the artwork, the minimum and the lead time. This page sets out what the service
+      covers, where the artwork gate sits, how the three minimums stack, and what to send so the
+      quotation answers a real question.
     </p>
     <div class="page-title-media">
       <img src="/images/private-label.webp" alt="Charcoal briquette cubes beside kraft retail boxes with blank label panels on a workbench — conceptual illustration" width="1600" height="900" loading="eager" />
@@ -46,79 +74,252 @@ const jsonLd = [
 
   <section class="section">
     <div class="container">
-      <h2>The Process</h2>
-      <ol class="prose">
-        <li><strong>Choose Product</strong> — coconut shell hookah, BBQ or bamboo charcoal.</li>
-        <li><strong>Choose Size</strong> — 25mm / 26mm / 27mm cube or flat.</li>
-        <li><strong>Choose Packaging</strong> — bulk, retail box or custom.</li>
-        <li><strong>Submit Logo</strong> — your artwork and brand requirements.</li>
-        <li><strong>Sample</strong> — approve a pre-production sample before production.</li>
-        <li><strong>Production</strong> — manufacture to the agreed specification.</li>
-        <li><strong>Inspection</strong> — quality control before shipment.</li>
-        <li><strong>Shipment</strong> — export and delivery to your destination port.</li>
-      </ol>
-
-      <h2>What You Can Customize</h2>
-      <div class="grid grid-3">
-        <div class="card"><h3>Product &amp; Size</h3><p>Coconut shell, BBQ or bamboo charcoal in standard or custom cube sizes.</p></div>
-        <div class="card"><h3>Packaging</h3><p>Bulk bags, retail boxes, or branded private-label packaging.</p></div>
-        <div class="card"><h3>Branding</h3><p>Your logo, colors and labeling on box and outer carton.</p></div>
-      </div>
-
-      <h2>What Private Label Changes: MOQ and Lead Time</h2>
+      <h2>What Changes, and What Does Not</h2>
       <div class="prose">
         <p>
-          Private label changes two commercial terms relative to buying stock product: the minimum
-          order and the lead time. The reason is the printed packaging — your branded boxes and
-          labels carry a print-run minimum, and production starts only after your artwork is
-          approved.
+          A private label order is a packaging and branding exercise on top of a commodity product.
+          The fire behaviour, the ash and the size class come from the product record you select —
+          not from the box. The box decides how the product is presented, how much moisture it picks
+          up on the way to market, and how early your money commits to a print run.
         </p>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Order type</th><th>Typical MOQ</th><th>Typical lead time</th></tr>
+            <tr><th>Element</th><th>Stock product</th><th>Private label</th></tr>
           </thead>
           <tbody>
-            <tr><td>Stock packaging</td><td class="spec-value">~1 tonne</td><td class="spec-value">Shorter (no print step)</td></tr>
-            <tr><td>Private label, printed boxes</td><td class="spec-value">One 20 ft container</td><td class="spec-value">15–25 days after artwork approval</td></tr>
+            <tr><td>Product</td><td class="spec-value">Catalogue grade and size</td><td class="spec-value">Same catalogue product, or an OEM specification</td></tr>
+            <tr><td>Brand</td><td class="spec-value">Supplier’s or neutral</td><td class="spec-value">Your logo, colours and panels</td></tr>
+            <tr><td>Packaging</td><td class="spec-value">Stock box or bag</td><td class="spec-value">Printed primary pack plus outer carton</td></tr>
+            <tr><td>Minimum</td><td class="spec-value">Commonly around one tonne</td><td class="spec-value">Commonly one 20 ft container</td></tr>
+            <tr><td>Lead time</td><td class="spec-value">From stock or a short run</td><td class="spec-value">15–25 days after artwork approval</td></tr>
+            <tr><td>Setup</td><td class="spec-value">None</td><td class="spec-value">Plates, proofing and artwork handling</td></tr>
           </tbody>
         </table>
       </div>
       <p class="updated">
-        These figures reflect common industry practice and public supplier listings, not a
-        contractual commitment. The binding terms are confirmed in your written quotation.
+        Minimum and lead-time figures reflect common industry practice and public supplier listings,
+        not a contractual commitment. The binding terms are the ones in your written quotation.
       </p>
-
-      <h2>Branding on the Box</h2>
       <div class="prose">
-        <ul>
-          <li><strong>Logo and colour</strong> — your artwork printed on the retail box and outer carton.</li>
-          <li><strong>Multilingual panels</strong> — destination-market language where required.</li>
-          <li><strong>Barcode and batch coding</strong> — for retail scanning and traceability.</li>
-        </ul>
         <p>
-          A common first-brand strategy is to start with neutral or stock packaging to validate the
-          product, then move to printed boxes on a larger order — this defers the print minimum
-          until the product is proven. See the buyer guidance in our
-          <a href={`${SITES.knowledge}/knowledge/`} target="_blank" rel="noopener">knowledge hub</a>
-          for the full reasoning.
+          One thing private label does not do is upgrade the product. If a field in the product
+          record is marked <em>data pending</em>, a printed box does not fill it. Specify the
+          charcoal from the
+          <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">product records</a>
+          first, then build the pack around a specification you can actually defend.
         </p>
       </div>
 
-      <div class="callout" style="margin-top:1.5rem;">
-        <span class="callout-title">Before the first print run</span>
+      <h2>What the Service Covers</h2>
+      <div class="prose">
         <p>
-          <a href="/private-label-oem-charcoal-guide/">Private Label and OEM Charcoal: From Specification to Shipment</a>
-          — the specification sheet, artwork gate, stacked minimums, label compliance, inspection
-          records and the PO annex that makes them binding.
+          The service coordinates the commercial and documentary side of a branded order. It is a
+          management layer, not a factory: production happens at a supplier whose process and
+          documents you can inspect. Concretely, the scope is:
         </p>
+        <ul>
+          <li><strong>Product and size selection</strong> — matching the application to a recorded size class, and stating what is not recorded.</li>
+          <li><strong>The specification sheet</strong> — the nine fields that make a product order enforceable, including the basis for each measured value.</li>
+          <li><strong>Packaging specification</strong> — format, board grade, barrier, piece count and the test protocol behind them.</li>
+          <li><strong>Artwork liaison</strong> — carrying your files to the converter, returning proofs, and holding the approved version as the inspection reference.</li>
+          <li><strong>Sampling</strong> — development, golden and production samples, each with a written decision.</li>
+          <li><strong>Production follow-up</strong> — schedule, stage gates and the record that shows each gate was passed.</li>
+          <li><strong>Pre-shipment inspection</strong> — piece count, dimensions, moisture, packing condition and carton marks against the approved specification.</li>
+          <li><strong>Documents</strong> — invoice, packing list, analysis certificate and the dangerous-goods paperwork for UN 1361 cargo.</li>
+        </ul>
+        <p>
+          It does not include owning the factory, issuing a certification, accrediting a laboratory,
+          or acting as your customs broker. Where a claim would need one of those, the page and the
+          quotation say so instead of implying it.
+        </p>
+      </div>
+
+      <h2>Product and Size: The Part You Can Fix</h2>
+      <div class="prose">
+        <p>
+          Three cube classes carry supplier-declared records in the database: 25 mm, 26 mm and
+          27 mm, with nominal piece counts of 72, 64 and 56 pieces per kilogram respectively. Those
+          counts describe the recorded product, not a guarantee for every batch — piece weight varies
+          with density and pressing, so treat them as a planning figure and confirm the tolerance in
+          the specification.
+        </p>
+        <p>
+          Only the 25 mm record carries batch chemistry. The 26 mm and 27 mm entries are size-class
+          records: piece count and nominal dimension from a public table, with packaging, MOQ, origin
+          and chemistry still pending. If your brand is built on a specific ash or fixed-carbon
+          figure, that figure has to come from a supplier datasheet or a laboratory report for the
+          batch you buy — it cannot be inherited from a size class.
+        </p>
+        <p>
+          Flat versus cube, custom dimensions and alternative raw materials move the order from
+          private label into OEM territory, because the product itself changes. The
+          <a href="/oem/">OEM page</a> covers that case; the
+          <a href="/coconut-shell-charcoal-guide/">coconut shell specification guide</a> covers how to
+          read the grade records.
+        </p>
+      </div>
+
+      <h2>The Artwork Gate</h2>
+      <div class="prose">
+        <p>
+          Most branded orders lose their schedule at the artwork gate, not at the factory. The gate
+          is a sequence, and doing it out of order is what causes reprints:
+        </p>
+        <ol>
+          <li><strong>Dieline first.</strong> Obtain the converter’s dieline for the exact box before any design work. A designer working without a dieline produces artwork that cannot be printed — panels land on folds, bleeds are missing, and the barcode sits where the box is glued.</li>
+          <li><strong>Content proof.</strong> A digital proof confirms layout, copy and mandatory text. Check the declared net weight, country of origin, importer name and address where the destination requires it, language, barcode or GTIN, batch field, and any warning or recycling marks.</li>
+          <li><strong>Print proof.</strong> A proof on the actual board confirms colour and registration on the stock you are buying. Screen colour is not board colour, and a dark charcoal background shows registration error more than a light one.</li>
+          <li><strong>Pre-production sample.</strong> The assembled pack — box, liner, product, carton — is the object you approve. This is the sample inspection will be measured against.</li>
+        </ol>
+        <p>
+          Put the artwork version, date and approver in writing, and keep the approved file with the
+          order. “The version in the chat” is not a reference document. Also settle two commercial
+          points before plates are cut: who pays for the plates, and who holds them if you later move
+          the packaging to another converter. A late artwork change after plates exist restarts the
+          print step and, with it, the lead time.
+        </p>
+        <p>
+          The full treatment — dielines, proof types, label compliance and the PO annex — is in the
+          <a href="/private-label-oem-charcoal-guide/">private label and OEM guide</a>. The packaging
+          construction decisions behind the box are on the
+          <a href="/packaging/">packaging page</a>.
+        </p>
+      </div>
+
+      <h2>Minimums: Three Stack, Not One</h2>
+      <div class="prose">
+        <p>
+          A private label quotation is bounded by three different minimums, and buyers usually ask
+          about only the first:
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Minimum</th><th>What sets it</th><th>Typical shape</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Charcoal run</td><td class="spec-value">The factory’s smallest efficient batch</td><td class="spec-value">Around one tonne for stock packing</td></tr>
+            <tr><td>Print run</td><td class="spec-value">Plates, press setup and board purchasing</td><td class="spec-value">Often one 20 ft container of printed boxes</td></tr>
+            <tr><td>Carrier / dangerous goods</td><td class="spec-value">UN 1361 Class 4.2 booking rules</td><td class="spec-value">Full-container movement favoured</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          The effective minimum is the largest of the three, not an average. That is why a printed
+          order is usually framed in containers: a 20 ft container of coconut shell hookah charcoal
+          loads at roughly 14.4 tonnes and a 40 ft high-cube at roughly 23.4 tonnes as a public
+          planning reference, before retail packaging and pallets take their share of the volume.
+        </p>
+        <p>
+          If the first order has to be smaller, the lever is packaging, not negotiation. Launch in
+          neutral or supplier packaging, validate the product in your market, then commit to print.
+          The trade-off is shelf presence; the gain is that you are not financing a print run before
+          you know the product sells. The arithmetic behind container-based minimums is in the
+          <a href={`${SITES.knowledge}/knowledge/coconut-charcoal-moq/`} target="_blank" rel="noopener">MOQ guide</a>
+          and the <a href={`${SITES.knowledge}/knowledge/charcoal-container-loading/`} target="_blank" rel="noopener">container-loading guide</a>.
+        </p>
+      </div>
+
+      <h2>Samples: Three Decisions, Not One</h2>
+      <div class="prose">
+        <p>
+          “Send me a sample” hides three different questions. Naming the one you are answering keeps
+          the order moving:
+        </p>
+        <ul>
+          <li><strong>Development sample</strong> — is this the right product and size for my market? It answers a product question and does not commit anyone to a specification.</li>
+          <li><strong>Golden sample</strong> — is this the reference for production? Signed, dated, photographed and retained by both sides. It is the physical definition of the approved product, pack and print.</li>
+          <li><strong>Production sample</strong> — does the run match the golden sample? Drawn from the actual production lot, not from a separate hand-made batch.</li>
+        </ul>
+        <p>
+          A sample that arrives without its specification is a product demonstration, not an approval
+          document. Note the size class, piece count, moisture basis and packaging version alongside
+          it, or the reference degrades into “the one that looked right”. Sample requests go through
+          the <a href="/request-sample/">sample request page</a> so the product, size and destination
+          are recorded together.
+        </p>
+      </div>
+
+      <h2>Inspection and Documents Before Shipment</h2>
+      <div class="prose">
+        <p>
+          Three gates cover most of the risk. Before production: confirm the approved artwork, the
+          board and liner actually ordered, and the product specification. During production: check
+          piece dimensions, piece count per unit and moisture at the packing line. Before shipment:
+          inspect cartons, seals, print, marks and pallet condition against the approved sample.
+        </p>
+        <p>
+          Which failures matter is a commercial decision. A colour drift on the box is a brand
+          problem; a moisture reading over the agreed limit is a product problem; a carton that
+          crushes two tiers down is a transit problem. Each needs a stated acceptance rule before the
+          lot exists, because a dispute after loading has no cheap remedy.
+        </p>
+        <p>
+          The document set travels with the goods: commercial invoice, packing list matching the
+          carton and pallet marks, and a certificate of analysis. Read the COA for what it actually
+          is — a laboratory report and a seller’s declaration look similar and mean different things;
+          the <a href="/charcoal-testing-coa-guide/">testing and COA guide</a> explains the
+          distinction, and the
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">method reference</a>
+          lists the standards behind each figure. Charcoal ships as UN 1361, Class 4.2, so the
+          dangerous-goods declaration and safety data sheet belong in the same file.
+        </p>
+      </div>
+
+      <h2>What to Send</h2>
+      <div class="prose">
+        <p>
+          A quotation can only answer what the enquiry states. Eight items are enough to price and
+          schedule a first order:
+        </p>
+        <ol>
+          <li><strong>Product and size</strong> — coconut shell hookah, BBQ or bamboo; 25 / 26 / 27 mm cube, flat, or a custom dimension.</li>
+          <li><strong>Target market</strong> — country and channel, because label rules and pack format follow the destination.</li>
+          <li><strong>Packaging format</strong> — retail box, pack or bulk bag, with the nominal net weight per unit.</li>
+          <li><strong>Artwork status</strong> — finished files, a concept, or nothing yet. This decides whether the print step can start.</li>
+          <li><strong>First order volume and a 12-month view</strong> — the first number sets the minimum, the second sets whether a print run is sensible.</li>
+          <li><strong>Destination port and Incoterm</strong> — the quotation basis, and who arranges the main carriage.</li>
+          <li><strong>Label requirements</strong> — language, importer details, barcode ownership and any destination-specific marks.</li>
+          <li><strong>Sample and shipment deadlines</strong> — a real date, so the artwork gate can be planned backwards from it.</li>
+        </ol>
+        <p>
+          Anything you cannot answer yet is useful too. Saying “packaging undecided” gets a different
+          and more honest answer than a guessed box size.
+        </p>
+      </div>
+
+      <div class="callout-pending">
+        <span class="callout-title">Data pending — what this page does not claim</span>
+        <p>
+          No factory, capacity, certification, client or price is stated on this page, because none
+          is verified in the records. The 25 / 26 / 27 mm piece counts are supplier-declared; the
+          26 mm and 27 mm chemistry, packaging and MOQ remain pending. Minimum and lead-time figures
+          are industry reference, not a commitment. A private label order is quoted against your
+          specification and volume — the written quotation is the only binding statement.
+        </p>
+      </div>
+
+      <h2>Private Label Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
       </div>
 
       <div class="cta-banner">
         <h2>Start a private label project</h2>
-        <p>Tell us your product, size, target market and packaging preference.</p>
-        <a class="btn btn-primary" href="/request-quote/">Start a Private Label Project →</a>
+        <p>
+          Send the product, size, target market and packaging preference — we will confirm what can
+          be quoted and what is still pending.
+        </p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
       </div>
     </div>
   </section>

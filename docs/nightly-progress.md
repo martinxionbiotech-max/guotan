@@ -1,9 +1,9 @@
 # Charcoal Hub — Nightly Progress
 
-Last updated: 2026-11-22
-Current: N13
-Next: N14 — `/private-label/` depth (372 words)
-Status: N13 complete; 12-night queue closed, extended queue open
+Last updated: 2026-11-23
+Current: N14
+Next: N15 — `/oem/` service page (429 words)
+Status: N14 complete; extended queue open
 
 ## Completed
 
@@ -176,6 +176,18 @@ Status: N13 complete; 12-night queue closed, extended queue open
 - Evidence discipline: the 1 kg box (72 × 25 mm cubes) and 10 kg pack are labelled supplier-declared and come from the data site records. The 1.2 kg / 2 kg packs, 10–20 kg master carton and 500–1,000 kg jumbo bag are labelled industry reference. Container figures (14.4 t / 23.4 t) are the same public-supplier planning reference already used on `/export/`. Board grades, liner specifications and carton dimensions remain `data pending` with the reason stated.
 - No prices, MOQs or lead times were added to this page. The print/charcoal minimum structure stays on `/private-label/` and the pillar, where it is already labelled industry reference.
 
+## N14 verification detail
+
+- `npm run build` (guotan) → 26 pages (25 indexable + 404); markdown negotiation 25 generated / 1 skipped (404).
+- `/private-label/`: 2,182 visible `<main>` words (target 1,200+), 10 H2, 1 H1. Title 45 chars, description 149 chars.
+- `npm run check:links` → 26 pages, 1,096 internal links, 0 broken. `npm run audit:network` → all five sites pass (main 26 pages / 25 indexable / 25 sitemap / max title 55 / max desc 158).
+- Structure: what changes vs stock product (table), service scope with an explicit "does not include" paragraph, product/size fixable ground, the four-step artwork gate (dieline → content proof → print proof → pre-production sample), the three stacked minimums (charcoal run / print run / UN 1361 carrier), three sample types, three inspection gates with the document set, and an eight-item enquiry checklist.
+- Internal links: `/request-quote/` 3×, `/request-sample/` 1×, `/oem/` 1×, `/packaging/` 1×, `/private-label-oem-charcoal-guide/` 2×, `/coconut-shell-charcoal-guide/` 1×, `/charcoal-testing-coa-guide/` 1×.
+- Cross-site links verified against built sibling trees: data `/products/`; testing `/tests/`; knowledge `/knowledge/coconut-charcoal-moq/` and `/knowledge/charcoal-container-loading/`.
+- JSON-LD: BreadcrumbList + Organization + Service + FAQPage (5 questions matching the visible Q&A). No Offer, price or availability.
+- Evidence discipline: the 72 / 64 / 56 pieces-per-kg figures are supplier-declared size records, and the page states that 26 mm and 27 mm carry no batch chemistry. MOQ (~1 t stock / one 20 ft printed), lead time (15–25 days after artwork approval) and container loads (14.4 t / 23.4 t) are labelled industry reference. No factory, capacity, certification, client or price claim was added.
+- Inbound links already existed from `/`, `/oem/`, `/products/`, `/products/coconut-shell-charcoal/`, the coconut guide, the manufacturing pillar and the private-label pillar; no new inbound links were needed.
+
 ## Extended queue (opened 2026-11-22)
 
 The 12-night queue is closed. The plan's remaining measurable gap is the commercial-page depth KPI (`<600 words → 0`) and the 25 vs 30–35 indexable-page target. This extension takes one page per night and does not add thin pages to move the count.
@@ -183,7 +195,7 @@ The 12-night queue is closed. The plan's remaining measurable gap is the commerc
 | Night | Work unit | Current → target | Acceptance |
 |---|---|---|---|
 | N13 | `/packaging/` specification page | 393 → 1,939 | done |
-| N14 | `/private-label/` service page | 372 → 1,200+ | service scope, artwork gate, minimums, what to send; links pillar, packaging, RFQ |
+| N14 | `/private-label/` service page | 372 → 2,182 | done — service scope, artwork gate, three minimums, what to send; links pillar, packaging, RFQ |
 | N15 | `/oem/` service page | 429 → 1,200+ | OEM vs private label, spec control, tooling/print ownership, inspection |
 | N16 | `/manufacturing/` service page | 348 → 1,200+ | stage overview, QC gates, what is supplier-declared; link manufacturing pillar |
 | N17 | `/export/` service page | 446 → 1,200+ | Incoterms/risk, document set, UN 1361, loading plan, destination checks |
