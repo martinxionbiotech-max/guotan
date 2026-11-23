@@ -2,9 +2,33 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd, faqPageJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/oem/`;
+
+const faqs = [
+  {
+    q: 'Does an OEM order require my own brand?',
+    a: 'No. OEM describes who controls the product specification, not whose name is on the box. You can take an OEM product in neutral packaging and sell it under your own label later, or combine a custom product with printed packaging in one order. What separates OEM from private label is that the product itself — raw material, shape, dimension, grade — is made to your specification rather than selected from the catalogue.',
+  },
+  {
+    q: 'What sets the minimum order for OEM charcoal?',
+    a: 'Three things, and they do not move together: the smallest run the factory will schedule, the cost and setup of any custom mould or die, and — where packaging is printed — the print run. Public supplier listings commonly describe roughly one tonne for stock packaging and a full 20 ft container once boxes are printed. A custom shape can add a tooling-driven minimum of its own. Only the written quotation binds the figure.',
+  },
+  {
+    q: 'Who owns the mould or die used for a custom shape?',
+    a: 'Whoever paid for it, if the paperwork says so — which is why it has to be written down. Before you approve the sample, agree four points: who pays for the tool, who holds it, whether it can be transferred or scrapped at your request, and who is responsible for wear and maintenance. Record the tool identity, cavity count and condition in a tooling annex to the purchase order. Without that clause, possession decides the argument.',
+  },
+  {
+    q: 'Can I change the specification after the golden sample is signed?',
+    a: 'Yes, but the change restarts the approval. A new dimension, tolerance, moisture limit or material changes the measurement record, and usually the price and schedule with it. Re-issue the specification with a new version number, take a new sample, and measure it against the new limits. Changes made after production has started create mixed lots, because the earlier output was built to the old specification and cannot be re-labelled into the new one.',
+  },
+  {
+    q: 'What happens if the first production batch misses the specification?',
+    a: 'That depends on the acceptance rule you agreed before the run existed. Decide in advance whether a failed result means re-inspection, sorting, rework, replacement of the lot, or a price adjustment — and who pays for the remedy. Keep a retained sample from both the approved golden sample and the disputed lot so the comparison is physical rather than verbal. A specification without a remedy clause is a description, not a contract term.',
+  },
+];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: `${SITES.main}/` },
@@ -19,16 +43,17 @@ const jsonLd = [
     id: canonical,
     name: 'OEM Charcoal Manufacturing',
     serviceType: 'OEM charcoal manufacturing',
-    description: 'OEM charcoal manufacturing to a buyer specification — custom raw material, size, shape and packaging, with sample approval and pre-shipment inspection.',
+    description: 'OEM charcoal manufacturing to a buyer-held specification — custom raw material, shape, dimension, grade and packaging, with tooling ownership terms, sample approval and pre-shipment inspection.',
     providerId: SITES.main,
   }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
 ];
 ---
 
 <BaseLayout
   site={site}
-  title="OEM Charcoal Manufacturing"
-  description="OEM charcoal manufacturing — custom product, size and packaging built to your specification with sampling and inspection."
+  title="OEM Charcoal Manufacturing — Custom Specification"
+  description="OEM charcoal manufacturing explained: how a custom specification is written, who owns moulds and print plates, and the inspection gates before shipment."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'OEM', url: '/oem/' }]}
@@ -36,87 +61,283 @@ const jsonLd = [
   <div class="page-title container">
     <h1>OEM Charcoal Manufacturing</h1>
     <p class="lede">
-      Manufacture charcoal to your specification — custom raw material, size, shape and packaging —
-      with a structured sampling and inspection workflow before bulk production.
+      OEM means the product is manufactured to a specification you hold, rather than picked from a
+      catalogue. That shifts the work from choosing a product to writing a specification the factory
+      can hit, deciding who owns the tooling, and proving the run matched — this page covers those
+      three things in the order they cause problems.
     </p>
+    <div class="page-title-media">
+      <img src="/images/page-manufacturing.webp" alt="Charcoal briquette production line with press and conveyor — conceptual illustration" width="1600" height="900" loading="eager" />
+    </div>
   </div>
 
   <section class="section">
     <div class="container">
-      <h2>How OEM Works</h2>
+      <h2>OEM and Private Label: Where the Line Sits</h2>
       <div class="prose">
         <p>
-          OEM (original equipment manufacturing) means the product is manufactured to your
-          specification and, where requested, under your brand. The workflow follows a
-          sample-first discipline: you approve a pre-production sample before any bulk run begins.
+          The two terms are used loosely in the charcoal trade, and the difference is not the logo on
+          the box. Private label takes a product that already exists in the catalogue and changes the
+          packaging, the artwork and the commercial terms. OEM changes the product: a different raw
+          material, a shape that is not a standard cube, a size outside the usual 25 / 26 / 27 mm
+          classes, a tighter tolerance, or a grade written to your limits instead of the supplier's.
         </p>
-        <ol>
-          <li><strong>Choose Product</strong> — coconut shell hookah, BBQ or bamboo charcoal.</li>
-          <li><strong>Choose Size</strong> — 25 mm / 26 mm / 27 mm cube, flat, or a custom dimension.</li>
-          <li><strong>Choose Packaging</strong> — bulk, retail box, or custom printed.</li>
-          <li><strong>Submit Logo</strong> — your artwork and brand requirements.</li>
-          <li><strong>Sample</strong> — approve a pre-production sample before production.</li>
-          <li><strong>Production</strong> — manufacture to the agreed specification.</li>
-          <li><strong>Inspection</strong> — quality control against the agreed spec before shipment.</li>
-          <li><strong>Shipment</strong> — export and delivery to your destination port.</li>
-        </ol>
         <p>
-          The same eight steps drive our <a href="/private-label/">private label</a> service; OEM
-          is the broader term, covering custom specification even when you do not put a brand on the
-          box.
-        </p>
-      </div>
-
-      <h2>What OEM Changes About the Order</h2>
-      <div class="prose">
-        <p>
-          Two things change when an order moves from stock product to OEM: the minimum order
-          quantity and the lead time. Both are driven by the same economics — a custom run needs
-          production setup and, where printed packaging is involved, a print run.
+          Most real orders mix the two. A custom product usually still ships in a printed box, so the
+          tooling questions of OEM and the artwork questions of private label both apply. What
+          matters is knowing which half of the order is fixed by the factory's existing line and
+          which half has to be created for you.
         </p>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Order type</th><th>Typical MOQ</th><th>Why</th></tr>
+            <tr><th>Question</th><th>Private label</th><th>OEM</th></tr>
           </thead>
           <tbody>
-            <tr><td>Stock packaging</td><td class="spec-value">~1 tonne</td><td>No setup or print run; product is already made</td></tr>
-            <tr><td>OEM, printed boxes</td><td class="spec-value">One 20 ft container</td><td>Custom run + printed packaging minimum</td></tr>
+            <tr><td>What changes</td><td class="spec-value">Packaging, artwork, brand</td><td class="spec-value">Product: raw material, shape, dimension, grade, pack format</td></tr>
+            <tr><td>Where the product comes from</td><td class="spec-value">A catalogue record you select</td><td class="spec-value">A specification written for the order</td></tr>
+            <tr><td>Tooling involved</td><td class="spec-value">Print plates only</td><td class="spec-value">Mould or die, plus print plates if printed</td></tr>
+            <tr><td>What sets the minimum</td><td class="spec-value">Charcoal run and print run</td><td class="spec-value">Tooling setup and run length, then print</td></tr>
+            <tr><td>What the sample proves</td><td class="spec-value">Pack and print match the approved version</td><td class="spec-value">Dimensions, mass, moisture and burn match the written limits</td></tr>
+            <tr><td>What can drift on reorder</td><td class="spec-value">Artwork version, board supply</td><td class="spec-value">Tool wear, drying conditions, material lot</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="updated">
-        MOQ figures reflect common industry practice and public supplier listings; the binding
-        figure is always the one in your written quotation.
-      </p>
-
-      <h2>Printing &amp; Customization Options</h2>
       <div class="prose">
-        <ul>
-          <li><strong>Box printing</strong> — full colour logo, multilingual panels, barcode and batch coding on the retail box and outer carton.</li>
-          <li><strong>Size runs</strong> — cube sizes 22 / 25 / 26 / 27 mm typically run on the same production line.</li>
-          <li><strong>Specification targets</strong> — ash, moisture, fixed carbon and size tolerance written into the purchase order against a stated method.</li>
-        </ul>
         <p>
-          A spec target without a stated test method is not enforceable. Our specification pages
-          on the <a href={`${SITES.data}/specifications/`} target="_blank" rel="noopener">data sub-site</a>
-          explain the six core metrics (ash, moisture, fixed carbon, volatile matter, burning time,
-          size tolerance) so you can write a contract that can actually be checked.
+          Two related terms are worth separating while the order is still a draft. White label is an
+          off-the-shelf product sold under your brand — closer to private label than to OEM. ODM means
+          the supplier designs the product and you brand it, so the specification is theirs and you
+          are choosing from their development. Neither is better; they put the engineering
+          responsibility in different hands, and the price and the risk follow it.
+        </p>
+        <p>
+          If the product does not need to change, the
+          <a href="/private-label/">private label page</a> is the shorter path: you select a
+          recorded size class, approve artwork against a dieline, and the charcoal stays the same. The
+          full comparison of white label, private label, OEM and ODM sits in the
+          <a href="/private-label-oem-charcoal-guide/">private label and OEM guide</a>.
         </p>
       </div>
 
-      <div class="callout" style="margin-top:1.5rem;">
-        <span class="callout-title">Write the specification first</span>
+      <h2>What the Specification Has to Control</h2>
+      <div class="prose">
         <p>
-          <a href="/private-label-oem-charcoal-guide/">Private Label and OEM Charcoal: From Specification to Shipment</a>
-          — how to turn a custom run into a measurable spec, a signed sample and an inspection plan.
+          An OEM order asks a supplier to hit a target instead of shipping a catalogue item, so the
+          specification sheet is the product. Nine elements make it enforceable. Each one exists
+          because a factory can satisfy the words while missing the intent if the element is left out.
         </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Element</th><th>What to write</th><th>Why it can be checked</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Product identity</td><td class="spec-value">Raw material and form — e.g. carbonised coconut shell, pressed cube</td><td class="spec-value">A COA or a burn test contradicts the wrong carbon immediately</td></tr>
+            <tr><td>Dimension and tolerance</td><td class="spec-value">Nominal size plus a permitted band, e.g. 25 mm ±0.5 mm</td><td class="spec-value">Calipers on a random sample turn the claim into a number</td></tr>
+            <tr><td>Sampling plan</td><td class="spec-value">How many pieces, from which lot, measured with what</td><td class="spec-value">A tolerance without a sampling rule cannot be enforced</td></tr>
+            <tr><td>Piece mass or count</td><td class="spec-value">Pieces per kilogram at a stated moisture, or grams per piece</td><td class="spec-value">Count and net weight can both be true only if one is derived from the other</td></tr>
+            <tr><td>Moisture</td><td class="spec-value">Limit plus basis — as-received or dry</td><td class="spec-value">A percentage without a basis is not comparable between labs</td></tr>
+            <tr><td>Ash, fixed carbon, volatiles</td><td class="spec-value">Value plus test method designation</td><td class="spec-value">The method decides the number; the same sample reads differently across methods</td></tr>
+            <tr><td>Burn and ignition</td><td class="spec-value">Duration plus conditions: piece size, airflow, lighting method</td><td class="spec-value">Burn time without conditions is marketing, not a specification</td></tr>
+            <tr><td>Packaging</td><td class="spec-value">Format, board, net weight, piece count, barrier</td><td class="spec-value">The pack is part of the product once it reaches retail</td></tr>
+            <tr><td>Acceptance rule</td><td class="spec-value">What happens on a miss: re-inspect, sort, rework, replace, adjust</td><td class="spec-value">A limit without a remedy is an argument waiting for a shipment</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Three habits make the sheet usable. First, separate a <em>limit</em> from a
+          <em>typical</em> value: “≤ 3.5% ash, typical 3.0%” tells the factory what fails and what to
+          aim for, while a single number hides which one it is. Second, attach a method and a basis to
+          every measured value — the
+          <a href={`${SITES.data}/specifications/`} target="_blank" rel="noopener">specification pages</a>
+          define each metric, and the
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">method reference</a>
+          lists the standards behind them. Third, state the sampling point: a moisture reading taken
+          at the press, at the packing line and at the destination port are three different numbers
+          for one batch.
+        </p>
+        <p>
+          What the sheet cannot do is invent evidence. A size class is a nominal dimension, not a
+          chemistry record — the 26 mm and 27 mm records carry piece counts and dimensions from a
+          public table but no batch ash or fixed carbon. If your brand needs a chemistry claim, it has
+          to come from a supplier datasheet or a laboratory report for the batch you buy. The
+          <a href="/coconut-shell-charcoal-guide/">coconut shell specification guide</a> explains how
+          to read those records without over-claiming them.
+        </p>
+      </div>
+
+      <h2>Tooling: Moulds, Dies and Who Holds Them</h2>
+      <div class="prose">
+        <p>
+          A standard cube runs on a mould the factory already has. A custom profile — a different
+          footprint, a rounded edge, a larger format, a hole through the piece — needs a die made for
+          the order. That die is a physical asset with a life, and its ownership is a commercial term,
+          not a detail to settle after the first shipment.
+        </p>
+        <p>
+          Assume the tool wears. Pressing abrasive carbon against a die changes the cavity over a long
+          run, and the change shows up as dimension drift rather than a sudden failure. Ask for
+          first-article and last-article measurements from the same run, so you can see whether the
+          tool held the tolerance from the beginning of the lot to the end. On a reorder, ask when the
+          tool was last inspected and whether it was replaced.
+        </p>
+        <p>
+          Four points belong in writing before the tool is cut:
+        </p>
+        <ul>
+          <li><strong>Who pays</strong> — tooling is normally a one-time charge, separate from the unit price. It is not a per-piece cost, and it should not quietly reappear in a later quotation as one.</li>
+          <li><strong>Who holds it</strong> — the factory, the toolmaker, or a third party. Possession decides who can use it for another buyer.</li>
+          <li><strong>Whether it can move</strong> — if you paid for the tool, ask for a written statement that it is yours and can be transferred or scrapped at your request. A tool that cannot leave the factory is leverage, not an asset.</li>
+          <li><strong>Who maintains it</strong> — wear, re-polishing and replacement, and at whose cost. This is the clause that matters on the third reorder, not the first.</li>
+        </ul>
+        <p>
+          Record the tool identity in a tooling annex: a photograph, the cavity count, the date of
+          manufacture and the condition at handover. “The mould we made for you” is not an identifier.
+        </p>
+        <p>
+          Printed packaging carries a parallel question. Print plates are commonly charged to the
+          buyer once and held by the converter, which means a later switch of packaging supplier may
+          require new plates. Artwork ownership is a separate matter from plate ownership: agree that
+          the design files remain yours and get the dieline and the approved file back in an editable
+          format. The <a href="/packaging/">packaging page</a> covers the construction side — board,
+          barrier, palletisation — and the <a href="/private-label/">private label page</a> walks
+          through the artwork gate in sequence.
+        </p>
+      </div>
+
+      <h2>From Drawing to Golden Sample</h2>
+      <div class="prose">
+        <p>
+          A custom run is approved in stages, and each stage answers a different question. Skipping
+          one does not save time; it moves the failure later, where it costs more.
+        </p>
+        <ol>
+          <li><strong>Feasibility sample</strong> — can this specification be made at all, and at what rough volume? It tests the drawing against the line. It is not an approval and should not be treated as one.</li>
+          <li><strong>Development sample</strong> — a made-to-specification piece you can burn, measure and show to your market. This is where a dimension that looked reasonable on paper turns out to be awkward in the hand.</li>
+          <li><strong>Golden sample</strong> — the signed reference for production. For an OEM order it must travel with its measurement record: the specification version, the measured dimensions, piece mass, moisture and the test conditions behind any burn figure. The object alone records what it looks like, not what it is.</li>
+          <li><strong>Production sample</strong> — drawn from the actual run, not made separately by hand. Comparing it with the golden sample is the check that the line, not the sample bench, can hold the specification.</li>
+        </ol>
+        <p>
+          The approval record is short and worth more than the sample: sample ID, date, specification
+          version, the measured values with their method, a photograph, and the name of the person who
+          approved it on each side. Keep one copy with the purchase order and one with the inspection
+          file. If a dispute starts, this record is the definition of what was agreed.
+        </p>
+        <p>
+          Samples travel through the <a href="/request-sample/">sample request page</a> so the
+          product, size, specification version and destination are recorded together. A sample sent
+          without its specification is a demonstration, and a demonstration cannot be inspected
+          against.
+        </p>
+      </div>
+
+      <h2>Inspection Gates for a Custom Run</h2>
+      <div class="prose">
+        <p>
+          Standard production is checked against a catalogue description. A custom run is checked
+          against a document you wrote, which makes the gates both more necessary and easier to
+          define. Four gates cover most of the risk.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Gate</th><th>What is checked</th><th>Record that proves it</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Pre-production</td><td class="spec-value">Material lot, tool identity, signed specification version, approved artwork</td><td class="spec-value">Signed specification sheet and approved proof</td></tr>
+            <tr><td>First article</td><td class="spec-value">Dimensions, piece mass, moisture and appearance from the start of the run</td><td class="spec-value">First-article measurement report</td></tr>
+            <tr><td>In-process</td><td class="spec-value">Dimension drift, piece mass, moisture at the packing line, cracks and delamination</td><td class="spec-value">Line check log with sample size and result</td></tr>
+            <tr><td>Pre-shipment</td><td class="spec-value">Count, dimension sample, moisture, breakage, carton marks, pallet condition</td><td class="spec-value">Inspection report and retained sample</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          The first article is the gate that a catalogue order does not need. It catches a tool that
+          was cut to the wrong dimension before a tonne of product exists, and it costs one shift
+          rather than one lot. The in-process check exists because a run can start inside tolerance and
+          finish outside it; sampling only at the end tells you the average of a drift, not where the
+          drift went.
+        </p>
+        <p>
+          Pre-shipment inspection for a custom order should reuse the golden sample physically. Put
+          the approved piece beside the sampled piece and measure both, rather than reading a
+          specification and judging by eye. The retained sample — one sealed unit from the lot, kept
+          by both sides — is what makes a later complaint answerable. The
+          <a href={`${SITES.knowledge}/knowledge/pre-shipment-inspection-charcoal/`} target="_blank" rel="noopener">pre-shipment inspection guide</a>
+          sets out the checks in the order they are usually run.
+        </p>
+        <p>
+          Documents travel with the goods, not after them: commercial invoice, packing list that
+          matches carton and pallet marks, and a certificate of analysis. Read the COA for what it
+          actually is — a laboratory report and a seller's declaration look similar and mean different
+          things, which the
+          <a href="/charcoal-testing-coa-guide/">testing and COA guide</a> explains. Charcoal moves
+          under UN 1361, Class 4.2, so the dangerous-goods declaration and safety data sheet belong in
+          the same file, and destination rules may add a certificate of origin or label requirements.
+        </p>
+      </div>
+
+      <h2>Volume, Lead Time and Container Arithmetic</h2>
+      <div class="prose">
+        <p>
+          OEM volume is usually discussed in containers because the tooling and print steps make small
+          runs expensive per unit. As a public planning reference, a 20 ft container of coconut shell
+          hookah charcoal loads at roughly 14.4 tonnes and a 40 ft high-cube at roughly 23.4 tonnes
+          before retail packaging and pallets take their share of the volume. Those figures describe
+          the cargo, not a quotation.
+        </p>
+        <p>
+          Lead time splits into two parts that are often conflated: tooling and sampling, then
+          production. The first depends on the die and how many sample rounds the specification needs;
+          the second is commonly quoted at 15–25 days after artwork approval for a printed order, as
+          an industry reference rather than a commitment. Plan backwards from the shipment date and
+          put both halves in the schedule, or the sample rounds will consume the production window.
+        </p>
+        <p>
+          The minimum follows the same logic. A stock-packaging run is commonly described at around
+          one tonne; a printed order at a full 20 ft container; a custom mould can add a minimum of
+          its own because the setup is charged to the first run. The effective minimum is the largest
+          of these, not an average, and the written quotation is the only binding statement. The
+          arithmetic behind container-based minimums is in the
+          <a href={`${SITES.knowledge}/knowledge/coconut-charcoal-moq/`} target="_blank" rel="noopener">MOQ guide</a>
+          and the <a href={`${SITES.knowledge}/knowledge/charcoal-container-loading/`} target="_blank" rel="noopener">container-loading guide</a>.
+        </p>
+      </div>
+
+      <div class="callout-pending">
+        <span class="callout-title">Data pending — what this page does not claim</span>
+        <p>
+          No factory, capacity, certification, client or price is stated on this page, because none
+          is verified in the records. The 25 / 26 / 27 mm piece counts (72 / 64 / 56 per kilogram) are
+          supplier-declared size records; the 26 mm and 27 mm chemistry, packaging and MOQ remain
+          pending. Tooling charges, minimums, lead times and container loads quoted here are industry
+          reference or planning figures, not commitments. An OEM order is quoted against your
+          specification, tooling and volume — the written quotation is the only binding statement.
+        </p>
+      </div>
+
+      <h2>OEM Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
       </div>
 
       <div class="cta-banner">
-        <h2>Have a custom specification?</h2>
-        <p>Tell us what you need — we'll respond with feasibility and a quote.</p>
+        <h2>Have a drawing or a target specification?</h2>
+        <p>
+          Send the product, dimension and tolerance, target market and first volume — we will confirm
+          what can be quoted and what is still pending.
+        </p>
         <a class="btn btn-primary" href="/request-quote/">Start an OEM Project →</a>
       </div>
     </div>
