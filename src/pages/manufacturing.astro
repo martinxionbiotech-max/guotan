@@ -2,9 +2,33 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd, faqPageJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/manufacturing/`;
+
+const faqs = [
+  {
+    q: 'Do you own the factory that makes the charcoal?',
+    a: 'No. Charcoal Hub is a sourcing and product-intelligence platform; production runs at independent supplier plants. That is why this page describes gates, records and evidence labels rather than equipment and capacity. A supplier claim is published with the label its evidence supports — supplier-reported, registry-checked, sample-measured or third-party tested — and no record is promoted because a plant says so.',
+  },
+  {
+    q: 'Can you guarantee the production batch will match the sample?',
+    a: 'No one can guarantee that from a sample, and a supplier who does is describing hope rather than control. A sample proves a specification can be made; it does not prove a line can hold it across a lot. The batch is protected by three things instead: a written acceptance rule that says what happens on a miss, gates during the run that catch drift early, and a retained sample from the shipped lot that makes a later comparison physical rather than verbal.',
+  },
+  {
+    q: 'Who writes the specification — you or the buyer?',
+    a: 'Either, but it has to end up in one field set. A catalogue order selects a recorded size class and the specification is the supplier\'s. A built-to-specification order starts from the buyer\'s sheet. In both cases the values are restated in the same fields — dimension and tolerance, piece mass or count, moisture with its basis, ash, fixed carbon and volatiles with their methods, burn conditions, packaging and acceptance rule — so two suppliers can be compared on the same axes and a lab result can be read against the clause it belongs to.',
+  },
+  {
+    q: 'What does "supplier-reported" mean in your records?',
+    a: 'It means the value came from the supplier — a datasheet, a specification sheet or a written message — and has not been independently checked. It is useful as a starting point for a sample request and useless as a contract term. Moving a value off that label needs a document that supports it: a public registry record for a legal fact, a measured sample for a piece, or a laboratory report for a tested parameter, each limited to what it actually covers.',
+  },
+  {
+    q: 'How do I know a supplier can handle my volume before I commit?',
+    a: 'Ask for a written run schedule rather than a monthly tonnage figure. A capacity number on a website is a claim about equipment; a schedule is a commitment about your order — which line, which week, what else is running, and what happens if the previous lot overruns. For a first order, keep the volume inside what one run can produce and inspect that run. Published capacity is not used on this page because no plant-level allocation has been verified.',
+  },
+];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: `${SITES.main}/` },
@@ -17,18 +41,19 @@ const jsonLd = [
   }),
   serviceJsonLd({
     id: canonical,
-    name: 'Charcoal Manufacturing & Sourcing',
-    serviceType: 'Charcoal sourcing and manufacturing management',
-    description: 'Charcoal manufacturing and sourcing management — multi-supplier qualification, a standardized specification model and batch quality control.',
+    name: 'Charcoal Manufacturing Management',
+    serviceType: 'Charcoal manufacturing and sourcing management',
+    description: 'Charcoal manufacturing managed across qualified suppliers — specification control, stage-gate quality checks, batch records, pre-shipment inspection and an evidence label on every published value.',
     providerId: SITES.main,
   }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
 ];
 ---
 
 <BaseLayout
   site={site}
-  title="Charcoal Manufacturing & Sourcing"
-  description="How we approach charcoal manufacturing and sourcing — multi-supplier qualification, standardized specifications and batch quality control."
+  title="Charcoal Manufacturing & Sourcing — How We Run a Batch"
+  description="How charcoal manufacturing is managed across qualified suppliers: specification control, stage-gate QC, batch records and pre-shipment inspection."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Manufacturing', url: '/manufacturing/' }]}
@@ -36,73 +61,322 @@ const jsonLd = [
   <div class="page-title container">
     <h1>Manufacturing &amp; Sourcing</h1>
     <p class="lede">
-      A China-based sourcing and supplier network — focused on transparency, standardization and
-      sourcing efficiency rather than "China = cheap".
+      Charcoal Hub is a sourcing and product-intelligence platform, not a single factory. Production
+      runs at independent supplier plants. This page covers the part we actually control — how a run
+      is specified, gated, documented and labelled — and it separates what has been checked from what
+      a supplier simply states.
     </p>
     <div class="page-title-media">
-      <img src="/images/page-manufacturing.webp" alt="Charcoal briquette production line with press machine and conveyor — conceptual illustration" width="1600" height="900" loading="lazy" />
+      <img src="/images/page-manufacturing.webp" alt="Charcoal briquette production line with press machine and conveyor — conceptual illustration" width="1600" height="900" loading="eager" />
     </div>
   </div>
 
   <section class="section">
     <div class="container">
-      <h2>How We Source</h2>
-      <div class="grid grid-2">
-        <div class="card"><h3>Multi-supplier qualification</h3><p>We qualify multiple manufacturers so buyers can compare specifications.</p></div>
-        <div class="card"><h3>Standardized specifications</h3><p>One spec model across all products — ash, moisture, fixed carbon, size, burn time.</p></div>
-        <div class="card"><h3>Batch quality control</h3><p>Testing per batch with results labeled by source.</p></div>
-        <div class="card"><h3>Export readiness</h3><p>Documentation and container loading for international shipping.</p></div>
-      </div>
-
-      <h2>The Coconut Shell Charcoal Process Chain</h2>
+      <h2>Two Ways a Charcoal Order Gets Made</h2>
       <div class="prose">
         <p>
-          The following is the general process chain for coconut shell charcoal briquettes, drawn
-          from public industry descriptions. It is shared manufacturing knowledge, not a claim
-          about any specific factory's equipment or output.
+          Almost every charcoal order is one of two things, and the difference decides where the risk
+          sits. A <strong>catalogue order</strong> selects a product that already exists: a recorded
+          size class, a grade the supplier runs, a packaging format they stock. A
+          <strong>built-to-specification order</strong> creates the product for the order — a raw
+          material, shape, dimension, grade or pack that the plant does not run by default.
         </p>
-        <ol>
-          <li><strong>Carbonization</strong> — coconut shells are heated with limited oxygen to drive off volatiles and leave carbon.</li>
-          <li><strong>Crushing</strong> — the carbonized shell is ground to a controlled particle size.</li>
-          <li><strong>Mixing</strong> — the carbon powder is blended, typically with a binder, to a uniform paste.</li>
-          <li><strong>Forming</strong> — the paste is pressed into shape (cube or flat briquettes).</li>
-          <li><strong>Cutting</strong> — pressed stock is cut to the nominal size (e.g. 25 mm).</li>
-          <li><strong>Drying</strong> — briquettes are dried to a low, controlled moisture content.</li>
-        </ol>
         <p>
-          Each step is a point where the final specification can drift: under-carbonization raises
-          volatile matter, inconsistent crushing changes density and burn rate, and incomplete
-          drying raises moisture. That is why batch testing matters — the process chain only
-          produces a predictable product when each stage is controlled.
+          The first is faster and cheaper to start, and the risk is mostly that the catalogue
+          description and the delivered lot disagree. The second puts the engineering in your hands:
+          the risk moves to whether the specification was written tightly enough to be reproducible,
+          and whether the sample that convinced you came from the line that will make the goods. Most
+          first orders are the first kind; most private-label programmes end up as the second.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Question</th><th>Catalogue order</th><th>Built-to-specification order</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>What is fixed</td><td class="spec-value">A product the plant already runs</td><td class="spec-value">A specification written for the order</td></tr>
+            <tr><td>Who defines the values</td><td class="spec-value">The supplier's record</td><td class="spec-value">The buyer's sheet, restated in a shared field set</td></tr>
+            <tr><td>What the sample proves</td><td class="spec-value">The lot resembles the catalogue item</td><td class="spec-value">The specification is manufacturable</td></tr>
+            <tr><td>Where variation enters</td><td class="spec-value">Batch-to-batch drift on a known product</td><td class="spec-value">Material lot, tooling, drying and pack, all at once</td></tr>
+            <tr><td>What has to be approved</td><td class="spec-value">The grade and the pack</td><td class="spec-value">The specification, the sample and the artwork</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          If your order is the first kind, the
+          <a href="/private-label/">private label page</a> follows the pack and artwork side. If it is
+          the second, the <a href="/oem/">OEM page</a> covers tooling ownership and the sample path in
+          detail. Both end up here, because both have to be produced and checked the same way. If the
+          product and volume are already decided, start with a
+          <a href="/request-quote/">quote request</a> and state the destination — the shipping terms
+          change the packing decision before production does.
         </p>
       </div>
 
-      <h2>Why Standardized Specifications Matter</h2>
+      <h2>Who Does What on a Run</h2>
       <div class="prose">
         <p>
-          A manufacturing claim is only useful when it is measurable. We use one specification
-          model — ash, moisture, fixed carbon, volatile matter, size tolerance and burning time —
-          across all products, so a buyer can compare suppliers on the same axes. The definitions
-          live on the
-          <a href={`${SITES.data}/specifications/`} target="_blank" rel="noopener">data sub-site</a>.
-          For how each stage of the line sets those values, see the
-          <a href="/hookah-charcoal-manufacturing/">hookah charcoal manufacturing guide</a>.
+          A manufacturing order fails quietly when everyone assumes someone else owns a decision. The
+          split below is the one used on a Charcoal Hub order; a direct factory purchase usually
+          collapses the middle column into the buyer, which is why the buyer ends up chasing tooling,
+          sampling and inspection at the same time.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Decision</th><th>Buyer</th><th>Sourcing desk</th><th>Factory</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Product specification</td><td class="spec-value">Sets the requirement and the target market</td><td class="spec-value">Restates it in the shared field set; flags untestable clauses</td><td class="spec-value">Confirms feasibility against the line</td></tr>
+            <tr><td>Supplier selection</td><td class="spec-value">Approves the shortlist</td><td class="spec-value">Document review, sample request, status label</td><td class="spec-value">Provides documents and a sample</td></tr>
+            <tr><td>Sample approval</td><td class="spec-value">Signs the golden sample and its measurement record</td><td class="spec-value">Checks the record against the specification</td><td class="spec-value">Produces the sample to the stated limits</td></tr>
+            <tr><td>Tooling and print plates</td><td class="spec-value">Pays, and holds ownership if the clause says so</td><td class="spec-value">Writes the tooling annex</td><td class="spec-value">Cuts, holds and maintains the tool</td></tr>
+            <tr><td>In-process control</td><td class="spec-value">Reviews the gate records</td><td class="spec-value">Checks that each gate has a result and a signer</td><td class="spec-value">Runs the checks and keeps the logs</td></tr>
+            <tr><td>Pre-shipment inspection</td><td class="spec-value">Accepts or rejects against the acceptance rule</td><td class="spec-value">Commissions the inspection and holds the retained sample</td><td class="spec-value">Makes the lot available and fixes a miss</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>The Line, in Brief</h2>
+      <div class="prose">
+        <p>
+          Coconut shell hookah charcoal runs through the same six stages almost everywhere. Each stage
+          fixes one property, and each has a characteristic way of going wrong — which is what makes it
+          worth a check rather than an assumption.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Stage</th><th>What it fixes</th><th>How it fails</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Shell intake and storage</td><td class="spec-value">Feedstock moisture, contamination</td><td class="spec-value">Mould, soil and sand raising ash</td></tr>
+            <tr><td>Carbonisation</td><td class="spec-value">Fixed carbon, volatiles, yield</td><td class="spec-value">Under-char smokes; over-char goes friable</td></tr>
+            <tr><td>Milling and screening</td><td class="spec-value">Particle size distribution</td><td class="spec-value">Uneven density and weak pieces</td></tr>
+            <tr><td>Binder and mixing</td><td class="spec-value">Green strength, ash contribution</td><td class="spec-value">Cracks in drying, extra ash in the product</td></tr>
+            <tr><td>Pressing and cutting</td><td class="spec-value">Density, dimension, shape</td><td class="spec-value">Size drift as the die wears; delamination</td></tr>
+            <tr><td>Drying and conditioning</td><td class="spec-value">Final moisture, hardness</td><td class="spec-value">Case-hardened outside, wet inside; mould in transit</td></tr>
+            <tr><td>Sorting and packing</td><td class="spec-value">Count, breakage, pack integrity</td><td class="spec-value">Short count, fines in the box</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          This page does not repeat the process detail. The
+          <a href="/hookah-charcoal-manufacturing/">hookah charcoal manufacturing guide</a> runs each
+          stage in sequence, ties it to the parameter it sets and the defect it produces, and explains
+          why batch-to-batch consistency is a different problem from conformance. Read that guide if
+          you are writing a specification; read this page if you are placing a run.
+        </p>
+      </div>
+
+      <h2>QC Gates: Where a Batch Is Allowed to Continue</h2>
+      <div class="prose">
+        <p>
+          A gate is not the same thing as a test. A test produces a number; a gate produces a decision,
+          a record and a named person who accepted it. A plant can test every batch and still ship a
+          bad lot if no test is attached to a rule that says what happens when the number is outside
+          the limit. Six gates cover a coconut shell charcoal run.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Gate</th><th>When</th><th>What is checked</th><th>Record</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Feedstock intake</td><td class="spec-value">On receipt at the plant</td><td class="spec-value">Moisture, shell type, visible soil and foreign matter</td><td class="spec-value">Intake log with supplier and lot</td></tr>
+            <tr><td>Carbonisation outturn</td><td class="spec-value">End of each kiln cycle</td><td class="spec-value">Yield, appearance, volatile matter by the agreed method</td><td class="spec-value">Batch card tied to the kiln cycle</td></tr>
+            <tr><td>Mix and binder</td><td class="spec-value">Every mix</td><td class="spec-value">Binder ratio, water, particle blend</td><td class="spec-value">Mix log with weights</td></tr>
+            <tr><td>Green piece</td><td class="spec-value">Start of the press run</td><td class="spec-value">Dimension, piece mass, green strength</td><td class="spec-value">First-article measurement</td></tr>
+            <tr><td>Dried finished piece</td><td class="spec-value">End of drying</td><td class="spec-value">Moisture, dimension, piece mass, drop breakage</td><td class="spec-value">Drying record plus a sealed sample</td></tr>
+            <tr><td>Pre-shipment</td><td class="spec-value">Before loading</td><td class="spec-value">Count, dimension sample, moisture, breakage, marks</td><td class="spec-value">Inspection report and retained sample</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Two details decide whether these gates mean anything. The first is the sampling rule: how
+          many pieces, drawn from where, measured with what. A tolerance without a sampling plan cannot
+          be enforced, because any single piece can be found that passes. Public inspection
+          conventions such as ISO 2859-1 describe how to size a sample by lot and acceptance level;
+          they are a starting point for the purchase order, not a substitute for one.
+        </p>
+        <p>
+          The second is the retained sample. One sealed unit from the shipped lot, kept by both sides,
+          is what turns a later complaint into a comparison. Without it, a dispute is a memory of what
+          the sample looked like months earlier — and the party holding the stock usually wins that
+          argument.
+        </p>
+      </div>
+
+      <h2>One Specification Model Across Suppliers</h2>
+      <div class="prose">
+        <p>
+          Multi-supplier sourcing only works if the offers are comparable. We restate every product in
+          one field set — dimension with a tolerance, piece mass or count per kilogram, moisture with
+          its basis, ash, fixed carbon and volatiles with their test methods, burn conditions,
+          <a href="/packaging/">pack format</a> and the acceptance rule — so a buyer compares the same axes instead of two suppliers'
+          differently-worded sheets.
+        </p>
+        <p>
+          Within that model, two habits prevent most disputes. Separate a <em>limit</em> from a
+          <em>typical</em>: “≤ 3.5% ash, typical 3.0%” tells the factory what fails and what to aim
+          for, while one number hides which it is. And attach a method and a basis to every measured
+          value, because the same sample reads differently under different methods and a moisture
+          figure means nothing without knowing whether it is as-received or dry.
+        </p>
+        <p>
+          The definitions live on the
+          <a href={`${SITES.data}/specifications/`} target="_blank" rel="noopener">specification pages</a>,
+          the standards behind them on the
+          <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">test method reference</a>,
+          and the field-by-field version of this argument in the
+          <a href="/coconut-shell-charcoal-guide/">coconut shell specification guide</a>.
+        </p>
+      </div>
+
+      <h2>Supplier Qualification, and What It Is Worth</h2>
+      <div class="prose">
+        <p>
+          A supplier is qualified in four steps, and each step supports a different statement. Document
+          review checks the paperwork that underpins a claim — business licence, factory documentation,
+          product specifications, certifications — for consistency rather than for impressiveness.
+          Sample evaluation measures a physical piece against the intended application. Batch testing
+          checks production output, and only a third-party laboratory moves a parameter to
+          independently verified. On-site or third-party verification is what can support a capability
+          claim about the plant itself.
+        </p>
+        <p>
+          The current state of the directory is worth stating plainly: of the eight supplier profiles
+          published, three are <strong>Supplier Reported</strong> and five are
+          <strong>Unverified</strong>. None is Verified or Third-Party Verified. The one Verified record
+          on the manufacturer site is the operating entity itself, and it is excluded from supplier
+          counts because it is not a charcoal plant. A directory that reads better than its evidence is
+          worse than a short one.
+        </p>
+        <p>
+          The workflow, the status labels and the reason a storefront cannot earn one are set out on
+          the <a href={`${SITES.manufacturer}/how-we-qualify/`} target="_blank" rel="noopener">qualification model page</a>
+          and the <a href={`${SITES.manufacturer}/verification/`} target="_blank" rel="noopener">verification model</a>.
+        </p>
+      </div>
+
+      <h2>What Is Supplier-Declared — and What Each Source Can Support</h2>
+      <div class="prose">
+        <p>
+          Most charcoal data in circulation comes from the seller. That is not automatically wrong, but
+          it is a different kind of statement from a measurement, and the two should never be printed
+          in the same typeface. Every value published on this site carries the label its source
+          supports.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Source</th><th>What it can support</th><th>What it cannot</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Supplier datasheet or written statement</td><td class="spec-value">A stated value, labelled supplier-reported</td><td class="spec-value">Independent confirmation, or consistency across batches</td></tr>
+            <tr><td>Public registry record</td><td class="spec-value">Legal existence, registration data, company status</td><td class="spec-value">Product capability, quality or trading volume</td></tr>
+            <tr><td>Sample measurement</td><td class="spec-value">The measured piece, at that moment, by that method</td><td class="spec-value">The production lot, or the next order</td></tr>
+            <tr><td>Third-party laboratory report</td><td class="spec-value">The tested parameters, for the sampled lot</td><td class="spec-value">The factory, other batches or other products</td></tr>
+            <tr><td>Inspection report</td><td class="spec-value">Count, condition and marks of the inspected lot</td><td class="spec-value">Chemistry unless samples were tested</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Three consequences follow. A 26 mm size class carrying a piece count is not a chemistry
+          record, and should not be quoted as one. A certificate of analysis is a document about a
+          sample, not a factory audit — the
+          <a href="/charcoal-testing-coa-guide/">testing and COA guide</a> explains how to read what it
+          actually covers. And a supplier's monthly tonnage is a claim about equipment until a run
+          schedule names your order.
+        </p>
+      </div>
+
+      <h2>Capacity, Minimums and Lead Time</h2>
+      <div class="prose">
+        <p>
+          No plant capacity is published on this page, because a capacity figure without an allocation
+          is a number about someone else's equipment. What matters for a purchase is narrower: which
+          line, which week, what else is booked, and what the plant does if the previous lot overruns.
+          Those answers belong in a written run schedule, and they are confirmed at quotation for the
+          specific product and volume.
+        </p>
+        <p>
+          Minimums follow the order type. As a public planning reference, stock-packaging runs are
+          commonly described at around one tonne, while a printed private-label order typically needs a
+          full 20 ft container because the print setup is charged to the run. A custom mould can add a
+          minimum of its own. The effective minimum is the largest of these, not an average.
+        </p>
+        <p>
+          For volume planning, a 20 ft container of coconut shell hookah charcoal loads at roughly 14.4
+          tonnes and a 40 ft high-cube at roughly 23.4 tonnes before retail packaging and pallets take
+          their share. Production is commonly quoted at 15–25 days after artwork approval for a printed
+          order. All three figures are industry reference, not commitments, and your
+          <a href="/request-quote/">quote request</a> is where the schedule for a specific run is
+          confirmed. The
+          <a href={`${SITES.knowledge}/knowledge/coconut-charcoal-moq/`} target="_blank" rel="noopener">MOQ guide</a>
+          and the <a href={`${SITES.knowledge}/knowledge/charcoal-container-loading/`} target="_blank" rel="noopener">container-loading guide</a>
+          work through the arithmetic.
+        </p>
+      </div>
+
+      <h2>Documents That Travel With the Goods</h2>
+      <div class="prose">
+        <p>
+          A run is not finished when the pallets are wrapped. The document set is part of the delivery,
+          and a missing one can stop a container at destination more reliably than a quality argument.
+          A commercial invoice and a packing list that matches carton and pallet marks are the
+          baseline. A certificate of analysis belongs with them when a parameter was tested. Charcoal
+          moves under UN 1361, Class 4.2, so the dangerous-goods declaration and safety data sheet
+          travel in the same file.
+        </p>
+        <p>
+          Destination rules may add a certificate of origin, labelling requirements or an import
+          permit, and the importer of record is the party that carries them. The
+          <a href="/export/">export page</a> covers the shipping side, and the
+          <a href={`${SITES.knowledge}/knowledge/charcoal-import-certifications/`} target="_blank" rel="noopener">import certification guide</a>
+          lists what different markets typically ask for.
         </p>
       </div>
 
       <div class="callout-pending">
-        <span class="callout-title">Data pending — supplier verification in progress</span>
+        <span class="callout-title">Data pending — what this page does not claim</span>
         <p>
-          Manufacturer profiles, production capacities and certifications are published only after
-          supplier verification. See the manufacturer sub-site for the qualification model.
+          No factory, production capacity, certification, client or price is stated here, because none
+          is verified in the records. The three Supplier Reported and five Unverified profiles are the
+          current state of the directory, not a placeholder to be upgraded by copywriting. Container
+          loads, the one-tonne stock minimum, the printed-order minimum and the 15–25 day production
+          window are industry reference or planning figures. Capacity and lead time for your order are
+          confirmed in writing at quotation.
         </p>
-        <p><a href={`${SITES.manufacturer}/`} target="_blank" rel="noopener">Manufacturer Intelligence →</a></p>
+      </div>
+
+      <h2>Manufacturing Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
       </div>
 
       <div class="cta-banner">
-        <h2>Need manufacturing capacity?</h2>
-        <p>Tell us your product and volume.</p>
-        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+        <h2>Have a specification and a shipment date?</h2>
+        <p>
+          Send the product, dimension and tolerance, target market and first volume — we will confirm
+          which stages can be quoted, which need a sample, and which values are still supplier-reported.
+        </p>
+        <a class="btn btn-primary" href="/request-quote/">Start a Sourcing Enquiry →</a>
       </div>
     </div>
   </section>
