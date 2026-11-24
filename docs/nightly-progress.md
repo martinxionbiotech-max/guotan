@@ -1,9 +1,9 @@
 # Charcoal Hub — Nightly Progress
 
-Last updated: 2026-11-23
-Current: N15
-Next: N16 — `/manufacturing/` service page (348 words)
-Status: N15 complete; extended queue open
+Last updated: 2026-11-24
+Current: N16
+Next: N17 — `/export/` service page (446 words)
+Status: N16 complete; extended queue open
 
 ## Completed
 
@@ -24,6 +24,7 @@ Status: N15 complete; extended queue open
 | N14 | Private label service page (queue extension) | 2026-11-22 | `42bc9fe` | 26 pages | `/private-label/` 372 → 2,182 visible words, 10 H2, 1 H1, title 45, description 149. Adds the stock-vs-private-label comparison, service scope with an explicit "does not include" paragraph, the four-step artwork gate, three stacked minimums, three sample types, three inspection gates and an eight-item enquiry checklist. Service + BreadcrumbList + Organization + FAQPage; no Offer, price or availability. |
 | N15 | OEM service page (queue extension) | 2026-11-23 | `0716d21` | 26 pages | `/oem/` 429 → 2,655 visible `<main>` words, 6 content H2, 1 H1, title 49, description 152. Separates OEM from private label, white label and ODM by what actually changes (product vs pack); covers the nine-element specification sheet with limit-vs-typical and method/basis rules, tooling and print-plate ownership with a tooling annex, the four-stage sample path and the measurement record a golden sample needs, four inspection gates including first-article, and volume/lead-time arithmetic. Service + BreadcrumbList + Organization + FAQPage (5 questions matching visible text); no Offer, price or availability. RFQ 3×, `/request-sample/` 1×. |
 | N13 | Packaging service page (queue extension) | 2026-11-22 | `a7610ff` | 26 pages | `/packaging/` 393 → 1,939 visible words, 12 H2, 1 H1, title 26, description 135. Six-format table separates the two supplier-declared data records (1 kg box, 10 kg pack) from four industry-reference formats. Adds box anatomy by layer, the moisture/barrier decision with its measurement basis and sampling point, ECT vs Mullen, pallet footprints and ISPM 15, the retail-vs-bulk loading trade-off, ISTA 1A / ASTM D5276 protocols, an eleven-line packaging specification, cost drivers, and five FAQs. Service + BreadcrumbList + FAQPage JSON-LD; no Offer, price or availability. |
+| N16 | Manufacturing service page (queue extension) | 2026-11-24 | `911209a` | 26 pages | `/manufacturing/` 348 → 2,561 visible `<main>` words, 9 content H2 plus FAQ and CTA, 1 H1, title 58, description 146. Reframed from a process explainer into the page about how a run is managed: catalogue vs built-to-specification order, a buyer/sourcing-desk/factory decision split, the six-stage line in brief (depth left to the pillar), six QC gates each with its record, the nine-field specification model, the four-stage qualification workflow with the directory's real state (3 Supplier Reported, 5 Unverified, no supplier Verified), a source-to-claim table for supplier-declared data, why no plant capacity is published, and the document set. Service + BreadcrumbList + Organization + FAQPage; no Offer, price or availability. RFQ 3×; inbound links added from `/private-label/` and the manufacturing pillar. |
 
 ## Partial / Blocked
 
@@ -202,6 +203,18 @@ Status: N15 complete; extended queue open
 - Evidence discipline: 72 / 64 / 56 pieces per kg are supplier-declared size records and the page repeats that 26 mm and 27 mm carry no batch chemistry; ±0.5 mm is called a common band, not a standard; one tonne stock / one 20 ft printed, 15–25 days after artwork approval and 14.4 t / 23.4 t container loads are labelled industry reference or planning figures. No factory, capacity, certification, client, tooling cost or price is stated.
 - Inbound links already existed from `/`, `/products/`, `/products/index.astro`, `/products/coconut-shell-charcoal/`, `/products/bamboo-charcoal/`, `/private-label/`, the private-label pillar and the site nav/footer; no new inbound links were needed.
 
+## N16 verification detail
+
+- `npm run build` (guotan) → 26 pages (25 indexable + 404); markdown negotiation 25 generated / 1 skipped (404).
+- `/manufacturing/`: 2,561 visible `<main>` words (target 1,200+), 9 content H2 plus FAQ and CTA, 1 H1. Title 58 chars, description 146 chars.
+- `npm run check:links` → 26 pages, 1,111 internal links, 0 broken. `npm run audit:network` → all five sites pass (main 26 pages / 25 indexable / 25 sitemap / max title 55 / max desc 158).
+- Structure: catalogue vs built-to-specification order and where risk sits in each; a buyer / sourcing desk / factory split across seven decisions; the six-stage line in one table (stage → parameter fixed → how it fails) with process depth deliberately left to the pillar; six QC gates each with timing, check and record; one specification model with the limit-vs-typical and method-plus-basis rules; the four-stage qualification workflow; a source-to-claim table for supplier datasheets, registry records, sample measurements, third-party reports and inspection reports; capacity/minimum/lead-time honesty; and the document set that travels with the goods.
+- Internal links: `/request-quote/` 3×, `/private-label/`, `/oem/`, `/packaging/` (pack format in the specification model), `/hookah-charcoal-manufacturing/`, `/coconut-shell-charcoal-guide/`, `/charcoal-testing-coa-guide/`, `/export/`.
+- Cross-site links verified by `audit:network` against the built sibling trees: data `/specifications/`; testing `/tests/`; manufacturer `/how-we-qualify/` and `/verification/`; knowledge `/knowledge/coconut-charcoal-moq/`, `/knowledge/charcoal-container-loading/`, `/knowledge/charcoal-import-certifications/`.
+- JSON-LD: BreadcrumbList + Organization + Service + FAQPage (5 questions matching the visible Q&A). No Offer, price or availability; grep of the built page finds no `InStock`, `AggregateOffer`, `lowPrice` or price string.
+- Evidence discipline: no factory, production capacity, certification, client or price is claimed. The directory state is stated exactly — 8 supplier profiles, 3 Supplier Reported, 5 Unverified, none Verified or Third-Party Verified; the single Verified record is the operator entity and is excluded from supplier counts. Container loads (14.4 t / 23.4 t), the ~1 t stock minimum, the printed 20 ft minimum and 15–25 days after artwork approval are labelled industry reference or planning figures. ISO 2859-1 is cited as a sampling convention, not as evidence of any supplier's practice.
+- Inbound links added: `/private-label/` ("stage gates" in the service scope list) and the manufacturing pillar's QC-plan section ("manufacturing and sourcing page").
+
 ## Extended queue (opened 2026-11-22)
 
 The 12-night queue is closed. The plan's remaining measurable gap is the commercial-page depth KPI (`<600 words → 0`) and the 25 vs 30–35 indexable-page target. This extension takes one page per night and does not add thin pages to move the count.
@@ -211,7 +224,7 @@ The 12-night queue is closed. The plan's remaining measurable gap is the commerc
 | N13 | `/packaging/` specification page | 393 → 1,939 | done |
 | N14 | `/private-label/` service page | 372 → 2,182 | done — service scope, artwork gate, three minimums, what to send; links pillar, packaging, RFQ |
 | N15 | `/oem/` service page | 429 → 2,655 | done — OEM vs private label/white label/ODM, nine-element spec control, tooling and plate ownership, four-stage sampling, four inspection gates |
-| N16 | `/manufacturing/` service page | 348 → 1,200+ | stage overview, QC gates, what is supplier-declared; link manufacturing pillar |
+| N16 | `/manufacturing/` service page | 348 → 2,561 | done — catalogue vs built-to-spec, buyer/desk/factory decision split, six-stage line, six QC gates with records, qualification state, supplier-declared source table; links pillar |
 | N17 | `/export/` service page | 446 → 1,200+ | Incoterms/risk, document set, UN 1361, loading plan, destination checks |
 | N18 | `/testing/` gateway | 369 → 900+ | methods vs reports, what can be requested, how to read a COA; link testing site |
 | N19 | `/request-quote/` + `/request-sample/` | 275 / 85 → 600+ each | what to send, response path, sample terms; no invented lead times |
@@ -220,6 +233,9 @@ The 12-night queue is closed. The plan's remaining measurable gap is the commerc
 Each night still follows the rules: one unit, build, link check, audit gate, commit, push, update this file. If a unit cannot meet the acceptance without inventing a fact, record it as `partial` and stop.
 
 ## Carry-forward notes
+
+- No plant capacity is published on the main site. A capacity figure without an allocation describes someone else's equipment; the manufacturing page says so and asks for a written run schedule instead. Do not add tonnage or monthly-output claims to any service page without a verified plant document.
+- The supplier directory state quoted on `/manufacturing/` (3 Supplier Reported, 5 Unverified, 0 Verified) must be re-checked whenever a profile changes status; it is a live count, not a fixed claim.
 
 - The 12-night queue is complete. Main-site indexable pages stand at 25 against the plan's 30–35 target; the 20 → 25 growth is four pillar pages plus the standards page. Further growth needs new commercial or reference pages, not filler; do not add thin pages to close the count.
 - `npm run audit:network` is now the release gate for the network. Run it after any cross-site link, slug or metadata change — `check:links` is per site and cannot see a link that is valid locally but dead in the sibling build.
