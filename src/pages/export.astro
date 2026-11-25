@@ -2,9 +2,33 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd } from '../lib/seo';
+import { breadcrumbJsonLd, organizationJsonLd, serviceJsonLd, faqPageJsonLd } from '../lib/seo';
 
 const canonical = `${SITES.main}/export/`;
+
+const faqs = [
+  {
+    q: 'Which Incoterm should a first charcoal order use?',
+    a: 'For a containerised first order, FCA is usually the cleanest term to start from: the seller clears export and hands the container to the carrier, and the buyer controls the main carriage and insurance from a point they can see. FOB is still widely quoted for charcoal, but it was written for goods craned over a ship\'s rail, and for a container that is handed to a terminal days before sailing it can leave a gap where neither side is clearly responsible for the box. CIF is convenient but sets a minimum insurance cover that is narrower than most buyers assume. Whatever term is agreed, it belongs in the sales contract and in the quotation, not only in an email.',
+  },
+  {
+    q: 'Who is the importer of record?',
+    a: 'Normally the buyer, or the buyer\'s appointed entity in the destination country. It is the party that owes the duty, holds the import licence where one is required, and answers to customs for the declaration. A DDP quote moves much of the practical work to the seller, but it does not automatically make the seller the importer of record in every market, and a seller cannot lend its identity to a buyer who has no presence in the destination. Confirm who declares the goods before the container is booked, because the answer decides which documents are needed and whose name is on them.',
+  },
+  {
+    q: 'Is charcoal really dangerous goods?',
+    a: 'Yes. Charcoal of animal or vegetable origin is UN 1361, Class 4.2 — substances liable to spontaneous combustion — packing group III. Since IMDG Amendment 42-24, the older route that allowed a product to ship outside the dangerous-goods rules on the strength of a self-heating test has been withdrawn, so every consignment is declared and carried as dangerous goods, and unpackaged bulk carriage in containers is no longer an option. The practical consequence is a declaration, a safety data sheet, marked packaging, a carrier that accepts Class 4.2, and a forwarder who books the cargo as what it is.',
+  },
+  {
+    q: 'Can the supplier ship without declaring it as dangerous goods?',
+    a: 'A supplier who offers that is proposing a misdeclared booking, which is illegal and is the failure mode the rules exist to prevent. A misdeclared container can be refused at the terminal, held at transhipment, fined, or shut out of the vessel, and the cargo\'s self-heating risk does not disappear because the paperwork is wrong. It is also a straightforward competence signal: an exporter set up to handle charcoal will declare UN 1361 without being asked, and will have current self-heating documentation available when a carrier requests it.',
+  },
+  {
+    q: 'How much charcoal fits in a container?',
+    a: 'There is no single number, and any page that gives one without a packaging basis is guessing. Public industry guides report roughly 17–20 tonnes in a 20 ft container for coconut shell briquettes depending on whether the load is bulk bagged or retail boxed, and higher figures for a 40 ft high-cube; one public supplier planning figure used earlier in this network was 14.4 tonnes and 23.4 tonnes, which reflects a denser retail pack and a conservative loading method. The load plan for your order is calculated from the packed unit, the cartons or pallets per container, and the forwarder\'s weight and volume limits — then written down before booking.',
+  },
+];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: `${SITES.main}/` },
@@ -17,110 +41,506 @@ const jsonLd = [
   }),
   serviceJsonLd({
     id: canonical,
-    name: 'Charcoal Export & Logistics',
-    serviceType: 'Charcoal export and logistics support',
-    description: 'Charcoal export support — export documentation, container loading planning and destination-port coordination for international buyers.',
+    name: 'Charcoal Export & Shipping Support',
+    serviceType: 'Charcoal export documentation and shipment planning',
+    description: 'Export support for charcoal buyers — Incoterm and risk review, the export document set, UN 1361 Class 4.2 declaration, container loading plans and destination compliance checks.',
     providerId: SITES.main,
   }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
 ];
 ---
 
 <BaseLayout
   site={site}
-  title="Charcoal Export & Logistics"
-  description="Charcoal export support — documentation, container loading and destination-port planning for international buyers."
+  title="Charcoal Export & Shipping: Incoterms, Documents, UN 1361"
+  description="How a charcoal export shipment is quoted, documented and loaded: Incoterms and risk transfer, the document set, UN 1361 Class 4.2 and destination checks."
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Export', url: '/export/' }]}
 >
   <div class="page-title container">
-    <h1>Export &amp; Logistics</h1>
+    <h1>Export &amp; Shipping</h1>
     <p class="lede">
-      Export support for international charcoal buyers — documentation, container loading and
-      destination-port planning. Figures here describe industry practice and public supplier data,
-      not guarantees for any specific order.
+      A charcoal container is not finished when production ends. It has to be declared as dangerous
+      goods, loaded to a plan, documented for the destination and handed over on terms that decide who
+      carries the risk at each step. This page covers that side of the order — and states plainly which
+      numbers are industry reference rather than commitments for your shipment.
     </p>
   </div>
 
   <section class="section">
     <div class="container">
-      <h2>What We Support</h2>
-      <div class="grid grid-3">
-        <div class="card"><h3>Documentation</h3><p>Commercial invoice, packing list, certificate of origin and export documents.</p></div>
-        <div class="card"><h3>Container Loading</h3><p>Optimized loading to maximize weight and protect the product.</p></div>
-        <div class="card"><h3>Destination Planning</h3><p>Port and delivery planning for your market.</p></div>
-      </div>
-
-      <h2>Container Loading Reference</h2>
+      <h2>A Shipment Has Five Parties, Not Two</h2>
       <div class="prose">
         <p>
-          How much charcoal fits a container depends on product form, packaging and packing density,
-          so a single figure never applies to every load. As a planning reference drawn from public
-          supplier data for coconut shell hookah charcoal, a 20-foot container loads approximately
-          <strong>14.4 tonnes</strong> and a 40-foot high-cube approximately <strong>23.4 tonnes</strong>.
-          Retail-packaged goods and palletised loads typically load lighter than bulk bags, because
-          boxes and pallets consume volume.
+          Most first shipments go wrong at a handover rather than at the factory. The product is fine,
+          the container is fine, and then the booking is made by one party, the declaration filed by
+          another and the documents issued in a name that does not match the buyer. Charcoal adds a
+          dangerous-goods layer on top, so the split of responsibility has to be written down before
+          the first booking, not discovered at the port.
         </p>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Container</th><th>Indicative load (coconut shell briquettes)</th><th>Note</th></tr>
+            <tr><th>Party</th><th>Controls</th><th>What fails when it is unclear</th></tr>
           </thead>
           <tbody>
-            <tr><td>20 ft GP</td><td class="spec-value">~14.4 t</td><td>Public supplier data; varies with packaging</td></tr>
-            <tr><td>40 ft HQ</td><td class="spec-value">~23.4 t</td><td>Public supplier data; varies with packaging</td></tr>
+            <tr>
+              <td>Seller / exporter</td>
+              <td class="spec-value">Production, packing, export clearance, the goods until handover</td>
+              <td class="spec-value">Packing that does not match the load plan; export documents inconsistent with the invoice</td>
+            </tr>
+            <tr>
+              <td>Freight forwarder</td>
+              <td class="spec-value">Booking, dangerous-goods declaration, carrier selection, sailing schedule</td>
+              <td class="spec-value">Cargo booked as general goods; a carrier that does not accept Class 4.2</td>
+            </tr>
+            <tr>
+              <td>Carrier / shipping line</td>
+              <td class="spec-value">Stowage, vessel acceptance, the bill of lading</td>
+              <td class="spec-value">Container shut out at the terminal; a bill of lading that does not match the booking</td>
+            </tr>
+            <tr>
+              <td>Customs broker at destination</td>
+              <td class="spec-value">Import declaration, duty classification, release</td>
+              <td class="spec-value">Wrong tariff heading; missing certificate; storage charges while the file is corrected</td>
+            </tr>
+            <tr>
+              <td>Importer of record</td>
+              <td class="spec-value">Duty, import licence where required, product compliance in the destination</td>
+              <td class="spec-value">A DDP quote that never established who is allowed to import; a consignee who cannot clear</td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <p class="updated">
-        Indicative figures only — the load plan for a specific order is confirmed with the supplier
-        and freight forwarder before booking.
-      </p>
-
-      <h2>Ports of Loading</h2>
       <div class="prose">
         <p>
-          Common Chinese ports of loading for charcoal exports are <strong>Shanghai</strong>,
-          <strong>Ningbo</strong> and <strong>Shenzhen</strong>. The practical choice depends on the
-          supplier's location and the shipping line serving your destination. Charcoal is a
-          dangerous good (UN 1361, Class 4.2, self-heating), so the carrier and the loading port
-          must accept Class 4.2 cargo — a detail worth confirming before committing to a route.
+          The importer-of-record question is the one buyers skip most often. It is not a formality: it
+          decides whose name is on the customs declaration, who owes the duty, and who answers for the
+          product once it is inside the market. A quote that says DDP without naming a registered
+          importer is an incomplete quote, however competitive the number looks.
         </p>
       </div>
 
-      <h2>Export Documentation</h2>
+      <h2>Incoterms: Where the Risk Changes Hands</h2>
       <div class="prose">
-        <p>A typical export set for a charcoal shipment includes:</p>
-        <ul>
-          <li><strong>Commercial Invoice (CI)</strong> — value and terms of the sale.</li>
-          <li><strong>Packing List (PL)</strong> — quantities, weights and packaging per carton/pallet.</li>
-          <li><strong>Bill of Lading (BL)</strong> — the carrier's receipt and title document.</li>
-          <li><strong>Certificate of Origin (CO)</strong> — states the country of origin, often required for duty treatment.</li>
-          <li><strong>Fumigation Certificate</strong> — required where the destination or packing material (e.g. wooden pallets) demands phytosanitary treatment.</li>
-          <li><strong>Dangerous Goods Declaration &amp; MSDS</strong> — required because charcoal ships under UN 1361, Class 4.2.</li>
-        </ul>
         <p>
-          The exact document set is destination-specific and is confirmed per order with the
-          buyer's broker. For the classification and compliance side, see the
-          <a href="/compliance/">compliance notes</a>.
+          An Incoterm does three jobs at once: it says who arranges and pays for each leg, it names the
+          point where risk passes from seller to buyer, and it fixes which documents the seller must
+          provide. It does not set the price, the quality, the payment method or the law of the
+          contract — those are separate clauses. The table below describes the 2020 rules in the way
+          they behave for a container of charcoal, not as a recommendation for your order.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Term</th><th>Seller arranges</th><th>Buyer arranges</th><th>Risk passes</th><th>Charcoal-specific catch</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>EXW</td>
+              <td class="spec-value">Making the goods available at its premises</td>
+              <td class="spec-value">Everything, including export clearance</td>
+              <td class="spec-value">At the seller's premises</td>
+              <td class="spec-value">The buyer must be able to clear export in China; most overseas buyers cannot</td>
+            </tr>
+            <tr>
+              <td>FCA</td>
+              <td class="spec-value">Export clearance, delivery to the carrier or terminal named</td>
+              <td class="spec-value">Main carriage, insurance, import</td>
+              <td class="spec-value">On handover to the carrier</td>
+              <td class="spec-value">The ICC's preferred term for containerised cargo; needs a named delivery point</td>
+            </tr>
+            <tr>
+              <td>FOB</td>
+              <td class="spec-value">Export clearance, delivery on board the vessel</td>
+              <td class="spec-value">Main carriage, insurance, import</td>
+              <td class="spec-value">Once goods are on board</td>
+              <td class="spec-value">Written for break-bulk; a container is at the terminal days before loading, so the gap is real</td>
+            </tr>
+            <tr>
+              <td>CFR</td>
+              <td class="spec-value">Export clearance, main carriage to destination port</td>
+              <td class="spec-value">Insurance, import, onward carriage</td>
+              <td class="spec-value">On board at origin</td>
+              <td class="spec-value">Buyer carries sea risk without automatic cover; the cheapest freight route is not always the safest</td>
+            </tr>
+            <tr>
+              <td>CIF</td>
+              <td class="spec-value">Export clearance, carriage, minimum marine insurance</td>
+              <td class="spec-value">Import, onward carriage, any cover above the minimum</td>
+              <td class="spec-value">On board at origin</td>
+              <td class="spec-value">Minimum cover is 110% of contract value on Institute Cargo Clauses (C), which excludes many partial losses</td>
+            </tr>
+            <tr>
+              <td>DAP</td>
+              <td class="spec-value">Carriage to the named destination, export clearance</td>
+              <td class="spec-value">Import clearance, duty, unloading where agreed</td>
+              <td class="spec-value">At the destination, ready for unloading</td>
+              <td class="spec-value">Seller carries the whole transit risk; the buyer must still be able to import</td>
+            </tr>
+            <tr>
+              <td>DDP</td>
+              <td class="spec-value">Carriage, import clearance and duty where the seller can act as importer</td>
+              <td class="spec-value">Unloading, onward distribution</td>
+              <td class="spec-value">At the destination, duty paid</td>
+              <td class="spec-value">Requires a seller entity able to import in that market; local VAT and product rules still apply</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Two details decide whether the term actually protects anyone. The first is the named place:
+          “FCA Shanghai” is not a term until it says which terminal or warehouse, because that is where
+          the handover happens. The second is insurance. CIF's minimum is a floor, not a standard, and
+          a container of charcoal that self-heats in transit can produce a claim that a narrow cargo
+          clause does not meet. If the goods value is significant, read the cover before the term is
+          agreed rather than after the loss.
+        </p>
+        <p>
+          None of this is legal advice, and none of it fixes the term for your order. The applicable
+          Incoterm, named place, insurance basis and payment method belong in the sales contract; the
+          <a href="/request-quote/">quote request</a> is where we confirm which terms the order can be
+          written on.
         </p>
       </div>
 
-      <h2>Lead Time</h2>
+      <h2>The Document Set, and What Each Document Proves</h2>
       <div class="prose">
         <p>
-          For OEM or printed private-label orders, an indicative lead time of
-          <strong>15–25 days after artwork approval</strong> is commonly cited in public supplier
-          listings. This is industry practice, not a contractual commitment: production, packaging
-          print runs and vessel availability all move the real schedule. Standard stock-packaged
-          orders typically move faster because no print or tooling step is involved.
+          Charcoal paperwork is usually described as one list, but it is really three sets that do
+          different jobs. Transport documents get the container onto the vessel. Origin and commercial
+          documents get it through the border and release the payment. Market-compliance documents are
+          what the destination authority asks for after that. Mixing them up produces the classic
+          delay: a complete-looking file that is missing the one document the port actually wanted.
         </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Document</th><th>Issued by</th><th>What it proves</th><th>What it does not prove</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Commercial invoice</td>
+              <td class="spec-value">Seller</td>
+              <td class="spec-value">Value, parties, terms of sale</td>
+              <td class="spec-value">Origin, quality or compliance</td>
+            </tr>
+            <tr>
+              <td>Packing list</td>
+              <td class="spec-value">Seller</td>
+              <td class="spec-value">Cartons, pallets, net and gross weight per line</td>
+              <td class="spec-value">That the count is correct — that is what inspection checks</td>
+            </tr>
+            <tr>
+              <td>Bill of lading</td>
+              <td class="spec-value">Carrier or forwarder</td>
+              <td class="spec-value">Receipt of the cargo, contract of carriage, title</td>
+              <td class="spec-value">Condition of the goods inside a sealed container</td>
+            </tr>
+            <tr>
+              <td>Certificate of origin</td>
+              <td class="spec-value">Chamber of commerce or authorised body</td>
+              <td class="spec-value">Country of origin for duty treatment</td>
+              <td class="spec-value">Quality, safety or sustainability</td>
+            </tr>
+            <tr>
+              <td>Dangerous goods declaration</td>
+              <td class="spec-value">Shipper, via the forwarder</td>
+              <td class="spec-value">That the cargo is declared as UN 1361, Class 4.2</td>
+              <td class="spec-value">That the goods are dry, weathered or safe to load</td>
+            </tr>
+            <tr>
+              <td>Safety data sheet (MSDS)</td>
+              <td class="spec-value">Seller or manufacturer</td>
+              <td class="spec-value">Composition, hazards, handling and stowage advice</td>
+              <td class="spec-value">Batch-specific measurement</td>
+            </tr>
+            <tr>
+              <td>Certificate of analysis</td>
+              <td class="spec-value">Laboratory, or the seller if self-declared</td>
+              <td class="spec-value">The tested parameters of the sampled lot, by a named method</td>
+              <td class="spec-value">The whole lot, the factory, or the next order</td>
+            </tr>
+            <tr>
+              <td>Fumigation / phytosanitary certificate</td>
+              <td class="spec-value">Authorised treatment provider</td>
+              <td class="spec-value">Treatment of wood packaging or a pest-risk requirement</td>
+              <td class="spec-value">Anything about the charcoal itself</td>
+            </tr>
+            <tr>
+              <td>Inspection report</td>
+              <td class="spec-value">Third-party inspection body</td>
+              <td class="spec-value">Count, condition, marks and photographs of the inspected lot</td>
+              <td class="spec-value">Chemistry, unless samples were drawn and tested</td>
+            </tr>
+            <tr>
+              <td>Insurance certificate</td>
+              <td class="spec-value">Insurer or broker</td>
+              <td class="spec-value">Cover, sum insured, clauses and exclusions</td>
+              <td class="spec-value">That a particular loss is covered — read the clauses</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          One document deserves a separate warning. A certificate of analysis is not a certificate of
+          the factory, the batch you bought, or the next shipment. It is a record of what a laboratory
+          measured on a sample, under a method, on a date. The
+          <a href="/charcoal-testing-coa-guide/">testing and COA guide</a> works through how to read one,
+          and the <a href={`${SITES.testing}/tests/`} target="_blank" rel="noopener">test method reference</a>
+          gives the method behind each parameter. If the file has a COA but no sampling record, you know
+          what was measured but not what it represents.
+        </p>
+        <p>
+          For the destination side, the
+          <a href={`${SITES.knowledge}/knowledge/charcoal-import-certifications/`} target="_blank" rel="noopener">import certification guide</a>
+          separates transport documents from market-compliance documents and lists what different
+          markets typically ask for. The <a href="/compliance/">compliance notes</a> on this site cover
+          the claims we will and will not make about them.
+        </p>
+      </div>
+
+      <h2>UN 1361, Class 4.2: The Classification That Sets the Rules</h2>
+      <div class="prose">
+        <p>
+          Charcoal of animal or vegetable origin — coconut shell hookah cubes included — is classified
+          as <strong>UN 1361, “Carbon, animal or vegetable origin”, Class 4.2</strong>, substances liable
+          to spontaneous combustion, packing group III. The hazard is not theoretical: fresh product,
+          trapped moisture and poor ventilation in a sealed box can raise the internal temperature over
+          a long voyage.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Field</th><th>Entry</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>UN number</td><td class="spec-value">1361</td></tr>
+            <tr><td>Proper shipping name</td><td class="spec-value">Carbon, animal or vegetable origin</td></tr>
+            <tr><td>Hazard class</td><td class="spec-value">4.2 — substances liable to spontaneous combustion</td></tr>
+            <tr><td>Packing group</td><td class="spec-value">III</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Since IMDG Amendment 42-24, the old exemption path — test the product for self-heating and
+          ship outside the dangerous-goods rules — has been withdrawn. Every consignment is declared and
+          carried as dangerous goods regardless of any earlier test result, and unpackaged bulk
+          carriage in a container is no longer an option. Shipments move under the process controls that
+          replaced the exemption, and major carriers began enforcing the change through 2025.
+        </p>
+        <p>
+          In practice that means four things on a charcoal order. The booking is made as Class 4.2, not
+          as general cargo. Every bag or carton carries the UN 1361 marking and the Class 4.2 diamond
+          alongside the trade label. The container carries the required placards. And the shipper can
+          produce current self-heating documentation when the carrier asks for it. A supplier who
+          offers to “ship it normally and save the DG fee” is offering a misdeclared booking, which can
+          be refused, held, fined or shut out — and which leaves the fire risk exactly where it was.
+        </p>
+        <p>
+          This is logistics context, not legal advice. Requirements vary by carrier and flag state, and
+          the current IMDG text is the authority. The
+          <a href={`${SITES.knowledge}/knowledge/charcoal-shipping-safety-un1361/`} target="_blank" rel="noopener">UN 1361 shipping guide</a>
+          sets out the classification and the 2025–2026 change in more detail; your forwarder confirms
+          what applies to your route.
+        </p>
+      </div>
+
+      <h2>The Loading Plan: Weight, Volume and Packaging</h2>
+      <div class="prose">
+        <p>
+          Charcoal is a volume-constrained cargo. It cubes out before it weighs out, which means the
+          number of tonnes in a container is decided by how densely the packed unit stacks, not by the
+          container's payload rating. Retail boxes add air. Pallets consume usable volume — public
+          estimates put the loss at 15–20% — and buy faster discharge and less damage at destination.
+          Bulk bags pack densest and present worst on a retail shelf.
+        </p>
+        <p>
+          Published figures differ for exactly that reason, and the difference is worth showing rather
+          than hiding behind a single number.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Basis</th><th>20 ft</th><th>40 ft HQ</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Coconut shell briquettes, full retail packaging</td>
+              <td class="spec-value">~17–18.5 t</td>
+              <td class="spec-value">~25–26 t</td>
+              <td class="spec-value">Reported industry range, floor-stuffed</td>
+            </tr>
+            <tr>
+              <td>Coconut shell briquettes, bulk packaging</td>
+              <td class="spec-value">~19.5–20 t</td>
+              <td class="spec-value">~26–28 t</td>
+              <td class="spec-value">Reported industry range, floor-stuffed</td>
+            </tr>
+            <tr>
+              <td>Earlier planning figure used in this network</td>
+              <td class="spec-value">~14.4 t</td>
+              <td class="spec-value">~23.4 t</td>
+              <td class="spec-value">One public supplier figure, denser pack and conservative method</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          The gap between 14.4 and 20 tonnes is not an error in either source; it is the packaging and
+          loading method showing up in the arithmetic. That is why the load plan for an order is built
+          from the packed unit — cartons per layer, layers per pallet or stack, pallets per container,
+          gross weight per unit — and then checked against the forwarder's weight and volume limits.
+          A load plan in tonnes without a unit count cannot be reconciled against the packing list, and
+          the packing list is what the inspection checks.
+        </p>
+        <p>
+          Four things belong in the plan before the container is stuffed. The dangerous-goods stowage
+          requirement, because it can restrict how the cargo is distributed. The moisture and
+          weathering evidence for the lot, because wet charcoal is both heavier and a greater
+          self-heating risk. The seal number and the stuffing photographs, because they are the only
+          record of what went in. And the discharge method at destination, because a floor-stuffed
+          container that arrives where no one can unload it is a plan that failed at the last step.
+        </p>
+        <p>
+          The arithmetic is worked through in the
+          <a href={`${SITES.knowledge}/knowledge/charcoal-container-loading/`} target="_blank" rel="noopener">container loading guide</a>,
+          and the packing formats that change it are on the
+          <a href="/packaging/">packaging page</a> and in the
+          <a href={`${SITES.data}/packaging/`} target="_blank" rel="noopener">packaging records</a>.
+        </p>
+      </div>
+
+      <h2>Destination Checks Before You Book</h2>
+      <div class="prose">
+        <p>
+          Every destination asks a different set of questions, and the answers are cheaper to find
+          before the booking than after the arrival notice. Six checks cover most of the risk. A
+          <a href="/request-quote/">quote request</a> that names the destination port, the packed
+          format and the first volume is enough for us to say which of them apply before a price is
+          discussed.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Check</th><th>Why it matters</th><th>Who confirms it</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tariff classification</td>
+              <td class="spec-value">Charcoal sits under heading 4402 in the HS schedule (HTS in the US, TARIC in the EU); the subheading drives duty and any trade measure</td>
+              <td class="spec-value">Your customs broker</td>
+            </tr>
+            <tr>
+              <td>Dangerous-goods acceptance</td>
+              <td class="spec-value">Not every port, terminal or line accepts Class 4.2, and transhipment ports add their own rules</td>
+              <td class="spec-value">Forwarder and carrier</td>
+            </tr>
+            <tr>
+              <td>Import licence or permit</td>
+              <td class="spec-value">Some markets require registration or a permit before charcoal can be imported at all</td>
+              <td class="spec-value">Importer of record, broker</td>
+            </tr>
+            <tr>
+              <td>Product labelling</td>
+              <td class="spec-value">Retail packs need the destination's language, importer details and origin marking; the EU GPSR adds a responsible-person requirement</td>
+              <td class="spec-value">Buyer, with the label proof</td>
+            </tr>
+            <tr>
+              <td>Wood packaging</td>
+              <td class="spec-value">Pallets and crates need ISPM 15 treatment and the mark, or the consignment can be refused</td>
+              <td class="spec-value">Seller and treatment provider</td>
+            </tr>
+            <tr>
+              <td>Deforestation and due diligence</td>
+              <td class="spec-value">The EU regulation on deforestation-free products covers listed commodities; whether a coconut-shell charcoal consignment falls in scope is a determination for the importer</td>
+              <td class="spec-value">Importer, with counsel</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Two of these deserve a longer note. Labelling is a production decision, not a shipping one: a
+          retail carton printed before the destination's requirements were checked cannot be fixed at
+          the port, and a reprint is a new print run. The
+          <a href="/private-label/">private label</a> and <a href="/oem/">OEM</a> pages treat the label
+          proof as a gate for that reason.
+        </p>
+        <p>
+          The due-diligence question is the other one. Rules that attach to a commodity are assessed
+          against the actual product and supply chain, not against a category name, and the party that
+          files the due-diligence statement is the importer. We will supply the product and origin
+          information the file needs; we will not tell a buyer that a consignment is “EUDR compliant”
+          on the strength of a product name. That determination belongs with the importer and its
+          counsel, and the
+          <a href={`${SITES.knowledge}/knowledge/charcoal-import-certifications/`} target="_blank" rel="noopener">import certification guide</a>
+          explains where it sits among the other documents.
+        </p>
+      </div>
+
+      <h2>Documents Against Payment</h2>
+      <div class="prose">
+        <p>
+          Where payment runs on a letter of credit, the document set becomes the payment mechanism, and
+          a single mismatch can stop it. The classic discrepancies are mundane: a weight on the packing
+          list that differs from the bill of lading, a description that does not match the credit word
+          for word, a certificate issued after the shipment date, an insurance certificate for less
+          than the credit requires. None of them is a quality problem, and all of them can leave a
+          container sitting at destination while the banks exchange amendments.
+        </p>
+        <p>
+          The defence is a pre-shipment document check against the credit terms, run before the
+          container leaves, with the invoice, packing list, bill of lading draft, certificate of origin
+          and any inspection or analysis document read side by side. If the credit calls for a
+          certificate of analysis, agree the laboratory, the parameters and the sampling point before
+          production — not after, when the only available report covers a different lot.
+        </p>
+      </div>
+
+      <h2>What This Page Does Not Claim</h2>
+      <div class="callout-pending">
+        <span class="callout-title">Data pending — scope and evidence</span>
+        <p>
+          Charcoal Hub is a sourcing and product-intelligence platform, not a freight forwarder, a
+          customs broker or a carrier. We do not publish a licence number, a carrier contract, a
+          freight rate, a transit time for a named lane or an insurance facility, because none is
+          verified in the records. Container tonnages, the 15–25 day production window after artwork
+          approval and the pallet-volume loss are industry reference or planning figures, not
+          commitments. The classification and regulatory points are logistics context compiled from
+          public sources, not legal advice. Rates, routings, terms and the document set are confirmed
+          per shipment with the forwarder, the broker and the carrier.
+        </p>
+      </div>
+
+      <h2>Export Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
       </div>
 
       <div class="cta-banner">
-        <h2>Planning an import?</h2>
-        <p>Tell us your destination port and volume — we'll confirm the load plan and document set.</p>
+        <h2>Shipping to a new market?</h2>
+        <p>
+          Send the destination country or port, the packed format and the first volume. We will confirm
+          which parts of the shipment can be planned now, which need a document from the supplier, and
+          which are the importer's to determine.
+        </p>
         <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
       </div>
     </div>
