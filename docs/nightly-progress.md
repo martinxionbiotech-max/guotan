@@ -1,9 +1,9 @@
 # Charcoal Hub — Nightly Progress
 
-Last updated: 2026-11-24
-Current: N16
-Next: N17 — `/export/` service page (446 words)
-Status: N16 complete; extended queue open
+Last updated: 2026-11-25
+Current: N17
+Next: N18 — `/testing/` gateway (369 words)
+Status: N17 complete; extended queue open
 
 ## Completed
 
@@ -25,6 +25,7 @@ Status: N16 complete; extended queue open
 | N15 | OEM service page (queue extension) | 2026-11-23 | `0716d21` | 26 pages | `/oem/` 429 → 2,655 visible `<main>` words, 6 content H2, 1 H1, title 49, description 152. Separates OEM from private label, white label and ODM by what actually changes (product vs pack); covers the nine-element specification sheet with limit-vs-typical and method/basis rules, tooling and print-plate ownership with a tooling annex, the four-stage sample path and the measurement record a golden sample needs, four inspection gates including first-article, and volume/lead-time arithmetic. Service + BreadcrumbList + Organization + FAQPage (5 questions matching visible text); no Offer, price or availability. RFQ 3×, `/request-sample/` 1×. |
 | N13 | Packaging service page (queue extension) | 2026-11-22 | `a7610ff` | 26 pages | `/packaging/` 393 → 1,939 visible words, 12 H2, 1 H1, title 26, description 135. Six-format table separates the two supplier-declared data records (1 kg box, 10 kg pack) from four industry-reference formats. Adds box anatomy by layer, the moisture/barrier decision with its measurement basis and sampling point, ECT vs Mullen, pallet footprints and ISPM 15, the retail-vs-bulk loading trade-off, ISTA 1A / ASTM D5276 protocols, an eleven-line packaging specification, cost drivers, and five FAQs. Service + BreadcrumbList + FAQPage JSON-LD; no Offer, price or availability. |
 | N16 | Manufacturing service page (queue extension) | 2026-11-24 | `911209a` | 26 pages | `/manufacturing/` 348 → 2,561 visible `<main>` words, 9 content H2 plus FAQ and CTA, 1 H1, title 58, description 146. Reframed from a process explainer into the page about how a run is managed: catalogue vs built-to-specification order, a buyer/sourcing-desk/factory decision split, the six-stage line in brief (depth left to the pillar), six QC gates each with its record, the nine-field specification model, the four-stage qualification workflow with the directory's real state (3 Supplier Reported, 5 Unverified, no supplier Verified), a source-to-claim table for supplier-declared data, why no plant capacity is published, and the document set. Service + BreadcrumbList + Organization + FAQPage; no Offer, price or availability. RFQ 3×; inbound links added from `/private-label/` and the manufacturing pillar. |
+| N17 | Export service page (queue extension) | 2026-11-25 | `7005c23` | 26 pages | `/export/` 446 → 3,146 visible `<main>` words, 10 content H2 plus FAQ and CTA, 1 H1, title 57, description 153. Rebuilt from a three-card summary into the shipping page: the five parties and what each controls, an Incoterms 2020 table (obligation, risk transfer and the charcoal-specific catch per term, including the FCA-vs-FOB container gap and the CIF 110% / ICC(C) minimum), the document set split by job with what each document proves and does not, UN 1361 Class 4.2 and the withdrawal of the self-heating exemption under IMDG 42-24, a loading plan that reconciles conflicting published tonnage ranges by packaging basis, six destination checks (tariff, DG acceptance, permit, labelling/GPSR, ISPM 15, EUDR determination), and letter-of-credit document discipline. Service + BreadcrumbList + Organization + FAQPage (5 questions matching visible text); no Offer, price or availability. |
 
 ## Partial / Blocked
 
@@ -215,6 +216,19 @@ Status: N16 complete; extended queue open
 - Evidence discipline: no factory, production capacity, certification, client or price is claimed. The directory state is stated exactly — 8 supplier profiles, 3 Supplier Reported, 5 Unverified, none Verified or Third-Party Verified; the single Verified record is the operator entity and is excluded from supplier counts. Container loads (14.4 t / 23.4 t), the ~1 t stock minimum, the printed 20 ft minimum and 15–25 days after artwork approval are labelled industry reference or planning figures. ISO 2859-1 is cited as a sampling convention, not as evidence of any supplier's practice.
 - Inbound links added: `/private-label/` ("stage gates" in the service scope list) and the manufacturing pillar's QC-plan section ("manufacturing and sourcing page").
 
+## N17 verification detail
+
+- `npm run build` (guotan) → 26 pages (25 indexable + 404); markdown negotiation 25 generated / 1 skipped (404).
+- `/export/`: 3,146 visible `<main>` words (target 1,200+), 10 content H2 plus FAQ and CTA, 1 H1. Title 57 rendered chars, description 153.
+- `npm run check:links` → 26 pages, 1,118 internal links, 0 broken. `npm run audit:network` → all five sites pass (main 26 pages / 25 indexable / 25 sitemap / max title 57 / max desc 158).
+- Structure: a five-party responsibility table (seller, forwarder, carrier, destination broker, importer of record) with the failure each handover produces; an Incoterms 2020 table covering EXW, FCA, FOB, CFR, CIF, DAP and DDP with obligation, risk point and a charcoal-specific catch per row, plus the named-place and insurance caveats; a ten-row document table separating transport, origin/commercial and market-compliance documents with "proves" and "does not prove"; UN 1361 identification with the IMDG 42-24 change and its four practical consequences; a loading-plan section that shows three published tonnage bases side by side rather than one figure; six destination checks; and a letter-of-credit discrepancy section.
+- Internal links: `/request-quote/` 3×, `/compliance/`, `/packaging/`, `/private-label/`, `/oem/`, `/charcoal-testing-coa-guide/`.
+- Cross-site links verified by `audit:network` against the built sibling trees: data `/packaging/`; testing `/tests/`; knowledge `/knowledge/charcoal-shipping-safety-un1361/`, `/knowledge/charcoal-container-loading/`, `/knowledge/charcoal-import-certifications/`.
+- JSON-LD: BreadcrumbList + Organization + Service + FAQPage (5 questions matching the visible Q&A). No Offer, price or availability; grep of the built page finds no `InStock`, `AggregateOffer`, `lowPrice` or `highPrice`.
+- Evidence discipline: no freight rate, transit time, carrier contract, forwarder licence, insurance facility or port pair is claimed. The 17–18.5 t / 19.5–20 t / 25–28 t ranges are labelled reported industry ranges from public loading guides; the 14.4 t / 23.4 t figure used elsewhere in the network is labelled one public supplier planning figure with a denser pack and conservative method, which is why the two do not match. Incoterms obligations are described as the 2020 rules, not as terms offered. EUDR scope for coconut-shell charcoal is left explicitly to the importer and its counsel. The regulatory section says it is logistics context, not legal advice.
+- Word budget: the first draft measured 3,315 and included an eight-step "quote to delivery" sequence; that section was removed as a restatement of the five sections above it, leaving 3,146. No acceptance-criterion topic was cut.
+- Inbound links already existed from `/manufacturing/`, `/packaging/` and the private-label pillar; no new inbound links were needed.
+
 ## Extended queue (opened 2026-11-22)
 
 The 12-night queue is closed. The plan's remaining measurable gap is the commercial-page depth KPI (`<600 words → 0`) and the 25 vs 30–35 indexable-page target. This extension takes one page per night and does not add thin pages to move the count.
@@ -225,7 +239,7 @@ The 12-night queue is closed. The plan's remaining measurable gap is the commerc
 | N14 | `/private-label/` service page | 372 → 2,182 | done — service scope, artwork gate, three minimums, what to send; links pillar, packaging, RFQ |
 | N15 | `/oem/` service page | 429 → 2,655 | done — OEM vs private label/white label/ODM, nine-element spec control, tooling and plate ownership, four-stage sampling, four inspection gates |
 | N16 | `/manufacturing/` service page | 348 → 2,561 | done — catalogue vs built-to-spec, buyer/desk/factory decision split, six-stage line, six QC gates with records, qualification state, supplier-declared source table; links pillar |
-| N17 | `/export/` service page | 446 → 1,200+ | Incoterms/risk, document set, UN 1361, loading plan, destination checks |
+| N17 | `/export/` service page | 446 → 3,146 | done — Incoterms 2020 with risk points, document set by job, UN 1361/IMDG 42-24, three-basis loading plan, six destination checks, LC document discipline |
 | N18 | `/testing/` gateway | 369 → 900+ | methods vs reports, what can be requested, how to read a COA; link testing site |
 | N19 | `/request-quote/` + `/request-sample/` | 275 / 85 → 600+ each | what to send, response path, sample terms; no invented lead times |
 | N20 | Main-site page-count review | 25 → 30–35 | only pages with a real query and evidence plan; no filler |
@@ -242,6 +256,8 @@ Each night still follows the rules: one unit, build, link check, audit gate, com
 - Trust pages must keep their entity facts in sync: legal name, founding date, phone, mailbox and mailbox-domain explanation appear on About, Contact, the Organization schema on every page, and the footer. Change them in one pass across all five repos or the network will contradict itself.
 
 - `/packaging/` is a specification page, not a price list. Only the 1 kg box and 10 kg pack carry data records, both supplier-declared; board grades, liner specifications and carton dimensions stay pending until a supplier document exists. When a dieline or board certificate arrives, add the record to `data.guotan/src/content/packaging/` first, then cite it from the page — do not type a specification into the marketing copy.
+
+- Container tonnage is now stated on three different bases across the network: the knowledge guide reports 17–18.5 t (retail) and 19.5–20 t (bulk) per 20 ft, while six main-site pages still cite 14.4 t / 23.4 t as though it were the single figure. N17 showed all three side by side on `/export/` and explained the packaging basis; the other pages should be aligned the next time each is touched, or the network will look like it contradicts itself. Do not delete the 14.4 t figure — it is a real public supplier planning number — label it as one basis.
 
 - No supplier profile is `Verified` or `Third-Party Verified`. The next upgrade requires an actual document review (business licence, factory document) or a traceable third-party report for a named supplier — a storefront or a supplier's own website cannot support either status.
 - The PT Coco and Yaparacoal NIB numbers are supplier-stated only. The Indonesian registry (AHU/OSS) was not queried; verify the numbers there before moving either profile off `Supplier Reported`.
