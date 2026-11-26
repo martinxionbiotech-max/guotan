@@ -1,9 +1,9 @@
 # Charcoal Hub — Nightly Progress
 
-Last updated: 2026-11-25
-Current: N17
-Next: N18 — `/testing/` gateway (369 words)
-Status: N17 complete; extended queue open
+Last updated: 2026-11-26
+Current: N18
+Next: N19 — `/request-quote/` + `/request-sample/` (275 / 85 → 600+ each)
+Status: N18 complete; extended queue open
 
 ## Completed
 
@@ -26,6 +26,7 @@ Status: N17 complete; extended queue open
 | N13 | Packaging service page (queue extension) | 2026-11-22 | `a7610ff` | 26 pages | `/packaging/` 393 → 1,939 visible words, 12 H2, 1 H1, title 26, description 135. Six-format table separates the two supplier-declared data records (1 kg box, 10 kg pack) from four industry-reference formats. Adds box anatomy by layer, the moisture/barrier decision with its measurement basis and sampling point, ECT vs Mullen, pallet footprints and ISPM 15, the retail-vs-bulk loading trade-off, ISTA 1A / ASTM D5276 protocols, an eleven-line packaging specification, cost drivers, and five FAQs. Service + BreadcrumbList + FAQPage JSON-LD; no Offer, price or availability. |
 | N16 | Manufacturing service page (queue extension) | 2026-11-24 | `911209a` | 26 pages | `/manufacturing/` 348 → 2,561 visible `<main>` words, 9 content H2 plus FAQ and CTA, 1 H1, title 58, description 146. Reframed from a process explainer into the page about how a run is managed: catalogue vs built-to-specification order, a buyer/sourcing-desk/factory decision split, the six-stage line in brief (depth left to the pillar), six QC gates each with its record, the nine-field specification model, the four-stage qualification workflow with the directory's real state (3 Supplier Reported, 5 Unverified, no supplier Verified), a source-to-claim table for supplier-declared data, why no plant capacity is published, and the document set. Service + BreadcrumbList + Organization + FAQPage; no Offer, price or availability. RFQ 3×; inbound links added from `/private-label/` and the manufacturing pillar. |
 | N17 | Export service page (queue extension) | 2026-11-25 | `7005c23` | 26 pages | `/export/` 446 → 3,146 visible `<main>` words, 10 content H2 plus FAQ and CTA, 1 H1, title 57, description 153. Rebuilt from a three-card summary into the shipping page: the five parties and what each controls, an Incoterms 2020 table (obligation, risk transfer and the charcoal-specific catch per term, including the FCA-vs-FOB container gap and the CIF 110% / ICC(C) minimum), the document set split by job with what each document proves and does not, UN 1361 Class 4.2 and the withdrawal of the self-heating exemption under IMDG 42-24, a loading plan that reconciles conflicting published tonnage ranges by packaging basis, six destination checks (tariff, DG acceptance, permit, labelling/GPSR, ISPM 15, EUDR determination), and letter-of-credit document discipline. Service + BreadcrumbList + Organization + FAQPage (5 questions matching visible text); no Offer, price or availability. |
+| N18 | Testing gateway (queue extension) | 2026-11-26 | `787ad15` | 26 pages | `/testing/` 370 → 1,622 visible `<main>` words, 6 content H2 plus FAQ and CTA, 1 H1, title 57, description 141. Rebuilt from a six-card list into the testing-document gateway: method reference vs supplier datasheet vs test report/COA and what each can prove; the six core metrics with the method and basis that must travel with each figure; four request types (method reference, specification review, sampling/testing scope, pre-shipment inspection) with what to send; an eight-field COA reading table and five named failure patterns; and an explicit scope box (not a laboratory, no accreditation, 0 published reports). WebPage + BreadcrumbList + Organization + FAQPage (4 questions matching visible text); no Offer, price or availability. Links testing `/tests/`, `/methods-vs-reports/`, `/reports/`; `/request-quote/` and `/request-sample/` once each. |
 
 ## Partial / Blocked
 
@@ -229,6 +230,18 @@ Status: N17 complete; extended queue open
 - Word budget: the first draft measured 3,315 and included an eight-step "quote to delivery" sequence; that section was removed as a restatement of the five sections above it, leaving 3,146. No acceptance-criterion topic was cut.
 - Inbound links already existed from `/manufacturing/`, `/packaging/` and the private-label pillar; no new inbound links were needed.
 
+## N18 verification detail
+
+- `npm run build` (guotan) → 26 pages (25 indexable + 404); markdown negotiation 25 generated / 1 skipped (404).
+- `/testing/`: 1,622 visible `<main>` words (target 900+), 6 content H2 plus FAQ and CTA, 1 H1. Title 57 chars, description 141.
+- `npm run check:links` → 26 pages, 1,120 internal links, 0 broken. `npm run audit:network` → all five sites pass (main 26 pages / 25 indexable / 25 sitemap / max title 57 / max desc 158).
+- Structure: a three-document table (method reference, supplier datasheet, test report or COA) with issuer and the limit of each; the six core metrics with the method, temperature and reporting basis that must travel with each figure; four request types with what to send; an eight-field COA reading table (laboratory, report number, sample identity, method and edition, result/unit/basis, accreditation scope, deviations, signature/date) plus five failure patterns; and a scope box stating the site is not a laboratory and the testing sub-site publishes 0 reports.
+- Internal links: `/request-quote/` 1×, `/request-sample/` 1×, `/charcoal-testing-coa-guide/` 1×.
+- Cross-site links resolved by `audit:network`: testing `/tests/`, `/methods-vs-reports/`, `/reports/`.
+- JSON-LD: BreadcrumbList + Organization + WebPage + FAQPage (4 questions matching the visible Q&A). No Offer, price or availability; grep of the built page finds no `InStock`, `AggregateOffer`, `lowPrice` or `highPrice`.
+- Evidence discipline: no laboratory name, accreditation, report number, result, price, lead time or test capability is claimed. The standard families are cited by designation only (ASTM D1762; ISO 18122, 18123, 18125) and the FAQ tells the buyer to confirm the method against the market and the buyer's own requirement. The GB/T caveat says only that a cited method must apply to charcoal rather than another carbon product — no specific GB/T designation is asserted as applicable.
+- Inbound links already existed from the homepage, the COA guide, site nav and footer; no new inbound links were needed.
+
 ## Extended queue (opened 2026-11-22)
 
 The 12-night queue is closed. The plan's remaining measurable gap is the commercial-page depth KPI (`<600 words → 0`) and the 25 vs 30–35 indexable-page target. This extension takes one page per night and does not add thin pages to move the count.
@@ -240,7 +253,7 @@ The 12-night queue is closed. The plan's remaining measurable gap is the commerc
 | N15 | `/oem/` service page | 429 → 2,655 | done — OEM vs private label/white label/ODM, nine-element spec control, tooling and plate ownership, four-stage sampling, four inspection gates |
 | N16 | `/manufacturing/` service page | 348 → 2,561 | done — catalogue vs built-to-spec, buyer/desk/factory decision split, six-stage line, six QC gates with records, qualification state, supplier-declared source table; links pillar |
 | N17 | `/export/` service page | 446 → 3,146 | done — Incoterms 2020 with risk points, document set by job, UN 1361/IMDG 42-24, three-basis loading plan, six destination checks, LC document discipline |
-| N18 | `/testing/` gateway | 369 → 900+ | methods vs reports, what can be requested, how to read a COA; link testing site |
+| N18 | `/testing/` gateway | 370 → 1,622 | done — method vs datasheet vs report, what must travel with each core metric, four request types, eight-field COA reading table with five failure patterns, scope box; links testing `/tests/`, `/methods-vs-reports/`, `/reports/` |
 | N19 | `/request-quote/` + `/request-sample/` | 275 / 85 → 600+ each | what to send, response path, sample terms; no invented lead times |
 | N20 | Main-site page-count review | 25 → 30–35 | only pages with a real query and evidence plan; no filler |
 
