@@ -1,9 +1,9 @@
 # Charcoal Hub — Nightly Progress
 
-Last updated: 2026-11-26
-Current: N18
-Next: N19 — `/request-quote/` + `/request-sample/` (275 / 85 → 600+ each)
-Status: N18 complete; extended queue open
+Last updated: 2026-11-28
+Current: N19
+Next: N20 — main-site page-count review (25 → 30–35)
+Status: N19 complete; extended queue open
 
 ## Completed
 
@@ -242,6 +242,21 @@ Status: N18 complete; extended queue open
 - Evidence discipline: no laboratory name, accreditation, report number, result, price, lead time or test capability is claimed. The standard families are cited by designation only (ASTM D1762; ISO 18122, 18123, 18125) and the FAQ tells the buyer to confirm the method against the market and the buyer's own requirement. The GB/T caveat says only that a cited method must apply to charcoal rather than another carbon product — no specific GB/T designation is asserted as applicable.
 - Inbound links already existed from the homepage, the COA guide, site nav and footer; no new inbound links were needed.
 
+## N19 verification detail
+
+- `npm run build` (guotan) → 26 pages (25 indexable + 404); markdown negotiation 25 generated / 1 skipped (404).
+- `/request-quote/`: 1,878 visible `<main>` words (target 600+), 9 H2, 1 H1. Title 24 chars, description 143.
+- `/request-sample/`: 1,825 visible `<main>` words (target 600+), 9 H2, 1 H1. Title 24 chars, description 143.
+- `npm run check:links` → 26 pages, 1,131 internal links, 0 broken. `npm run audit:network` → all five sites pass (main 26 pages / 25 indexable / 25 sitemap / max title 57 / max desc 158).
+- `/request-quote/` structure: the eight elements a quotation must state (product identity, dimension and tolerance, specification with method and basis, packaging, quantity basis, delivery basis, validity, exclusions); an eight-field request table with why each field changes the answer; a unit-of-quote table (piece / kg / tonne / container) with what must travel with each; a seven-row comparability table (reporting basis, size tolerance, count vs mass, packaging, Incoterm, sampling and method, currency and date); a "what we will not quote" box (no fixed catalogue price, no stock status, no undocumentable specification, no non-existent certificate, no unsupported destination); a six-step request path ending at pre-shipment; and five FAQs.
+- `/request-sample/` structure: a six-row table of what a sample can show with the field check for each, plus an explicit cannot-show paragraph (batch consistency, lot conformity, regulatory compliance, next-run material); four sample types (development, production-representative, golden/approval, retention) with who keeps each; a six-item "what to send" table; an eight-step evaluation table with the record to keep (caliper, ten-piece mass, drop height, conditioning, ignition, stated burn setup, ash mass, weigh-dry-weigh); a burn-time-comparability section; a six-row sample-terms table; and a five-step sample-to-order path.
+- Sample terms: quantity, courier account and cost bearer, whether a sample charge applies and how it is credited, documentation, representation (development vs production), and no-resale are all stated as items the reply confirms per request. No sample price, courier rate, parcel transit time or MOQ figure is published — the page says so explicitly and explains why the numbers depend on destination and weight.
+- Response path: six steps from record matching to pre-shipment, with the rule that no step is skipped and a named gap is preferred to a complete-looking quote. No response-time promise appears anywhere; the FAQ states that the page does not publish one and asks the buyer to put a deadline in the request instead.
+- JSON-LD: BreadcrumbList + Organization + WebPage + FAQPage on both pages (5 questions each, matching the visible Q&A). No Offer, no price, no availability.
+- Price/stock discipline: an early draft of the quote page used the literal token "InStock" in a sentence saying we do not publish it; that was rephrased because the network's own release grep treats the token as a failure. `grep -rlE 'InStock|AggregateOffer|lowPrice|highPrice' dist/` now returns nothing across the main-site build.
+- Forms unchanged in behaviour: same Formspree action with the mailto fallback, two fields added (email on the sample form, which had none; "what will you test" on the sample form). No new backend or tracking was introduced.
+- Inbound links to both pages already existed from nav, footer, homepage, product pages, service pages and the pillars; no new inbound links were needed.
+
 ## Extended queue (opened 2026-11-22)
 
 The 12-night queue is closed. The plan's remaining measurable gap is the commercial-page depth KPI (`<600 words → 0`) and the 25 vs 30–35 indexable-page target. This extension takes one page per night and does not add thin pages to move the count.
@@ -254,12 +269,14 @@ The 12-night queue is closed. The plan's remaining measurable gap is the commerc
 | N16 | `/manufacturing/` service page | 348 → 2,561 | done — catalogue vs built-to-spec, buyer/desk/factory decision split, six-stage line, six QC gates with records, qualification state, supplier-declared source table; links pillar |
 | N17 | `/export/` service page | 446 → 3,146 | done — Incoterms 2020 with risk points, document set by job, UN 1361/IMDG 42-24, three-basis loading plan, six destination checks, LC document discipline |
 | N18 | `/testing/` gateway | 370 → 1,622 | done — method vs datasheet vs report, what must travel with each core metric, four request types, eight-field COA reading table with five failure patterns, scope box; links testing `/tests/`, `/methods-vs-reports/`, `/reports/` |
-| N19 | `/request-quote/` + `/request-sample/` | 275 / 85 → 600+ each | what to send, response path, sample terms; no invented lead times |
+| N19 | `/request-quote/` + `/request-sample/` | 275 / 85 → 1,878 / 1,825 | done — quote: eight elements a quotation must state, what to send, unit-of-quote table, seven comparability breaks, what we will not quote, six-step request path; sample: what a sample can and cannot prove, four sample types, eight field checks, sample terms confirmed per request; no lead time published |
 | N20 | Main-site page-count review | 25 → 30–35 | only pages with a real query and evidence plan; no filler |
 
 Each night still follows the rules: one unit, build, link check, audit gate, commit, push, update this file. If a unit cannot meet the acceptance without inventing a fact, record it as `partial` and stop.
 
 ## Carry-forward notes
+
+- Sample terms (courier cost, sample charge and its treatment against a bulk order) are confirmed per request and are deliberately not published as rates on `/request-sample/`. Do not add a "free sample" or "buyer pays freight" blanket policy without an actual commercial decision behind it; the page currently states only what the reply will confirm.
 
 - No plant capacity is published on the main site. A capacity figure without an allocation describes someone else's equipment; the manufacturing page says so and asks for a written run schedule instead. Do not add tonnage or monthly-output claims to any service page without a verified plant document.
 - The supplier directory state quoted on `/manufacturing/` (3 Supplier Reported, 5 Unverified, 0 Verified) must be re-checked whenever a profile changes status; it is a live count, not a fixed claim.

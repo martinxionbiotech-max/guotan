@@ -2,14 +2,178 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd } from '../lib/seo';
+import {
+  breadcrumbJsonLd,
+  organizationJsonLd,
+  webPageJsonLd,
+  faqPageJsonLd,
+} from '../lib/seo';
 
 const canonical = `${SITES.main}/request-sample/`;
+
+const title = 'Request Charcoal Samples';
+const description =
+  'What a charcoal sample can and cannot prove, the four sample types, what to send, and how to record a fair burn test before you commit to bulk.';
+
+const proves = [
+  {
+    aspect: 'Geometry and finish',
+    check: 'Nominal dimension, edge shape, surface cracks and the amount of dust in the bag.',
+  },
+  {
+    aspect: 'Piece mass and count',
+    check: 'Weigh ten pieces and count how many make a kilogram — the two numbers must agree with the pack claim.',
+  },
+  {
+    aspect: 'Impact behaviour',
+    check: 'A drop from a stated height shows how much breakage the piece takes before it reaches a bowl.',
+  },
+  {
+    aspect: 'Ignition',
+    check: 'How the piece takes heat from your normal source, and whether it cracks, sparks or goes out.',
+  },
+  {
+    aspect: 'Burn behaviour',
+    check: 'Duration, ash structure and heat in your setup — useful only with the conditions recorded.',
+  },
+  {
+    aspect: 'Odour and smoke',
+    check: 'What the piece emits while lighting and while burning, assessed by the people who will use it.',
+  },
+];
+
+const sampleTypes = [
+  {
+    type: 'Development sample',
+    what: 'A trial piece made to your target specification, often before the production line is set.',
+    decides: 'Whether the specification is achievable at all, and what has to change.',
+    keeps: 'Supplier',
+  },
+  {
+    type: 'Production-representative sample',
+    what: 'A sample drawn from a run made on the same line, from the same shell and binder, to the same settings.',
+    decides: 'Whether the line can repeat the development result.',
+    keeps: 'Buyer and supplier',
+  },
+  {
+    type: 'Golden or approval sample',
+    what: 'The piece both sides signed off, with its measurement record attached.',
+    decides: 'What “conforming” means for the order and at inspection.',
+    keeps: 'Both, one retained set each',
+  },
+  {
+    type: 'Retention sample',
+    what: 'A sealed sample held back from the shipped lot.',
+    decides: 'Whether a later complaint refers to the same material.',
+    keeps: 'Supplier, with the lot identity on the label',
+  },
+];
+
+const evaluation = [
+  {
+    step: 'Measure the piece',
+    record: 'Caliper across three axes on ten pieces; note the smallest and largest, not only the average.',
+  },
+  {
+    step: 'Weigh and count',
+    record: 'Mass of ten pieces, then pieces per kilogram. Compare both with the pack or datasheet claim.',
+  },
+  {
+    step: 'Drop test',
+    record: 'Drop from a fixed height onto a hard floor, twice per piece; count how many break or chip.',
+  },
+  {
+    step: 'Condition the sample',
+    record: 'Note how long the sample sat in your space before testing. Moisture moves with the room, and so does burn behaviour.',
+  },
+  {
+    step: 'Light it the way you will use it',
+    record: 'Heat source, time to catch, whether it sparks or smokes, and how the first ten minutes look.',
+  },
+  {
+    step: 'Burn it in a stated setup',
+    record: 'Bowl type and size, pack density, draw, ambient conditions and piece mass. Without these the duration is an anecdote.',
+  },
+  {
+    step: 'Weigh the ash',
+    record: 'Ash mass against the starting mass, plus colour and whether the piece held its shape.',
+  },
+  {
+    step: 'Check moisture by weight',
+    record: 'Weigh, dry at a stated temperature, weigh again. State the temperature and the time, or the percentage means nothing.',
+  },
+];
+
+const terms = [
+  {
+    item: 'Quantity',
+    stated: 'How many pieces or grams, and whether the sample is one pack or a mixed set of sizes.',
+  },
+  {
+    item: 'Courier',
+    stated: 'Which account the parcel ships on, and whether the cost sits with the sender or the receiver.',
+  },
+  {
+    item: 'Sample charge',
+    stated: 'Whether a charge applies, and how it is treated if a bulk order follows.',
+  },
+  {
+    item: 'Documentation',
+    stated: 'What travels with the parcel: packing note, product datasheet, or a COA only if one exists for that sample.',
+  },
+  {
+    item: 'Representation',
+    stated: 'Whether the sample is development material or drawn from a production run — the two carry different weight.',
+  },
+  {
+    item: 'Resale',
+    stated: 'Samples are for evaluation, not for resale or for use as production stock.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Do you charge for samples?',
+    a: 'A sample charge may apply, and the reply for the specific request states whether one does and how it is treated if a bulk order follows. This page does not publish a blanket rate, because the answer depends on the product, the quantity and the destination. What it will not do is quote a sample price that quietly assumes a bulk order you have not placed.',
+  },
+  {
+    q: 'Who pays the courier?',
+    a: 'Courier cost depends on destination, weight and the account used, so it is stated in the reply rather than published here as a rate. The point is that it is written down before dispatch, not discovered on delivery. If your company has a courier account, say so in the request and the sample can ship against it.',
+  },
+  {
+    q: 'How much sample should I ask for?',
+    a: 'Enough to repeat every check at least once. A burn test consumes pieces, a drop test consumes pieces, and a moisture check consumes a sub-sample, so a single piece cannot support an evaluation. Ask for a quantity that lets a failed piece be replaced without ending the test, and keep one piece unopened for the record.',
+  },
+  {
+    q: 'Can the sample come from the exact production lot?',
+    a: 'Ask for it explicitly. A development sample and a production sample are different objects in practice, even when they look alike. If the sample is drawn from the lot, the lot identity belongs on the label and on the packing note, so the material in your hand can be tied to the material in the container.',
+  },
+  {
+    q: 'Does a sample arrive with a COA?',
+    a: 'Only if a certificate exists for that sample. The testing sub-site is a method reference and its reports register holds zero reports, so no certificate is generated to accompany a sample. If you need a measured result, the testing scope has to be agreed before the sample is drawn — which parameters, which method family and which laboratory.',
+  },
+];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: `${SITES.main}/` },
     { name: 'Request Samples', url: canonical },
   ]),
+  organizationJsonLd({
+    id: SITES.main,
+    name: 'Charcoal Hub',
+    description: site.description,
+  }),
+  webPageJsonLd({
+    id: canonical,
+    type: 'WebPage',
+    name: title,
+    description,
+    dateModified: '2026-11-27',
+    mainEntityId: SITES.main,
+    siteId: SITES.main,
+  }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
 ];
 
 const FORMSPREE_ID = import.meta.env.FORMSPREE_ID;
@@ -20,8 +184,8 @@ const MAILTO = `mailto:joanna@dinweys.com?subject=${encodeURIComponent(SUBJECT)}
 
 <BaseLayout
   site={site}
-  title="Request Samples"
-  description="Request charcoal samples to verify product quality before committing to bulk."
+  title={title}
+  description={description}
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Request Samples', url: '/request-sample/' }]}
@@ -29,59 +193,331 @@ const MAILTO = `mailto:joanna@dinweys.com?subject=${encodeURIComponent(SUBJECT)}
   <div class="page-title container">
     <h1>Request Samples</h1>
     <p class="lede">
-      Verify a product before committing to bulk. Request samples with your product, size and quantity —
-      sample verification is always the first step.
+      A sample is how you check a charcoal before you commit to a container. Tell us the product,
+      the size, the quantity and what you intend to test, and the reply states the sample terms —
+      quantity, courier, any sample charge and what documentation travels with the parcel.
     </p>
   </div>
 
   <section class="section">
     <div class="container">
-      <form class="form-card" action={ACTION} method="POST" data-mailto={MAILTO}>
-        <div class="form-grid">
-          <div class="full">
-            <label for="product">Product <span class="req">*</span></label>
-            <input id="product" name="product" type="text" required placeholder="e.g. coconut shell hookah charcoal" />
+      <div class="grid grid-2">
+        <div>
+          <h2>What a Sample Can and Cannot Prove</h2>
+          <div class="prose">
+            <p>
+              A sample is evidence of one piece at one moment. That is worth a great deal when the
+              question is “can this supplier make the piece I need?” It is worth much less when the
+              question is “will the container match this piece?”
+            </p>
           </div>
-          <div>
-            <label for="size">Size</label>
-            <input id="size" name="size" type="text" placeholder="e.g. 25mm / 26mm / 27mm" />
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>What it can show</th><th>The check to run</th></tr>
+              </thead>
+              <tbody>
+                {proves.map((p) => (
+                  <tr>
+                    <td><strong>{p.aspect}</strong></td>
+                    <td class="spec-value">{p.check}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <div>
-            <label for="quantity">Quantity</label>
-            <input id="quantity" name="quantity" type="text" placeholder="e.g. 1kg sample" />
-          </div>
-          <div>
-            <label for="country">Country <span class="req">*</span></label>
-            <input id="country" name="country" type="text" required />
-          </div>
-          <div>
-            <label for="company">Company</label>
-            <input id="company" name="company" type="text" />
-          </div>
-          <div class="full">
-            <label for="application">Application</label>
-            <input id="application" name="application" type="text" placeholder="e.g. hookah lounge / retail / BBQ" />
-          </div>
-          <div class="full">
-            <label for="comments">Comments</label>
-            <textarea id="comments" name="comments" placeholder="Any requirements…"></textarea>
+          <div class="prose">
+            <p>
+              What it cannot show: batch-to-batch consistency, that the shipped lot matches the
+              sample, that the product complies with a destination regulation, or that the supplier
+              will use the same shell and binder on the next run. Those are questions for a
+              specification annex, a sampling plan and a pre-shipment inspection — not for a parcel
+              of twelve pieces.
+            </p>
           </div>
         </div>
-        <p style="margin-top:1.25rem;">
-          <button class="btn btn-primary" type="submit">Request Samples →</button>
-        </p>
-        <p class="form-note">
-          {FORMSPREE_ID
-            ? 'Submitting sends your sample request securely. We respond by email.'
-            : 'This form is not yet connected to a backend. Please email your request to joanna@dinweys.com, or the form will open your email client.'}
-        </p>
-      </form>
 
-      <p class="meta-line" style="margin-top:1.5rem;">
-        Not sure what to check when the sample arrives? The
-        <a href="/charcoal-testing-coa-guide/">testing and COA guide</a> sets out the field checks
-        and the documents to ask for.
-      </p>
+        <div>
+          <form class="form-card" action={ACTION} method="POST" data-mailto={MAILTO}>
+            <h3 style="margin-top:0;">Send a sample request</h3>
+            <div class="form-grid">
+              <div class="full">
+                <label for="product">Product <span class="req">*</span></label>
+                <input id="product" name="product" type="text" required placeholder="e.g. coconut shell hookah charcoal" />
+              </div>
+              <div>
+                <label for="size">Size</label>
+                <input id="size" name="size" type="text" placeholder="e.g. 25mm / 26mm / 27mm" />
+              </div>
+              <div>
+                <label for="quantity">Quantity</label>
+                <input id="quantity" name="quantity" type="text" placeholder="e.g. 1 kg sample" />
+              </div>
+              <div>
+                <label for="country">Country <span class="req">*</span></label>
+                <input id="country" name="country" type="text" required />
+              </div>
+              <div>
+                <label for="company">Company</label>
+                <input id="company" name="company" type="text" />
+              </div>
+              <div class="full">
+                <label for="application">Application</label>
+                <input id="application" name="application" type="text" placeholder="e.g. hookah lounge / retail / BBQ" />
+              </div>
+              <div class="full">
+                <label for="email">Email <span class="req">*</span></label>
+                <input id="email" name="email" type="email" required />
+              </div>
+              <div class="full">
+                <label for="comments">What will you test?</label>
+                <textarea id="comments" name="comments" placeholder="Ignition, burn duration, ash, breakage, odour… and the setup you will use"></textarea>
+              </div>
+            </div>
+            <p style="margin-top:1.25rem;">
+              <button class="btn btn-primary" type="submit">Request Samples →</button>
+            </p>
+            <p class="form-note">
+              {FORMSPREE_ID
+                ? 'Submitting sends your sample request securely. We respond by email.'
+                : 'This form is not yet connected to a backend. Please email your request to joanna@dinweys.com, or the form will open your email client.'}
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Four Kinds of Sample</h2>
+      <div class="prose">
+        <p>
+          “Send me a sample” can mean four different things, and confusing them is how a buyer ends
+          up approving a piece the factory cannot repeat. Name the type you want in the request.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Type</th><th>What it is</th><th>What it decides</th><th>Who keeps it</th></tr>
+          </thead>
+          <tbody>
+            {sampleTypes.map((s) => (
+              <tr>
+                <td><strong>{s.type}</strong></td>
+                <td>{s.what}</td>
+                <td>{s.decides}</td>
+                <td class="spec-value">{s.keeps}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          The golden sample is the one that matters most and is most often skipped. It is not a
+          favourite piece — it is a piece with a measurement record both sides accepted, held by
+          both sides, so a later dispute is a comparison rather than a conversation. The
+          <a href="/oem/">OEM page</a> sets out the four-stage sample path and the six fields an
+          approval record needs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What to Send</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Item</th><th>Why the reply needs it</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Product and size</strong></td>
+              <td>Selects the record and the supplier. A 25 mm and a 27 mm cube are different pieces with different mass and packing counts.</td>
+            </tr>
+            <tr>
+              <td><strong>Quantity</strong></td>
+              <td>Sets the parcel weight, the courier band and whether a mixed set of sizes is possible.</td>
+            </tr>
+            <tr>
+              <td><strong>Destination country</strong></td>
+              <td>Determines courier routing and any import restriction on the sample itself.</td>
+            </tr>
+            <tr>
+              <td><strong>Application</strong></td>
+              <td>Hookah, BBQ, retail or industrial use changes which properties matter and how the sample is selected.</td>
+            </tr>
+            <tr>
+              <td><strong>What you will test</strong></td>
+              <td>Lets the sample be selected and documented for that check instead of sent as a generic piece.</td>
+            </tr>
+            <tr>
+              <td><strong>Courier account</strong></td>
+              <td>If your company has one, the parcel can ship against it and the cost stays visible to you.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>How to Evaluate a Sample</h2>
+      <div class="prose">
+        <p>
+          These are field checks, not laboratory methods. Their value comes from recording what you
+          did as well as what you saw — a result without conditions cannot be compared with the next
+          sample or with a supplier’s datasheet.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Check</th><th>What to record</th></tr>
+          </thead>
+          <tbody>
+            {evaluation.map((e) => (
+              <tr>
+                <td><strong>{e.step}</strong></td>
+                <td class="spec-value">{e.record}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Keep the record with the sample bag. If the evaluation leads to an order, those notes
+          become the first draft of the specification annex — and if it does not, they explain why
+          the next supplier was asked for something different.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Why Burn-Time Figures Do Not Travel</h2>
+      <div class="prose">
+        <p>
+          Burn duration depends on the bowl, the pack, the draw, the heat source, the ambient air and
+          the mass of the piece. Change any one of them and the number moves, often by more than the
+          difference between two suppliers. A burn-time figure quoted without those conditions is
+          not a measurement you can compare; it is a claim about a session nobody described.
+        </p>
+        <p>
+          The practical response is to fix the conditions before the test: the same bowl, the same
+          pack, the same heat source, the same draw, and the same piece mass. Then the number means
+          something — for that setup, on that day, with that sample. The
+          <a href="/charcoal-testing-coa-guide/">testing and COA guide</a> explains why the method and
+          the reporting basis have to travel with every figure, and the testing sub-site’s
+          <a href={`${SITES.testing}/tests/burning-time/`} target="_blank" rel="noopener">burning-time method</a>
+          page describes how the parameter is defined rather than what any product scores.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Sample Terms</h2>
+      <div class="prose">
+        <p>
+          Sample terms are agreed per request, because courier cost depends on destination and
+          weight, and any sample charge depends on the product and the quantity. These are the items
+          the reply states before anything ships:
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Item</th><th>What the reply states</th></tr>
+          </thead>
+          <tbody>
+            {terms.map((t) => (
+              <tr>
+                <td><strong>{t.item}</strong></td>
+                <td class="spec-value">{t.stated}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          No lead time is published on this page. A parcel’s arrival depends on the courier route,
+          the destination’s clearance and the service level chosen, and a number printed here would
+          be a guess presented as a commitment. If you have a date to hit, put it in the request and
+          the reply will say whether the route can meet it.
+        </p>
+        <p>
+          A sample is not a price offer and not a reservation of stock. It is an evaluation piece;
+          the commercial terms sit in the quotation and the order documents issued in the name of
+          the operating entity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>From Sample to Order</h2>
+      <ol class="prose">
+        <li>
+          <strong>Screen.</strong> Evaluate the first sample against the checks above and decide
+          whether the specification is close enough to continue.
+        </li>
+        <li>
+          <strong>Approve a golden sample.</strong> Both sides sign the same measurement record and
+          each keeps a set. This is the reference for every later comparison.
+        </li>
+        <li>
+          <strong>Confirm the specification annex.</strong> The <a href="/private-label/">private
+          label</a> and <a href="/oem/">OEM</a> pages show how the nine-field specification is
+          written, including the limit-versus-typical rule.
+        </li>
+        <li>
+          <strong>Run production.</strong> The <a href="/manufacturing/">manufacturing page</a>
+          describes the QC gates and the record each one produces.
+        </li>
+        <li>
+          <strong>Inspect before shipment.</strong> The pre-shipment check compares the lot with the
+          annex and the golden sample, not with memory.
+        </li>
+      </ol>
+      <div class="prose">
+        <p>
+          Skipping the golden sample is the expensive shortcut. Without it, “the batch looks
+          different” has no reference, and the argument is settled by whoever has more leverage
+          rather than by a document.
+        </p>
+      </div>
+
+      <h2>Sample Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="cta-banner">
+        <h2>Ready to price the bulk order?</h2>
+        <p>
+          Once the sample is approved, send the size, volume, packaging and destination. The
+          quotation will state the specification, the packaging, the delivery basis and which
+          figures are still pending.
+        </p>
+        <a class="btn btn-primary" href="/request-quote/">Request a Quote →</a>
+        <a class="btn btn-secondary" href="/products/" style="margin-left:0.5rem;">Browse Products →</a>
+      </div>
     </div>
   </section>
 

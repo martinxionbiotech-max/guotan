@@ -2,14 +2,194 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site-config';
 import { SITES } from '../lib/sites';
-import { breadcrumbJsonLd } from '../lib/seo';
+import {
+  breadcrumbJsonLd,
+  organizationJsonLd,
+  webPageJsonLd,
+  faqPageJsonLd,
+} from '../lib/seo';
 
 const canonical = `${SITES.main}/request-quote/`;
+
+const title = 'Request a Charcoal Quote';
+const description =
+  'What a Charcoal Hub quotation states, what to send for a comparable answer, what we will not quote, and why two charcoal offers rarely compare.';
+
+const quoteElements = [
+  {
+    element: 'Product identity',
+    fixes: 'Form (cube, flat, bar or lump), shell base and the grade name used in our records.',
+  },
+  {
+    element: 'Dimension and tolerance',
+    fixes: 'Nominal size plus the band accepted. A 24–26 mm band is a different product from 24.5–25.5 mm.',
+  },
+  {
+    element: 'Specification',
+    fixes: 'Ash, moisture, fixed carbon, volatiles and calorific value, each with its method and reporting basis — or a status label saying it is not held.',
+  },
+  {
+    element: 'Packaging',
+    fixes: 'Retail box, master carton, bulk bag, printed or unprinted, and the net weight per unit.',
+  },
+  {
+    element: 'Quantity basis',
+    fixes: 'Pieces, kilograms or tonnes, and whether the figure is net or gross.',
+  },
+  {
+    element: 'Delivery basis',
+    fixes: 'Incoterm and named place. FOB and DDP differ by freight, insurance, duty and who clears customs.',
+  },
+  {
+    element: 'Validity',
+    fixes: 'The date the figures hold. A rate with no date cannot be checked against a later offer.',
+  },
+  {
+    element: 'Exclusions',
+    fixes: 'What the price does not include — testing, pallets, labelling or destination charges.',
+  },
+];
+
+const requestFields = [
+  {
+    field: 'Product form',
+    give: 'Coconut shell, hookah, BBQ or bamboo; cube, flat, bar or lump.',
+    why: 'Decides which records and which suppliers are relevant at all.',
+  },
+  {
+    field: 'Size class',
+    give: '25, 26 or 27 mm, or a custom dimension, with the tolerance you can accept.',
+    why: 'Piece mass, packing count and burn profile follow from the size.',
+  },
+  {
+    field: 'Volume',
+    give: 'Sample, pallet, LCL, 20 ft or 40 ft, plus expected repeat volume.',
+    why: 'Sets the production run, the packaging run and the freight basis.',
+  },
+  {
+    field: 'Packaging',
+    give: 'Bulk bag, retail box, master carton, printed or plain; artwork status if private label.',
+    why: 'In private label the print run is often the binding minimum, not the charcoal.',
+  },
+  {
+    field: 'Destination',
+    give: 'Country, port or inland point, and whether you are the importer of record.',
+    why: 'Decides the delivery basis and which documents the shipment needs.',
+  },
+  {
+    field: 'Specification targets',
+    give: 'Ash, moisture, fixed carbon, volatiles, calorific value and burn time, with a method if you have one.',
+    why: 'Decides which supplier can meet the request and what has to be tested.',
+  },
+  {
+    field: 'Documents',
+    give: 'COA, MSDS, packing list, certificate of origin or a declaration your market requires.',
+    why: 'Some destinations cannot clear the goods without them, whatever the price.',
+  },
+  {
+    field: 'Order context',
+    give: 'First order or repeat, the benchmark you are comparing against, and your target date.',
+    why: 'A repeat order and a first order carry different evidence requirements.',
+  },
+];
+
+const units = [
+  {
+    unit: 'Per piece',
+    used: 'Hookah and retail packs',
+    caveat: 'Only comparable when the piece mass and the count per pack are stated. A 25 mm and a 27 mm cube are not the same piece.',
+  },
+  {
+    unit: 'Per kilogram',
+    used: 'Bulk and industrial',
+    caveat: 'Must state net weight and whether the figure is on a dry or as-received basis.',
+  },
+  {
+    unit: 'Per tonne',
+    used: 'Container and bulk',
+    caveat: 'Must state the packaging basis: loose in a liner, cartons on a pallet, or retail-ready cases.',
+  },
+  {
+    unit: 'Per container',
+    used: 'Freight-inclusive offers',
+    caveat: 'Must state the Incoterm, the load actually planned and the palletisation. A container figure without a load basis is not a quantity.',
+  },
+];
+
+const comparisons = [
+  {
+    difference: 'Reporting basis',
+    hides: 'Ash and fixed carbon on a dry basis read several points higher than the same material as-received.',
+  },
+  {
+    difference: 'Size tolerance',
+    hides: 'A wide band ships more undersize pieces and more breakage than a tight one at the same nominal size.',
+  },
+  {
+    difference: 'Count versus mass',
+    hides: '“72 pieces per kg” and “1 kg per box” can describe the same box, or two different ones.',
+  },
+  {
+    difference: 'Packaging',
+    hides: 'A printed retail box and a bulk bag change the cost per tonne and the minimum run.',
+  },
+  {
+    difference: 'Incoterm',
+    hides: 'FOB and CIF differ by freight and insurance; DDP adds duty, clearance and destination risk.',
+  },
+  {
+    difference: 'Sampling and method',
+    hides: 'Who draws the sample and which method is used changes the number, not the charcoal.',
+  },
+  {
+    difference: 'Currency and date',
+    hides: 'A rate without a currency, a date and a validity period cannot be checked or repeated.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How quickly will I get a quotation?',
+    a: 'This page does not publish a response time, because the work behind a quote depends on how much of the specification already exists. A request that names product, size, volume, packaging and destination can be answered from records; one that leaves the specification open needs supplier confirmation first. If you are working to a deadline, state it in the request and the reply will say whether that date can be met rather than imply that it will.',
+  },
+  {
+    q: 'Can I get a price per tonne for a full container?',
+    a: 'Yes, if the request states the packaging, the load basis, the Incoterm and the named place. A per-tonne figure without those four items cannot be compared with another supplier’s figure, because each one changes what is being priced. The quotation states the basis next to the number so the comparison can be made on equal terms.',
+  },
+  {
+    q: 'Do you sell less than a full container?',
+    a: 'Pallet and LCL quantities can be discussed, but the answer depends on the product and the pack. In private label, the print run is often the binding minimum rather than the charcoal itself, which is why a small printed order can cost more per unit than a bulk bag. The quotation states which minimum is driving the quantity.',
+  },
+  {
+    q: 'Is a quotation binding?',
+    a: 'No. A quotation is a written offer to negotiate a specification, a quantity and a delivery basis. It becomes binding only in the order documents — proforma invoice, specification annex and packing list — issued in the name of Yancheng Xuanbao Environmental Technology Co., Ltd. If a figure matters to the contract, it belongs in the annex, not only in the email that carried the quote.',
+  },
+  {
+    q: 'What if my specification is stricter than your published records?',
+    a: 'Then the request becomes a qualification question rather than a price question. Some limits can be met and evidenced from a supplier’s own test documents; others cannot be verified with the documents available, and the reply will say which is which. We would rather decline a limit we cannot evidence than accept it and leave you to discover the gap at inspection.',
+  },
+];
+
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Home', url: `${SITES.main}/` },
     { name: 'Request a Quote', url: canonical },
   ]),
+  organizationJsonLd({
+    id: SITES.main,
+    name: 'Charcoal Hub',
+    description: site.description,
+  }),
+  webPageJsonLd({
+    id: canonical,
+    type: 'WebPage',
+    name: title,
+    description,
+    dateModified: '2026-11-27',
+    mainEntityId: SITES.main,
+    siteId: SITES.main,
+  }),
+  faqPageJsonLd({ id: `${canonical}#faq`, faqs }),
 ];
 
 const FORMSPREE_ID = import.meta.env.FORMSPREE_ID;
@@ -20,8 +200,8 @@ const MAILTO = `mailto:joanna@dinweys.com?subject=${encodeURIComponent(SUBJECT)}
 
 <BaseLayout
   site={site}
-  title="Request a Charcoal Quote"
-  description="Request a charcoal quote — tell us product, size, volume, packaging and destination port. We reply with specifications and pricing."
+  title={title}
+  description={description}
   canonical={canonical}
   jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Request a Quote', url: '/request-quote/' }]}
@@ -29,9 +209,10 @@ const MAILTO = `mailto:joanna@dinweys.com?subject=${encodeURIComponent(SUBJECT)}
   <div class="page-title container">
     <h1>Request a Quote</h1>
     <p class="lede">
-      Tell us the product, size, volume, packaging and destination port. We reply with the
-      specification we can actually supply and a quotation for that specification — no fixed
-      catalogue price, because charcoal is priced per grade, packaging and order volume.
+      Tell us the product, size, volume, packaging and destination port. The reply states the
+      specification we can actually supply — with each figure labelled measured, supplier-reported
+      or pending — and a quotation for that specification. There is no fixed catalogue price,
+      because charcoal is priced per grade, per pack and per load.
     </p>
   </div>
 
@@ -39,28 +220,26 @@ const MAILTO = `mailto:joanna@dinweys.com?subject=${encodeURIComponent(SUBJECT)}
     <div class="container">
       <div class="grid grid-2">
         <div>
-          <h2>What to include</h2>
+          <h2>What a Quotation States</h2>
+          <p>
+            A price on its own is not a quotation. These eight elements are what make two offers
+            comparable, and what we put in writing before you commit:
+          </p>
           <ul class="prose">
-            <li><strong>Product</strong> — coconut shell, hookah, BBQ or bamboo charcoal.</li>
-            <li><strong>Size</strong> — 25 mm / 26 mm / 27 mm cube, flat, or a custom dimension.</li>
-            <li><strong>Volume</strong> — sample, pallet, LCL or full container.</li>
-            <li><strong>Packaging</strong> — bulk bag, retail box or private label.</li>
-            <li><strong>Destination port</strong> — so we can quote the right freight basis.</li>
-            <li><strong>Specification targets</strong> — ash, moisture, fixed carbon and burn time, if you have them.</li>
+            {quoteElements.map((q) => (
+              <li><strong>{q.element}</strong> — {q.fixes}</li>
+            ))}
           </ul>
           <p>
-            Not sure about a specification? Send what you know. If a figure is missing we will mark
-            it <em>data pending</em> rather than guess, and confirm it with the supplier before you
-            commit.
-          </p>
-          <p>
-            For a physical sample first, use <a href="/request-sample/">Request Samples</a>.
-            For general contact details, see <a href="/contact/">Contact</a>.
+            If one of them is not settled, the quotation says so instead of choosing a value for
+            you. The <a href="/editorial-standards/">editorial and data standards</a> explain how the
+            status labels are applied across the site and the record databases.
           </p>
         </div>
 
         <div>
           <form class="form-card" action={ACTION} method="POST" data-mailto={MAILTO}>
+            <h3 style="margin-top:0;">Send a quote request</h3>
             <div class="form-grid">
               <div class="full">
                 <label for="product">Product <span class="req">*</span></label>
@@ -96,7 +275,7 @@ const MAILTO = `mailto:joanna@dinweys.com?subject=${encodeURIComponent(SUBJECT)}
               </div>
               <div class="full">
                 <label for="comments">Specification targets / comments</label>
-                <textarea id="comments" name="comments" placeholder="Ash, moisture, fixed carbon, burn time, branding, target price basis…"></textarea>
+                <textarea id="comments" name="comments" placeholder="Ash, moisture, fixed carbon, burn time, branding, target price basis, deadline…"></textarea>
               </div>
             </div>
             <p style="margin-top:1.25rem;">
@@ -110,19 +289,233 @@ const MAILTO = `mailto:joanna@dinweys.com?subject=${encodeURIComponent(SUBJECT)}
           </form>
         </div>
       </div>
+    </div>
+  </section>
 
-      <h2>What happens next</h2>
+  <section class="section section-alt">
+    <div class="container">
+      <h2>What to Send</h2>
+      <p>
+        Every field below removes a round trip. Nothing is mandatory except a way to reply, but a
+        request that leaves product, volume and destination open cannot be answered with a number
+        that means anything.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Field</th><th>What to give</th><th>Why it changes the answer</th></tr>
+          </thead>
+          <tbody>
+            {requestFields.map((r) => (
+              <tr>
+                <td><strong>{r.field}</strong></td>
+                <td>{r.give}</td>
+                <td class="spec-value">{r.why}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p>
+        If a figure is missing, say so. It will be marked <em>data pending</em> and confirmed with
+        the supplier rather than filled with a template value. The product records on the
+        <a href={`${SITES.data}/products/`} target="_blank" rel="noopener">data sub-site</a> show
+        which fields are already held for each published grade.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>The Unit a Price Is Quoted On</h2>
+      <div class="prose">
+        <p>
+          Charcoal is quoted per piece, per kilogram, per tonne and per container, and the four are
+          not interchangeable. A per-piece figure hides the piece mass; a per-tonne figure hides the
+          packaging; a per-container figure hides the load and the delivery term. When a supplier
+          quotes one unit and you compare it with another, the difference you are measuring may be
+          arithmetic rather than product.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Unit</th><th>Common in</th><th>What must be stated with it</th></tr>
+          </thead>
+          <tbody>
+            {units.map((u) => (
+              <tr>
+                <td><strong>{u.unit}</strong></td>
+                <td>{u.used}</td>
+                <td class="spec-value">{u.caveat}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          The same rule applies to the load. Published container figures differ because they are
+          built on different packaging: retail cases on pallets, cartons hand-stacked, or bulk in a
+          liner. The <a href="/export/">export page</a> sets three published tonnage bases side by
+          side and explains why they do not match, rather than presenting one of them as the number.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Why Two Charcoal Quotes Rarely Compare</h2>
+      <div class="prose">
+        <p>
+          Buyers often receive two offers that look far apart and conclude that one supplier is
+          expensive. More often the two documents are answering different questions. These are the
+          differences that move a charcoal price without moving the charcoal:
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Difference</th><th>What it hides</th></tr>
+          </thead>
+          <tbody>
+            {comparisons.map((c) => (
+              <tr>
+                <td><strong>{c.difference}</strong></td>
+                <td class="spec-value">{c.hides}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          The practical response is to ask both suppliers for the same eight elements in the same
+          order. A quotation that cannot state its basis is not necessarily a bad offer — it is an
+          unfinished one, and it should be finished before it is compared.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What We Will Not Quote</h2>
+      <div class="callout-pending">
+        <span class="callout-title">Scope and evidence</span>
+        <p>
+          <strong>A fixed catalogue price.</strong> Charcoal moves with raw material, fuel, freight
+          and exchange rates. A price printed on a page would be wrong within weeks, so prices are
+          quoted per request and carry a validity date.
+        </p>
+        <p>
+          <strong>Stock or availability.</strong> We do not publish a stock status anywhere on this
+          site, and no product schema carries an availability value. Availability is confirmed per
+          lot and per specification.
+        </p>
+        <p>
+          <strong>A specification we cannot document.</strong> If a figure is not held, it appears
+          as pending with the reason, not as a plausible template value.
+        </p>
+        <p>
+          <strong>A certificate we cannot produce.</strong> No COA, test report or accreditation is
+          promised that does not exist. The testing sub-site publishes method references and states
+          that its reports register holds zero reports.
+        </p>
+        <p>
+          <strong>A destination we cannot document.</strong> If a market requires a permit,
+          declaration or labelling step we cannot support, we say so before quoting rather than
+          after the goods are booked.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>How a Request Moves</h2>
       <ol class="prose">
-        <li>We check the request against available product records and supplier capability.</li>
-        <li>We confirm which specification fields are verified, supplier-reported or still pending.</li>
-        <li>We send a quotation for the confirmed specification, packaging and volume.</li>
-        <li>If the specification is still open, we arrange a sample before bulk production.</li>
+        <li>
+          <strong>Read against the records.</strong> The product form and size are matched to the
+          published product records; fields the records do not carry are listed as gaps.
+        </li>
+        <li>
+          <strong>Supplier confirmation.</strong> The open fields are put to the supplier in
+          writing, because a figure we cannot trace is not a figure we will quote.
+        </li>
+        <li>
+          <strong>Sample decision.</strong> If the specification is still open, a sample is arranged
+          before a bulk price means anything. The <a href="/request-sample/">sample route</a> is
+          separate because it is a physical check.
+        </li>
+        <li>
+          <strong>Quotation.</strong> Each figure carries its status — measured, supplier-reported
+          or pending — and the eight elements above are stated in the document.
+        </li>
+        <li>
+          <strong>Order documents.</strong> Proforma invoice, specification annex and packing list
+          are issued in the name of the operating entity and must match the quotation.
+        </li>
+        <li>
+          <strong>Pre-shipment.</strong> Inspection and document check run against the same
+          specification annex, so the batch is measured against the document you approved.
+        </li>
       </ol>
+      <div class="prose">
+        <p>
+          No step is skipped to make a deadline. If a field cannot be confirmed, the quotation says
+          which one and the decision stays with you — a quote with a named gap is more useful than a
+          complete-looking quote built on an assumption.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Other Request Routes</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Sample first</h3>
+          <p>
+            A physical sample before a bulk commitment. The
+            <a href="/request-sample/">sample request</a> covers what to send, how to evaluate the
+            piece and why a burn-time figure does not travel without its test conditions.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Printed pack or product change</h3>
+          <p>
+            <a href="/private-label/">Private label</a> covers artwork, print minimums and
+            inspection gates; <a href="/oem/">OEM</a> covers changes to the product itself;
+            <a href="/packaging/">packaging</a> covers the format and barrier decision.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Quote Questions</h2>
+      <div class="prose">
+        {faqs.map((f) => (
+          <div>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
+      </div>
 
       <div class="cta-banner">
-        <h2>Prefer to talk first?</h2>
-        <p>Contact the sales desk directly — phone, WhatsApp or email.</p>
-        <a class="btn btn-primary" href="/contact/">Contact Details →</a>
+        <h2>Not ready to request a quote?</h2>
+        <p>
+          Start with the records: the data sub-site publishes the specification fields that are
+          actually held, and the knowledge hub explains how to read them before you ask for a
+          price.
+        </p>
+        <a class="btn btn-primary" href="/products/">Browse Products →</a>
         <a class="btn btn-secondary" href="/request-sample/" style="margin-left:0.5rem;">Request Samples →</a>
       </div>
     </div>
